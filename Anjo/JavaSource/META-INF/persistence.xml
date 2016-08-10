@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+	<persistence-unit name="Anjo">
+		<class>entidades.UsuarioEfika</class>
+		<class>entidades.sistema.Transmicao</class>
+		<class>entidades.ControleUsuario</class>
+		<class>entidades.sistema.SubProdutoMotivo</class>
+		<class>entidades.sistema.Solucao</class>
+		<class>entidades.sistema.Produto</class>
+		<class>entidades.sistema.Modelo</class>
+		<class>entidades.sistema.FalhaSistemica</class>
+		<class>entidades.sistema.Fabricante</class>
+		<class>entidades.sistema.Equipe</class>
+		<class>entidades.sistema.Equipamento</class>
+		<class>entidades.sistema.Duvida</class>
+	</persistence-unit>
+</persistence>
