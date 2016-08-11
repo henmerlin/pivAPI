@@ -7,6 +7,7 @@ import javax.faces.context.FacesContext;
 import javax.inject.Named;
 
 import entidades.UsuarioEfika;
+import models.ControleUsuarioServico;
 import models.LoginServico;
 import util.JSFUtil;
 import webservices.Usuario;
@@ -17,7 +18,7 @@ import java.io.Serializable;
 @SuppressWarnings("serial")
 @Named
 @SessionScoped
-public class LoginBean implements Serializable{
+public class LoginBean implements Serializable {
 
 	private UsuarioEfika usuario;
 
@@ -29,6 +30,9 @@ public class LoginBean implements Serializable{
 
 	@EJB
 	private LoginServico servicoLogin;
+	
+	@EJB
+	private ControleUsuarioServico controleUsuarioServico;
 
 	private boolean logado;
 
@@ -65,6 +69,8 @@ public class LoginBean implements Serializable{
 
 			this.usuarioWS = this.servicoLogin.buscaLoginWS(this.usuario.getLogin());
 			this.servicoLogin.autenticaLogin(this.usuarioWS, this.senha);
+			
+			this.validaControleUsuario();
 
 			this.logado = true;			
 			return "index.jsf"; 
@@ -84,6 +90,28 @@ public class LoginBean implements Serializable{
 		this.usuario = new UsuarioEfika();
 		this.logado = false;
 
+	}
+	
+	public void validaControleUsuario() {
+		
+		try {
+			
+			this.controleUsuarioServico.listarControleUsuarioEspecifico(this.usuario);
+						
+		} catch (Exception e) {
+
+			try {
+				
+				this.controleUsuarioServico.cadastrarControleUsuario(this.usuario);
+				
+			} catch (Exception e1) {
+
+				JSFUtil.addErrorMessage(e.getMessage());
+				
+			}
+			
+		}
+		
 	}
 
 	public void validaPagina(String pagina) {

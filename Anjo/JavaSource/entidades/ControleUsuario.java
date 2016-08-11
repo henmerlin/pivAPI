@@ -15,6 +15,8 @@ public class ControleUsuario {
 	
 	private Boolean ativo;
 	
+	private Boolean adm;
+	
 	private UsuarioEfika usuarioEfika;
 	
 	private Equipe equipe;
@@ -35,6 +37,14 @@ public class ControleUsuario {
 		this.ativo = ativo;
 	}
 
+	public Boolean getAdm() {
+		return adm;
+	}
+
+	public void setAdm(Boolean adm) {
+		this.adm = adm;
+	}
+
 	public UsuarioEfika getUsuarioEfika() {
 		return usuarioEfika;
 	}
@@ -49,6 +59,6 @@ public class ControleUsuario {
 
 	public void setEquipe(Equipe equipe) {
 		this.equipe = equipe;
-	}	
+	}
 	
 }

@@ -45,7 +45,7 @@ public class FalhaSistemicaServico {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public List<FalhaSistemica> listarTotasFalhaSistemicas() {
+	public List<FalhaSistemica> listarTodasFalhaSistemicas() {
 		
 		try {
 			
