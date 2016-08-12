@@ -7,8 +7,8 @@ import javax.faces.context.FacesContext;
 import javax.inject.Named;
 
 import entidades.UsuarioEfika;
-import models.ControleUsuarioServico;
 import models.LoginServico;
+import models.UsuarioEfikaServico;
 import util.JSFUtil;
 import webservices.Usuario;
 
@@ -30,9 +30,9 @@ public class LoginBean implements Serializable {
 
 	@EJB
 	private LoginServico servicoLogin;
-	
+
 	@EJB
-	private ControleUsuarioServico controleUsuarioServico;
+	private UsuarioEfikaServico usuarioEfikaServico;
 
 	private boolean logado;
 
@@ -64,13 +64,11 @@ public class LoginBean implements Serializable {
 	public String logar() {
 
 		try {
-			
+
 			this.usuario.setLogin(this.usuario.getLogin().toUpperCase());
 
 			this.usuarioWS = this.servicoLogin.buscaLoginWS(this.usuario.getLogin());
 			this.servicoLogin.autenticaLogin(this.usuarioWS, this.senha);
-			
-			this.validaControleUsuario();
 
 			this.logado = true;			
 			return "index.jsf"; 
@@ -91,34 +89,67 @@ public class LoginBean implements Serializable {
 		this.logado = false;
 
 	}
-	
-	public void validaControleUsuario() {
-		
-		try {
-			
-			this.controleUsuarioServico.listarControleUsuarioEspecifico(this.usuario);
-						
-		} catch (Exception e) {
 
-			try {
-				
-				this.controleUsuarioServico.cadastrarControleUsuario(this.usuario);
-				
-			} catch (Exception e1) {
 
-				JSFUtil.addErrorMessage(e.getMessage());
-				
-			}
-			
-		}
-		
-	}
 
 	public void validaPagina(String pagina) {
 
 		this.pagina = pagina;
 
 	}
+
+	public Boolean verificaAdm() {
+
+		try {			
+
+			return this.listarControleUsuarioEspecifico().getAdm();
+
+		} catch (Exception e) {
+
+			return false;
+
+		}
+
+	}
+
+	public void isNotAdmRedireciona() throws IOException {
+
+		ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
+		
+		try {
+			
+			UsuarioEfika usuarioEfika = this.listarControleUsuarioEspecifico();
+			
+			if (usuarioEfika.getAdm()) {
+				
+				context.redirect("/Anjo/index.jsf");
+				
+			}
+			
+		} catch (Exception e) {
+
+			context.redirect("/Anjo/index.jsf");
+			JSFUtil.addErrorMessage(e.getMessage());
+			
+		}		
+
+	}
+
+	public UsuarioEfika listarControleUsuarioEspecifico() {
+
+		try {
+
+			return this.usuarioEfikaServico.listarUsuarioEfikaEspecifico(this.usuario);			
+
+		} catch (Exception e) {
+			
+			JSFUtil.addErrorMessage(e.getMessage());
+			return null;
+
+		}
+
+	}
+
 
 	public UsuarioEfika getUsuario() {
 		return usuario;

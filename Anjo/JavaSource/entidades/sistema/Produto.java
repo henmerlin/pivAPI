@@ -3,6 +3,7 @@ package entidades.sistema;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Produto {
@@ -13,6 +14,7 @@ public class Produto {
 	
 	private String nome;
 	
+	@ManyToOne
 	private SubProdutoMotivo subProdutoMotivo;
 
 	public Integer getId() {

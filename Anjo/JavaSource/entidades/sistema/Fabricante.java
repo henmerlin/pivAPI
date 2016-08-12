@@ -3,6 +3,7 @@ package entidades.sistema;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Fabricante {
@@ -15,6 +16,7 @@ public class Fabricante {
 	
 	private Boolean lista;
 	
+	@ManyToOne
 	private Modelo modelo;
 
 	public Integer getId() {

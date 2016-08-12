@@ -86,7 +86,11 @@ public class LoginServico {
 		UsuarioEfika usuarioEfika = new UsuarioEfika();
 
 		usuarioEfika.setLogin(usuario.getLogin());
-		usuarioEfika.setNivel(usuario.getNivel());		
+		usuarioEfika.setNivel(usuario.getNivel());
+		
+		usuarioEfika.setAdm(false);
+		
+		usuarioEfika.setAtivo(false);
 
 		this.entityManager.persist(usuarioEfika);
 

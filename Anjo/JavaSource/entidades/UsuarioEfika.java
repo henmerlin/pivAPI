@@ -2,10 +2,13 @@ package entidades;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotEmpty;
+
+import entidades.sistema.Equipe;
 
 @Entity
 @Table(name="backloglist_UsuarioEfika")
@@ -18,7 +21,16 @@ public class UsuarioEfika{
 	@NotNull
 	private Integer nivel;
 	
-	public UsuarioEfika() {
+	private Boolean ativo;
+	
+	private Boolean adm;
+	
+	@ManyToOne
+	private Equipe equipe;
+	
+	public UsuarioEfika() {		
+		
+		
 	}
 
 	public String getLogin() {
@@ -35,6 +47,30 @@ public class UsuarioEfika{
 
 	public void setNivel(Integer nivel) {
 		this.nivel = nivel;
+	}	
+
+	public Equipe getEquipe() {
+		return equipe;
+	}
+
+	public void setEquipe(Equipe equipe) {
+		this.equipe = equipe;
+	}	
+
+	public Boolean getAtivo() {
+		return ativo;
+	}
+
+	public void setAtivo(Boolean ativo) {
+		this.ativo = ativo;
+	}
+
+	public Boolean getAdm() {
+		return adm;
+	}
+
+	public void setAdm(Boolean adm) {
+		this.adm = adm;
 	}
 
 	@Override

@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/recursos/template/template.xhtml">
+
+	<ui:define name="tituloPagina">
+		 Gerenciar Sistema
+	</ui:define>
+	<ui:define name="tituloPrincipal">
+		<i class="fa fa-home"> </i> Gerenciar Sistema</ui:define>
+	<ui:define name="tituloSecundario"></ui:define>
+
+	<ui:define name="botoesAcao"></ui:define>
+
+	<ui:insert name="eventos">
+
+		<f:metadata>
+
+			<f:event listener="#{loginBean.validaPagina('adm')}"
+				type="preRenderView" />
+
+			<f:event listener="#{loginBean.isNotAdmRedireciona()}"
+				type="preRenderView" />
+
+		</f:metadata>
+
+	</ui:insert>
+
+	<ui:define name="conteudo">
+
+		<h:form id="form">
+
+			<p:tabView id="tabview" dynamic="true">
+
+				<p:tab title="Controle de Usuário">
+
+					<p:dataTable
+						value="#{controleUsuarioBean.listarControleUsuario(false)}"
+						var="userFalse" emptyMessage="Não há usuários registrados"
+						paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
+						paginator="true"
+						currentPageReportTemplate="[{startRecord} de {endRecord}]"
+						filteredValue="#{controleUsuarioBean.listaFiltradaDeControleUsuario}">
+
+						<f:facet name="header"> Usuários Inativos </f:facet>
+
+						<p:column headerText="Login">
+
+							<h:outputText value="#{userFalse.usuarioEfika.login}" />
+
+						</p:column>
+
+						<p:column headerText="Ativo?">
+
+							<h:outputText value="Sim" rendered="#{userFalse.ativo}" />
+							<h:outputText value="Não" rendered="#{!userFalse.ativo}" />
+
+						</p:column>
+
+						<p:column headerText="Adm?">
+
+							<h:outputText value="Sim" rendered="#{userFalse.adm}" />
+							<h:outputText value="Não" rendered="#{!userFalse.adm}" />
+
+						</p:column>
+
+						<p:column headerText="Modifica" style="text-align: center;">
+
+							<p:commandButton update="@form:tabview:detalhesModUsuario"
+								oncomplete="PF('modUser').show()" icon="ui-icon-pencil"
+								title="Editar">
+
+								<f:setPropertyActionListener value="#{userFalse}"
+									target="#{controleUsuarioBean.controleUsuarioModifica}" />
+
+							</p:commandButton>
+
+						</p:column>
+
+					</p:dataTable>
+					
+					<br />
+
+					<p:dataTable
+						value="#{controleUsuarioBean.listarControleUsuario(true)}"
+						var="userTrue" emptyMessage="Não há usuários registrados"
+						paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
+						paginator="true"
+						currentPageReportTemplate="[{startRecord} de {endRecord}]"
+						filteredValue="#{controleUsuarioBean.listaFiltradaDeControleUsuario}">
+
+						<f:facet name="header">	Usuários Ativos </f:facet>
+
+						<p:column headerText="Login">
+
+							<h:outputText value="#{userTrue.usuarioEfika.login}" />
+
+						</p:column>
+
+						<p:column headerText="Ativo?">
+
+							<h:outputText value="Sim" rendered="#{userTrue.ativo}" />
+							<h:outputText value="Não" rendered="#{!userTrue.ativo}" />
+
+						</p:column>
+
+						<p:column headerText="Adm?">
+
+							<h:outputText value="Sim" rendered="#{userTrue.adm}" />
+							<h:outputText value="Não" rendered="#{!userTrue.adm}" />
+
+						</p:column>
+
+						<p:column headerText="Modifica" style="text-align: center;">
+
+							<p:commandButton update="@form:tabview:detalhesModUsuario"
+								oncomplete="PF('modUser').show()" icon="ui-icon-pencil"
+								title="Editar">
+
+								<f:setPropertyActionListener value="#{userTrue}"
+									target="#{controleUsuarioBean.controleUsuarioModifica}" />
+
+							</p:commandButton>
+
+						</p:column>
+
+					</p:dataTable>
+
+					<p:dialog header="Edita Controle Usuário" widgetVar="modUser"
+						modal="true" showEffect="fade" hideEffect="fade" resizable="false"
+						width="300" height="200">
+
+						<h:panelGroup id="detalhesModUsuario">
+
+							<h:panelGrid>
+
+								<h:outputText value="Login" />
+								<h:outputText
+									value="#{controleUsuarioBean.controleUsuarioModifica.usuarioEfika.login}" />
+
+								<h:outputText value="Adm?" />
+								<p:selectBooleanCheckbox
+									value="#{controleUsuarioBean.controleUsuarioModifica.adm}" />
+
+								<h:outputText value="Ativo?" />
+								<p:selectBooleanCheckbox
+									value="#{controleUsuarioBean.controleUsuarioModifica.ativo}" />
+
+								<p:commandButton value="Modificar"
+									action="#{controleUsuarioBean.modificaControleUsuario()}"
+									update="@all" />
+
+							</h:panelGrid>
+
+						</h:panelGroup>
+
+
+					</p:dialog>
+
+				</p:tab>
+
+			</p:tabView>
+
+		</h:form>
+
+	</ui:define>
+</ui:composition>
+</html>
