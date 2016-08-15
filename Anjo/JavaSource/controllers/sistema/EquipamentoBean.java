@@ -72,5 +72,21 @@ public class EquipamentoBean {
 		return this.equipamentoServico.listarEquipamentosLista(lista);		
 		
 	}
+
+	public Equipamento getEquipamento() {
+		return equipamento;
+	}
+
+	public void setEquipamento(Equipamento equipamento) {
+		this.equipamento = equipamento;
+	}
+
+	public Equipamento getEquipamentoModifica() {
+		return equipamentoModifica;
+	}
+
+	public void setEquipamentoModifica(Equipamento equipamentoModifica) {
+		this.equipamentoModifica = equipamentoModifica;
+	}	
 	
 }

@@ -21,6 +21,7 @@ public class FabricanteServico {
 		
 		try {
 			
+			fabricante.setLista(true);
 			this.entityManager.persist(fabricante);
 			
 		} catch (Exception e) {

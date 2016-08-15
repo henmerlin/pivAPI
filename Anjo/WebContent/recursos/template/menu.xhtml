@@ -14,6 +14,10 @@
 			<li><a href="/Anjo/"> <i class="fa fa-home" /> Início
 			</a></li>
 
+			<li><a href="/Anjo/sistema/atendimento.jsf"> <i
+					class="fa fa-list" /> Atendimento
+			</a></li>
+
 			<h:panelGroup rendered="#{loginBean.verificaAdm()}">
 
 				<li><a href="/Anjo/adm/index.jsf"> <i class="fa fa-cogs" />
@@ -24,7 +28,7 @@
 
 		</h:panelGroup>
 
-		<h:panelGroup rendered="#{loginBean.pagina.equalsIgnoreCase('adm') and loginBean.verificaAdm()}">
+		<h:panelGroup rendered="#{loginBean.pagina.equalsIgnoreCase('adm')}">
 
 			<li><a href="/Anjo/adm/gerenciarSis.jsf"> <i
 					class="fa fa-cogs" /> Gerenciar Sistema

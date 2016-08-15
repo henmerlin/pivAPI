@@ -20,6 +20,7 @@ public class FalhaSistemicaServico {
 		
 		try {
 			
+			falhaSistemica.setFalha(false);
 			this.entityManager.persist(falhaSistemica);
 			
 		} catch (Exception e) {

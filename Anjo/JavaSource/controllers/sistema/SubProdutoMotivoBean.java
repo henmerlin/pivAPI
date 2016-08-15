@@ -6,7 +6,7 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
-import models.sistema.SubProdutoMotivo;
+import entidades.sistema.SubProdutoMotivo;
 import models.sistema.SubProdutoMotivoServico;
 import util.JSFUtil;
 

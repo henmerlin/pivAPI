@@ -32,7 +32,7 @@ public class FalhaSistemicaBean {
 	public void cadastrarFalhaSistemica() {
 		
 		try {
-			
+						
 			this.falhaSistemicaServico.cadastrarFalhaSistemica(this.falhaSistemica);
 			JSFUtil.addInfoMessage("Falha Sistemica cadastrada com sucesso.");
 			this.falhaSistemica = new FalhaSistemica();

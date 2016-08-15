@@ -38,9 +38,9 @@ public class UsuarioEfikaBean {
 		
 		try {
 			
-			this.usuarioEfikaServico.modificarUsuarioEfika(this.usuarioEfika);
+			this.usuarioEfikaServico.modificarUsuarioEfika(this.usuarioEfikaModifica);
 			JSFUtil.addInfoMessage("Usuário modificado com sucesso.");
-			this.usuarioEfika = new UsuarioEfika();
+			this.usuarioEfikaModifica = new UsuarioEfika();
 			
 		} catch (Exception e) {
 

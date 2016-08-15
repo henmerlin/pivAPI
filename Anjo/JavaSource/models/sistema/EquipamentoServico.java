@@ -20,6 +20,7 @@ public class EquipamentoServico {
 		
 		try {
 			
+			equipamento.setLista(true);
 			this.entityManager.persist(equipamento);
 			
 		} catch (Exception e) {

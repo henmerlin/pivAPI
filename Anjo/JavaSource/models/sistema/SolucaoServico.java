@@ -20,6 +20,8 @@ public class SolucaoServico {
 		
 		try {
 			
+			solucao.setLista(true);
+			
 			this.entityManager.persist(solucao);
 			
 		} catch (Exception e) {

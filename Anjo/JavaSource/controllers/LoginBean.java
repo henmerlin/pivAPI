@@ -120,7 +120,7 @@ public class LoginBean implements Serializable {
 			
 			UsuarioEfika usuarioEfika = this.listarControleUsuarioEspecifico();
 			
-			if (usuarioEfika.getAdm()) {
+			if (!usuarioEfika.getAdm()) {
 				
 				context.redirect("/Anjo/index.jsf");
 				
@@ -143,7 +143,6 @@ public class LoginBean implements Serializable {
 
 		} catch (Exception e) {
 			
-			JSFUtil.addErrorMessage(e.getMessage());
 			return null;
 
 		}

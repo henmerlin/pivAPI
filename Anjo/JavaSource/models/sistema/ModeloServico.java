@@ -20,6 +20,7 @@ public class ModeloServico {
 		
 		try {
 			
+			modelo.setLista(true);
 			this.entityManager.persist(modelo);
 			
 		} catch (Exception e) {

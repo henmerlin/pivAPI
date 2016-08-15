@@ -11,7 +11,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 import entidades.sistema.Equipe;
 
 @Entity
-@Table(name="backloglist_UsuarioEfika")
+@Table(name="Anjo_UsuarioEfika")
 public class UsuarioEfika{
 	
 	@Id
@@ -28,7 +28,8 @@ public class UsuarioEfika{
 	@ManyToOne
 	private Equipe equipe;
 	
-	public UsuarioEfika() {		
+	public UsuarioEfika() {
+		
 		
 		
 	}
