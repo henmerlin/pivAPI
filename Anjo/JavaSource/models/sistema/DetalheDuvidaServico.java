@@ -30,6 +30,21 @@ public class DetalheDuvidaServico {
 		}
 
 	}
+	
+	public void cadastrarDetalheDuvidaByUser(DetalheDuvida detalheDuvida) throws Exception {
+
+		try {
+			
+			detalheDuvida.setLista(false);
+			this.entityManager.persist(detalheDuvida);
+
+		} catch (Exception e) {
+
+			throw new Exception("Erro ao cadastrar Detalhe da Duvida");
+
+		}
+
+	}
 
 	public void modificarDetalheDuvida(DetalheDuvida detalheDuvida) throws Exception {
 

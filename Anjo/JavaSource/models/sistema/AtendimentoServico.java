@@ -1,6 +1,7 @@
 package models.sistema;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.ejb.Stateless;
@@ -21,6 +22,8 @@ public class AtendimentoServico {
 		
 		try {
 			
+			Date date = new Date();			
+			atendimento.setDataRegistro(date);			
 			this.entityManager.persist(atendimento);
 			
 		} catch (Exception e) {
@@ -72,6 +75,24 @@ public class AtendimentoServico {
 		} catch (Exception e) {
 
 			throw new Exception("Atendimento especifico não existe por favor verifique.");
+			
+		}
+		
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Atendimento> listarAtendimentosPorData(Date dataInicio, Date dataFim) {
+		
+		try {
+			
+			Query query = this.entityManager.createQuery("FROM Atendimento a WHERE a.dataRegistro BETWEEN :param1 AND :param2");
+			query.setParameter("param1", dataInicio);
+			query.setParameter("param2", dataFim);
+			return query.getResultList();
+			
+		} catch (Exception e) {
+
+			return new ArrayList<Atendimento>();
 			
 		}
 		

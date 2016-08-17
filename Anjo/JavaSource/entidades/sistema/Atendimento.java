@@ -26,15 +26,15 @@ public class Atendimento {
 	
 	private Date dataRegistro;
 	
-	private Boolean acionadoSuporte;
+	private Boolean acionadoSuporte = false;
 	
 	private String nomeSuporte;
 	
-	private Boolean acionadoFalhaSis;
+	private Boolean acionadoFalhaSis = false;
 	
 	private String falhaSis;
 	
-	private Boolean acionadoFalhaEqp;
+	private Boolean acionadoFalhaEqp = false;
 	
 	private String falhaEqp;
 	

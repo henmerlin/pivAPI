@@ -152,7 +152,7 @@ public class AtendimentoBean {
 	public void cadastrarDuvida() {
 
 		try {
-			this.duvidaServico.cadastrarDuvida(this.duvida);
+			this.duvidaServico.cadastrarDuvidaByUser(this.duvida);
 			this.duvida = new Duvida();
 
 		} catch (Exception e) {
@@ -167,7 +167,7 @@ public class AtendimentoBean {
 
 		try {
 
-			this.detalheDuvidaServico.cadastrarDetalheDuvida(this.detalheDuvida);
+			this.detalheDuvidaServico.cadastrarDetalheDuvidaByUser(this.detalheDuvida);
 			this.detalheDuvida = new DetalheDuvida();
 
 
@@ -183,7 +183,7 @@ public class AtendimentoBean {
 
 		try {
 
-			this.equipamentoServico.cadastrarEquipamento(this.equipamento);
+			this.equipamentoServico.cadastrarEquipamentoByUser(this.equipamento);
 			this.equipamento = new Equipamento();
 
 		} catch (Exception e) {
@@ -198,7 +198,7 @@ public class AtendimentoBean {
 
 		try {
 
-			this.fabricanteServico.cadastrarFabricante(this.fabricante);
+			this.fabricanteServico.cadastrarFabricanteByUser(this.fabricante);
 			this.fabricante = new Fabricante();			
 
 		} catch (Exception e) {
@@ -213,7 +213,7 @@ public class AtendimentoBean {
 
 		try {
 
-			this.modeloServico.cadastrarModelo(this.modelo);
+			this.modeloServico.cadastrarModeloByUser(this.modelo);
 			this.modelo = new Modelo();
 
 		} catch (Exception e) {
@@ -228,7 +228,7 @@ public class AtendimentoBean {
 
 		try {
 
-			this.solucaoServico.cadastrarSolucao(this.solucao);
+			this.solucaoServico.cadastrarSolucaoByUser(this.solucao);
 			this.solucao = new Solucao();
 
 		} catch (Exception e) {
@@ -383,9 +383,7 @@ public class AtendimentoBean {
 	}
 
 	public void validarCamposOutros() {
-		
-		System.out.println("Entrou validar Campos");
-
+				
 		if (this.atendimento.getDuvida().getNome().equalsIgnoreCase("Outros")) {
 			
 			this.atendimento.setDuvida(this.duvida);				
@@ -400,27 +398,27 @@ public class AtendimentoBean {
 
 		}
 
-		if (this.infoEquipamento.getEquipamento().getNome().equalsIgnoreCase("Outros")) {
-
+		if (this.atendimento.getAcionadoFalhaEqp() && this.infoEquipamento.getEquipamento().getNome().equalsIgnoreCase("Outros")) {
+			
 			this.infoEquipamento.setEquipamento(this.equipamento);				
 			this.cadastrarEquipamento();
 
 		}
 
-		if (this.infoEquipamento.getFabricante().getNome().equalsIgnoreCase("Outros")) {
+		if (this.atendimento.getAcionadoFalhaEqp() && this.infoEquipamento.getFabricante().getNome().equalsIgnoreCase("Outros")) {
 
 			this.infoEquipamento.setFabricante(this.fabricante);				
 			this.cadastrarFabricante();
 
 		}
-
-		if (this.infoEquipamento.getModelo().getNome().equalsIgnoreCase("Outros")) {
+		
+		if (this.atendimento.getAcionadoFalhaEqp() && this.infoEquipamento.getModelo().getNome().equalsIgnoreCase("Outros")) {
 
 			this.infoEquipamento.setModelo(this.modelo);				
 			this.cadastrarModelo();				
 
 		}
-
+		
 		if (this.atendimento.getSolucao().getNome().equalsIgnoreCase("Outros")) {
 
 			this.atendimento.setSolucao(this.solucao);

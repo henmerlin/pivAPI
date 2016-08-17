@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/recursos/template/template.xhtml">
+
+	<ui:define name="tituloPagina">
+		 Admistração
+	</ui:define>
+	<ui:define name="tituloPrincipal">
+		<i class="fa fa-cogs"> </i> Admistração</ui:define>
+	<ui:define name="tituloSecundario"></ui:define>
+
+	<ui:define name="botoesAcao"></ui:define>
+
+	<ui:insert name="eventos">
+
+		<f:metadata>
+
+			<f:event listener="#{loginBean.validaPagina('adm')}"
+				type="preRenderView" />
+			<f:event listener="#{loginBean.isNotAdmRedireciona()}"
+				type="preRenderView" />
+
+		</f:metadata>
+
+	</ui:insert>
+
+	<ui:define name="conteudo">
+
+		<h:panelGrid columns="3" style="margin-bottom: 15px;">
+			<p:outputLabel for="dataInicio" value="Data Início: " />
+			<p:outputLabel for="dataFim" value="Data Fim: " />
+			<p:outputLabel for="busca" value="" />
+			<p:calendar id="dataInicio" value="#{listaBean.dataInicio}" pattern="dd/MM/yyyy" mask="true" />
+			<p:calendar id="dataFim" value="#{listaBean.dataFim}" pattern="dd/MM/yyyy" mask="true" />
+
+			<p:commandButton id="busca" value="Buscar"
+				action="#{listaBean.listarAtendimentosRegistrados()}"
+				update="relats" />
+
+		</h:panelGrid>
+
+		<p:dataTable id="relats" var="atendimento" value="#{listaBean.listaDeAtendimento}"
+			emptyMessage="Preencha as datas para obter os Atendimentos registrados"
+			paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {Exporters}"
+			paginator="true" style="margin-bottom:20px" rows="10"
+			currentPageReportTemplate="[{startRecord} de {endRecord}]"
+			rowsPerPageTemplate="10, 15, 20, 25">
+
+			<f:facet name="header">
+			
+				Atendimentos registrados
+			
+			</f:facet>
+
+			<f:facet name="{Exporters}">
+
+				<h:commandLink>
+
+					<i class="fa fa-download" /> Exportar
+					<p:dataExporter type="xls" target="relats"
+						fileName="Registros Atendimentos" />
+
+				</h:commandLink>
+
+			</f:facet>
+
+			<p:column headerText="Matricula">
+
+				<h:outputText value="#{atendimento.matriculaOperador}" />
+
+			</p:column>
+
+			<p:column headerText="Instância">
+
+				<h:outputText value="#{atendimento.instancia}" />
+
+			</p:column>
+
+			<p:column headerText="Transmissão">
+
+				<h:outputText value="#{atendimento.transmissao.nome}" />
+
+			</p:column>
+
+
+			<p:column headerText="Ordem">
+
+				<h:outputText value="#{atendimento.ordem}" />
+
+			</p:column>
+
+			<p:column headerText="BA/Código PON">
+
+				<h:outputText value="#{atendimento.codigo}" />
+
+			</p:column>
+
+			<p:column headerText="Produto">
+
+				<h:outputText value="#{atendimento.infoProduto.produto.nome}" />
+
+			</p:column>
+			
+			<p:column headerText="Sub Produto">
+
+				<h:outputText value="#{atendimento.infoProduto.subProdutoMotivo.nome}" />
+
+			</p:column>
+			
+			<p:column headerText="Duvida/Dificuldade">
+
+				<h:outputText value="#{atendimento.duvida.nome}" />
+
+			</p:column>
+			
+			<p:column headerText="Acionado suporte?">
+
+				<h:outputText rendered="#{atendimento.acionadoSuporte}" value="Sim" />
+				<h:outputText rendered="#{!atendimento.acionadoSuporte}" value="Não" />
+
+			</p:column>
+			
+			<p:column headerText="Nome Suporte">
+
+				<h:outputText value="#{atendimento.nomeSuporte}" />
+
+			</p:column>
+			
+			<p:column headerText="Falha sistemica?">
+
+				<h:outputText rendered="#{atendimento.acionadoFalhaSis}" value="Sim" />
+				<h:outputText rendered="#{!atendimento.acionadoFalhaSis}" value="Não" />
+
+			</p:column>
+			
+			<p:column headerText="Falha Sistemica">
+
+				<h:outputText value="#{atendimento.falhaSis}" />
+
+			</p:column>
+			
+			<p:column headerText="Falha Equipamento?">
+
+				<h:outputText rendered="#{atendimento.acionadoFalhaEqp}" value="Sim" />
+				<h:outputText rendered="#{!atendimento.acionadoFalhaEqp}" value="Não" />
+
+			</p:column>
+			
+			<p:column headerText="Falha Equipamento">
+
+				<h:outputText value="#{atendimento.falhaEqp}" />
+
+			</p:column>
+			
+			<p:column headerText="Equipamento">
+
+				<h:outputText value="#{atendimento.infoEquipamento.equipamento.nome}" />
+
+			</p:column>			
+			
+			<p:column headerText="Fabricante">
+
+				<h:outputText value="#{atendimento.infoEquipamento.fabricante.nome}" />
+
+			</p:column>			
+			
+			<p:column headerText="Modelo">
+
+				<h:outputText value="#{atendimento.infoEquipamento.modelo.nome}" />
+
+			</p:column>
+			
+			<p:column headerText="Solução">
+
+				<h:outputText value="#{atendimento.solucao.nome}" />
+
+			</p:column>		
+
+		</p:dataTable>
+
+	</ui:define>
+</ui:composition>
+</html>
