@@ -115,22 +115,43 @@ public class LoginBean implements Serializable {
 	public void isNotAdmRedireciona() throws IOException {
 
 		ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
-		
+
 		try {
-			
+
 			UsuarioEfika usuarioEfika = this.listarControleUsuarioEspecifico();
-			
+
 			if (!usuarioEfika.getAdm()) {
-				
+
 				context.redirect("/Anjo/index.jsf");
-				
+
 			}
-			
+
 		} catch (Exception e) {
 
 			context.redirect("/Anjo/index.jsf");
 			JSFUtil.addErrorMessage(e.getMessage());
-			
+
+		}		
+
+	}
+
+	public void isNotLogadoRedireciona() throws IOException {
+
+		ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
+
+		try {
+
+			if (!logado) {
+
+				context.redirect("/Anjo/index.jsf");
+
+			}
+
+		} catch (Exception e) {
+
+			context.redirect("/Anjo/index.jsf");
+			JSFUtil.addErrorMessage(e.getMessage());
+
 		}		
 
 	}
@@ -142,7 +163,7 @@ public class LoginBean implements Serializable {
 			return this.usuarioEfikaServico.listarUsuarioEfikaEspecifico(this.usuario);			
 
 		} catch (Exception e) {
-			
+
 			return null;
 
 		}

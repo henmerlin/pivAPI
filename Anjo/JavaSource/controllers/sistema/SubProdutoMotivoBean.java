@@ -6,6 +6,7 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
+import entidades.sistema.Produto;
 import entidades.sistema.SubProdutoMotivo;
 import models.sistema.SubProdutoMotivoServico;
 import util.JSFUtil;
@@ -64,6 +65,12 @@ public class SubProdutoMotivoBean {
 	public List<SubProdutoMotivo> listarSubProdutoMotivo() {
 		
 		return this.subProdutoMotivoServico.listarSubProdutoMotivo();
+		
+	}
+	
+	public List<SubProdutoMotivo> listarSubProdutoMotivoProdutoEspecifico(Produto produto) {
+		
+		return this.subProdutoMotivoServico.listarSubProdutoMotivoProdutoEspecifico(produto);
 		
 	}
 

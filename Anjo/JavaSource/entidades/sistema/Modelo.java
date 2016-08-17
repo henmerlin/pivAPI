@@ -5,12 +5,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Entity
-public class Modelo {
-
+public class Modelo {	
+	
 	@Id
 	@GeneratedValue
 	private Integer id;
-	
+
 	private String nome;
 	
 	private Boolean lista;

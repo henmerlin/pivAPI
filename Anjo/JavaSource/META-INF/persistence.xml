@@ -3,16 +3,18 @@
 	<persistence-unit name="vu">
 		<jta-data-source>java:/co_hsqldb</jta-data-source>
 		<class>entidades.UsuarioEfika</class>
-		<class>entidades.sistema.Transmicao</class>
-		<class>entidades.sistema.SubProdutoMotivo</class>
-		<class>entidades.sistema.Solucao</class>
+		<class>entidades.Equipe</class>
 		<class>entidades.sistema.Produto</class>
-		<class>entidades.sistema.Modelo</class>
-		<class>entidades.sistema.FalhaSistemica</class>
-		<class>entidades.sistema.Fabricante</class>
-		<class>entidades.sistema.Equipe</class>
-		<class>entidades.sistema.Equipamento</class>
+		<class>entidades.sistema.SubProdutoMotivo</class>
+		<class>entidades.sistema.InfoProduto</class>
+		<class>entidades.sistema.Transmissao</class>
 		<class>entidades.sistema.Duvida</class>
+		<class>entidades.sistema.DetalheDuvida</class>
+		<class>entidades.sistema.Solucao</class>
+		<class>entidades.sistema.Modelo</class>
+		<class>entidades.sistema.Fabricante</class>
+		<class>entidades.sistema.Equipamento</class>
+		<class>entidades.sistema.InfoEquipamento</class>
 		<class>entidades.sistema.Atendimento</class>
 		<properties>
 			<property name="hibernate.dialect" value="org.hibernate.dialect.HSQLDialect"/>

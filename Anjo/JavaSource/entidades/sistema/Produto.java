@@ -6,13 +6,13 @@ import javax.persistence.Id;
 
 @Entity
 public class Produto {
-
+	
 	@Id
 	@GeneratedValue
 	private Integer id;
 	
 	private String nome;
-	
+
 	public Integer getId() {
 		return id;
 	}
@@ -57,6 +57,6 @@ public class Produto {
 	@Override
 	public String toString() {
 		return "Produto [id=" + id + "]";
-	}
-	
+	}	
+
 }

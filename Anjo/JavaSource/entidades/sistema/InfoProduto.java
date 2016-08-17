@@ -6,17 +6,18 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class SubProdutoMotivo {
-	
+public class InfoProduto {
+
 	@Id
 	@GeneratedValue
 	private Integer id;
-	
-	private String nome;
-	
+
 	@ManyToOne
 	private Produto produto;
-		
+	
+	@ManyToOne
+	private SubProdutoMotivo subProdutoMotivo;
+
 	public Integer getId() {
 		return id;
 	}
@@ -25,20 +26,20 @@ public class SubProdutoMotivo {
 		this.id = id;
 	}
 
-	public String getNome() {
-		return nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-
 	public Produto getProduto() {
 		return produto;
 	}
 
 	public void setProduto(Produto produto) {
 		this.produto = produto;
+	}
+
+	public SubProdutoMotivo getSubProdutoMotivo() {
+		return subProdutoMotivo;
+	}
+
+	public void setSubProdutoMotivo(SubProdutoMotivo subProdutoMotivo) {
+		this.subProdutoMotivo = subProdutoMotivo;
 	}
 
 	@Override
@@ -57,7 +58,7 @@ public class SubProdutoMotivo {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		SubProdutoMotivo other = (SubProdutoMotivo) obj;
+		InfoProduto other = (InfoProduto) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -68,7 +69,7 @@ public class SubProdutoMotivo {
 
 	@Override
 	public String toString() {
-		return "SubProdutoMotivo [id=" + id + "]";
+		return "InfoProduto [id=" + id + "]";
 	}	
 	
 }

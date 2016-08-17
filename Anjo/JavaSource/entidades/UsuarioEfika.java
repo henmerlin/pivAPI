@@ -8,8 +8,6 @@ import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
-import entidades.sistema.Equipe;
-
 @Entity
 @Table(name="Anjo_UsuarioEfika")
 public class UsuarioEfika{

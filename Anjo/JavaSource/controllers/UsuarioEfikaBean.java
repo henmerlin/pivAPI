@@ -7,8 +7,8 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 
+import entidades.Equipe;
 import entidades.UsuarioEfika;
-import entidades.sistema.Equipe;
 import models.UsuarioEfikaServico;
 import util.JSFUtil;
 

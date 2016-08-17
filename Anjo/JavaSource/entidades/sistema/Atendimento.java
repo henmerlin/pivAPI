@@ -5,47 +5,59 @@ import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 
 import entidades.UsuarioEfika;
 
 @Entity
-public class Atendimento {
+public class Atendimento {	
 	
 	@Id
 	@GeneratedValue
 	private Integer id;
 	
+	private String matriculaOperador;
+	
 	private String instancia;
+	
+	private String ordem;
 	
 	private String codigo;
 	
-	@Lob
-	private String detalhe;
-	
 	private Date dataRegistro;
+	
+	private Boolean acionadoSuporte;
+	
+	private String nomeSuporte;
+	
+	private Boolean acionadoFalhaSis;
+	
+	private String falhaSis;
+	
+	private Boolean acionadoFalhaEqp;
+	
+	private String falhaEqp;
 	
 	@ManyToOne
 	private Solucao solucao;
 	
 	@ManyToOne
+	private InfoEquipamento infoEquipamento;
+	
+	@ManyToOne
+	private InfoProduto infoProduto;
+	
+	@ManyToOne
+	private DetalheDuvida detalheDuvida;
+	
+	@ManyToOne
 	private Duvida duvida;
-	
-	@ManyToOne
-	private FalhaSistemica falhaSistemica;
-	
-	@ManyToOne
-	private Equipamento equipamento;
-	
+
 	@ManyToOne
 	private UsuarioEfika usuarioEfika;
 	
 	@ManyToOne
-	private Transmicao transmicao;
-	
-	@ManyToOne
-	private Produto produto;
+	private Transmissao transmissao;
 
 	public Integer getId() {
 		return id;
@@ -53,6 +65,14 @@ public class Atendimento {
 
 	public void setId(Integer id) {
 		this.id = id;
+	}
+
+	public String getMatriculaOperador() {
+		return matriculaOperador;
+	}
+
+	public void setMatriculaOperador(String matriculaOperador) {
+		this.matriculaOperador = matriculaOperador;
 	}
 
 	public String getInstancia() {
@@ -63,20 +83,20 @@ public class Atendimento {
 		this.instancia = instancia;
 	}
 
+	public String getOrdem() {
+		return ordem;
+	}
+
+	public void setOrdem(String ordem) {
+		this.ordem = ordem;
+	}
+
 	public String getCodigo() {
 		return codigo;
 	}
 
 	public void setCodigo(String codigo) {
 		this.codigo = codigo;
-	}
-
-	public String getDetalhe() {
-		return detalhe;
-	}
-
-	public void setDetalhe(String detalhe) {
-		this.detalhe = detalhe;
 	}
 
 	public Date getDataRegistro() {
@@ -87,6 +107,38 @@ public class Atendimento {
 		this.dataRegistro = dataRegistro;
 	}
 
+	public Boolean getAcionadoSuporte() {
+		return acionadoSuporte;
+	}
+
+	public void setAcionadoSuporte(Boolean acionadoSuporte) {
+		this.acionadoSuporte = acionadoSuporte;
+	}
+
+	public String getNomeSuporte() {
+		return nomeSuporte;
+	}
+
+	public void setNomeSuporte(String nomeSuporte) {
+		this.nomeSuporte = nomeSuporte;
+	}
+
+	public Boolean getAcionadoFalhaSis() {
+		return acionadoFalhaSis;
+	}
+
+	public void setAcionadoFalhaSis(Boolean acionadoFalhaSis) {
+		this.acionadoFalhaSis = acionadoFalhaSis;
+	}
+
+	public String getFalhaSis() {
+		return falhaSis;
+	}
+
+	public void setFalhaSis(String falhaSis) {
+		this.falhaSis = falhaSis;
+	}
+
 	public Solucao getSolucao() {
 		return solucao;
 	}
@@ -95,28 +147,20 @@ public class Atendimento {
 		this.solucao = solucao;
 	}
 
-	public Duvida getDuvida() {
-		return duvida;
+	public InfoEquipamento getInfoEquipamento() {
+		return infoEquipamento;
 	}
 
-	public void setDuvida(Duvida duvida) {
-		this.duvida = duvida;
+	public void setInfoEquipamento(InfoEquipamento infoEquipamento) {
+		this.infoEquipamento = infoEquipamento;
 	}
 
-	public FalhaSistemica getFalhaSistemica() {
-		return falhaSistemica;
+	public DetalheDuvida getDetalheDuvida() {
+		return detalheDuvida;
 	}
 
-	public void setFalhaSistemica(FalhaSistemica falhaSistemica) {
-		this.falhaSistemica = falhaSistemica;
-	}
-
-	public Equipamento getEquipamento() {
-		return equipamento;
-	}
-
-	public void setEquipamento(Equipamento equipamento) {
-		this.equipamento = equipamento;
+	public void setDetalheDuvida(DetalheDuvida detalheDuvida) {
+		this.detalheDuvida = detalheDuvida;
 	}
 
 	public UsuarioEfika getUsuarioEfika() {
@@ -127,20 +171,74 @@ public class Atendimento {
 		this.usuarioEfika = usuarioEfika;
 	}
 
-	public Transmicao getTransmicao() {
-		return transmicao;
+	public Transmissao getTransmissao() {
+		return transmissao;
 	}
 
-	public void setTransmicao(Transmicao transmicao) {
-		this.transmicao = transmicao;
-	}
-
-	public Produto getProduto() {
-		return produto;
-	}
-
-	public void setProduto(Produto produto) {
-		this.produto = produto;
+	public void setTransmissao(Transmissao transmissao) {
+		this.transmissao = transmissao;
 	}	
+
+	public InfoProduto getInfoProduto() {
+		return infoProduto;
+	}
+
+	public void setInfoProduto(InfoProduto infoProduto) {
+		this.infoProduto = infoProduto;
+	}	
+
+	public Duvida getDuvida() {
+		return duvida;
+	}
+
+	public void setDuvida(Duvida duvida) {
+		this.duvida = duvida;
+	}	
+
+	public Boolean getAcionadoFalhaEqp() {
+		return acionadoFalhaEqp;
+	}
+
+	public void setAcionadoFalhaEqp(Boolean acionadoFalhaEqp) {
+		this.acionadoFalhaEqp = acionadoFalhaEqp;
+	}
+
+	public String getFalhaEqp() {
+		return falhaEqp;
+	}
+
+	public void setFalhaEqp(String falhaEqp) {
+		this.falhaEqp = falhaEqp;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Atendimento other = (Atendimento) obj;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "Atendimento [id=" + id + "]";
+	}
 	
 }

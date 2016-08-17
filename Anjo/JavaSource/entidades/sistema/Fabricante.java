@@ -79,6 +79,6 @@ public class Fabricante {
 	@Override
 	public String toString() {
 		return "Fabricante [id=" + id + "]";
-	}	
+	}
 	
 }

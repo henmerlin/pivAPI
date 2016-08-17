@@ -3,17 +3,23 @@ package entidades.sistema;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 @Entity
-public class FalhaSistemica {
+public class InfoEquipamento {
 
 	@Id
 	@GeneratedValue
-	private Integer id;
+	private Integer id;	
 	
-	private String nome;
+	@ManyToOne
+	private Equipamento equipamento;
 	
-	private Boolean falha;	
+	@ManyToOne
+	private Fabricante fabricante;
+	
+	@ManyToOne
+	private Modelo modelo;
 
 	public Integer getId() {
 		return id;
@@ -23,20 +29,28 @@ public class FalhaSistemica {
 		this.id = id;
 	}
 
-	public Boolean getFalha() {
-		return falha;
+	public Equipamento getEquipamento() {
+		return equipamento;
 	}
 
-	public void setFalha(Boolean falha) {
-		this.falha = falha;
-	}	
-
-	public String getNome() {
-		return nome;
+	public void setEquipamento(Equipamento equipamento) {
+		this.equipamento = equipamento;
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
+	public Fabricante getFabricante() {
+		return fabricante;
+	}
+
+	public void setFabricante(Fabricante fabricante) {
+		this.fabricante = fabricante;
+	}
+
+	public Modelo getModelo() {
+		return modelo;
+	}
+
+	public void setModelo(Modelo modelo) {
+		this.modelo = modelo;
 	}
 
 	@Override
@@ -55,7 +69,7 @@ public class FalhaSistemica {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		FalhaSistemica other = (FalhaSistemica) obj;
+		InfoEquipamento other = (InfoEquipamento) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -66,7 +80,7 @@ public class FalhaSistemica {
 
 	@Override
 	public String toString() {
-		return "FalhaSistemica [id=" + id + "]";
-	}	
-	
+		return "InfoEquipamento [id=" + id + "]";
+	}
+
 }

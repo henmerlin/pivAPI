@@ -1,4 +1,4 @@
-package controllers.sistema;
+package controllers;
 
 import java.util.List;
 
@@ -6,8 +6,8 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
-import entidades.sistema.Equipe;
-import models.sistema.EquipeServico;
+import entidades.Equipe;
+import models.EquipeServico;
 import util.JSFUtil;
 
 @ManagedBean
@@ -15,56 +15,56 @@ import util.JSFUtil;
 public class EquipeBean {
 
 	private Equipe equipe;
-	
+
 	private Equipe equipeModifica;
-	
+
 	@EJB
 	private EquipeServico equipeServico;
-	
+
 	public EquipeBean() {
 
 		this.equipe = new Equipe();
-		
+
 		this.equipeModifica = new Equipe();
-		
+
 	}
-	
+
 	public void cadastrarEquipe() {
-		
+
 		try {
-			
+
 			this.equipeServico.cadastrarEquipe(this.equipe);
 			JSFUtil.addInfoMessage("Equipe cadastrada com sucesso.");
 			this.equipe = new Equipe();
-			
+
 		} catch (Exception e) {
 
 			JSFUtil.addErrorMessage(e.getMessage());
-			
+
 		}
-		
+
 	}
-	
+
 	public void modificarEquipe() {
-		
+
 		try {
-			
+
 			this.equipeServico.modificarEquipe(this.equipeModifica);
 			JSFUtil.addInfoMessage("Equipe modificada com sucesso.");
 			this.equipeModifica = new Equipe();
-			
+
 		} catch (Exception e) {
 
 			JSFUtil.addErrorMessage(e.getMessage());
-			
+
 		}
-		
+
 	}
-	
+
 	public List<Equipe> listaEquipe() {
-		
+
 		return this.equipeServico.listaEquipe();
-		
+
 	}
 
 	public Equipe getEquipe() {
@@ -82,5 +82,5 @@ public class EquipeBean {
 	public void setEquipeModifica(Equipe equipeModifica) {
 		this.equipeModifica = equipeModifica;
 	}	
-		
+
 }

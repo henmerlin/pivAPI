@@ -160,8 +160,7 @@
 									converter="omnifaces.SelectItemsConverter" filter="true"
 									filterMatchMode="startsWith">
 
-									<f:selectItem itemLabel="-- Selecione --"
-										itemValue="#{usuarioEfikaBean.usuarioEfikaModifica.equipe}" />
+									<f:selectItem itemLabel="-- Selecione --" itemValue="" />
 									<f:selectItems value="#{equipeBean.listaEquipe()}" var="eqps"
 										itemLabel="#{eqps.nome}" itemValue="#{eqps}" />
 
@@ -244,81 +243,6 @@
 
 				</p:tab>
 
-				<p:tab title="Falha Sistemica">
-
-					<h:panelGrid>
-
-						<h:outputText value="Nome" />
-						<p:inputText value="#{falhaSistemicaBean.falhaSistemica.nome}" />
-
-						<p:commandButton value="Cadastrar"
-							action="#{falhaSistemicaBean.cadastrarFalhaSistemica()}"
-							update="@all" />
-
-					</h:panelGrid>
-
-					<br />
-
-					<p:dataTable
-						value="#{falhaSistemicaBean.listarTodasFalhaSistemicas()}"
-						var="falhaSis" emptyMessage="Não há Falha sistemicas registradas"
-						paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
-						paginator="true"
-						currentPageReportTemplate="[{startRecord} de {endRecord}]">
-
-						<p:column headerText="Nome" style="text-align: center;">
-
-							<h:outputText value="#{falhaSis.nome}" />
-
-						</p:column>
-
-						<p:column headerText="Criado pelo usuário"
-							style="text-align: center;">
-
-							<h:outputText rendered="#{falhaSis.falha}" value="Sim" />
-							<h:outputText rendered="#{!falhaSis.falha}" value="Não" />
-
-						</p:column>
-
-						<p:column headerText="Modifica" style="text-align: center;">
-
-							<p:commandButton update="@form:tabview:detalhesModFalhaSis"
-								oncomplete="PF('falhaSis').show()" icon="ui-icon-pencil"
-								title="Editar">
-
-								<f:setPropertyActionListener value="#{falhaSis}"
-									target="#{falhaSistemicaBean.falhaSistemicaModifica}" />
-
-							</p:commandButton>
-
-						</p:column>
-
-					</p:dataTable>
-
-					<p:dialog header="Edita Falha Sistemica" widgetVar="falhaSis"
-						modal="true" showEffect="fade" hideEffect="fade" resizable="false"
-						width="300" height="200">
-
-						<h:panelGroup id="detalhesModFalhaSis">
-
-							<h:panelGrid>
-
-								<h:outputText value="Nome" />
-								<p:inputText
-									value="#{falhaSistemicaBean.falhaSistemicaModifica.nome}" />
-
-								<p:commandButton value="Modificar"
-									action="#{falhaSistemicaBean.modificarFalhaSistemica()}"
-									update="@all" />
-
-							</h:panelGrid>
-
-						</h:panelGroup>
-
-					</p:dialog>
-
-				</p:tab>
-
 				<p:tab title="Solução">
 
 					<h:panelGrid>
@@ -368,7 +292,7 @@
 
 					</p:dataTable>
 
-					<p:dialog header="Edita Falha Sistemica" widgetVar="falhaSolucoes"
+					<p:dialog header="Edita Solução" widgetVar="falhaSolucoes"
 						modal="true" showEffect="fade" hideEffect="fade" resizable="false"
 						width="300" height="200">
 
@@ -392,72 +316,153 @@
 
 				<p:tab title="Duvida">
 
-					<h:panelGrid>
+					<p:panel header="Duvida">
 
-						<h:outputText value="Nome" />
-						<p:inputText value="#{duvidaBean.duvida.nome}" />
+						<h:panelGrid>
 
-						<p:commandButton value="Cadastrar"
-							action="#{duvidaBean.cadastrarDuvida()}" update="@all" />
+							<h:outputText value="Nome" />
+							<p:inputText value="#{duvidaBean.duvida.nome}" />
 
-					</h:panelGrid>
+							<p:commandButton value="Cadastrar"
+								action="#{duvidaBean.cadastrarDuvida()}" update="@all" />
+
+						</h:panelGrid>
+
+						<br />
+
+						<p:dataTable value="#{duvidaBean.listaTodasDuvidas()}"
+							var="duvida" emptyMessage="Não há duvidas registradas"
+							paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
+							paginator="true"
+							currentPageReportTemplate="[{startRecord} de {endRecord}]">
+
+							<p:column headerText="Nome" style="text-align: center;">
+
+								<h:outputText value="#{duvida.nome}" />
+
+							</p:column>
+
+							<p:column headerText="Criado pelo usuário"
+								style="text-align: center;">
+
+								<h:outputText rendered="#{!duvida.lista}" value="Sim" />
+								<h:outputText rendered="#{duvida.lista}" value="Não" />
+
+							</p:column>
+
+							<p:column headerText="Modifica" style="text-align: center;">
+
+								<p:commandButton update="@form:tabview:detalhesModDuvida"
+									oncomplete="PF('falhaDuvida').show()" icon="ui-icon-pencil"
+									title="Editar">
+
+									<f:setPropertyActionListener value="#{duvida}"
+										target="#{duvidaBean.duvidaModifica}" />
+
+								</p:commandButton>
+
+							</p:column>
+
+						</p:dataTable>
+
+						<p:dialog header="Edita Duvida" widgetVar="falhaDuvida"
+							modal="true" showEffect="fade" hideEffect="fade"
+							resizable="false" width="300" height="200">
+
+							<h:panelGroup id="detalhesModDuvida">
+
+								<h:panelGrid>
+
+									<h:outputText value="Nome" />
+									<p:inputText value="#{duvidaBean.duvidaModifica.nome}" />
+
+									<p:commandButton value="Modificar"
+										action="#{duvidaBean.modificaDuvida()}" update="@all" />
+
+								</h:panelGrid>
+
+							</h:panelGroup>
+
+						</p:dialog>
+
+					</p:panel>
 
 					<br />
 
-					<p:dataTable value="#{duvidaBean.listaTodasDuvidas()}" var="duvida"
-						emptyMessage="Não há duvidas registradas"
-						paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
-						paginator="true"
-						currentPageReportTemplate="[{startRecord} de {endRecord}]">
+					<p:panel header="Detalhe duvida">
 
-						<p:column headerText="Nome" style="text-align: center;">
+						<h:panelGrid>
 
-							<h:outputText value="#{duvida.nome}" />
+							<h:outputText value="Nome" />
+							<p:inputText value="#{detalheDuvidaBean.detalheDuvida.nome}" />
 
-						</p:column>
+							<p:commandButton value="Cadastrar"
+								action="#{detalheDuvidaBean.cadastrarDetalheDuvida()}"
+								update="@all" />
 
-						<p:column headerText="Criado pelo usuário"
-							style="text-align: center;">
+						</h:panelGrid>
 
-							<h:outputText rendered="#{!duvida.lista}" value="Sim" />
-							<h:outputText rendered="#{duvida.lista}" value="Não" />
+						<br />
 
-						</p:column>
+						<p:dataTable value="#{detalheDuvidaBean.listardetalheDuvida()}"
+							var="detalheDuvida"
+							emptyMessage="Não há detalhes duvidas registradas"
+							paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
+							paginator="true"
+							currentPageReportTemplate="[{startRecord} de {endRecord}]">
 
-						<p:column headerText="Modifica" style="text-align: center;">
+							<p:column headerText="Nome" style="text-align: center;">
 
-							<p:commandButton update="@form:tabview:detalhesModDuvida"
-								oncomplete="PF('falhaDuvida').show()" icon="ui-icon-pencil"
-								title="Editar">
+								<h:outputText value="#{detalheDuvida.nome}" />
 
-								<f:setPropertyActionListener value="#{duvida}"
-									target="#{duvidaBean.duvidaModifica}" />
+							</p:column>
 
-							</p:commandButton>
+							<p:column headerText="Criado pelo usuário"
+								style="text-align: center;">
 
-						</p:column>
+								<h:outputText rendered="#{!detalheDuvida.lista}" value="Sim" />
+								<h:outputText rendered="#{detalheDuvida.lista}" value="Não" />
 
-					</p:dataTable>
+							</p:column>
 
-					<p:dialog header="Edita Duvida" widgetVar="falhaDuvida"
-						modal="true" showEffect="fade" hideEffect="fade" resizable="false"
-						width="300" height="200">
+							<p:column headerText="Modifica" style="text-align: center;">
 
-						<h:panelGroup id="detalhesModDuvida">
+								<p:commandButton update="@form:tabview:detalhesModDetDuvida"
+									oncomplete="PF('modDetDuvida').show()" icon="ui-icon-pencil"
+									title="Editar">
 
-							<h:panelGrid>
+									<f:setPropertyActionListener value="#{detalheDuvida}"
+										target="#{detalheDuvidaBean.detalheDuvidaModifica}" />
 
-								<h:outputText value="Nome" />
-								<p:inputText value="#{duvidaBean.duvidaModifica.nome}" />
+								</p:commandButton>
 
-								<p:commandButton value="Cadastrar"
-									action="#{duvidaBean.modificaDuvida()}" update="@all" />
+							</p:column>
 
-							</h:panelGrid>
+						</p:dataTable>
 
-						</h:panelGroup>
+						<p:dialog header="Edita Duvida" widgetVar="modDetDuvida"
+							modal="true" showEffect="fade" hideEffect="fade"
+							resizable="false" width="300" height="200">
 
-					</p:dialog>
+							<h:panelGroup id="detalhesModDetDuvida">
+
+								<h:panelGrid>
+
+									<h:outputText value="Nome" />
+									<p:inputText
+										value="#{detalheDuvidaBean.detalheDuvidaModifica.nome}" />
+
+									<p:commandButton value="Modificar"
+										action="#{detalheDuvidaBean.modificarDetalheDuvida()}"
+										update="@all" />
+
+								</h:panelGrid>
+
+							</h:panelGroup>
+
+						</p:dialog>
+
+					</p:panel>
 
 				</p:tab>
 
@@ -466,35 +471,35 @@
 					<h:panelGrid>
 
 						<h:outputText value="Nome" />
-						<p:inputText value="#{transmicaoBean.transmicao.nome}" />
+						<p:inputText value="#{transmissaoBean.transmissao.nome}" />
 
 						<p:commandButton value="Cadastrar"
-							action="#{transmicaoBean.cadastrarTransmicao()}" update="@all" />
+							action="#{transmissaoBean.cadastrarTransmissao()}" update="@all" />
 
 					</h:panelGrid>
 
 					<br />
 
-					<p:dataTable value="#{transmicaoBean.listarTransmicao()}"
-						var="transmicao" emptyMessage="Não há duvidas registradas"
+					<p:dataTable value="#{transmissaoBean.listarTransmissao()}"
+						var="transmissao" emptyMessage="Não há duvidas registradas"
 						paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
 						paginator="true"
 						currentPageReportTemplate="[{startRecord} de {endRecord}]">
 
 						<p:column headerText="Nome" style="text-align: center;">
 
-							<h:outputText value="#{transmicao.nome}" />
+							<h:outputText value="#{transmissao.nome}" />
 
 						</p:column>
 
 						<p:column headerText="Modifica" style="text-align: center;">
 
 							<p:commandButton update="@form:tabview:detalhesModTransmicao"
-								oncomplete="PF('falhaTransmicao').show()" icon="ui-icon-pencil"
+								oncomplete="PF('falhaTransmissao').show()" icon="ui-icon-pencil"
 								title="Editar">
 
-								<f:setPropertyActionListener value="#{transmicao}"
-									target="#{transmicaoBean.transmicaoModifica}" />
+								<f:setPropertyActionListener value="#{transmissao}"
+									target="#{transmissaoBean.transmissaoModifica}" />
 
 							</p:commandButton>
 
@@ -502,7 +507,7 @@
 
 					</p:dataTable>
 
-					<p:dialog header="Edita Transmissão" widgetVar="falhaTransmicao"
+					<p:dialog header="Edita Transmissão" widgetVar="falhaTransmissao"
 						modal="true" showEffect="fade" hideEffect="fade" resizable="false"
 						width="300" height="200">
 
@@ -511,10 +516,11 @@
 							<h:panelGrid>
 
 								<h:outputText value="Nome" />
-								<p:inputText value="#{transmicaoBean.transmicaoModifica.nome}" />
+								<p:inputText value="#{transmissaoBean.transmissaoModifica.nome}" />
 
 								<p:commandButton value="Modificar"
-									action="#{transmicaoBean.modificaTransmicao()}" update="@all" />
+									action="#{transmissaoBean.modificarTransmissao()}"
+									update="@all" />
 
 							</h:panelGrid>
 
@@ -881,21 +887,6 @@
 							<h:outputText value="Nome" />
 							<p:inputText value="#{equipamentoBean.equipamento.nome}" />
 
-							<h:outputText value="Fabricante" />
-							<p:selectOneMenu
-								value="#{equipamentoBean.equipamento.fabricante}"
-								converter="omnifaces.SelectItemsConverter" filter="true"
-								filterMatchMode="startsWith">
-
-								<f:selectItem itemLabel="-- Selecione --" itemValue="" />
-
-								<f:selectItems
-									value="#{fabricanteBean.listarTodosFabricantes()}"
-									var="fabricante" itemLabel="#{fabricante.nome}"
-									itemValue="#{fabricante}" />
-
-							</p:selectOneMenu>
-
 							<p:commandButton value="Cadastrar"
 								action="#{equipamentoBean.cadastrarEquipamento()}" update="@all" />
 
@@ -913,12 +904,6 @@
 							<p:column headerText="Nome" style="text-align: center;">
 
 								<h:outputText value="#{equipamento.nome}" />
-
-							</p:column>
-
-							<p:column headerText="Fabricante" style="text-align: center;">
-
-								<h:outputText value="#{equipamento.fabricante.nome}" />
 
 							</p:column>
 
@@ -954,21 +939,6 @@
 									<h:outputText value="Nome" />
 									<p:inputText
 										value="#{equipamentoBean.equipamentoModifica.nome}" />
-
-									<h:outputText value="Fabricante" />
-									<p:selectOneMenu
-										value="#{equipamentoBean.equipamentoModifica.fabricante}"
-										converter="omnifaces.SelectItemsConverter" filter="true"
-										filterMatchMode="startsWith">
-
-										<f:selectItem itemLabel="-- Selecione --" itemValue="" />
-
-										<f:selectItems
-											value="#{fabricanteBean.listarTodosFabricantes()}"
-											var="fabricante" itemLabel="#{fabricante.nome}"
-											itemValue="#{fabricante}" />
-
-									</p:selectOneMenu>
 
 									<p:commandButton value="Cadastrar"
 										action="#{equipamentoBean.modificarEquipamento()}"

@@ -5,8 +5,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Entity
-public class Transmicao {
-
+public class Transmissao {
+	
 	@Id
 	@GeneratedValue
 	private Integer id;
@@ -45,7 +45,7 @@ public class Transmicao {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Transmicao other = (Transmicao) obj;
+		Transmissao other = (Transmissao) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -56,7 +56,7 @@ public class Transmicao {
 
 	@Override
 	public String toString() {
-		return "Transmicao [id=" + id + "]";
-	}	
-	
+		return "Transmissao [id=" + id + "]";
+	}
+		
 }

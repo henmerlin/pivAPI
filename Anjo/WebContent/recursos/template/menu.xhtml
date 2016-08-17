@@ -14,9 +14,13 @@
 			<li><a href="/Anjo/"> <i class="fa fa-home" /> Início
 			</a></li>
 
-			<li><a href="/Anjo/sistema/atendimento.jsf"> <i
-					class="fa fa-list" /> Atendimento
-			</a></li>
+			<h:panelGroup rendered="#{loginBean.logado}">
+
+				<li><a href="/Anjo/sistema/atendimento.jsf"> <i
+						class="fa fa-list" /> Suporte PA
+				</a></li>
+
+			</h:panelGroup>
 
 			<h:panelGroup rendered="#{loginBean.verificaAdm()}">
 

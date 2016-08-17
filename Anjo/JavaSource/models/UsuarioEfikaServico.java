@@ -8,8 +8,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
+import entidades.Equipe;
 import entidades.UsuarioEfika;
-import entidades.sistema.Equipe;
 
 @Stateless
 public class UsuarioEfikaServico {

@@ -68,5 +68,5 @@ public class Duvida {
 	public String toString() {
 		return "Duvida [id=" + id + "]";
 	}	
-	
+
 }

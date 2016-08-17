@@ -1,22 +1,18 @@
-package entidades.sistema;
+package entidades;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 
 @Entity
-public class SubProdutoMotivo {
+public class Equipe {
 	
 	@Id
 	@GeneratedValue
 	private Integer id;
 	
 	private String nome;
-	
-	@ManyToOne
-	private Produto produto;
-		
+
 	public Integer getId() {
 		return id;
 	}
@@ -31,14 +27,6 @@ public class SubProdutoMotivo {
 
 	public void setNome(String nome) {
 		this.nome = nome;
-	}
-
-	public Produto getProduto() {
-		return produto;
-	}
-
-	public void setProduto(Produto produto) {
-		this.produto = produto;
 	}
 
 	@Override
@@ -57,7 +45,7 @@ public class SubProdutoMotivo {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		SubProdutoMotivo other = (SubProdutoMotivo) obj;
+		Equipe other = (Equipe) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -68,7 +56,7 @@ public class SubProdutoMotivo {
 
 	@Override
 	public String toString() {
-		return "SubProdutoMotivo [id=" + id + "]";
-	}	
-	
+		return "Equipe [id=" + id + "]";
+	}		
+
 }

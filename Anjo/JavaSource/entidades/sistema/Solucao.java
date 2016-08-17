@@ -67,6 +67,6 @@ public class Solucao {
 	@Override
 	public String toString() {
 		return "Solucao [id=" + id + "]";
-	}
-	
+	}	
+
 }

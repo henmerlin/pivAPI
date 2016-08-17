@@ -5,13 +5,15 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Entity
-public class Equipe {
+public class DetalheDuvida {
 
 	@Id
 	@GeneratedValue
 	private Integer id;
 	
 	private String nome;
+	
+	private Boolean lista;
 
 	public Integer getId() {
 		return id;
@@ -27,6 +29,14 @@ public class Equipe {
 
 	public void setNome(String nome) {
 		this.nome = nome;
+	}
+
+	public Boolean getLista() {
+		return lista;
+	}
+
+	public void setLista(Boolean lista) {
+		this.lista = lista;
 	}
 
 	@Override
@@ -45,7 +55,7 @@ public class Equipe {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Equipe other = (Equipe) obj;
+		DetalheDuvida other = (DetalheDuvida) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -56,7 +66,7 @@ public class Equipe {
 
 	@Override
 	public String toString() {
-		return "Equipe [id=" + id + "]";
+		return "DetalheDuvida [id=" + id + "]";
 	}	
-	
+
 }
