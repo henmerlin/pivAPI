@@ -100,7 +100,7 @@
 
 				<h:outputText value="Outras Duvida/Dificuldade" />
 				<p:inputText id="outraDuvida" value="#{atendimentoBean.duvida.nome}"
-					disabled="#{!atendimentoBean.atendimento.duvida.nome.equalsIgnoreCase('Outros')}" />
+					disabled="#{!atendimentoBean.atendimento.duvida.nome.equalsIgnoreCase('Outros')}" maxlength="60"/>
 
 				<h:outputText value="Detalhes da duvida" />
 				<p:selectOneMenu
@@ -117,7 +117,7 @@
 				</p:selectOneMenu>
 
 				<h:outputText value="Outros Detalhes Duvida" />
-				<p:inputText id="outraDetDuvida"
+				<p:inputTextarea id="outraDetDuvida"
 					value="#{atendimentoBean.detalheDuvida.nome}"
 					disabled="#{!atendimentoBean.atendimento.detalheDuvida.nome.equalsIgnoreCase('Outros')}" />
 
@@ -229,7 +229,7 @@
 				</p:selectOneMenu>
 
 				<h:outputText value="Outras Solução" />
-				<p:inputText id="outroSolucao"
+				<p:inputTextarea id="outroSolucao"
 					value="#{atendimentoBean.solucao.nome}"
 					disabled="#{!atendimentoBean.atendimento.solucao.nome.equalsIgnoreCase('Outros')}" />
 

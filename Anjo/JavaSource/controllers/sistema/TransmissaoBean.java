@@ -33,7 +33,7 @@ public class TransmissaoBean {
 
 		try {
 
-			this.transmissaoServico.cadastrarTransmicao(this.transmissao);
+			this.transmissaoServico.cadastrarTransmissao(this.transmissao);
 			JSFUtil.addInfoMessage("Transmissao cadastrada com sucesso");			
 			this.transmissao = new Transmissao();
 
@@ -49,7 +49,7 @@ public class TransmissaoBean {
 
 		try {
 
-			this.transmissaoServico.cadastrarTransmicao(this.transmissaoModifica);
+			this.transmissaoServico.modificarTransmissao(this.transmissaoModifica);
 			JSFUtil.addInfoMessage("Transmissao modificada com sucesso");			
 			this.transmissaoModifica = new Transmissao();
 

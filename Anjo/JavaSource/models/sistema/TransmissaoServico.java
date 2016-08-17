@@ -17,7 +17,7 @@ public class TransmissaoServico {
 	@PersistenceContext(unitName = "vu")
 	private EntityManager entityManager;
 
-	public void cadastrarTransmicao(Transmissao transmissao) throws Exception {
+	public void cadastrarTransmissao(Transmissao transmissao) throws Exception {
 
 		try {
 
@@ -31,7 +31,7 @@ public class TransmissaoServico {
 
 	}
 	
-	public void modificarTransmicao(Transmissao transmissao) throws Exception {
+	public void modificarTransmissao(Transmissao transmissao) throws Exception {
 
 		try {
 
