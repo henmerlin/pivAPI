@@ -47,9 +47,9 @@
 		<p:dataTable id="relats" var="atendimento" value="#{listaBean.listaDeAtendimento}"
 			emptyMessage="Preencha as datas para obter os Atendimentos registrados"
 			paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {Exporters}"
-			paginator="true" style="margin-bottom:20px" rows="10"
+			paginator="true" style="margin-bottom:20px" rows="5"
 			currentPageReportTemplate="[{startRecord} de {endRecord}]"
-			rowsPerPageTemplate="10, 15, 20, 25">
+			rowsPerPageTemplate="5, 10">
 
 			<f:facet name="header">
 			
