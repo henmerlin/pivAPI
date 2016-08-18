@@ -14,7 +14,7 @@
 			<li><a href="/Anjo/"> <i class="fa fa-home" /> Início
 			</a></li>
 
-			<h:panelGroup rendered="#{loginBean.logado}">
+			<h:panelGroup rendered="#{loginBean.logado and loginBean.verificaSeAtivo()}">
 
 				<li><a href="/Anjo/sistema/atendimento.jsf"> <i
 						class="fa fa-list" /> Atendimento

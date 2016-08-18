@@ -170,6 +170,33 @@ public class LoginBean implements Serializable {
 
 	}
 
+	public Boolean verificaSeAtivo() {
+
+		return this.listarControleUsuarioEspecifico().getAtivo();
+
+	}
+
+	public void isNotAtivoRedireciona() throws IOException {
+
+		ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
+
+		try {
+
+			if (!this.listarControleUsuarioEspecifico().getAtivo()) {
+
+				context.redirect("/Anjo/index.jsf");
+
+			}
+
+		} catch (Exception e) {
+
+			context.redirect("/Anjo/index.jsf");
+			JSFUtil.addErrorMessage(e.getMessage());
+
+		}		
+
+	}
+
 
 	public UsuarioEfika getUsuario() {
 		return usuario;
