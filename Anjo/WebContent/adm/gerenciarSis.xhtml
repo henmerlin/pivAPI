@@ -41,7 +41,7 @@
 					<p:dataTable
 						value="#{usuarioEfikaBean.listarUsuarioEfikaAtivo(false)}"
 						var="userFalse" emptyMessage="Não há usuários registrados"
-						paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
+						paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} "
 						paginator="true"
 						currentPageReportTemplate="[{startRecord} de {endRecord}]"
 						filteredValue="#{controleUsuarioBean.listaFiltradaDeControleUsuario}">
@@ -332,9 +332,10 @@
 
 						<p:dataTable value="#{duvidaBean.listaTodasDuvidas()}"
 							var="duvida" emptyMessage="Não há duvidas registradas"
-							paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
-							paginator="true"
-							currentPageReportTemplate="[{startRecord} de {endRecord}]">
+							paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+							paginator="true" rows="5"
+							currentPageReportTemplate="[{startRecord} de {endRecord}]"
+							rowsPerPageTemplate="5, 10">
 
 							<p:column headerText="Nome" style="text-align: center;">
 
@@ -407,9 +408,10 @@
 						<p:dataTable value="#{detalheDuvidaBean.listardetalheDuvida()}"
 							var="detalheDuvida"
 							emptyMessage="Não há detalhes duvidas registradas"
-							paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
-							paginator="true"
-							currentPageReportTemplate="[{startRecord} de {endRecord}]">
+							paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+							paginator="true" rows="5"
+							currentPageReportTemplate="[{startRecord} de {endRecord}]"
+							rowsPerPageTemplate="5, 10">
 
 							<p:column headerText="Nome" style="text-align: center;">
 
@@ -549,10 +551,10 @@
 						<p:dataTable value="#{produtoBean.listarProduto()}" var="produto"
 							style="float: right; width: 60%;"
 							emptyMessage="Não há Produtos registradas"
-							paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
-							paginator="true"
+							paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+							paginator="true" rows="5"
 							currentPageReportTemplate="[{startRecord} de {endRecord}]"
-							rowsPerPageLabel="10">
+							rowsPerPageTemplate="5, 10">
 
 							<p:column headerText="Nome" style="text-align: center;">
 
@@ -631,10 +633,10 @@
 							var="subProduto"
 							style="float: right; width: 60%; margin-top: 20px;"
 							emptyMessage="Não há Sub Produtos registradas"
-							paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
-							paginator="true"
+							paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+							paginator="true" rows="5"
 							currentPageReportTemplate="[{startRecord} de {endRecord}]"
-							rowsPerPageLabel="10">
+							rowsPerPageTemplate="5, 10">
 
 							<p:column headerText="Nome" style="text-align: center;">
 
@@ -719,10 +721,10 @@
 						<p:dataTable value="#{modeloBean.listarTodosModelos()}"
 							var="modelo" style="float: right; width: 60%; margin-top: 20px;"
 							emptyMessage="Não há modelos registradas"
-							paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
-							paginator="true"
+							paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+							paginator="true" rows="5"
 							currentPageReportTemplate="[{startRecord} de {endRecord}]"
-							rowsPerPageLabel="10">
+							rowsPerPageTemplate="5, 10">
 
 							<p:column headerText="Nome" style="text-align: center;">
 
@@ -798,10 +800,10 @@
 							var="fabricante"
 							style="float: right; width: 60%; margin-top: 20px;"
 							emptyMessage="Não há modelos registradas"
-							paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
-							paginator="true"
+							paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+							paginator="true" rows="5"
 							currentPageReportTemplate="[{startRecord} de {endRecord}]"
-							rowsPerPageLabel="10">
+							rowsPerPageTemplate="5, 10">
 
 							<p:column headerText="Nome" style="text-align: center;">
 
@@ -884,10 +886,10 @@
 							var="equipamento"
 							style="float: right; width: 60%; margin-top: 20px;"
 							emptyMessage="Não há equipamento registradas"
-							paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
-							paginator="true"
+							paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+							paginator="true" rows="5"
 							currentPageReportTemplate="[{startRecord} de {endRecord}]"
-							rowsPerPageLabel="10">
+							rowsPerPageTemplate="5, 10">
 
 							<p:column headerText="Nome" style="text-align: center;">
 
