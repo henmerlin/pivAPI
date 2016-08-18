@@ -6,10 +6,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 import entidades.UsuarioEfika;
 
 @Entity
+@Table(name="anjo_Atendimento")
 public class Atendimento {	
 	
 	@Id

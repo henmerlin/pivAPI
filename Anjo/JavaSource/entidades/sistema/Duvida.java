@@ -3,8 +3,10 @@ package entidades.sistema;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
+@Table(name="anjo_Duvida")
 public class Duvida {
 
 	@Id
