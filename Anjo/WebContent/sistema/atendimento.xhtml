@@ -34,7 +34,7 @@
 
 		<p:panel header="Registrar atendimento">
 
-			<h:panelGrid columns="2" cellspacing="20">
+			<p:panelGrid columns="4" layout="grid">
 
 				<h:outputText value="Matricula" />
 				<p:inputText
@@ -196,7 +196,7 @@
 						value="#{fabricanteBean.listarFabricantesLista(true)}"
 						var="fabricante" itemLabel="#{fabricante.nome}"
 						itemValue="#{fabricante}" />
-					<f:ajax event="itemSelect" render="outroFab" />
+					<f:ajax event="itemSelect" render="outroFab mods" />
 
 				</p:selectOneMenu>
 
@@ -211,7 +211,7 @@
 					id="mods" converter="omnifaces.SelectItemsConverter">
 
 					<f:selectItem itemLabel="-- Selecione --" itemValue="" />
-					<f:selectItems value="#{modeloBean.listarModelosLista(true)}"
+					<f:selectItems value="#{modeloBean.listarModelosListaFabricante(atendimentoBean.infoEquipamento.fabricante)}"
 						var="modelo" itemLabel="#{modelo.nome}" itemValue="#{modelo}" />
 					<f:ajax event="itemSelect" render="outroModelo" />
 
@@ -219,7 +219,7 @@
 
 				<h:outputText value="Outros Modelo" />
 				<p:inputText id="outroModelo" value="#{atendimentoBean.modelo.nome}"
-					disabled="#{!atendimentoBean.infoEquipamento.modelo.nome.equalsIgnoreCase('Outros')}" />
+					disabled="#{!atendimentoBean.infoEquipamento.modelo.nome.equalsIgnoreCase('Outros')}" />				
 
 				<h:outputText value="Solução" />
 				<p:selectOneMenu value="#{atendimentoBean.atendimento.solucao}"
@@ -235,12 +235,14 @@
 				<h:outputText value="Outras Solução" />
 				<p:inputTextarea id="outroSolucao"
 					value="#{atendimentoBean.solucao.nome}"
-					disabled="#{!atendimentoBean.atendimento.solucao.nome.equalsIgnoreCase('Outros')}" />
+					disabled="#{!atendimentoBean.atendimento.solucao.nome.equalsIgnoreCase('Outros')}" />			
 
-				<p:commandButton value="Cadastrar"
+			</p:panelGrid>
+			
+			<br />
+			
+			<p:commandButton value="Cadastrar"
 					action="#{atendimentoBean.cadastrarAtendimento()}" update="@all" />
-
-			</h:panelGrid>
 
 		</p:panel>
 

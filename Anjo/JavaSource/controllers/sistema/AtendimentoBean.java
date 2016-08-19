@@ -2,6 +2,7 @@ package controllers.sistema;
 
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
@@ -53,7 +54,7 @@ public class AtendimentoBean {
 	private Modelo modelo;
 
 	private Solucao solucao;
-
+	
 	@EJB
 	private AtendimentoServico atendimentoServico;
 
@@ -101,6 +102,13 @@ public class AtendimentoBean {
 
 		this.solucao = new Solucao();
 
+	}
+	
+	@PostConstruct
+	public void init() {
+		
+		this.listarModelosLista();
+		
 	}
 
 	public void cadastrarAtendimento() {
@@ -448,6 +456,12 @@ public class AtendimentoBean {
 		}
 
 	}
+	
+	public List<Modelo> listarModelosLista() {
+		
+		return this.modeloServico.listarModelosLista(true);
+		
+	}
 
 	public Atendimento getAtendimento() {
 		return atendimento;
@@ -527,5 +541,6 @@ public class AtendimentoBean {
 
 	public void setSessao(LoginBean sessao) {
 		this.sessao = sessao;
-	}		
+	}
+	
 }

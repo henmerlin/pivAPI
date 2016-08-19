@@ -6,6 +6,7 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
+import entidades.sistema.Fabricante;
 import entidades.sistema.Modelo;
 import models.sistema.ModeloServico;
 import util.JSFUtil;
@@ -70,6 +71,12 @@ public class ModeloBean {
 	public List<Modelo> listarModelosLista(Boolean lista) {
 		
 		return this.modeloServico.listarModelosLista(lista);
+		
+	}
+	
+	public List<Modelo> listarModelosListaFabricante(Fabricante fabricante) {
+		
+		return this.modeloServico.listarModelosListaFabricante(fabricante);
 		
 	}
 

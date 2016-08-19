@@ -3,6 +3,7 @@ package entidades.sistema;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -16,6 +17,9 @@ public class Modelo {
 	private String nome;
 	
 	private Boolean lista;
+	
+	@ManyToOne
+	private Fabricante fabricante;
 
 	public Integer getId() {
 		return id;
@@ -39,6 +43,14 @@ public class Modelo {
 
 	public void setLista(Boolean lista) {
 		this.lista = lista;
+	}	
+
+	public Fabricante getFabricante() {
+		return fabricante;
+	}
+
+	public void setFabricante(Fabricante fabricante) {
+		this.fabricante = fabricante;
 	}
 
 	@Override

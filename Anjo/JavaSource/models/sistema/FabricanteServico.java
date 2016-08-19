@@ -9,6 +9,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import entidades.sistema.Fabricante;
+import entidades.sistema.Modelo;
 
 @Stateless
 public class FabricanteServico {
@@ -93,5 +94,21 @@ public class FabricanteServico {
 		}
 
 	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Fabricante> listarFabricantesLista(Modelo modelo) {
 
+		try {
+
+			Query query = this.entityManager.createQuery("FROM Fabricante f WHERE f.modelo =:param1");
+			query.setParameter("param1", modelo);
+			return query.getResultList();
+
+		} catch (Exception e) {
+
+			return new ArrayList<Fabricante>();
+
+		}
+
+	}
 }

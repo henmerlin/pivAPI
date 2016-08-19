@@ -8,6 +8,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
+import entidades.sistema.Fabricante;
 import entidades.sistema.Modelo;
 
 @Stateless
@@ -83,6 +84,23 @@ public class ModeloServico {
 
 			Query query = this.entityManager.createQuery("FROM Modelo m WHERE m.lista =:param1");
 			query.setParameter("param1", lista);
+			return query.getResultList();			
+
+		} catch (Exception e) {
+
+			return new ArrayList<Modelo>();
+
+		}		
+
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<Modelo> listarModelosListaFabricante(Fabricante fabricante) {
+
+		try {
+
+			Query query = this.entityManager.createQuery("FROM Modelo m WHERE m.fabricante =:param1");
+			query.setParameter("param1", fabricante);
 			return query.getResultList();			
 
 		} catch (Exception e) {

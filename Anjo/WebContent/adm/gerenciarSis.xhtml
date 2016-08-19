@@ -701,90 +701,13 @@
 				</p:tab>
 
 				<p:tab title="Equipamentos">
-
-					<p:panel header="Modelo" style="height: 300px;">
-
-						<h:panelGrid style="float: left;">
-
-							<h:outputText value="Nome" />
-							<p:inputText value="#{modeloBean.modelo.nome}" />
-
-							<p:commandButton value="Cadastrar"
-								action="#{modeloBean.cadastrarModelo()}" update="@all" />
-
-						</h:panelGrid>
-
-						<p:dataTable value="#{modeloBean.listarTodosModelos()}"
-							var="modelo" style="float: right; width: 60%; margin-top: 20px;"
-							emptyMessage="Não há modelos registradas"
-							paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-							paginator="true" rows="5"
-							currentPageReportTemplate="[{startRecord} de {endRecord}]">
-
-							<p:column headerText="Nome" style="text-align: center;">
-
-								<h:outputText value="#{modelo.nome}" />
-
-							</p:column>
-
-							<p:column headerText="Modifica" style="text-align: center;">
-
-								<p:commandButton update="@form:tabview:detalhesModModelo"
-									oncomplete="PF('modModelo').show()" icon="ui-icon-pencil"
-									title="Editar">
-
-									<f:setPropertyActionListener value="#{modelo}"
-										target="#{modeloBean.modeloModifica}" />
-
-								</p:commandButton>
-
-							</p:column>
-
-						</p:dataTable>
-
-						<p:dialog header="Edita Modelo" widgetVar="modModelo" modal="true"
-							showEffect="fade" hideEffect="fade" resizable="false" width="300"
-							height="200">
-
-							<h:panelGroup id="detalhesModModelo">
-
-								<h:panelGrid>
-
-									<h:outputText value="Nome" />
-									<p:inputText value="#{modeloBean.modeloModifica.nome}" />
-
-									<p:commandButton value="Modifica"
-										action="#{modeloBean.modificarModelo()}" update="@all" />
-
-								</h:panelGrid>
-
-							</h:panelGroup>
-
-						</p:dialog>
-
-					</p:panel>
-
-					<br />
-
+				
 					<p:panel header="Fabricante" style="height: 300px;">
 
 						<h:panelGrid style="float: left;">
 
 							<h:outputText value="Nome" />
 							<p:inputText value="#{fabricanteBean.fabricante.nome}" />
-
-							<h:outputText value="Modelo" />
-							<p:selectOneMenu value="#{fabricanteBean.fabricante.modelo}"
-								converter="omnifaces.SelectItemsConverter" filter="true"
-								filterMatchMode="startsWith">
-
-								<f:selectItem itemLabel="-- Selecione --" itemValue="" />
-
-								<f:selectItems value="#{modeloBean.listarTodosModelos()}"
-									var="modelos" itemLabel="#{modelos.nome}"
-									itemValue="#{modelos}" />
-
-							</p:selectOneMenu>
 
 							<p:commandButton value="Cadastrar"
 								action="#{fabricanteBean.cadastrarFabricante()}" update="@all" />
@@ -802,12 +725,6 @@
 							<p:column headerText="Nome" style="text-align: center;">
 
 								<h:outputText value="#{fabricante.nome}" />
-
-							</p:column>
-
-							<p:column headerText="Modelo" style="text-align: center;">
-
-								<h:outputText value="#{fabricante.modelo.nome}" />
 
 							</p:column>
 
@@ -837,20 +754,6 @@
 									<h:outputText value="Nome" />
 									<p:inputText value="#{fabricanteBean.fabricanteModifica.nome}" />
 
-									<h:outputText value="Modelo" />
-									<p:selectOneMenu
-										value="#{fabricanteBean.fabricanteModifica.modelo}"
-										converter="omnifaces.SelectItemsConverter" filter="true"
-										filterMatchMode="startsWith">
-
-										<f:selectItem itemLabel="-- Selecione --" itemValue="" />
-
-										<f:selectItems value="#{modeloBean.listarTodosModelos()}"
-											var="modelos" itemLabel="#{modelos.nome}"
-											itemValue="#{modelos}" />
-
-									</p:selectOneMenu>
-
 									<p:commandButton value="Cadastrar"
 										action="#{fabricanteBean.modificaFabricante()}" update="@all" />
 
@@ -862,6 +765,104 @@
 
 					</p:panel>
 
+					<br />
+					
+					<p:panel header="Modelo" style="height: 300px;">
+
+						<h:panelGrid style="float: left;">
+
+							<h:outputText value="Nome" />
+							<p:inputText value="#{modeloBean.modelo.nome}" />
+
+							<h:outputText value="Fabricante" />
+							<p:selectOneMenu value="#{modeloBean.modelo.fabricante}"
+								converter="omnifaces.SelectItemsConverter" filter="true"
+								filterMatchMode="startsWith">
+
+								<f:selectItem itemLabel="-- Selecione --" itemValue="" />
+
+								<f:selectItems
+									value="#{fabricanteBean.listarFabricantesLista(true)}"
+									var="fabricante" itemLabel="#{fabricante.nome}"
+									itemValue="#{fabricante}" />
+
+							</p:selectOneMenu>
+
+							<p:commandButton value="Cadastrar"
+								action="#{modeloBean.cadastrarModelo()}" update="@all" />
+
+						</h:panelGrid>
+
+						<p:dataTable value="#{modeloBean.listarTodosModelos()}"
+							var="modelo" style="float: right; width: 60%; margin-top: 20px;"
+							emptyMessage="Não há modelos registradas"
+							paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+							paginator="true" rows="5"
+							currentPageReportTemplate="[{startRecord} de {endRecord}]">
+
+							<p:column headerText="Nome" style="text-align: center;">
+
+								<h:outputText value="#{modelo.nome}" />
+
+							</p:column>
+							
+							<p:column headerText="Nome" style="text-align: center;">
+
+								<h:outputText value="#{modelo.fabricante.nome}" />
+
+							</p:column>
+
+							<p:column headerText="Modifica" style="text-align: center;">
+
+								<p:commandButton update="@form:tabview:detalhesModModelo"
+									oncomplete="PF('modModelo').show()" icon="ui-icon-pencil"
+									title="Editar">
+
+									<f:setPropertyActionListener value="#{modelo}"
+										target="#{modeloBean.modeloModifica}" />
+
+								</p:commandButton>
+
+							</p:column>
+
+						</p:dataTable>
+
+						<p:dialog header="Edita Modelo" widgetVar="modModelo" modal="true"
+							showEffect="fade" hideEffect="fade" resizable="false" width="300"
+							height="200">
+
+							<h:panelGroup id="detalhesModModelo">
+
+								<h:panelGrid>
+
+									<h:outputText value="Nome" />
+									<p:inputText value="#{modeloBean.modeloModifica.nome}" />
+
+									<h:outputText value="Fabricante" />
+									<p:selectOneMenu value="#{modeloBean.modeloModifica.fabricante}"
+										converter="omnifaces.SelectItemsConverter" filter="true"
+										filterMatchMode="startsWith">
+
+										<f:selectItem itemLabel="-- Selecione --" itemValue="" />
+
+										<f:selectItems
+											value="#{fabricanteBean.listarFabricantesLista(true)}"
+											var="fabricante" itemLabel="#{fabricante.nome}"
+											itemValue="#{fabricante}" />
+
+									</p:selectOneMenu>
+
+									<p:commandButton value="Modifica"
+										action="#{modeloBean.modificarModelo()}" update="@all" />
+
+								</h:panelGrid>
+
+							</h:panelGroup>
+
+						</p:dialog>
+
+					</p:panel>
+					
 					<br />
 
 					<p:panel header="Equipamento" style="height: 300px;">
