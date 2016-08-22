@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/recursos/template/template.xhtml">
+
+	<ui:define name="tituloPagina">
+		 Registro INC
+	</ui:define>
+	<ui:define name="tituloPrincipal">
+		<i class="fa fa-list-alt"> </i>  Registro INC</ui:define>
+	<ui:define name="tituloSecundario"></ui:define>
+
+	<ui:define name="botoesAcao"></ui:define>
+
+	<ui:insert name="eventos">
+
+		<f:metadata>
+
+			<f:event listener="#{loginBean.isNotLogadoRedireciona()}"
+				type="preRenderView" />
+
+			<f:event listener="#{loginBean.isNotAtivoRedireciona()}"
+				type="preRenderView" />
+
+		</f:metadata>
+
+	</ui:insert>
+
+	<ui:define name="conteudo">
+
+		<p:panel header="Registrar INC">
+
+			<h:panelGrid columns="2" cellspacing="10">
+
+				<h:outputText value="Cód INC:" />
+				<p:inputText value="#{atendimentoIncBean.atendimentoInc.numero}" />
+
+				<h:outputText value="Priorizado:" />
+				<p:selectBooleanCheckbox
+					value="#{atendimentoIncBean.atendimentoInc.priorizado}" />
+
+				<h:outputText value="Contato Tec:" />
+				<p:selectBooleanCheckbox
+					value="#{atendimentoIncBean.atendimentoInc.contatoTec}" />
+
+				<h:outputText value="Informações:" />
+				<p:inputTextarea
+					value="#{atendimentoIncBean.atendimentoInc.informacoes}"/>
+
+				<h:outputText value="Hora Gerado INC:" />
+				<p:calendar
+					value="#{atendimentoIncBean.atendimentoInc.horaGeradoInc}"
+					pattern="dd/MM/yyyy HH:mm" mask="true" />
+
+			</h:panelGrid>
+
+			<br />
+
+			<p:commandButton value="Cadastrar"
+				action="#{atendimentoIncBean.cadastrarAtendimentoInc()}"
+				update="@all" />
+
+		</p:panel>
+
+	</ui:define>
+</ui:composition>
+</html>
