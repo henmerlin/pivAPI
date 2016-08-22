@@ -883,7 +883,7 @@
 								<f:selectItem itemLabel="-- Selecione --" itemValue="" />
 
 								<f:selectItems
-									value="#{fabricanteBean.listarFabricantesLista(true)}"
+									value="#{fabricanteBean.listarFabricantesLista(true, true)}"
 									var="fabricante" itemLabel="#{fabricante.nome}"
 									itemValue="#{fabricante}" />
 
@@ -956,7 +956,7 @@
 										<f:selectItem itemLabel="-- Selecione --" itemValue="" />
 
 										<f:selectItems
-											value="#{fabricanteBean.listarFabricantesLista(true)}"
+											value="#{fabricanteBean.listarFabricantesLista(true, true)}"
 											var="fabricante" itemLabel="#{fabricante.nome}"
 											itemValue="#{fabricante}" />
 
