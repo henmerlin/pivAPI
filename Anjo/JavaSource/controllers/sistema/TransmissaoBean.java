@@ -60,11 +60,17 @@ public class TransmissaoBean {
 		}
 
 	}
-	
+
 	public List<Transmissao> listarTransmissao() {		
-		
+
 		return this.transmissaoServico.listarTransmissao();
-		
+
+	}
+
+	public List<Transmissao> listarTransmissaoAtivo(Boolean ativo) {		
+
+		return this.transmissaoServico.listarTransmissaoAtivo(ativo);
+
 	}
 
 	public Transmissao getTransmissao() {
@@ -82,5 +88,5 @@ public class TransmissaoBean {
 	public void setTransmissaoModifica(Transmissao transmissaoModifica) {
 		this.transmissaoModifica = transmissaoModifica;
 	}
-	
+
 }

@@ -68,9 +68,9 @@ public class SubProdutoMotivoBean {
 		
 	}
 	
-	public List<SubProdutoMotivo> listarSubProdutoMotivoProdutoEspecifico(Produto produto) {
+	public List<SubProdutoMotivo> listarSubProdutoMotivoProdutoEspecifico(Produto produto, Boolean ativo) {
 		
-		return this.subProdutoMotivoServico.listarSubProdutoMotivoProdutoEspecifico(produto);
+		return this.subProdutoMotivoServico.listarSubProdutoMotivoProdutoEspecifico(produto, ativo);
 		
 	}
 

@@ -74,9 +74,9 @@ public class ModeloBean {
 		
 	}
 	
-	public List<Modelo> listarModelosListaFabricante(Fabricante fabricante) {
+	public List<Modelo> listarModelosListaFabricante(Fabricante fabricante, Boolean ativo) {
 		
-		return this.modeloServico.listarModelosListaFabricante(fabricante);
+		return this.modeloServico.listarModelosListaFabricante(fabricante, ativo);
 		
 	}
 

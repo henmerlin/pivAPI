@@ -67,9 +67,9 @@ public class DuvidaBean {
 		
 	}
 	
-	public List<Duvida> listaDuvidasLista(Boolean lista) {
+	public List<Duvida> listaDuvidasLista(Boolean lista, Boolean ativo) {
 		
-		return this.duvidaServico.listaDuvidasLista(lista);
+		return this.duvidaServico.listaDuvidasLista(lista, ativo);
 		
 	}
 

@@ -18,6 +18,8 @@ public class SubProdutoMotivo {
 	
 	@ManyToOne
 	private Produto produto;
+	
+	private Boolean ativo = false;
 		
 	public Integer getId() {
 		return id;
@@ -41,6 +43,14 @@ public class SubProdutoMotivo {
 
 	public void setProduto(Produto produto) {
 		this.produto = produto;
+	}
+
+	public Boolean getAtivo() {
+		return ativo;
+	}
+
+	public void setAtivo(Boolean ativo) {
+		this.ativo = ativo;
 	}
 
 	@Override

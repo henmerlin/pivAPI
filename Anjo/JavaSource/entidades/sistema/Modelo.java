@@ -20,6 +20,8 @@ public class Modelo {
 	
 	@ManyToOne
 	private Fabricante fabricante;
+	
+	private Boolean ativo = false;
 
 	public Integer getId() {
 		return id;
@@ -51,6 +53,14 @@ public class Modelo {
 
 	public void setFabricante(Fabricante fabricante) {
 		this.fabricante = fabricante;
+	}	
+
+	public Boolean getAtivo() {
+		return ativo;
+	}
+
+	public void setAtivo(Boolean ativo) {
+		this.ativo = ativo;
 	}
 
 	@Override

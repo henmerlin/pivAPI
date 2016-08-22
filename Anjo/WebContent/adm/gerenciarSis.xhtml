@@ -74,7 +74,8 @@
 
 						</p:column>
 
-						<p:column headerText="Modifica" style="text-align: center;">
+						<p:column headerText="Modifica"
+							style="text-align: center; width: 80px;">
 
 							<p:commandButton update="@form:tabview:detalhesModUsuario"
 								oncomplete="PF('modUser').show()" icon="ui-icon-pencil"
@@ -127,7 +128,8 @@
 
 						</p:column>
 
-						<p:column headerText="Modifica" style="text-align: center;">
+						<p:column headerText="Modifica"
+							style="text-align: center; width: 80px;">
 
 							<p:commandButton update="@form:tabview:detalhesModUsuario"
 								oncomplete="PF('modUser').show()" icon="ui-icon-pencil"
@@ -209,7 +211,15 @@
 
 						</p:column>
 
-						<p:column headerText="Modifica" style="text-align: center;">
+						<p:column headerText="Ativo" style="text-align: center;">
+
+							<h:outputText rendered="#{equipe.ativo}" value="Ativo" />
+							<h:outputText rendered="#{!equipe.ativo}" value="Inativo" />
+
+						</p:column>
+
+						<p:column headerText="Modifica"
+							style="text-align: center; width: 80px;">
 
 							<p:commandButton update="@form:tabview:detalhesModEquipe"
 								oncomplete="PF('modEquipe').show()" icon="ui-icon-pencil"
@@ -234,6 +244,13 @@
 
 								<h:outputText value="Nome" />
 								<p:inputText value="#{equipeBean.equipeModifica.nome}" />
+
+								<h:outputText value="Ativo?" />
+								<p:selectBooleanCheckbox
+									value="#{equipeBean.equipeModifica.ativo}" />
+
+								<p:commandButton value="Modificar"
+									action="#{equipeBean.modificarEquipe()}" update="@all" />
 
 							</h:panelGrid>
 
@@ -269,6 +286,13 @@
 
 						</p:column>
 
+						<p:column headerText="Ativo" style="text-align: center;">
+
+							<h:outputText rendered="#{solucoes.ativo}" value="Ativo" />
+							<h:outputText rendered="#{!solucoes.ativo}" value="Inativo" />
+
+						</p:column>
+
 						<p:column headerText="Criado pelo usuário"
 							style="text-align: center;">
 
@@ -277,7 +301,8 @@
 
 						</p:column>
 
-						<p:column headerText="Modifica" style="text-align: center;">
+						<p:column headerText="Modifica"
+							style="text-align: center; width: 80px;">
 
 							<p:commandButton update="@form:tabview:detalhesModSolucoes"
 								oncomplete="PF('falhaSolucoes').show()" icon="ui-icon-pencil"
@@ -302,6 +327,10 @@
 
 								<h:outputText value="Nome" />
 								<p:inputText value="#{solucaoBean.solucaoModifica.nome}" />
+
+								<h:outputText value="Ativo?" />
+								<p:selectBooleanCheckbox
+									value="#{solucaoBean.solucaoModifica.ativo}" />
 
 								<p:commandButton value="Modificar"
 									action="#{solucaoBean.modificaSolucao()}" update="@all" />
@@ -342,6 +371,13 @@
 
 							</p:column>
 
+							<p:column headerText="Ativo" style="text-align: center;">
+
+								<h:outputText rendered="#{duvida.ativo}" value="Ativo" />
+								<h:outputText rendered="#{!duvida.ativo}" value="Inativo" />
+
+							</p:column>
+
 							<p:column headerText="Criado pelo usuário"
 								style="text-align: center;">
 
@@ -350,7 +386,8 @@
 
 							</p:column>
 
-							<p:column headerText="Modifica" style="text-align: center;">
+							<p:column headerText="Modifica"
+								style="text-align: center; width: 80px;">
 
 								<p:commandButton update="@form:tabview:detalhesModDuvida"
 									oncomplete="PF('falhaDuvida').show()" icon="ui-icon-pencil"
@@ -375,6 +412,10 @@
 
 									<h:outputText value="Nome" />
 									<p:inputText value="#{duvidaBean.duvidaModifica.nome}" />
+
+									<h:outputText value="Ativo?" />
+									<p:selectBooleanCheckbox
+										value="#{duvidaBean.duvidaModifica.ativo}" />
 
 									<p:commandButton value="Modificar"
 										action="#{duvidaBean.modificaDuvida()}" update="@all" />
@@ -417,6 +458,13 @@
 
 							</p:column>
 
+							<p:column headerText="Ativo" style="text-align: center;">
+
+								<h:outputText rendered="#{detalheDuvida.ativo}" value="Ativo" />
+								<h:outputText rendered="#{!detalheDuvida.ativo}" value="Inativo" />
+
+							</p:column>
+
 							<p:column headerText="Criado pelo usuário"
 								style="text-align: center;">
 
@@ -425,7 +473,8 @@
 
 							</p:column>
 
-							<p:column headerText="Modifica" style="text-align: center;">
+							<p:column headerText="Modifica"
+								style="text-align: center; width: 80px;">
 
 								<p:commandButton update="@form:tabview:detalhesModDetDuvida"
 									oncomplete="PF('modDetDuvida').show()" icon="ui-icon-pencil"
@@ -451,6 +500,10 @@
 									<h:outputText value="Nome" />
 									<p:inputText
 										value="#{detalheDuvidaBean.detalheDuvidaModifica.nome}" />
+
+									<h:outputText value="Ativo?" />
+									<p:selectBooleanCheckbox
+										value="#{detalheDuvidaBean.detalheDuvidaModifica.ativo}" />
 
 									<p:commandButton value="Modificar"
 										action="#{detalheDuvidaBean.modificarDetalheDuvida()}"
@@ -492,7 +545,15 @@
 
 						</p:column>
 
-						<p:column headerText="Modifica" style="text-align: center;">
+						<p:column headerText="Ativo" style="text-align: center;">
+
+							<h:outputText rendered="#{transmissao.ativo}" value="Ativo" />
+							<h:outputText rendered="#{!transmissao.ativo}" value="Inativo" />
+
+						</p:column>
+
+						<p:column headerText="Modifica"
+							style="text-align: center; width: 80px;">
 
 							<p:commandButton update="@form:tabview:detalhesModTransmicao"
 								oncomplete="PF('falhaTransmissao').show()" icon="ui-icon-pencil"
@@ -517,6 +578,10 @@
 
 								<h:outputText value="Nome" />
 								<p:inputText value="#{transmissaoBean.transmissaoModifica.nome}" />
+
+								<h:outputText value="Ativo?" />
+								<p:selectBooleanCheckbox
+									value="#{transmissaoBean.transmissaoModifica.ativo}" />
 
 								<p:commandButton value="Modificar"
 									action="#{transmissaoBean.modificarTransmissao()}"
@@ -559,7 +624,15 @@
 
 							</p:column>
 
-							<p:column headerText="Modifica" style="text-align: center;">
+							<p:column headerText="Ativo" style="text-align: center;">
+
+								<h:outputText rendered="#{produto.ativo}" value="Ativo" />
+								<h:outputText rendered="#{!produto.ativo}" value="Inativo" />
+
+							</p:column>
+
+							<p:column headerText="Modifica"
+								style="text-align: center; width: 80px;">
 
 								<p:commandButton update="@form:tabview:detalhesModProduto"
 									oncomplete="PF('modProduto').show()" icon="ui-icon-pencil"
@@ -584,6 +657,10 @@
 
 									<h:outputText value="Nome" />
 									<p:inputText value="#{produtoBean.produtoModifica.nome}" />
+
+									<h:outputText value="Ativo?" />
+									<p:selectBooleanCheckbox
+										value="#{produtoBean.produtoModifica.ativo}" />
 
 									<p:commandButton value="Cadastrar"
 										action="#{produtoBean.modificarProduto()}" update="@all" />
@@ -638,15 +715,23 @@
 
 								<h:outputText value="#{subProduto.nome}" />
 
-							</p:column>
+							</p:column>							
 
 							<p:column headerText="Produto" style="text-align: center;">
 
 								<h:outputText value="#{subProduto.produto.nome}" />
 
 							</p:column>
+							
+							<p:column headerText="Ativo" style="text-align: center;">
 
-							<p:column headerText="Modifica" style="text-align: center;">
+								<h:outputText rendered="#{subProduto.ativo}" value="Ativo" />
+								<h:outputText rendered="#{!subProduto.ativo}" value="Inativo" />
+
+							</p:column>
+
+							<p:column headerText="Modifica"
+								style="text-align: center; width: 80px;">
 
 								<p:commandButton update="@form:tabview:detalhesModSubProduto"
 									oncomplete="PF('modSubProduto').show()" icon="ui-icon-pencil"
@@ -686,6 +771,10 @@
 
 									</p:selectOneMenu>
 
+									<h:outputText value="Ativo?" />
+									<p:selectBooleanCheckbox
+										value="#{subProdutoMotivoBean.subProdutoMotivoModifica.ativo}" />
+
 									<p:commandButton value="Modificar"
 										action="#{subProdutoMotivoBean.modificarSubProdutoMotivo()}"
 										update="@all" />
@@ -701,7 +790,7 @@
 				</p:tab>
 
 				<p:tab title="Equipamentos">
-				
+
 					<p:panel header="Fabricante" style="height: 300px;">
 
 						<h:panelGrid style="float: left;">
@@ -728,7 +817,15 @@
 
 							</p:column>
 
-							<p:column headerText="Modifica" style="text-align: center;">
+							<p:column headerText="Ativo" style="text-align: center;">
+
+								<h:outputText rendered="#{fabricante.ativo}" value="Ativo" />
+								<h:outputText rendered="#{!fabricante.ativo}" value="Inativo" />
+
+							</p:column>
+
+							<p:column headerText="Modifica"
+								style="text-align: center; width: 80px;">
 
 								<p:commandButton update="@form:tabview:detalhesModFabricante"
 									oncomplete="PF('modFabricante').show()" icon="ui-icon-pencil"
@@ -754,6 +851,10 @@
 									<h:outputText value="Nome" />
 									<p:inputText value="#{fabricanteBean.fabricanteModifica.nome}" />
 
+									<h:outputText value="Ativo?" />
+									<p:selectBooleanCheckbox
+										value="#{fabricanteBean.fabricanteModifica.ativo}" />
+
 									<p:commandButton value="Cadastrar"
 										action="#{fabricanteBean.modificaFabricante()}" update="@all" />
 
@@ -766,7 +867,7 @@
 					</p:panel>
 
 					<br />
-					
+
 					<p:panel header="Modelo" style="height: 300px;">
 
 						<h:panelGrid style="float: left;">
@@ -804,15 +905,23 @@
 
 								<h:outputText value="#{modelo.nome}" />
 
-							</p:column>
-							
-							<p:column headerText="Nome" style="text-align: center;">
+							</p:column>							
+
+							<p:column headerText="Fabricante" style="text-align: center;">
 
 								<h:outputText value="#{modelo.fabricante.nome}" />
 
 							</p:column>
+							
+							<p:column headerText="Ativo" style="text-align: center;">
 
-							<p:column headerText="Modifica" style="text-align: center;">
+								<h:outputText rendered="#{modelo.ativo}" value="Ativo" />
+								<h:outputText rendered="#{!modelo.ativo}" value="Inativo" />
+
+							</p:column>
+
+							<p:column headerText="Modifica"
+								style="text-align: center; width: 80px;">
 
 								<p:commandButton update="@form:tabview:detalhesModModelo"
 									oncomplete="PF('modModelo').show()" icon="ui-icon-pencil"
@@ -839,7 +948,8 @@
 									<p:inputText value="#{modeloBean.modeloModifica.nome}" />
 
 									<h:outputText value="Fabricante" />
-									<p:selectOneMenu value="#{modeloBean.modeloModifica.fabricante}"
+									<p:selectOneMenu
+										value="#{modeloBean.modeloModifica.fabricante}"
 										converter="omnifaces.SelectItemsConverter" filter="true"
 										filterMatchMode="startsWith">
 
@@ -852,6 +962,10 @@
 
 									</p:selectOneMenu>
 
+									<h:outputText value="Ativo?" />
+									<p:selectBooleanCheckbox
+										value="#{modeloBean.modeloModifica.ativo}" />
+
 									<p:commandButton value="Modifica"
 										action="#{modeloBean.modificarModelo()}" update="@all" />
 
@@ -862,7 +976,7 @@
 						</p:dialog>
 
 					</p:panel>
-					
+
 					<br />
 
 					<p:panel header="Equipamento" style="height: 300px;">
@@ -891,7 +1005,15 @@
 
 							</p:column>
 
-							<p:column headerText="Modifica" style="text-align: center;">
+							<p:column headerText="Ativo" style="text-align: center;">
+
+								<h:outputText rendered="#{equipamento.ativo}" value="Ativo" />
+								<h:outputText rendered="#{!equipamento.ativo}" value="Inativo" />
+
+							</p:column>
+
+							<p:column headerText="Modifica"
+								style="text-align: center; width: 80px;">
 
 								<p:commandButton update="@form:tabview:detalhesModEquipamento"
 									oncomplete="PF('modEquipamento').show()" icon="ui-icon-pencil"
@@ -917,6 +1039,10 @@
 									<h:outputText value="Nome" />
 									<p:inputText
 										value="#{equipamentoBean.equipamentoModifica.nome}" />
+
+									<h:outputText value="Ativo?" />
+									<p:selectBooleanCheckbox
+										value="#{equipamentoBean.equipamentoModifica.ativo}" />
 
 									<p:commandButton value="Cadastrar"
 										action="#{equipamentoBean.modificarEquipamento()}"

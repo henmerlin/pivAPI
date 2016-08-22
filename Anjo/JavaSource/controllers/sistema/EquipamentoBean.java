@@ -67,9 +67,9 @@ public class EquipamentoBean {
 		
 	}
 	
-	public List<Equipamento> listarEquipamentosLista(Boolean lista) {
+	public List<Equipamento> listarEquipamentosLista(Boolean lista, Boolean ativo) {
 		
-		return this.equipamentoServico.listarEquipamentosLista(lista);		
+		return this.equipamentoServico.listarEquipamentosLista(lista, ativo);
 		
 	}
 

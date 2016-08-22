@@ -15,56 +15,62 @@ import util.JSFUtil;
 public class ProdutoBean {
 
 	private Produto produto;
-	
+
 	private Produto produtoModifica;
-	
+
 	@EJB
 	private ProdutoServico produtoServico;
-	
+
 	public ProdutoBean() {
 
 		this.produto = new Produto();
-		
+
 		this.produtoModifica = new Produto();
-		
+
 	}
-	
+
 	public void cadastrarProduto() {
-		
+
 		try {
-			
+
 			this.produtoServico.cadastrarProduto(this.produto);
 			JSFUtil.addInfoMessage("Produto cadastrado com sucesso.");
 			this.produto = new Produto();
-			
+
 		} catch (Exception e) {
 
 			JSFUtil.addErrorMessage(e.getMessage());
-			
+
 		}
-		
+
 	}
-	
+
 	public void modificarProduto() {
-		
+
 		try {
-			
+
 			this.produtoServico.modificarProduto(this.produtoModifica);
 			JSFUtil.addInfoMessage("Produto modificado com sucesso.");
 			this.produtoModifica = new Produto();			
-			
+
 		} catch (Exception e) {
 
 			JSFUtil.addErrorMessage(e.getMessage());
-			
+
 		}
-	
+
 	}
-	
+
 	public List<Produto> listarProduto() {
-		
+
 		return this.produtoServico.listarProduto();
-		
+
+	}
+
+	public List<Produto> listarProdutoAtivo(Boolean ativo) {
+
+		return this.produtoServico.listarProdutoAtivo(ativo);
+
 	}
 
 	public Produto getProduto() {
@@ -82,5 +88,5 @@ public class ProdutoBean {
 	public void setProdutoModifica(Produto produtoModifica) {
 		this.produtoModifica = produtoModifica;
 	}	
-	
+
 }

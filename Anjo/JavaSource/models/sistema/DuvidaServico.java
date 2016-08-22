@@ -79,12 +79,13 @@ public class DuvidaServico {
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<Duvida> listaDuvidasLista(Boolean lista) {
+	public List<Duvida> listaDuvidasLista(Boolean lista, Boolean ativo) {
 
 		try {
 
-			Query query = this.entityManager.createQuery("FROM Duvida d WHERE d.lista =:param1");
+			Query query = this.entityManager.createQuery("FROM Duvida d WHERE d.lista =:param1 AND d.ativo =:param2");
 			query.setParameter("param1", lista);
+			query.setParameter("param2", ativo);
 			return query.getResultList();
 
 		} catch (Exception e) {

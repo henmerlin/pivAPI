@@ -17,6 +17,8 @@ public class Fabricante {
 	
 	private Boolean lista;
 	
+	private Boolean ativo = false;
+	
 	public Integer getId() {
 		return id;
 	}
@@ -39,6 +41,14 @@ public class Fabricante {
 
 	public void setLista(Boolean lista) {
 		this.lista = lista;
+	}	
+
+	public Boolean getAtivo() {
+		return ativo;
+	}
+
+	public void setAtivo(Boolean ativo) {
+		this.ativo = ativo;
 	}
 
 	@Override

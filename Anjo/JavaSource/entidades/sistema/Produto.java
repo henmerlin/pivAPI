@@ -14,6 +14,8 @@ public class Produto {
 	private Integer id;
 	
 	private String nome;
+	
+	private Boolean ativo = false;
 
 	public Integer getId() {
 		return id;
@@ -29,6 +31,14 @@ public class Produto {
 
 	public void setNome(String nome) {
 		this.nome = nome;
+	}	
+
+	public Boolean getAtivo() {
+		return ativo;
+	}
+
+	public void setAtivo(Boolean ativo) {
+		this.ativo = ativo;
 	}
 
 	@Override

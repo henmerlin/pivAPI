@@ -79,12 +79,13 @@ public class SolucaoServico {
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<Solucao> listarSolucoesLista(Boolean lista) {
+	public List<Solucao> listarSolucoesLista(Boolean lista, Boolean ativo) {
 
 		try {
 
-			Query query = this.entityManager.createQuery("FROM Solucao s WHERE s.lista =:param1");
+			Query query = this.entityManager.createQuery("FROM Solucao s WHERE s.lista =:param1 AND s.ativo =:param2");
 			query.setParameter("param1", lista);
+			query.setParameter("param2", ativo);
 			return query.getResultList();			
 
 		} catch (Exception e) {

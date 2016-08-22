@@ -67,9 +67,9 @@ public class SolucaoBean {
 		
 	}
 	
-	public List<Solucao> listarSolucoesLista(Boolean lista) {
+	public List<Solucao> listarSolucoesLista(Boolean lista, Boolean ativo) {
 		
-		return this.solucaoServico.listarSolucoesLista(lista);
+		return this.solucaoServico.listarSolucoesLista(lista, ativo);
 		
 	}
 

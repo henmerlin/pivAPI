@@ -62,12 +62,13 @@ public class SubProdutoMotivoServico {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public List<SubProdutoMotivo> listarSubProdutoMotivoProdutoEspecifico(Produto produto) {
+	public List<SubProdutoMotivo> listarSubProdutoMotivoProdutoEspecifico(Produto produto, Boolean ativo) {
 		
 		try {
 			
-			Query query = this.entityManager.createQuery("FROM SubProdutoMotivo s WHERE s.produto =:param1");
+			Query query = this.entityManager.createQuery("FROM SubProdutoMotivo s WHERE s.produto =:param1 AND s.ativo =:param2");
 			query.setParameter("param1", produto);
+			query.setParameter("param2", ativo);
 			return query.getResultList();
 			
 		} catch (Exception e) {

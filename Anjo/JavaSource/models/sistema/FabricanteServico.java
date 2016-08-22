@@ -79,12 +79,13 @@ public class FabricanteServico {
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<Fabricante> listarFabricantesLista(Boolean lista) {
+	public List<Fabricante> listarFabricantesLista(Boolean lista, Boolean ativo) {
 
 		try {
 
-			Query query = this.entityManager.createQuery("FROM Fabricante f WHERE f.lista =:param1");
+			Query query = this.entityManager.createQuery("FROM Fabricante f WHERE f.lista =:param1 AND f.ativo =:param2");
 			query.setParameter("param1", lista);
+			query.setParameter("param2", ativo);
 			return query.getResultList();
 
 		} catch (Exception e) {

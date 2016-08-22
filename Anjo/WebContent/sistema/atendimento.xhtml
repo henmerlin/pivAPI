@@ -47,7 +47,7 @@
 				<p:selectOneButton converter="omnifaces.SelectItemsConverter"
 					value="#{atendimentoBean.atendimento.transmissao}">
 
-					<f:selectItems value="#{transmissaoBean.listarTransmissao()}"
+					<f:selectItems value="#{transmissaoBean.listarTransmissaoAtivo(true)}"
 						var="transmissao" itemLabel="#{transmissao.nome}"
 						itemValue="#{transmissao}" />
 
@@ -70,7 +70,7 @@
 					converter="omnifaces.SelectItemsConverter">
 
 					<f:selectItem itemLabel="-- Selecione --" itemValue="" />
-					<f:selectItems value="#{produtoBean.listarProduto()}" var="produto"
+					<f:selectItems value="#{produtoBean.listarProdutoAtivo(true)}" var="produto"
 						itemLabel="#{produto.nome}" itemValue="#{produto}" />
 					<f:ajax event="itemSelect" render="subProdutoOnChange" />
 
@@ -83,7 +83,7 @@
 
 					<f:selectItem itemLabel="-- Selecione --" itemValue="" />
 					<f:selectItems
-						value="#{subProdutoMotivoBean.listarSubProdutoMotivoProdutoEspecifico(atendimentoBean.infoProduto.produto)}"
+						value="#{subProdutoMotivoBean.listarSubProdutoMotivoProdutoEspecifico(atendimentoBean.infoProduto.produto, true)}"
 						var="subProduto" itemLabel="#{subProduto.nome}"
 						itemValue="#{subProduto}" />
 
@@ -94,7 +94,7 @@
 					converter="omnifaces.SelectItemsConverter">
 
 					<f:selectItem itemLabel="-- Selecione --" itemValue="" />
-					<f:selectItems value="#{duvidaBean.listaDuvidasLista(true)}"
+					<f:selectItems value="#{duvidaBean.listaDuvidasLista(true, true)}"
 						var="duvidaList" itemLabel="#{duvidaList.nome}"
 						itemValue="#{duvidaList}" />
 					<f:ajax event="itemSelect" render="outraDuvida" />
@@ -113,7 +113,7 @@
 
 					<f:selectItem itemLabel="-- Selecione --" itemValue="" />
 					<f:selectItems
-						value="#{detalheDuvidaBean.listardetalheDuvidaLista(true)}"
+						value="#{detalheDuvidaBean.listardetalheDuvidaLista(true, true)}"
 						var="detDuvida" itemLabel="#{detDuvida.nome}"
 						itemValue="#{detDuvida}" />
 					<f:ajax event="itemSelect" render="outraDetDuvida" />
@@ -172,7 +172,7 @@
 
 					<f:selectItem itemLabel="-- Selecione --" itemValue="" />
 					<f:selectItems
-						value="#{equipamentoBean.listarEquipamentosLista(true)}"
+						value="#{equipamentoBean.listarEquipamentosLista(true, true)}"
 						var="equipamento" itemLabel="#{equipamento.nome}"
 						itemValue="#{equipamento}" />
 					<f:ajax event="itemSelect" render="outroEqp" />
@@ -193,7 +193,7 @@
 
 					<f:selectItem itemLabel="-- Selecione --" itemValue="" />
 					<f:selectItems
-						value="#{fabricanteBean.listarFabricantesLista(true)}"
+						value="#{fabricanteBean.listarFabricantesLista(true, true)}"
 						var="fabricante" itemLabel="#{fabricante.nome}"
 						itemValue="#{fabricante}" />
 					<f:ajax event="itemSelect" render="outroFab mods" />
@@ -211,7 +211,7 @@
 					id="mods" converter="omnifaces.SelectItemsConverter">
 
 					<f:selectItem itemLabel="-- Selecione --" itemValue="" />
-					<f:selectItems value="#{modeloBean.listarModelosListaFabricante(atendimentoBean.infoEquipamento.fabricante)}"
+					<f:selectItems value="#{modeloBean.listarModelosListaFabricante(atendimentoBean.infoEquipamento.fabricante, true)}"
 						var="modelo" itemLabel="#{modelo.nome}" itemValue="#{modelo}" />
 					<f:ajax event="itemSelect" render="outroModelo" />
 
@@ -226,7 +226,7 @@
 					converter="omnifaces.SelectItemsConverter">
 
 					<f:selectItem itemLabel="-- Selecione --" itemValue="" />
-					<f:selectItems value="#{solucaoBean.listarSolucoesLista(true)}"
+					<f:selectItems value="#{solucaoBean.listarSolucoesLista(true, true)}"
 						var="solucao" itemLabel="#{solucao.nome}" itemValue="#{solucao}" />
 					<f:ajax event="itemSelect" render="outroSolucao" />
 

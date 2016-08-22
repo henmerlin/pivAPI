@@ -67,9 +67,9 @@ public class FabricanteBean {
 		
 	}
 
-	public List<Fabricante> listarFabricantesLista(Boolean lista) {
+	public List<Fabricante> listarFabricantesLista(Boolean lista, Boolean ativo) {
 		
-		return this.fabricanteServico.listarFabricantesLista(lista);
+		return this.fabricanteServico.listarFabricantesLista(lista, ativo);
 		
 	}
 

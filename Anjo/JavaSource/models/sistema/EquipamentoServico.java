@@ -77,12 +77,13 @@ public class EquipamentoServico {
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<Equipamento> listarEquipamentosLista(Boolean lista) {
+	public List<Equipamento> listarEquipamentosLista(Boolean lista, Boolean ativo) {
 
 		try {
 
-			Query query = this.entityManager.createQuery("FROM Equipamento e WHERE e.lista =:param1");
+			Query query = this.entityManager.createQuery("FROM Equipamento e WHERE e.lista =:param1 AND e.ativo =:param2");
 			query.setParameter("param1", lista);
+			query.setParameter("param2", ativo);
 			return query.getResultList();			
 
 		} catch (Exception e) {

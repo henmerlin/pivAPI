@@ -30,7 +30,7 @@ public class TransmissaoServico {
 		}
 
 	}
-	
+
 	public void modificarTransmissao(Transmissao transmissao) throws Exception {
 
 		try {
@@ -44,21 +44,38 @@ public class TransmissaoServico {
 		}
 
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public List<Transmissao> listarTransmissao() {
-		
+
 		try {
-			
+
 			Query query = this.entityManager.createQuery("FROM Transmissao t");
 			return query.getResultList();
-			
+
 		} catch (Exception e) {
 
 			return new ArrayList<Transmissao>();
-			
+
 		}
-		
+
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<Transmissao> listarTransmissaoAtivo(Boolean ativo) {
+
+		try {
+
+			Query query = this.entityManager.createQuery("FROM Transmissao t WHERE t.ativo =:param1");
+			query.setParameter("param1", ativo);
+			return query.getResultList();
+
+		} catch (Exception e) {
+
+			return new ArrayList<Transmissao>();
+
+		}
+
 	}
 
 }

@@ -16,6 +16,8 @@ public class DetalheDuvida {
 	private String nome;
 	
 	private Boolean lista;
+	
+	private Boolean ativo;
 
 	public Integer getId() {
 		return id;
@@ -39,6 +41,14 @@ public class DetalheDuvida {
 
 	public void setLista(Boolean lista) {
 		this.lista = lista;
+	}	
+
+	public Boolean getAtivo() {
+		return ativo;
+	}
+
+	public void setAtivo(Boolean ativo) {
+		this.ativo = ativo;
 	}
 
 	@Override
