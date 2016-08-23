@@ -23,7 +23,8 @@ public class AtendimentoServico {
 		try {
 			
 			Date date = new Date();			
-			atendimento.setDataRegistro(date);			
+			atendimento.setDataRegistro(date);
+			atendimento.setMatriculaOperador(atendimento.getMatriculaOperador().toUpperCase());
 			this.entityManager.persist(atendimento);
 			
 		} catch (Exception e) {

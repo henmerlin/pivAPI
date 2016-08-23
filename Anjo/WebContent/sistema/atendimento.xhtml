@@ -38,16 +38,19 @@
 
 				<h:outputText value="Matricula" />
 				<p:inputText
-					value="#{atendimentoBean.atendimento.matriculaOperador}" />
+					value="#{atendimentoBean.atendimento.matriculaOperador}"
+					maxlength="8" />
 
 				<h:outputText value="Instância" />
-				<p:inputText value="#{atendimentoBean.atendimento.instancia}" />
+				<p:inputText value="#{atendimentoBean.atendimento.instancia}"
+					maxlength="10" />
 
 				<h:outputText value="Transmissão" />
 				<p:selectOneButton converter="omnifaces.SelectItemsConverter"
 					value="#{atendimentoBean.atendimento.transmissao}">
 
-					<f:selectItems value="#{transmissaoBean.listarTransmissaoAtivo(true)}"
+					<f:selectItems
+						value="#{transmissaoBean.listarTransmissaoAtivo(true)}"
 						var="transmissao" itemLabel="#{transmissao.nome}"
 						itemValue="#{transmissao}" />
 
@@ -70,8 +73,8 @@
 					converter="omnifaces.SelectItemsConverter">
 
 					<f:selectItem itemLabel="-- Selecione --" itemValue="" />
-					<f:selectItems value="#{produtoBean.listarProdutoAtivo(true)}" var="produto"
-						itemLabel="#{produto.nome}" itemValue="#{produto}" />
+					<f:selectItems value="#{produtoBean.listarProdutoAtivo(true)}"
+						var="produto" itemLabel="#{produto.nome}" itemValue="#{produto}" />
 					<f:ajax event="itemSelect" render="subProdutoOnChange" />
 
 				</p:selectOneMenu>
@@ -211,7 +214,8 @@
 					id="mods" converter="omnifaces.SelectItemsConverter">
 
 					<f:selectItem itemLabel="-- Selecione --" itemValue="" />
-					<f:selectItems value="#{modeloBean.listarModelosListaFabricante(atendimentoBean.infoEquipamento.fabricante, true)}"
+					<f:selectItems
+						value="#{modeloBean.listarModelosListaFabricante(atendimentoBean.infoEquipamento.fabricante, true)}"
 						var="modelo" itemLabel="#{modelo.nome}" itemValue="#{modelo}" />
 					<f:ajax event="itemSelect" render="outroModelo" />
 
@@ -219,14 +223,15 @@
 
 				<h:outputText value="Outros Modelo" />
 				<p:inputText id="outroModelo" value="#{atendimentoBean.modelo.nome}"
-					disabled="#{!atendimentoBean.infoEquipamento.modelo.nome.equalsIgnoreCase('Outros')}" />				
+					disabled="#{!atendimentoBean.infoEquipamento.modelo.nome.equalsIgnoreCase('Outros')}" />
 
 				<h:outputText value="Solução" />
 				<p:selectOneMenu value="#{atendimentoBean.atendimento.solucao}"
 					converter="omnifaces.SelectItemsConverter">
 
 					<f:selectItem itemLabel="-- Selecione --" itemValue="" />
-					<f:selectItems value="#{solucaoBean.listarSolucoesLista(true, true)}"
+					<f:selectItems
+						value="#{solucaoBean.listarSolucoesLista(true, true)}"
 						var="solucao" itemLabel="#{solucao.nome}" itemValue="#{solucao}" />
 					<f:ajax event="itemSelect" render="outroSolucao" />
 
@@ -235,14 +240,14 @@
 				<h:outputText value="Outras Solução" />
 				<p:inputTextarea id="outroSolucao"
 					value="#{atendimentoBean.solucao.nome}"
-					disabled="#{!atendimentoBean.atendimento.solucao.nome.equalsIgnoreCase('Outros')}" />			
+					disabled="#{!atendimentoBean.atendimento.solucao.nome.equalsIgnoreCase('Outros')}" />
 
 			</p:panelGrid>
-			
+
 			<br />
-			
+
 			<p:commandButton value="Cadastrar"
-					action="#{atendimentoBean.cadastrarAtendimento()}" update="@all" />
+				action="#{atendimentoBean.cadastrarAtendimento()}" update="@all" />
 
 		</p:panel>
 
