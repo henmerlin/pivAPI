@@ -34,10 +34,11 @@
 
 		<p:panel header="Registrar INC">
 
-			<h:panelGrid columns="2" cellspacing="10">
+			<h:panelGrid cellspacing="10">
 
 				<h:outputText value="Cód INC:" />
-				<p:inputText value="#{atendimentoIncBean.atendimentoInc.numero}" />
+				<p:inputText value="#{atendimentoIncBean.atendimentoInc.numero}"
+					maxlength="10" />
 
 				<h:outputText value="Priorizado:" />
 				<p:selectBooleanCheckbox
@@ -47,9 +48,12 @@
 				<p:selectBooleanCheckbox
 					value="#{atendimentoIncBean.atendimentoInc.contatoTec}" />
 
-				<h:outputText value="Informações:" />
+				<h:outputText value="Informações: " />
+				<h:outputText id="counterTextAreaInfo" />
 				<p:inputTextarea
-					value="#{atendimentoIncBean.atendimentoInc.informacoes}"/>
+					value="#{atendimentoIncBean.atendimentoInc.informacoes}"
+					maxlength="400" counterTemplate=" {0} caracteres restantes" counter="counterTextAreaInfo" rows="10" cols="50"/>
+				
 
 				<h:outputText value="Hora Gerado INC:" />
 				<p:calendar

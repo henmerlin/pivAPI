@@ -823,6 +823,13 @@
 								<h:outputText rendered="#{!fabricante.ativo}" value="Inativo" />
 
 							</p:column>
+							
+							<p:column headerText="Criado pelo usuário" style="text-align: center;">
+
+								<h:outputText rendered="#{!fabricante.lista}" value="Sim" />
+								<h:outputText rendered="#{fabricante.lista}" value="Não" />
+
+							</p:column>
 
 							<p:column headerText="Modifica"
 								style="text-align: center; width: 80px;">
@@ -919,6 +926,13 @@
 								<h:outputText rendered="#{!modelo.ativo}" value="Inativo" />
 
 							</p:column>
+							
+							<p:column headerText="Criado pelo usuário" style="text-align: center;">
+
+								<h:outputText rendered="#{!modelo.lista}" value="Sim" />
+								<h:outputText rendered="#{modelo.lista}" value="Não" />
+
+							</p:column>
 
 							<p:column headerText="Modifica"
 								style="text-align: center; width: 80px;">
@@ -1009,6 +1023,13 @@
 
 								<h:outputText rendered="#{equipamento.ativo}" value="Ativo" />
 								<h:outputText rendered="#{!equipamento.ativo}" value="Inativo" />
+
+							</p:column>
+							
+							<p:column headerText="Criado pelo usuário" style="text-align: center;">
+
+								<h:outputText rendered="#{!equipamento.lista}" value="Sim" />
+								<h:outputText rendered="#{equipamento.lista}" value="Não" />
 
 							</p:column>
 
