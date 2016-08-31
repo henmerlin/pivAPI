@@ -12,9 +12,6 @@ import controllers.LoginBean;
 import entidades.UsuarioEfika;
 import entidades.sistema.Atendimento;
 import entidades.sistema.DetalheDuvida;
-import entidades.sistema.Duvida;
-import entidades.sistema.Equipamento;
-import entidades.sistema.Fabricante;
 import entidades.sistema.InfoEquipamento;
 import entidades.sistema.InfoProduto;
 import entidades.sistema.Modelo;
@@ -22,12 +19,9 @@ import entidades.sistema.Solucao;
 import models.sistema.AtendimentoServico;
 import models.sistema.DetalheDuvidaServico;
 import models.sistema.DuvidaServico;
-import models.sistema.EquipamentoServico;
-import models.sistema.FabricanteServico;
 import models.sistema.InfoEquipamentoServico;
 import models.sistema.InfoProdutoServico;
 import models.sistema.ModeloServico;
-import models.sistema.SolucaoServico;
 import util.JSFUtil;
 
 @ManagedBean
@@ -42,18 +36,10 @@ public class AtendimentoBean {
 	private InfoProduto infoProduto;
 
 	private InfoEquipamento infoEquipamento;
-
-	private Duvida duvida;
-
-	private DetalheDuvida detalheDuvida;
-
-	private Equipamento equipamento;
-
-	private Fabricante fabricante;
-
-	private Modelo modelo;
-
+	
 	private Solucao solucao;
+	
+	private DetalheDuvida detalheDuvida;
 	
 	@EJB
 	private AtendimentoServico atendimentoServico;
@@ -68,40 +54,25 @@ public class AtendimentoBean {
 	private DetalheDuvidaServico detalheDuvidaServico;
 
 	@EJB
-	private EquipamentoServico equipamentoServico;
-
-	@EJB
 	private InfoEquipamentoServico infoEquipamentoServico; 
 
-	@EJB
-	private FabricanteServico fabricanteServico;
 
 	@EJB
 	private ModeloServico modeloServico;
 
-	@EJB
-	private SolucaoServico solucaoServico;
 
 	public AtendimentoBean() {
 
 		this.atendimento = new Atendimento();
 
 		this.infoProduto = new InfoProduto();
-
-		this.duvida = new Duvida();
-
-		this.detalheDuvida = new DetalheDuvida();
-
+		
 		this.infoEquipamento = new InfoEquipamento();
-
-		this.equipamento = new Equipamento();
-
-		this.fabricante = new Fabricante();
-
-		this.modelo = new Modelo();
-
+		
 		this.solucao = new Solucao();
 
+		this.detalheDuvida = new DetalheDuvida();
+		
 	}
 	
 	@PostConstruct
@@ -116,7 +87,6 @@ public class AtendimentoBean {
 		try {
 
 			this.validaSeCampoVazio();
-			this.validarCamposOutros();
 			
 			this.atendimento.setInfoProduto(this.infoProduto);
 			this.cadastrarInfoProduto();
@@ -148,96 +118,6 @@ public class AtendimentoBean {
 
 			this.infoProdutoServico.cadastrarInfoProduto(this.infoProduto);
 			this.infoProduto = new InfoProduto();
-
-		} catch (Exception e) {
-
-			JSFUtil.addErrorMessage(e.getMessage());
-
-		}
-
-	}
-
-	public void cadastrarDuvida() {
-
-		try {
-			this.duvidaServico.cadastrarDuvidaByUser(this.duvida);
-			this.duvida = new Duvida();
-
-		} catch (Exception e) {
-
-			JSFUtil.addErrorMessage(e.getMessage());
-
-		}
-
-	}
-
-	public void cadastrarDetalheDuvida() {
-
-		try {
-
-			this.detalheDuvidaServico.cadastrarDetalheDuvidaByUser(this.detalheDuvida);
-			this.detalheDuvida = new DetalheDuvida();
-
-
-		} catch (Exception e) {
-
-			JSFUtil.addErrorMessage(e.getMessage());
-
-		}
-
-	}
-
-	public void cadastrarEquipamento() {
-
-		try {
-
-			this.equipamentoServico.cadastrarEquipamentoByUser(this.equipamento);
-			this.equipamento = new Equipamento();
-
-		} catch (Exception e) {
-
-			JSFUtil.addErrorMessage(e.getMessage());
-
-		}
-
-	}
-
-	public void cadastrarFabricante() {
-
-		try {
-
-			this.fabricanteServico.cadastrarFabricanteByUser(this.fabricante);
-			this.fabricante = new Fabricante();			
-
-		} catch (Exception e) {
-
-			JSFUtil.addErrorMessage(e.getMessage());
-
-		}
-
-	}
-
-	public void cadastrarModelo() {
-
-		try {
-
-			this.modeloServico.cadastrarModeloByUser(this.modelo);
-			this.modelo = new Modelo();
-
-		} catch (Exception e) {
-
-			JSFUtil.addErrorMessage(e.getMessage());
-
-		}
-
-	}
-
-	public void cadastrarSolucao() {
-
-		try {
-
-			this.solucaoServico.cadastrarSolucaoByUser(this.solucao);
-			this.solucao = new Solucao();
 
 		} catch (Exception e) {
 
@@ -318,14 +198,14 @@ public class AtendimentoBean {
 
 		}		
 
-		if (this.atendimento.getDuvida() == null || this.atendimento.getDuvida().getNome().equalsIgnoreCase("Outros") && this.duvida == null) {
+		if (this.atendimento.getDuvida() == null) {
 
 			nomeErro = nomeErro + " (duvida) ";
 			erro = true;
 
 		}
 
-		if (this.atendimento.getDetalheDuvida() == null || this.atendimento.getDetalheDuvida().getNome().equalsIgnoreCase("Outros") && this.detalheDuvida == null) {
+		if (this.atendimento.getDetalheDuvida() == null) {
 
 			nomeErro = nomeErro + " (detalhe da duvida) ";
 			erro = true;
@@ -353,28 +233,28 @@ public class AtendimentoBean {
 
 		}
 
-		if (this.atendimento.getAcionadoFalhaEqp() && (this.infoEquipamento.getEquipamento() == null || this.infoEquipamento.getEquipamento().getNome().equalsIgnoreCase("Outros") && this.equipamento.getNome().isEmpty())) {
+		if (this.atendimento.getAcionadoFalhaEqp() && this.infoEquipamento.getEquipamento() == null) {
 
 			nomeErro = nomeErro + " (equipamento) ";
 			erro = true;
 
 		}
 
-		if (this.atendimento.getAcionadoFalhaEqp() && (this.infoEquipamento.getFabricante() == null || this.infoEquipamento.getEquipamento().getNome().equalsIgnoreCase("Outros") && this.fabricante.getNome().isEmpty())) {
+		if (this.atendimento.getAcionadoFalhaEqp() && this.infoEquipamento.getFabricante() == null) {
 
 			nomeErro = nomeErro + " (fabricante) ";
 			erro = true;
 
 		}
 
-		if (this.atendimento.getAcionadoFalhaEqp() && (this.infoEquipamento.getModelo() == null || this.infoEquipamento.getModelo().getNome().equalsIgnoreCase("Outros") && this.modelo.getNome().isEmpty())) {
+		if (this.atendimento.getAcionadoFalhaEqp() && this.infoEquipamento.getModelo() == null) {
 
 			nomeErro = nomeErro + " (modelo) ";
 			erro = true;
 
 		}
 
-		if (this.atendimento.getSolucao() == null || this.atendimento.getSolucao().getNome().equalsIgnoreCase("Outros") && this.solucao.getNome().isEmpty()) {
+		if (this.atendimento.getSolucao() == null) {
 
 			nomeErro = nomeErro + " (solução) ";
 			erro = true;
@@ -388,53 +268,7 @@ public class AtendimentoBean {
 		}
 
 
-	}
-
-	public void validarCamposOutros() {
-				
-		if (this.atendimento.getDuvida().getNome().equalsIgnoreCase("Outros")) {
-			
-			this.atendimento.setDuvida(this.duvida);				
-			this.cadastrarDuvida();
-
-		}
-
-		if (this.atendimento.getDetalheDuvida().getNome().equalsIgnoreCase("Outros")) {
-
-			this.atendimento.setDetalheDuvida(this.detalheDuvida);				
-			this.cadastrarDetalheDuvida();				
-
-		}
-
-		if (this.atendimento.getAcionadoFalhaEqp() && this.infoEquipamento.getEquipamento().getNome().equalsIgnoreCase("Outros")) {
-			
-			this.infoEquipamento.setEquipamento(this.equipamento);				
-			this.cadastrarEquipamento();
-
-		}
-
-		if (this.atendimento.getAcionadoFalhaEqp() && this.infoEquipamento.getFabricante().getNome().equalsIgnoreCase("Outros")) {
-
-			this.infoEquipamento.setFabricante(this.fabricante);				
-			this.cadastrarFabricante();
-
-		}
-		
-		if (this.atendimento.getAcionadoFalhaEqp() && this.infoEquipamento.getModelo().getNome().equalsIgnoreCase("Outros")) {
-
-			this.infoEquipamento.setModelo(this.modelo);				
-			this.cadastrarModelo();				
-
-		}
-		
-		if (this.atendimento.getSolucao().getNome().equalsIgnoreCase("Outros")) {
-
-			this.atendimento.setSolucao(this.solucao);
-			this.cadastrarSolucao();
-
-		}
-
-	}
+	}	
 
 	public List<Atendimento> listarTodosAtendimentos() {
 
@@ -486,45 +320,13 @@ public class AtendimentoBean {
 	public void setInfoEquipamento(InfoEquipamento infoEquipamento) {
 		this.infoEquipamento = infoEquipamento;
 	}
-
-	public Duvida getDuvida() {
-		return duvida;
+	
+	public LoginBean getSessao() {
+		return sessao;
 	}
 
-	public void setDuvida(Duvida duvida) {
-		this.duvida = duvida;
-	}
-
-	public DetalheDuvida getDetalheDuvida() {
-		return detalheDuvida;
-	}
-
-	public void setDetalheDuvida(DetalheDuvida detalheDuvida) {
-		this.detalheDuvida = detalheDuvida;
-	}
-
-	public Equipamento getEquipamento() {
-		return equipamento;
-	}
-
-	public void setEquipamento(Equipamento equipamento) {
-		this.equipamento = equipamento;
-	}
-
-	public Fabricante getFabricante() {
-		return fabricante;
-	}
-
-	public void setFabricante(Fabricante fabricante) {
-		this.fabricante = fabricante;
-	}
-
-	public Modelo getModelo() {
-		return modelo;
-	}
-
-	public void setModelo(Modelo modelo) {
-		this.modelo = modelo;
+	public void setSessao(LoginBean sessao) {
+		this.sessao = sessao;
 	}
 
 	public Solucao getSolucao() {
@@ -535,12 +337,13 @@ public class AtendimentoBean {
 		this.solucao = solucao;
 	}
 
-	public LoginBean getSessao() {
-		return sessao;
+	public DetalheDuvida getDetalheDuvida() {
+		return detalheDuvida;
 	}
 
-	public void setSessao(LoginBean sessao) {
-		this.sessao = sessao;
+	public void setDetalheDuvida(DetalheDuvida detalheDuvida) {
+		this.detalheDuvida = detalheDuvida;
 	}
+	
 	
 }

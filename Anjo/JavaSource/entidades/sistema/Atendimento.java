@@ -5,6 +5,7 @@ import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -39,6 +40,9 @@ public class Atendimento {
 	private Boolean acionadoFalhaEqp = false;
 	
 	private String falhaEqp;
+	
+	@Lob
+	private String outrasInformacoes;
 	
 	@ManyToOne
 	private Solucao solucao;
@@ -211,6 +215,14 @@ public class Atendimento {
 
 	public void setFalhaEqp(String falhaEqp) {
 		this.falhaEqp = falhaEqp;
+	}	
+
+	public String getOutrasInformacoes() {
+		return outrasInformacoes;
+	}
+
+	public void setOutrasInformacoes(String outrasInformacoes) {
+		this.outrasInformacoes = outrasInformacoes;
 	}
 
 	@Override
