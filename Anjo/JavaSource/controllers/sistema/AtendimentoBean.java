@@ -296,6 +296,16 @@ public class AtendimentoBean {
 		return this.modeloServico.listarModelosLista(true);
 		
 	}
+	
+	public void selecionadoOutros(String select) {
+				
+		if (select.equalsIgnoreCase("Nenhuma das opões disponíveis")) {
+			
+			JSFUtil.addWarnMessage("Descreva no campo \"Outras Informações\"");
+		
+		}		
+		
+	}
 
 	public Atendimento getAtendimento() {
 		return atendimento;

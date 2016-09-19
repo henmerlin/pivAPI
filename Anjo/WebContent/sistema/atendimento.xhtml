@@ -32,9 +32,10 @@
 
 	<ui:define name="conteudo">
 
-		<p:panel header="Registrar atendimento">
+		<p:panel header="Registrar atendimento" style="height: 600px;">
 
-			<p:panelGrid columns="4" layout="grid">
+			<h:panelGrid columns="2" layout="grid"
+				style="float: left; width: 50%;" cellspacing="20">
 
 				<h:outputText value="Matricula" />
 				<p:inputText
@@ -100,6 +101,9 @@
 					<f:selectItems value="#{duvidaBean.listaDuvidasLista(true, true)}"
 						var="duvidaList" itemLabel="#{duvidaList.nome}"
 						itemValue="#{duvidaList}" />
+					<p:ajax
+						listener="#{atendimentoBean.selecionadoOutros(atendimentoBean.atendimento.duvida.nome)}"
+						event="itemSelect" update="formTemplate:msgs" />
 
 				</p:selectOneMenu>
 
@@ -113,8 +117,16 @@
 						value="#{detalheDuvidaBean.listardetalheDuvidaLista(true, true)}"
 						var="detDuvida" itemLabel="#{detDuvida.nome}"
 						itemValue="#{detDuvida}" />
+					<p:ajax
+						listener="#{atendimentoBean.selecionadoOutros(atendimentoBean.atendimento.detalheDuvida.nome)}"
+						event="itemSelect" update="formTemplate:msgs" />
 
 				</p:selectOneMenu>
+
+			</h:panelGrid>
+
+			<h:panelGrid columns="2" layout="grid"
+				style="float: right; width:50%;" cellspacing="10">
 
 				<h:outputText value="Acionado suporte" />
 				<p:selectBooleanCheckbox
@@ -166,6 +178,9 @@
 						value="#{equipamentoBean.listarEquipamentosLista(true, true)}"
 						var="equipamento" itemLabel="#{equipamento.nome}"
 						itemValue="#{equipamento}" />
+					<p:ajax
+						listener="#{atendimentoBean.selecionadoOutros(atendimentoBean.infoEquipamento.equipamento.nome)}"
+						event="itemSelect" update="formTemplate:msgs" />
 
 				</p:selectOneMenu>
 
@@ -181,6 +196,9 @@
 						var="fabricante" itemLabel="#{fabricante.nome}"
 						itemValue="#{fabricante}" />
 					<f:ajax event="itemSelect" render="mods" />
+					<p:ajax
+						listener="#{atendimentoBean.selecionadoOutros(atendimentoBean.infoEquipamento.fabricante.nome)}"
+						event="itemSelect" update="formTemplate:msgs" />
 
 				</p:selectOneMenu>
 
@@ -204,6 +222,9 @@
 					<f:selectItems
 						value="#{solucaoBean.listarSolucoesLista(true, true)}"
 						var="solucao" itemLabel="#{solucao.nome}" itemValue="#{solucao}" />
+					<p:ajax
+						listener="#{atendimentoBean.selecionadoOutros(atendimentoBean.atendimento.solucao.nome)}"
+						event="itemSelect" update="formTemplate:msgs" />
 
 				</p:selectOneMenu>
 
@@ -211,12 +232,13 @@
 				<p:inputTextarea
 					value="#{atendimentoBean.atendimento.outrasInformacoes}" />
 
-			</p:panelGrid>
+			</h:panelGrid>
 
 			<br />
 
 			<p:commandButton value="Cadastrar"
-				action="#{atendimentoBean.cadastrarAtendimento()}" update="@all" />
+				action="#{atendimentoBean.cadastrarAtendimento()}" update="@all"
+				style="margin-top: 70px; float: right;" />
 
 		</p:panel>
 
