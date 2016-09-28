@@ -28,12 +28,6 @@ public class AtendimentoIncServico {
 			
 			atendimentoInc.setUsuarioEfika(usuarioEfika);
 			
-			if (!atendimentoInc.getNumero().contains("INC")) {
-				
-				throw new Exception("Por favor preencha corretamente o INC");
-				
-			}
-			
 			this.entityManager.persist(atendimentoInc);
 			
 		} catch (Exception e) {
