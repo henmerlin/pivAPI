@@ -35,8 +35,10 @@
 			<p:outputLabel for="dataInicio" value="Data Início: " />
 			<p:outputLabel for="dataFim" value="Data Fim: " />
 			<p:outputLabel for="busca" value="" />
-			<p:calendar id="dataInicio" value="#{listaBean.dataInicio}" pattern="dd/MM/yyyy" mask="true" />
-			<p:calendar id="dataFim" value="#{listaBean.dataFim}" pattern="dd/MM/yyyy" mask="true" />
+			<p:calendar id="dataInicio" value="#{listaBean.dataInicio}"
+				pattern="dd/MM/yyyy" mask="true" />
+			<p:calendar id="dataFim" value="#{listaBean.dataFim}"
+				pattern="dd/MM/yyyy" mask="true" />
 
 			<p:commandButton id="busca" value="Buscar"
 				action="#{listaBean.listarAtendimentosRegistrados()}"
@@ -44,7 +46,8 @@
 
 		</h:panelGrid>
 
-		<p:dataTable id="relats" var="atendimento" value="#{listaBean.listaDeAtendimento}"
+		<p:dataTable id="relats" var="atendimento"
+			value="#{listaBean.listaDeAtendimento}"
 			emptyMessage="Preencha as datas para obter os Atendimentos registrados"
 			paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {Exporters}"
 			paginator="true" style="margin-bottom:20px" rows="5"
@@ -68,13 +71,13 @@
 				</h:commandLink>
 
 			</f:facet>
-			
+
 			<p:column headerText="Matricula Anjo">
 
 				<h:outputText value="#{atendimento.usuarioEfika.login}" />
 
 			</p:column>
-			
+
 			<p:column headerText="Equipe Anjo">
 
 				<h:outputText value="#{atendimento.usuarioEfika.equipe.nome}" />
@@ -117,81 +120,91 @@
 				<h:outputText value="#{atendimento.infoProduto.produto.nome}" />
 
 			</p:column>
-			
+
 			<p:column headerText="Sub Produto">
 
-				<h:outputText value="#{atendimento.infoProduto.subProdutoMotivo.nome}" />
+				<h:outputText
+					value="#{atendimento.infoProduto.subProdutoMotivo.nome}" />
 
 			</p:column>
-			
+
 			<p:column headerText="Duvida/Dificuldade">
 
 				<h:outputText value="#{atendimento.duvida.nome}" />
 
 			</p:column>
-			
+
 			<p:column headerText="Acionado suporte?">
 
 				<h:outputText rendered="#{atendimento.acionadoSuporte}" value="Sim" />
 				<h:outputText rendered="#{!atendimento.acionadoSuporte}" value="Não" />
 
 			</p:column>
-			
+
 			<p:column headerText="Nome Suporte">
 
 				<h:outputText value="#{atendimento.nomeSuporte}" />
 
 			</p:column>
-			
+
 			<p:column headerText="Falha sistemica?">
 
 				<h:outputText rendered="#{atendimento.acionadoFalhaSis}" value="Sim" />
-				<h:outputText rendered="#{!atendimento.acionadoFalhaSis}" value="Não" />
+				<h:outputText rendered="#{!atendimento.acionadoFalhaSis}"
+					value="Não" />
 
 			</p:column>
-			
+
 			<p:column headerText="Falha Sistemica">
 
 				<h:outputText value="#{atendimento.falhaSis}" />
 
 			</p:column>
-			
+
 			<p:column headerText="Falha Equipamento?">
 
 				<h:outputText rendered="#{atendimento.acionadoFalhaEqp}" value="Sim" />
-				<h:outputText rendered="#{!atendimento.acionadoFalhaEqp}" value="Não" />
+				<h:outputText rendered="#{!atendimento.acionadoFalhaEqp}"
+					value="Não" />
 
 			</p:column>
-			
+
 			<p:column headerText="Falha Equipamento">
 
 				<h:outputText value="#{atendimento.falhaEqp}" />
 
 			</p:column>
-			
+
 			<p:column headerText="Equipamento">
 
-				<h:outputText value="#{atendimento.infoEquipamento.equipamento.nome}" />
+				<h:outputText
+					value="#{atendimento.infoEquipamento.equipamento.nome}" />
 
-			</p:column>			
-			
+			</p:column>
+
 			<p:column headerText="Fabricante">
 
 				<h:outputText value="#{atendimento.infoEquipamento.fabricante.nome}" />
 
-			</p:column>			
-			
+			</p:column>
+
 			<p:column headerText="Modelo">
 
 				<h:outputText value="#{atendimento.infoEquipamento.modelo.nome}" />
 
 			</p:column>
-			
+
 			<p:column headerText="Solução">
 
 				<h:outputText value="#{atendimento.solucao.nome}" />
 
-			</p:column>		
+			</p:column>
+
+			<p:column headerText="Data Registro">
+
+				<h:outputText value="#{atendimento.dataRegistro}" />
+
+			</p:column>
 
 		</p:dataTable>
 
