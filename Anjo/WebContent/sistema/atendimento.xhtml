@@ -95,7 +95,7 @@
 
 				<h:outputText value="Duvida/Dificuldade" />
 				<p:selectOneMenu value="#{atendimentoBean.atendimento.duvida}"
-					converter="omnifaces.SelectItemsConverter">
+					converter="omnifaces.SelectItemsConverter" filter="true" filterMatchMode="contains">
 
 					<f:selectItem itemLabel="-- Selecione --" itemValue="" />
 					<f:selectItems value="#{duvidaBean.listaDuvidasLista(true, true)}"
@@ -216,7 +216,7 @@
 
 				<h:outputText value="Solução" />
 				<p:selectOneMenu value="#{atendimentoBean.atendimento.solucao}"
-					converter="omnifaces.SelectItemsConverter">
+					converter="omnifaces.SelectItemsConverter" filter="true" filterMatchMode="contains">
 
 					<f:selectItem itemLabel="-- Selecione --" itemValue="" />
 					<f:selectItems
