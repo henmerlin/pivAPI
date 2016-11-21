@@ -1,16 +1,21 @@
-# eclipse specific git ignore
-*.pydevproject
-.project
-.metadata
-bin/**
-**/bin/
-tmp/**
-tmp/**/*
-*.tmp
-*.bak
+#ant specific
+dist/
+build/
+
+#netbeans specific
+core
+nbproject/*
+!nbproject/project.properties
+!nbproject/project.xml
+
+#java specific
+*.class
+
+#general swap/backup files
+*.so
+*.log
+*.out
+*~
 *.swp
-*~.nib
-local.properties
-.classpath
-.settings/
-.loadpath
+*.DS_Store
+*.lock
