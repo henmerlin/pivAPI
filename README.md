@@ -1,4 +1,4 @@
-Portal Efika
+Portal Efika - Modulo Comunicação
 ===================
 ### Desenvolvedor
 \#| Nome
