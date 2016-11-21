@@ -1,3 +1,4 @@
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://www.opensymphony.com/sitemesh/decorator"
 	prefix="decorator"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -26,7 +27,7 @@
 <decorator:head/>
 </head>
 <body>
-	<!-- Jóvi -->
+	<!-- JÃ³vi -->
 	<!-- Fixed navbar -->
 	<nav class="navbar navbar-default navbar-fixed-top">
 		<div class="container">
@@ -49,16 +50,16 @@
 							<c:if test="${sessionUsuarioEfika.isAdmin()}">
 								<li class="dropdown"><a href="#" class="dropdown-toggle"
 									data-toggle="dropdown" role="button" aria-haspopup="true"
-									aria-expanded="false">Administração <span class="caret"></span></a>
+									aria-expanded="false">AdministraÃ§Ã£o <span class="caret"></span></a>
 									<ul class="dropdown-menu">
-										<li class="dropdown-header">Relatórios</li>
+										<li class="dropdown-header">RelatÃ³rios</li>
 										<li><a href="${linkTo[RelatorioController].create}">Base</a></li>
 										<li role="separator" class="divider"></li>
 										<li class="dropdown-header">Cadastros</li>
 										<li><a href="${linkTo[RedeController].list}">Rede</a></li>
 										<li><a href="${linkTo[MacroMotivoController].list}">Motivo de Suporte</a></li>
 										<li><a href="${linkTo[MotivoController].list}">Defeito Encontrado</a></li>
-										<li><a href="${linkTo[SolucaoController].list}">Solução</a></li>
+										<li><a href="${linkTo[SolucaoController].list}">SoluÃ§Ã£o</a></li>
 									</ul>
 								</li>
 							</c:if>				
