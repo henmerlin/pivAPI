@@ -1,8 +1,12 @@
+body{
+    overflow-x: hidden;
+}
+
 .validator {
-	padding: 8px;
-	font-size: 12px;
+    padding: 8px;
+    font-size: 12px;
 }
 
 .tabela {
-	font-size: 12px;
+    font-size: 12px;
 }

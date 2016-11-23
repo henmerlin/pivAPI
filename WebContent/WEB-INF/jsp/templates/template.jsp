@@ -1,108 +1,113 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://www.opensymphony.com/sitemesh/decorator"
-	prefix="decorator"%>
+           prefix="decorator"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html>
 <html lang="pt-br">
-<head>
-<title><decorator:title default="Suporte N2" /></title>
-<meta charset="utf-8">
-<link
-	href="${pageContext.request.contextPath}/resources/bootstrap-3.3.7-dist/css/bootstrap.min.css"
-	rel="stylesheet" />
-<link
-	href="${pageContext.request.contextPath}/resources/bootstrap-3.3.7-dist/css/bootstrap-theme.min.css"
-	rel="stylesheet" />
+    <head>
+        <title><decorator:title default="Portal Efika"/></title>
+        <meta charset="utf-8">
 
-<link
-	href="${pageContext.request.contextPath}/resources/custom/custom.css" rel="stylesheet" />
+        <!-- import CSS -->
+        <link
+            href="${pageContext.request.contextPath}/resources/bootstrap-3.3.7-dist/css/bootstrap.min.css"
+            rel="stylesheet" />
+        <link
+            href="${pageContext.request.contextPath}/resources/bootstrap-3.3.7-dist/css/bootstrap-theme.min.css"
+            rel="stylesheet" />
+        <link
+            href="${pageContext.request.contextPath}/resources/custom/custom.css" rel="stylesheet" />
 
-<script
-	src="${pageContext.request.contextPath}/resources/jquery-3.1.1/jquery-3.1.1.min.js"></script>
-<script
-	src="${pageContext.request.contextPath}/resources/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
-	
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/node_modules/element-ui/lib/theme-default/index.css">
 
-<decorator:head/>
-</head>
-<body>
-	<!-- Jóvi -->
-	<!-- Fixed navbar -->
-	<nav class="navbar navbar-default navbar-fixed-top">
-		<div class="container">
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle collapsed"
-					data-toggle="collapse" data-target="#navbar" aria-expanded="false"
-					aria-controls="navbar">
-					<span class="sr-only">Toggle navigation</span> <span
-						class="icon-bar"></span> <span class="icon-bar"></span> <span
-						class="icon-bar"></span>
-				</button>
-				<a class="navbar-brand" href="${linkTo[HomeController].index}">SuporteN2</a>
-			</div>
-			<div id="navbar" class="navbar-collapse collapse">
-				<ul class="nav navbar-nav">
-				
-					<li><a href="${linkTo[HomeController].index}">Home</a></li>
-						<c:if test="${sessionUsuarioEfika.isLogado()}">
-							<li><a href="${linkTo[AtendimentoController].create}">Atendimento</a></li>
-							<c:if test="${sessionUsuarioEfika.isAdmin()}">
-								<li class="dropdown"><a href="#" class="dropdown-toggle"
-									data-toggle="dropdown" role="button" aria-haspopup="true"
-									aria-expanded="false">Administração <span class="caret"></span></a>
-									<ul class="dropdown-menu">
-										<li class="dropdown-header">Relatórios</li>
-										<li><a href="${linkTo[RelatorioController].create}">Base</a></li>
-										<li role="separator" class="divider"></li>
-										<li class="dropdown-header">Cadastros</li>
-										<li><a href="${linkTo[RedeController].list}">Rede</a></li>
-										<li><a href="${linkTo[MacroMotivoController].list}">Motivo de Suporte</a></li>
-										<li><a href="${linkTo[MotivoController].list}">Defeito Encontrado</a></li>
-										<li><a href="${linkTo[SolucaoController].list}">Solução</a></li>
-									</ul>
-								</li>
-							</c:if>				
-						</c:if>					
-				</ul>
-				<ul class="nav navbar-nav navbar-right">
-				
-					<c:choose>
-					    <c:when test="${empty sessionUsuarioEfika.usuario.login}">
-					        <li><a href="${linkTo[UsuarioController].create}">Login</a></li>
-					    </c:when>    
-					    <c:otherwise>
-					        <li>
-					        	<a href="${linkTo[UsuarioController].logout}">${sessionUsuarioEfika.usuario.login}, Logout</a>
-				        	</li>
-					    </c:otherwise>
-					</c:choose>
-					
-				</ul>
-			</div>
-		</div>
-	</nav>
 
-	<div class="container">
-		<br/>
-		<br/>
-		<br/>
-		<br/>
-		<c:if test="${not empty mensagem}">
-			<span class="alert alert-success" role="alert"> <span
-				class="glyphicon glyphicon glyphicon-ok" aria-hidden="true"></span>
-				${mensagem}
-			</span>
-		</c:if>
-		<c:if test="${not empty mensagemFalha}">
-			<span class="alert alert-danger" role="alert">
-			<span class="glyphicon glyphicon glyphicon-remove" aria-hidden="true"></span> 
-				${mensagemFalha}
-			</span>
-		</c:if>
-		<decorator:body />
-	</div>
-	<!-- /container -->
+        <!-- import JavaScript -->
+        <script
+        src="${pageContext.request.contextPath}/resources/node_modules/vue/dist/vue.js"></script>
+        <script src="${pageContext.request.contextPath}/resources/node_modules/element-ui/lib/index.js"></script>
+        <script
+        src="${pageContext.request.contextPath}/resources/jquery-3.1.1/jquery-3.1.1.min.js"></script>
+        <script
+        src="${pageContext.request.contextPath}/resources/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
 
-</body>
+        <style>
+
+            body{
+                background-color: rgb(236,231,225);
+                z-index: -1;
+            }
+            .navbar-telefonica .telefonicaLogo{
+                width: 185px;
+                padding: 1.5%;
+            }
+
+            .navbar-telefonica{
+                width: 100%;
+                background-image:url('${pageContext.request.contextPath}/resources/images/header.jpg');
+            }
+
+        </style>
+
+        <decorator:head/>
+    </head>
+    <body>
+
+        <nav class="navbar-telefonica">
+            <img class="telefonicaLogo" src="${pageContext.request.contextPath}/resources/images/logo.png"/>
+        </nav>
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li><a href="#">Link <span class="sr-only">(current)</span></a></li>
+                        <li><a href="#">Link</a></li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">Action</a></li>
+                                <li><a href="#">Another action</a></li>
+                                <li><a href="#">Something else here</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li><a href="#">Separated link</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li><a href="#">One more separated link</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="#">Link</a></li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">Action</a></li>
+                                <li><a href="#">Another action</a></li>
+                                <li><a href="#">Something else here</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li><a href="#">Separated link</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div><!-- /.navbar-collapse -->
+            </div><!-- /.container-fluid -->
+        </nav>
+
+
+        <div>
+            <decorator:body/>
+        </div>
+        <!-- /container -->
+
+    </body>
 </html>
