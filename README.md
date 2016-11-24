@@ -19,7 +19,7 @@ UML| JDeveloper 12c
 Item     | Ferramenta
 -------- | ---
 Framework Server-Side| Vraptor 4
-Framework Client-Side| Vue.js
+Framework Client-Side| Vue.js 2.0
 Templates| Sitemesh
 ORM| JPA (Hibernate)
 WebServices| SOAP
