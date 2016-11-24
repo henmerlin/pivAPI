@@ -1,4 +1,4 @@
-package model;
+package portalefika.comunicao.entidades;
 
 import java.util.Date;
 
@@ -14,6 +14,11 @@ public class Banner extends ComponenteComImagem {
 
     @NotNull
     private Date saida;
+    
+    private Conteudo conteudo;
+    
+    private Integer ordem;
+    
 
     public Banner() {
 
@@ -41,5 +46,21 @@ public class Banner extends ComponenteComImagem {
 
     public Date getSaida() {
         return saida;
+    }
+
+    public void setOrdem(Integer ordem) {
+        this.ordem = ordem;
+    }
+
+    public Integer getOrdem() {
+        return ordem;
+    }
+
+    public void setConteudo(Conteudo conteudo) {
+        this.conteudo = conteudo;
+    }
+
+    public Conteudo getConteudo() {
+        return conteudo;
     }
 }

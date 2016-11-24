@@ -75,9 +75,12 @@
    </hash>
    <hash n="oracle.ide.model.TechnologyScopeConfiguration">
       <list n="technologyScope">
+         <string v="Ant"/>
          <string v="CDI"/>
          <string v="Database"/>
          <string v="EJB"/>
+         <string v="HTML"/>
+         <string v="JAVASCRIPT"/>
          <string v="JSP"/>
          <string v="Java"/>
          <string v="Java-Modeling"/>
@@ -145,12 +148,25 @@
    </hash>
    <hash n="oracle.jdeveloper.model.PathsConfiguration">
       <hash n="javaContentSet">
-         <list n="pattern-filters">
-            <string v="+**"/>
+         <list n="constituent-sets">
+            <hash>
+               <list n="pattern-filters">
+                  <string v="+**"/>
+               </list>
+               <list n="url-path">
+                  <url path="model/portalefika/"/>
+               </list>
+            </hash>
+            <hash>
+               <list n="pattern-filters">
+                  <string v="+**"/>
+               </list>
+               <list n="url-path">
+                  <url path="src/"/>
+               </list>
+            </hash>
          </list>
-         <list n="url-path">
-            <url path="src/"/>
-         </list>
+         <list n="url-path"/>
       </hash>
    </hash>
    <hash n="oracle.jdevimpl.config.JProjectLibraries">

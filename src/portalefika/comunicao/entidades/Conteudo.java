@@ -1,4 +1,4 @@
-package model;
+package portalefika.comunicao.entidades;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -12,7 +12,6 @@ import javax.validation.constraints.NotNull;
 public class Conteudo extends ComponenteComImagem {
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @NotNull
     private SubAbaPortal subAba;
 
     public Conteudo() {

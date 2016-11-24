@@ -1,11 +1,10 @@
-package controller;
+package controller.routes;
 
 import br.com.caelum.vraptor.Controller;
 import br.com.caelum.vraptor.Path;
 
-
 @Controller
-public class HomeController {
+public class HomeController extends AbstractCrudController {
 
     public HomeController() {
 
@@ -18,4 +17,5 @@ public class HomeController {
 
     public void restrito() {
     }
+
 }

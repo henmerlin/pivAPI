@@ -1,4 +1,4 @@
-package model;
+package portalefika.comunicao.entidades;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -10,7 +10,6 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 @Table(name = "PE_STATUSCOMPONENTE")
-@XmlRootElement
 public class StatusComponente {
 
     @Id

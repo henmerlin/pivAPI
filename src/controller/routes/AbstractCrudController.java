@@ -1,11 +1,11 @@
-package model;
+package controller.routes;
+
+import javax.inject.Inject;
 
 import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.validator.Validator;
 
-import javax.inject.Inject;
-
-public abstract class AbstractController {
+public abstract class AbstractCrudController {
 
     @Inject
     protected Result result;
@@ -13,5 +13,8 @@ public abstract class AbstractController {
     @Inject
     protected Validator validation;
 
+    public AbstractCrudController() {
+
+    }
 
 }

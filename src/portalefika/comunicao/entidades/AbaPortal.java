@@ -1,4 +1,4 @@
-package model;
+package portalefika.comunicao.entidades;
 
 import java.util.List;
 
