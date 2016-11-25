@@ -1,8 +1,6 @@
 package portalefika.comunicao.entidades;
 
-import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
 
 import javax.validation.constraints.NotNull;
@@ -18,9 +16,8 @@ public abstract class ComponentePortal {
     @NotEmpty
     private String titulo;
 
-    @ManyToOne(fetch = FetchType.EAGER)
     @NotNull
-    private StatusComponente status;
+    private Boolean ativo = true;
 
 
     public ComponentePortal() {
@@ -34,13 +31,6 @@ public abstract class ComponentePortal {
         return id;
     }
 
-    public void setStatus(StatusComponente status) {
-        this.status = status;
-    }
-
-    public StatusComponente getStatus() {
-        return status;
-    }
 
     public void setTitulo(String titulo) {
         this.titulo = titulo;
@@ -49,4 +39,14 @@ public abstract class ComponentePortal {
     public String getTitulo() {
         return titulo;
     }
+
+    public void setAtivo(Boolean ativo) {
+        this.ativo = ativo;
+    }
+
+    public Boolean getAtivo() {
+        return ativo;
+    }
 }
+
+
