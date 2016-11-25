@@ -1,4 +1,4 @@
-package controller.auth;
+package portalefika.autenticacao.controller;
 
 import java.io.Serializable;
 
@@ -6,7 +6,7 @@ import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import vraptor_suporten2.dal.webservice.Usuario;
+import portalefika.autenticacao.dal.webservice.Usuario;
 
 @SessionScoped
 @Named

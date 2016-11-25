@@ -5,10 +5,10 @@
  * by the Apache Axis 1.4 Apr 22, 2006 (06:55:48 PDT) WSDL2Java emitter.
  */
 
-package vraptor_suporten2.dal.webservice;
+package portalefika.autenticacao.dal.webservice;
 
 @SuppressWarnings("serial")
-public class EfikaUsers_ServiceLocator extends org.apache.axis.client.Service implements vraptor_suporten2.dal.webservice.EfikaUsers_Service {
+public class EfikaUsers_ServiceLocator extends org.apache.axis.client.Service implements portalefika.autenticacao.dal.webservice.EfikaUsers_Service {
 
     public EfikaUsers_ServiceLocator() {
     }
@@ -40,7 +40,7 @@ public class EfikaUsers_ServiceLocator extends org.apache.axis.client.Service im
         _8WSDDServiceName = name;
     }
 
-    public vraptor_suporten2.dal.webservice.EfikaUsers_PortType get_8() throws javax.xml.rpc.ServiceException {
+    public portalefika.autenticacao.dal.webservice.EfikaUsers_PortType get_8() throws javax.xml.rpc.ServiceException {
        java.net.URL endpoint;
         try {
             endpoint = new java.net.URL(_8_address);
@@ -51,9 +51,9 @@ public class EfikaUsers_ServiceLocator extends org.apache.axis.client.Service im
         return get_8(endpoint);
     }
 
-    public vraptor_suporten2.dal.webservice.EfikaUsers_PortType get_8(java.net.URL portAddress) throws javax.xml.rpc.ServiceException {
+    public portalefika.autenticacao.dal.webservice.EfikaUsers_PortType get_8(java.net.URL portAddress) throws javax.xml.rpc.ServiceException {
         try {
-            vraptor_suporten2.dal.webservice.EfikaUsersSoapBindingStub _stub = new vraptor_suporten2.dal.webservice.EfikaUsersSoapBindingStub(portAddress, this);
+            portalefika.autenticacao.dal.webservice.EfikaUsersSoapBindingStub _stub = new portalefika.autenticacao.dal.webservice.EfikaUsersSoapBindingStub(portAddress, this);
             _stub.setPortName(get_8WSDDServiceName());
             return _stub;
         }
@@ -73,8 +73,8 @@ public class EfikaUsers_ServiceLocator extends org.apache.axis.client.Service im
      */
     public java.rmi.Remote getPort(@SuppressWarnings("rawtypes") Class serviceEndpointInterface) throws javax.xml.rpc.ServiceException {
         try {
-            if (vraptor_suporten2.dal.webservice.EfikaUsers_PortType.class.isAssignableFrom(serviceEndpointInterface)) {
-                vraptor_suporten2.dal.webservice.EfikaUsersSoapBindingStub _stub = new vraptor_suporten2.dal.webservice.EfikaUsersSoapBindingStub(new java.net.URL(_8_address), this);
+            if (portalefika.autenticacao.dal.webservice.EfikaUsers_PortType.class.isAssignableFrom(serviceEndpointInterface)) {
+                portalefika.autenticacao.dal.webservice.EfikaUsersSoapBindingStub _stub = new portalefika.autenticacao.dal.webservice.EfikaUsersSoapBindingStub(new java.net.URL(_8_address), this);
                 _stub.setPortName(get_8WSDDServiceName());
                 return _stub;
             }

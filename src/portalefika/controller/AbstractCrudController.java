@@ -1,4 +1,4 @@
-package controller.routes;
+package portalefika.controller;
 
 import javax.inject.Inject;
 

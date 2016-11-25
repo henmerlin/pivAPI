@@ -1,4 +1,4 @@
-package controller.auth;
+package portalefika.autenticacao.controller;
 
 
 import javax.enterprise.context.RequestScoped;
@@ -6,9 +6,9 @@ import javax.inject.Inject;
 
 import br.com.caelum.vraptor.Controller;
 import br.com.caelum.vraptor.Result;
-import controller.routes.HomeController;
-import vraptor_suporten2.dal.webservice.EfikaUsersProxy;
-import vraptor_suporten2.dal.webservice.Usuario;
+import portalefika.controller.HomeController;
+import portalefika.autenticacao.dal.webservice.EfikaUsersProxy;
+import portalefika.autenticacao.dal.webservice.Usuario;
 
 @Controller
 @RequestScoped

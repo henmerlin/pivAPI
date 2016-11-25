@@ -5,7 +5,7 @@
  * by the Apache Axis 1.4 Apr 22, 2006 (06:55:48 PDT) WSDL2Java emitter.
  */
 
-package vraptor_suporten2.dal.webservice;
+package portalefika.autenticacao.dal.webservice;
 
 @SuppressWarnings("serial")
 public class Usuario  implements java.io.Serializable {

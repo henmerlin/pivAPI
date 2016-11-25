@@ -1,4 +1,4 @@
-package controller.routes;
+package portalefika.controller;
 
 import br.com.caelum.vraptor.Controller;
 import br.com.caelum.vraptor.Path;

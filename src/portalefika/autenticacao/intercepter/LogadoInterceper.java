@@ -1,4 +1,4 @@
-package controller.intercepter;
+package portalefika.autenticacao.intercepter;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
@@ -8,9 +8,9 @@ import br.com.caelum.vraptor.Intercepts;
 import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.interceptor.AcceptsWithAnnotations;
 import br.com.caelum.vraptor.interceptor.SimpleInterceptorStack;
-import controller.auth.SessionUsuarioEfika;
-import controller.auth.UsuarioController;
-import model.annotation.Logado;
+import portalefika.autenticacao.controller.SessionUsuarioEfika;
+import portalefika.autenticacao.controller.UsuarioController;
+import portalefika.autenticacao.annotation.Logado;
 
 
 @Intercepts
