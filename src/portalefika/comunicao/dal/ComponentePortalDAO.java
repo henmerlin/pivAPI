@@ -1,11 +1,13 @@
 package portalefika.comunicao.dal;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Logger;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
-import model.entities.EntityCrudInterface;
 import portalefika.comunicao.entidades.ComponentePortal;
 
 @Stateless
@@ -13,6 +15,9 @@ public class ComponentePortalDAO {
 
     @PersistenceContext
     protected EntityManager entityManager;
+
+    public ComponentePortalDAO() {
+    }
 
     public void cadastrar(ComponentePortal param1) {
         this.entityManager.persist(param1);
@@ -26,13 +31,29 @@ public class ComponentePortalDAO {
         this.entityManager.remove(this.entityManager.merge(param1));
     }
 
+    public List<ComponentePortal> listar(Class a) {
+        try {
+            Query query = this.entityManager.createQuery(a.getSimpleName() + "FROM " + a.getSimpleName() + " a");
+            return query.getResultList();
+        } catch (Exception e) {
+            return new ArrayList<ComponentePortal>();
+        }
+    }
+
     public ComponentePortal buscarPorId(ComponentePortal ob) {
 
         try {
+
+            if (ob.getId() == null) {
+                throw new Exception("Id não informado.");
+            }
+
             Query query = this.entityManager.createQuery("FROM " + ob.getClass().getSimpleName() + " m WHERE m.id =:param1");
             query.setParameter("param1", ob.getId());
             return (ComponentePortal) query.getSingleResult();
+
         } catch (Exception e) {
+            System.out.println(e.getMessage());
             return null;
         }
     }

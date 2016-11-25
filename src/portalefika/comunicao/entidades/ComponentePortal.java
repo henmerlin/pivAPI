@@ -1,5 +1,6 @@
 package portalefika.comunicao.entidades;
 
+import java.io.Serializable;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
@@ -8,7 +9,7 @@ import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.NotEmpty;
 
 @MappedSuperclass
-public abstract class ComponentePortal {
+public abstract class ComponentePortal implements Serializable {
 
     @Id
     private Integer id;
@@ -17,8 +18,7 @@ public abstract class ComponentePortal {
     private String titulo;
 
     @NotNull
-    private Boolean ativo = true;
-
+    private Boolean ativo;
 
     public ComponentePortal() {
     }
@@ -30,7 +30,6 @@ public abstract class ComponentePortal {
     public Integer getId() {
         return id;
     }
-
 
     public void setTitulo(String titulo) {
         this.titulo = titulo;
@@ -48,5 +47,3 @@ public abstract class ComponentePortal {
         return ativo;
     }
 }
-
-

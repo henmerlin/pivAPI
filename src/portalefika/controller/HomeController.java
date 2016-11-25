@@ -4,7 +4,7 @@ import br.com.caelum.vraptor.Controller;
 import br.com.caelum.vraptor.Path;
 
 @Controller
-public class HomeController extends AbstractCrudController {
+public class HomeController extends AbstractController {
 
     public HomeController() {
 
