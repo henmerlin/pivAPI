@@ -25,6 +25,8 @@
         <!-- import JavaScript -->
         <script
         src="${pageContext.request.contextPath}/resources/node_modules/vue/dist/vue.js"></script>
+        <script
+        src="${pageContext.request.contextPath}/resources/custom/components.js"></script>
         <script src="${pageContext.request.contextPath}/resources/node_modules/element-ui/lib/index.js"></script>
         <script
         src="${pageContext.request.contextPath}/resources/jquery-3.1.1/jquery-3.1.1.min.js"></script>
@@ -32,15 +34,6 @@
         src="${pageContext.request.contextPath}/resources/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
 
         <style>
-
-            body{
-                background-color: rgb(236,231,225);
-                z-index: -1;
-            }
-            .navbar-telefonica .telefonicaLogo{
-                width: 185px;
-                padding: 1.5%;
-            }
 
             .navbar-telefonica{
                 width: 100%;
@@ -87,11 +80,11 @@
                         </li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="#">Link</a></li>
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                <span class="glyphicon glyphicon-cog " aria-hidden="true"></span> Administração <span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li><a href="#">Action</a></li>
+                                <li><a href="${linkTo[EditorController].create()}">Editor</a></li>
                                 <li><a href="#">Another action</a></li>
                                 <li><a href="#">Something else here</a></li>
                                 <li role="separator" class="divider"></li>

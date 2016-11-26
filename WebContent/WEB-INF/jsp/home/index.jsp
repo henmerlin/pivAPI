@@ -4,8 +4,8 @@
            prefix="decorator"%>
 
 <style>
-    .carousel-control.left, .carousel-control.right {
-        background-image: none
+    body{
+        background-color: rgb(236,231,225);
     }
 </style>
 
@@ -35,35 +35,45 @@
         <span class="sr-only">Next</span>
     </a>
 </div>
-
-
-<div class="container text-center" style="padding-top: 5%;">
+<br>
+<br>
+<div id="bannersPequenos" class="container text-center">
     <div class="row">
-        <div class="col-md-4">
-            <img src="${pageContext.request.contextPath}/resources/images/redhat.png" alt="..." class="img-rounded">
-        </div>
-        <div class="col-md-4">
-            <img src="${pageContext.request.contextPath}/resources/images/redhat.png" alt="..." class="img-rounded">
-        </div>
-        <div class="col-md-4">
-            <img src="${pageContext.request.contextPath}/resources/images/redhat.png" alt="..." class="img-rounded">
+        <div class="col-md-4" v-for="banner in banners">
+            <img @click="vai(banner)" v-bind:src="prefix + banner.imagem" v-bind:alt="banner.alt" class="img-responsive">
         </div>
     </div>
-
-
-    <div id="app1">
-        {{ message }}
-    </div>
-
-
 </div>
-
+<br>
+<br>
+<div class="row">
+    <div class="col-md-6">
+        <img style="width: 100%;" src="${pageContext.request.contextPath}/resources/images/aniversariantes.png"/>
+    </div>
+    <div class="col-md-6">
+        <img style="width: 100%;" src="${pageContext.request.contextPath}/resources/images/mensagem_super.png"/>
+    </div>
+</div>
+<br>
+<br>
+<div class="footer">Portal Efika - Centro de Operações</div>
 
 <script>
-    new Vue({
-        el: '#app1',
+
+    var bannersPequenos = new Vue({
+        el: '#bannersPequenos',
         data: {
-            message: 'Hello Vue.js!'
+            prefix: '${pageContext.request.contextPath}/resources/images/',
+            banners: [
+                {imagem: '1_350x.jpg', alt: '1_350x'},
+                {imagem: '2_350x.jpg', alt: '2_350x'},
+                {imagem: '3_350x.jpg', alt: '3_350x'}
+            ]
+        },
+        methods: {
+            vai: function(h) {
+                alert(h.alt)
+            }
         }
     })
 </script>

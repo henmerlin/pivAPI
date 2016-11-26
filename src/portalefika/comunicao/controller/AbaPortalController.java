@@ -35,7 +35,6 @@ public class AbaPortalController extends AbstractController {
     @Get
     @Path("/comunicacao/aba/{a.id}")
     public void visualiza(AbaPortal a) {
-
         AbaPortal a1 = (AbaPortal) abaDao.buscarPorId(a);
         result.use(Results.json()).from(a1).serialize();
     }

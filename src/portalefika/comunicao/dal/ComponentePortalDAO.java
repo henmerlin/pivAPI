@@ -33,7 +33,7 @@ public class ComponentePortalDAO {
 
     public List<ComponentePortal> listar(Class a) {
         try {
-            Query query = this.entityManager.createQuery(a.getSimpleName() + "FROM " + a.getSimpleName() + " a");
+            Query query = this.entityManager.createQuery("FROM ComponentePortal");
             return query.getResultList();
         } catch (Exception e) {
             return new ArrayList<ComponentePortal>();
@@ -43,17 +43,10 @@ public class ComponentePortalDAO {
     public ComponentePortal buscarPorId(ComponentePortal ob) {
 
         try {
-
-            if (ob.getId() == null) {
-                throw new Exception("Id não informado.");
-            }
-
             Query query = this.entityManager.createQuery("FROM " + ob.getClass().getSimpleName() + " m WHERE m.id =:param1");
             query.setParameter("param1", ob.getId());
             return (ComponentePortal) query.getSingleResult();
-
         } catch (Exception e) {
-            System.out.println(e.getMessage());
             return null;
         }
     }
