@@ -2,7 +2,6 @@ package portalefika.comunicao.dal;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Logger;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -19,16 +18,16 @@ public class ComponentePortalDAO {
     public ComponentePortalDAO() {
     }
 
-    public void cadastrar(ComponentePortal param1) {
-        this.entityManager.persist(param1);
+    public void cadastrar(ComponentePortal c) {
+        this.entityManager.persist(c);
     }
 
-    public void editar(ComponentePortal param1) {
-        this.entityManager.merge(param1);
+    public void editar(ComponentePortal c) {
+        this.entityManager.merge(c);
     }
 
-    public void excluir(ComponentePortal param1) {
-        this.entityManager.remove(this.entityManager.merge(param1));
+    public void excluir(ComponentePortal c) {
+        this.entityManager.remove(this.entityManager.merge(c));
     }
 
     public List<ComponentePortal> listar(ComponentePortal a) {
@@ -39,12 +38,12 @@ public class ComponentePortalDAO {
         }
     }
 
-    public ComponentePortal buscarPorId(ComponentePortal ob) {
+    public ComponentePortal buscarPorId(ComponentePortal c) {
 
         try {
             Query query;
-            query = this.entityManager.createQuery("SELECT a FROM " + ob.getClass().getSimpleName() + " a WHERE a.id =:param1", ob.getClass());
-            query.setParameter("param1", ob.getId());
+            query = this.entityManager.createQuery("SELECT a FROM " + c.getClass().getSimpleName() + " a WHERE a.id =:param1", c.getClass());
+            query.setParameter("param1", c.getId());
             return (ComponentePortal) query.getSingleResult();
         } catch (Exception e) {
             return null;

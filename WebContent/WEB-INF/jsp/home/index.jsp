@@ -37,6 +37,7 @@
 </div>
 <br>
 <br>
+
 <div id="bannersPequenos" class="container text-center">
     <div class="row">
         <div class="col-md-4" v-for="banner in banners">
@@ -44,6 +45,7 @@
         </div>
     </div>
 </div>
+
 <br>
 <br>
 <div class="row">
