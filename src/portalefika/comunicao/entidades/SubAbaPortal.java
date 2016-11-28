@@ -9,9 +9,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import javax.validation.constraints.NotNull;
-
-
 @Entity
 @Table(name = "PE_SUBABA")
 public class SubAbaPortal extends ComponentePortal {
@@ -19,8 +16,7 @@ public class SubAbaPortal extends ComponentePortal {
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "subAba", cascade = CascadeType.REFRESH)
     private List<Conteudo> conteudos;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @NotNull
+    @ManyToOne
     private AbaPortal abaPortal;
 
     public SubAbaPortal() {

@@ -36,7 +36,10 @@ public class AbaPortalController extends AbstractController {
     @Path("/comunicacao/aba/{a.id}")
     public void visualiza(AbaPortal a) {
         AbaPortal a1 = (AbaPortal) abaDao.buscarPorId(a);
-        result.use(Results.json()).from(a1).serialize();
+
+        if (a1 != null) {
+            result.use(Results.json()).from(a1).serialize();
+        }
     }
 
     @Post("/comunicacao/aba/")
@@ -47,7 +50,7 @@ public class AbaPortalController extends AbstractController {
     @Path("/comunicacao/aba/")
     public void lista() {
 
-        List<ComponentePortal> l = abaDao.listar(AbaPortal.class);
+        List<ComponentePortal> l = abaDao.listar(new AbaPortal());
 
         if (l != null) {
             result.use(Results.json()).from(l).serialize();

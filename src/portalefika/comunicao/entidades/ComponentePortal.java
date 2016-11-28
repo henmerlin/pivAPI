@@ -1,6 +1,7 @@
 package portalefika.comunicao.entidades;
 
 import java.io.Serializable;
+import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
@@ -15,9 +16,12 @@ public abstract class ComponentePortal implements Serializable {
     private Integer id;
 
     @NotEmpty
+    @Column
     private String titulo;
 
     @NotNull
+    @Column
+
     private Boolean ativo;
 
     public ComponentePortal() {

@@ -15,8 +15,7 @@ public class AbaPortal extends ComponentePortal {
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "abaPortal", cascade = CascadeType.REFRESH)
     private List<SubAbaPortal> subAbas;
 
-    public AbaPortal(Integer id) {
-        this.setId(id);
+    public AbaPortal() {
     }
 
     public void setSubAbas(List<SubAbaPortal> subAbas) {

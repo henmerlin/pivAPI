@@ -31,10 +31,9 @@ public class ComponentePortalDAO {
         this.entityManager.remove(this.entityManager.merge(param1));
     }
 
-    public List<ComponentePortal> listar(Class a) {
+    public List<ComponentePortal> listar(ComponentePortal a) {
         try {
-            Query query = this.entityManager.createQuery("FROM ComponentePortal");
-            return query.getResultList();
+            return (List<ComponentePortal>) this.entityManager.createQuery("SELECT a FROM " + a.getClass().getSimpleName() + " a", a.getClass()).getResultList();
         } catch (Exception e) {
             return new ArrayList<ComponentePortal>();
         }
@@ -43,7 +42,8 @@ public class ComponentePortalDAO {
     public ComponentePortal buscarPorId(ComponentePortal ob) {
 
         try {
-            Query query = this.entityManager.createQuery("FROM " + ob.getClass().getSimpleName() + " m WHERE m.id =:param1");
+            Query query;
+            query = this.entityManager.createQuery("SELECT a FROM " + ob.getClass().getSimpleName() + " a WHERE a.id =:param1", ob.getClass());
             query.setParameter("param1", ob.getId());
             return (ComponentePortal) query.getSingleResult();
         } catch (Exception e) {
