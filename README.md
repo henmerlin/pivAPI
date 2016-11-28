@@ -4,6 +4,7 @@ Portal Efika - Modulo Comunicação
 \#| Nome
 -------- | ---
 1| Henrique Antonio Merlin Junior
+2| Fabio Henrique Clem 
 
 ===================
 
