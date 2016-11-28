@@ -2,6 +2,8 @@ package portalefika.comunicao.entidades;
 
 import java.io.Serializable;
 import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
@@ -13,6 +15,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 public abstract class ComponentePortal implements Serializable {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @NotEmpty
@@ -21,10 +24,15 @@ public abstract class ComponentePortal implements Serializable {
 
     @NotNull
     @Column
-
     private Boolean ativo;
 
     public ComponentePortal() {
+    }
+
+    public ComponentePortal(Integer id, String titulo, Boolean ativo) {
+        this.id = id;
+        this.titulo = titulo;
+        this.ativo = ativo;
     }
 
     public void setId(Integer id) {

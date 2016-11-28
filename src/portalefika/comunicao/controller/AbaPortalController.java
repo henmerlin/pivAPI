@@ -7,6 +7,7 @@ import br.com.caelum.vraptor.Get;
 import br.com.caelum.vraptor.Path;
 import br.com.caelum.vraptor.Post;
 import br.com.caelum.vraptor.Put;
+import br.com.caelum.vraptor.serialization.gson.WithRoot;
 import br.com.caelum.vraptor.view.Results;
 import java.util.List;
 import javax.enterprise.context.RequestScoped;
@@ -37,11 +38,15 @@ public class AbaPortalController extends AbstractController {
         }
     }
 
-    @Post("/comunicacao/aba/")
-    @Consumes("application/json")
-    public void adiciona(AbaPortal a) {
+    @Post
+    public void adiciona() {
+        AbaPortal a = new AbaPortal();
+        a.setTitulo("Nova Aba");
+        a.setAtivo(false);
+        abaDao.cadastrar(a);
     }
 
+    @Get
     @Path("/comunicacao/aba/")
     public void lista() {
 
@@ -56,9 +61,10 @@ public class AbaPortalController extends AbstractController {
     public void remove(AbaPortal a) {
     }
 
-    @Put("/comunicacao/aba/{a.id}")
     @Consumes("application/json")
-    public void atualiza(AbaPortal a) {
+    @Post
+    public void atualiza(AbaPortal abaPortal) {
+        abaDao.editar(abaPortal);
     }
 
 }

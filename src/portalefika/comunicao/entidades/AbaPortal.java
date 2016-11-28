@@ -1,5 +1,6 @@
 package portalefika.comunicao.entidades;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -16,6 +17,12 @@ public class AbaPortal extends ComponentePortal {
     private List<SubAbaPortal> subAbas;
 
     public AbaPortal() {
+        this.subAbas = new ArrayList<>();
+    }
+
+    public AbaPortal(List<SubAbaPortal> subAbas, Integer id, String titulo, Boolean ativo) {
+        super(id, titulo, ativo);
+        this.subAbas = new ArrayList<>();
     }
 
     public void setSubAbas(List<SubAbaPortal> subAbas) {

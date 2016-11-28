@@ -11,16 +11,15 @@
     </div>
 
     <div id="editor">
-
         <div class="row">
             <div class="col-md-5">
-                <h4>Aba</h4>
-                <div class="list-group" v-for="aba in abas">
-                    <a href="#" class="list-group-item">Morbi leo risus</a>
-                    <a href="#" class="list-group-item">{{aba.titulo}}</a>
+                <h4>Abas</h4>
+                <div class="list-group">
+                    <span  v-bind:contenteditable="{true: aba == editedAba, false: aba != editedAba}" @blur="doneEditAba(aba)" @dblclick="editAba(aba)" v-for="aba in abas" class="list-group-item">
+                        {{aba.titulo}}
+                    </span>
                 </div>
             </div>
-
             <div class="col-md-5">
                 <h4>SubAbas</h4>
                 <div id="editorSubAbas" class="list-group">
@@ -33,18 +32,20 @@
 
             <div class="col-md-2"></div>
         </div>
-
+        <button class="btn btn-success btn-xs" @click="adicionarAba">Adicionar</button>
     </div>
+
 
 
     <script>
 
-        var apiURL = "${pageContext.request.contextPath}/comunicacao/aba/";
+        apiURL = "${pageContext.request.contextPath}/comunicacao/aba/";
 
         new Vue({
             el: '#editor',
             data: {
-                abas: null
+                abas: null,
+                editedAba: null,
             },
             created: function() {
                 this.fetchData()
@@ -54,7 +55,34 @@
                     var self = this;
                     $.get(apiURL, function(data) {
                         self.abas = data.list;
-                    });
+                    })
+                },
+                adicionarAba: function() {
+                    var self = this;
+                    $.post("${pageContext.request.contextPath}/abaPortal/adiciona")
+
+                    setTimeout(function() {
+                        self.fetchData()
+                    }, 600)
+                },
+                editAba: function(h) {
+                    var self = this;
+                    self.editedAba = h;
+                },
+                doneEditAba: function(h) {
+                    var self = this;
+
+                    teste = h;
+
+                    var abaEdited = {"id": h.id, "titulo": h.titulo, "ativo": h.ativo};
+
+                    console.log(abaEdited);
+
+                    $.post("${pageContext.request.contextPath}/abaPortal/atualiza", abaEdited)
+
+                    setTimeout(function() {
+                        self.fetchData()
+                    }, 600)
                 }
             }
         })
