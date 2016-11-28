@@ -13,16 +13,14 @@
     <div id="editor">
 
         <div class="row">
-
             <div class="col-md-5">
                 <h4>Aba</h4>
-                <div id="editorAbas" class="list-group">
-                    <a href="#" class="list-group-item">Dapibus ac facilisis in</a>
+                <div class="list-group" v-for="aba in abas">
                     <a href="#" class="list-group-item">Morbi leo risus</a>
-                    <a href="#" class="list-group-item">Porta ac consectetur ac</a>
-                    <a href="#" class="list-group-item">Vestibulum at eros</a>
+                    <a href="#" class="list-group-item">{{aba.titulo}}</a>
                 </div>
             </div>
+
             <div class="col-md-5">
                 <h4>SubAbas</h4>
                 <div id="editorSubAbas" class="list-group">
@@ -34,31 +32,31 @@
             </div>
 
             <div class="col-md-2"></div>
-
         </div>
-
 
     </div>
 
 
     <script>
-        var editorAbas = new Vue({
-            el: '#editorAbas',
+
+        var apiURL = "${pageContext.request.contextPath}/comunicacao/aba/";
+
+        new Vue({
+            el: '#editor',
             data: {
-                abas: [
-                    {imagem: '1_350x.jpg', alt: '1_350x'},
-                    {imagem: '2_350x.jpg', alt: '2_350x'},
-                    {imagem: '3_350x.jpg', alt: '3_350x'}
-                ]
+                abas: null
+            },
+            created: function() {
+                this.fetchData()
             },
             methods: {
-                vai: function(h) {
-                    alert(h.alt)
+                fetchData: function() {
+                    var self = this;
+                    $.get(apiURL, function(data) {
+                        self.abas = data.list;
+                    });
                 }
             }
         })
+
     </script>
-
-
-</div>
-
