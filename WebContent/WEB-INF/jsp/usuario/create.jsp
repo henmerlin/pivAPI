@@ -1,23 +1,79 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://www.opensymphony.com/sitemesh/decorator"
-	prefix="decorator"%>
+           prefix="decorator"%>
 
-<div class="page-header">
-	<h2>Login</h2>
+<style>
+
+    body, html {
+
+        background: url('${pageContext.request.contextPath}/resources/images/Fundo.jpg') center center no-repeat fixed;
+
+        -webkit-background-size: cover !important;
+        -moz-background-size: cover !important;
+        -o-background-size: cover !important;
+        background-size: cover !important;
+
+    }
+
+
+    #formAuth {
+
+        margin-top: 10% !important;
+        margin-left: 5% !important;
+        height: 40% !important;
+        width: 40% !important;
+        background: url('${pageContext.request.contextPath}/resources/images/FundoAuth.png') center center no-repeat fixed;
+        -webkit-background-size: cover !important;
+        -moz-background-size: cover !important;
+        -o-background-size: cover !important;
+        background-size: cover !important;
+        display: table !important;
+        opacity: 0.65;
+
+    }   
+
+</style>
+
+
+
+<div id="formAuth">
+
+    <form action="${linkTo[UsuarioController].login}" method="post" style="margin-top: 20px; margin-left: 20px;">
+
+        <di>
+
+            <h1 style="color: #00296b;">Bem-Vindo ao Portal Efika</h1>
+            <h2 style="color: #00296b;">Acesso: </h2>
+
+        </di>
+                
+        <div style="float: left; width: 65%;">
+
+            <div class="form-group">
+                <label for="login" style="color: white;">Login</label> <input
+                    type="text" class="form-control" id="login" name="u.login"
+                    placeholder="Login">
+            </div>
+            <div class="form-group">
+                <label for="senha" style="color: white;">Senha</label> <input
+                    type="password" class="form-control" id="senha" name="u.senha"
+                    placeholder="Senha">
+            </div>
+
+        </div>
+
+        <div style="float: right; width: 30%; margin-top: 5%;">
+
+            <button type="submit" class="btn btn-primary" style="width: 90%;">Entrar</button>
+            <br/>
+            <a href="#" style="color: white;">Esqueceu sua senha?</a>
+
+        </div>
+
+    </form>
+
 </div>
-<div class="form-inline">
-	<form action="${linkTo[UsuarioController].login}" method="post">
-		<div class="form-group">
-			<label for="login">Login</label> <input
-				type="text" class="form-control" id="login" name="u.login"
-				placeholder="Login">
-		</div>
-		<div class="form-group">
-			<label for="senha">Senha</label> <input
-				type="password" class="form-control" id="senha" name="u.senha"
-				placeholder="Senha">
-		</div>
-		<button type="submit" class="btn btn-default">Login</button>
-	</form>
+
+
 </div>

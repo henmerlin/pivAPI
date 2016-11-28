@@ -12,42 +12,41 @@ import portalefika.autenticacao.controller.SessionUsuarioEfika;
 import portalefika.autenticacao.controller.UsuarioController;
 import portalefika.autenticacao.annotation.Logado;
 
-
 @Intercepts
 @RequestScoped
 @AcceptsWithAnnotations(Logado.class)
 public class LogadoInterceper {
 
-	@Inject
-	private Result result;
+    @Inject
+    private Result result;
 
-	@Inject
-	private SessionUsuarioEfika session;
+    @Inject
+    private SessionUsuarioEfika session;
 
     /**
      * @deprecated CDI eyes only
      */
     protected LogadoInterceper() {
-    	
+
     }
-    
+
     @Inject
-    public LogadoInterceper(SessionUsuarioEfika session){
-    	this.session = session;
+    public LogadoInterceper(SessionUsuarioEfika session) {
+        this.session = session;
     }
 
     @AroundCall
-	public void around(SimpleInterceptorStack stack){
-    	
-    	try {
-        	if(!session.getUsuario().getLogin().isEmpty()){
-        		stack.next();
-        	}else{
-            	result.forwardTo(UsuarioController.class).create();
-        	}
-		} catch (Exception e) {
-        	result.forwardTo(UsuarioController.class).create();
-		}
-	}
-	
+    public void around(SimpleInterceptorStack stack) {
+
+        try {
+            if (!session.getUsuario().getLogin().isEmpty()) {
+                stack.next();
+            } else {
+                result.forwardTo(UsuarioController.class).create();
+            }
+        } catch (Exception e) {
+            result.forwardTo(UsuarioController.class).create();
+        }
+    }
+
 }
