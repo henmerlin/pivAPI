@@ -2,20 +2,18 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://www.opensymphony.com/sitemesh/decorator"
            prefix="decorator"%>
-
 <style>
 
-    body, html {
+    body {
 
-        background: url('${pageContext.request.contextPath}/resources/images/Fundo.jpg') center center no-repeat fixed;
+        background: url('${pageContext.request.contextPath}/resources/images/Fundo.jpg') center center no-repeat fixed ;
 
-        -webkit-background-size: cover !important;
-        -moz-background-size: cover !important;
-        -o-background-size: cover !important;
-        background-size: cover !important;
-
+        -webkit-background-size: 100% 100% !important;
+        -moz-background-size: 100% 100% !important;
+        -o-background-size: 100% 100% !important;
+        background-size: 100% 100% !important;
+        
     }
-
 
     #formAuth {
 
@@ -29,13 +27,11 @@
         -o-background-size: cover !important;
         background-size: cover !important;
         display: table !important;
-        opacity: 0.65;
-
-    }   
+        opacity: 0.80;      
+                
+    }    
 
 </style>
-
-
 
 <div id="formAuth">
 
@@ -43,15 +39,19 @@
 
         <di>
 
-            <h1 style="color: #00296b;">Bem-Vindo ao Portal Efika</h1>
-            <h2 style="color: #00296b;">Acesso: </h2>
+            <h1 style="color: #003245;">Bem-Vindo ao Portal Efika</h1>
+
+            <p style="color: white;">Lorem ipsum dolor sit amet, 
+            consectetur adipiscing elit. Aliquam suscipit quis libero in placerat.</p>
+
+            <h2 style="color: #003245;">Acesso: </h2>
 
         </di>
-                
+
         <div style="float: left; width: 65%;">
 
             <div class="form-group">
-                <label for="login" style="color: white;">Login</label> <input
+                <label for="login" style="color: white;">Usuário</label> <input
                     type="text" class="form-control" id="login" name="u.login"
                     placeholder="Login">
             </div>
@@ -67,7 +67,7 @@
 
             <button type="submit" class="btn btn-primary" style="width: 90%;">Entrar</button>
             <br/>
-            <a href="#" style="color: white;">Esqueceu sua senha?</a>
+            <!--<a href="#" style="color: white;">Esqueceu sua senha?</a>-->
 
         </div>
 

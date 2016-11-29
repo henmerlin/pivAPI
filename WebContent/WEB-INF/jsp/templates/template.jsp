@@ -36,10 +36,11 @@
         <style>
 
             .navbar-telefonica{
-                
-                width: 100%;
+
+                width: 100% !important;
+                height: 100% !important;
                 background-image:url('${pageContext.request.contextPath}/resources/images/header.jpg');
-                
+
             }
 
         </style>
@@ -47,6 +48,8 @@
         <decorator:head/>
     </head>
     <body>
+
+
 
         <nav class="navbar-telefonica">
             <img class="telefonicaLogo" src="${pageContext.request.contextPath}/resources/images/logo.png"/>
@@ -93,7 +96,7 @@
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                                     <span class="glyphicon glyphicon-cog " aria-hidden="true"></span> Administração <span class="caret"></span></a>
                                 <ul class="dropdown-menu">
-                                    
+
                                     <li><a href="${linkTo[UsuarioController].logout()}">${sessionUsuarioEfika.usuario.login}, Sair</a></li>
                                     <li role="separator" class="divider"></li>
                                     <li><a href="${linkTo[EditorController].create()}">Editor</a></li>
@@ -101,7 +104,7 @@
                                     <li><a href="#">Something else here</a></li>
                                     <li role="separator" class="divider"></li>
                                     <li><a href="#">Separated link</a></li>
-                                    
+
                                 </ul>
                             </li>
 
