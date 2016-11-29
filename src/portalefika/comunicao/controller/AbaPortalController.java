@@ -2,7 +2,6 @@ package portalefika.comunicao.controller;
 
 import br.com.caelum.vraptor.Consumes;
 import br.com.caelum.vraptor.Controller;
-import br.com.caelum.vraptor.Delete;
 import br.com.caelum.vraptor.Get;
 import br.com.caelum.vraptor.Path;
 import br.com.caelum.vraptor.Post;
@@ -37,6 +36,7 @@ public class AbaPortalController extends AbstractController {
     }
 
     @Post
+    @Path("/comunicacao/aba/")
     public void adiciona() {
         AbaPortal a = new AbaPortal();
         a.setTitulo("Nova Aba");
@@ -55,11 +55,15 @@ public class AbaPortalController extends AbstractController {
         }
     }
 
-    @Delete("/comunicacao/aba/{a.id}")
+    @Consumes("application/json")
+    @Path("/comunicacao/aba/delete")
+    @Post
     public void remove(AbaPortal a) {
+        abaDao.excluir(a);
     }
 
     @Consumes("application/json")
+    @Path("/comunicacao/aba/update")
     @Post
     public void atualiza(AbaPortal abaPortal) {
         abaDao.editar(abaPortal);
