@@ -12,7 +12,7 @@
         -moz-background-size: 100% 100% !important;
         -o-background-size: 100% 100% !important;
         background-size: 100% 100% !important;
-        
+
     }
 
     #formAuth {
@@ -28,7 +28,7 @@
         background-size: cover !important;
         display: table !important;
         opacity: 0.80;      
-                
+
     }    
 
 </style>
@@ -37,43 +37,63 @@
 
     <form action="${linkTo[UsuarioController].login}" method="post" style="margin-top: 20px; margin-left: 20px;">
 
-        <di>
+        <div>
 
             <h1 style="color: #003245;">Bem-Vindo ao Portal Efika</h1>
 
             <p style="color: white;">Lorem ipsum dolor sit amet, 
-            consectetur adipiscing elit. Aliquam suscipit quis libero in placerat.</p>
+                consectetur adipiscing elit. Aliquam suscipit quis libero in placerat.</p>
 
             <h2 style="color: #003245;">Acesso: </h2>
 
-        </di>
+        </div>        
 
-        <div style="float: left; width: 65%;">
+        <div>
 
-            <div class="form-group">
-                <label for="login" style="color: white;">Usuário</label> <input
-                    type="text" class="form-control" id="login" name="u.login"
-                    placeholder="Login">
+            <div style="float: left; width: 65%;">
+
+                <div class="form-group">
+                    <label for="login" style="color: white;">Usuário</label> <input
+                        type="text" class="form-control" id="login" name="u.login"
+                        placeholder="Login">
+                </div>
+                <div class="form-group">
+                    <label for="senha" style="color: white;">Senha</label> <input
+                        type="password" class="form-control" id="senha" name="u.senha"
+                        placeholder="Senha">
+                </div>
+
             </div>
-            <div class="form-group">
-                <label for="senha" style="color: white;">Senha</label> <input
-                    type="password" class="form-control" id="senha" name="u.senha"
-                    placeholder="Senha">
+
+            <div style="float: right; width: 30%;">
+
+                <button type="submit" class="btn btn-primary" style="width: 90%;">Entrar</button>
+                <br/>
+                <!--<a href="#" style="color: white;">Esqueceu sua senha?</a>-->
+
             </div>
 
-        </div>
+            <div class="container" style="float: left; width: 65%; height: 40px;">
 
-        <div style="float: right; width: 30%; margin-top: 5%;">
+                <c:if test="${not empty mensagem}">
+                    <span class="alert alert-success" role="alert"> <span
+                            class="glyphicon glyphicon glyphicon-ok" aria-hidden="true"></span>
+                        ${mensagem}
+                    </span>
+                </c:if>
+                <c:if test="${not empty mensagemFalha}">
+                    <span class="alert alert-danger" role="alert">
+                        <span class="glyphicon glyphicon glyphicon-remove" aria-hidden="true"></span> 
+                        ${mensagemFalha}
+                    </span>
+                </c:if>  
 
-            <button type="submit" class="btn btn-primary" style="width: 90%;">Entrar</button>
-            <br/>
-            <!--<a href="#" style="color: white;">Esqueceu sua senha?</a>-->
+            </div>
 
-        </div>
+        </div>       
 
-    </form>
+    </form>   
 
 </div>
-
 
 </div>

@@ -49,8 +49,6 @@
     </head>
     <body>
 
-
-
         <nav class="navbar-telefonica">
             <img class="telefonicaLogo" src="${pageContext.request.contextPath}/resources/images/logo.png"/>
         </nav>
@@ -114,7 +112,7 @@
                 </div><!-- /.container-fluid -->
             </nav>
 
-        </c:if>
+        </c:if>       
 
         <div>
             <decorator:body/>
