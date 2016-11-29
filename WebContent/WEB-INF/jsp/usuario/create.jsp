@@ -65,7 +65,7 @@
 
             </div>
 
-            <div style="float: right; width: 30%;">
+            <div style="float: right; width: 30%; margin-top: 10%;">
 
                 <button type="submit" class="btn btn-primary" style="width: 90%;">Entrar</button>
                 <br/>
@@ -93,7 +93,5 @@
         </div>       
 
     </form>   
-
-</div>
 
 </div>
