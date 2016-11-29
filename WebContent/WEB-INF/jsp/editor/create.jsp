@@ -15,12 +15,13 @@
             <div class="col-md-5">
                 <h4>Abas</h4>
                 <div class="list-group">
-                    <span  v-bind:contenteditable="{true: aba == editedAba, false: aba != editedAba}" @blur="doneEditAba(aba)" @dblclick="editAba(aba)" v-for="aba in abas" class="list-group-item">
+                    <label v-model="aba.titulo" v-bind:contenteditable="{true: aba == editedAba, false: aba != editedAba}" @blur="doneEditAba(aba)" @dblclick="editAba(aba)" v-for="aba in abas" class="list-group-item">
                         {{aba.titulo}}
-                    </span>
+                    </label>
                 </div>
             </div>
             <div class="col-md-5">
+
                 <h4>SubAbas</h4>
                 <div id="editorSubAbas" class="list-group">
                     <a href="#" class="list-group-item">Dapibus ac facilisis in</a>
@@ -66,23 +67,35 @@
                     }, 600)
                 },
                 editAba: function(h) {
-                    var self = this;
+                    var self = this
                     self.editedAba = h;
+                    console.log(h);
                 },
                 doneEditAba: function(h) {
                     var self = this;
 
-                    teste = h;
+                    $.ajax({
+                        type: "POST",
+                        url: "${pageContext.request.contextPath}/abaPortal/atualiza",
+                        data: JSON.stringify({"abaPortal":
+                                    {
+                                        "id": h.id,
+                                        "titulo": h.titulo,
+                                        "ativo": h.ativo
+                                    }
+                        }),
+                        dataType: "json",
+                        beforeSend: function(xhrObj) {
+                            xhrObj.setRequestHeader("Content-Type", "application/json");
+                        },
+                        success: function(json) {
+                            setTimeout(function() {
+                                self.fetchData()
+                            }, 600)
+                        }
+                    });
 
-                    var abaEdited = {"id": h.id, "titulo": h.titulo, "ativo": h.ativo};
-
-                    console.log(abaEdited);
-
-                    $.post("${pageContext.request.contextPath}/abaPortal/atualiza", abaEdited)
-
-                    setTimeout(function() {
-                        self.fetchData()
-                    }, 600)
+                    self.editedAba = null;
                 }
             }
         })
