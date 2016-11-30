@@ -1,15 +1,15 @@
 package portalefika.comunicao.dal;
 
 import javax.transaction.Transactional;
-import portalefika.comunicao.entidades.AbaPortal;
 import portalefika.comunicao.entidades.ComponentePortal;
+import portalefika.comunicao.entidades.SubAbaPortal;
 
-public class AbaPortalDAO extends ComponentePortalDAO {
+public class SubAbaPortalDAO extends ComponentePortalDAO {
 
     @Override
     @Transactional
     public void cadastrar(ComponentePortal c) {
-        super.cadastrar((AbaPortal) c);
+        super.cadastrar((SubAbaPortal) c);
     }
 
 }

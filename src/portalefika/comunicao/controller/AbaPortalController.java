@@ -51,7 +51,7 @@ public class AbaPortalController extends AbstractController {
         List<ComponentePortal> l = abaDao.listar(new AbaPortal());
 
         if (l != null) {
-            result.use(Results.json()).from(l).serialize();
+            result.use(Results.json()).from(l).include("subAbas").serialize();
         }
     }
 

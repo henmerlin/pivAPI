@@ -6,6 +6,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.transaction.Transactional;
 
 import portalefika.comunicao.entidades.ComponentePortal;
 
@@ -22,10 +23,12 @@ public class ComponentePortalDAO {
         this.entityManager.persist(c);
     }
 
+    @Transactional
     public void editar(ComponentePortal c) {
         this.entityManager.merge(c);
     }
 
+    @Transactional
     public void excluir(ComponentePortal c) {
         this.entityManager.remove(this.entityManager.merge(c));
     }
