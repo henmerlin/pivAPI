@@ -17,6 +17,9 @@ import javax.validation.constraints.NotNull;
 @Entity
 @Table(name = "PE_ENQUETE")
 public class Enquete extends ComponentePortal {
+
+    public Enquete() {
+    }
     
     @NotNull
     private Date dataInicio;

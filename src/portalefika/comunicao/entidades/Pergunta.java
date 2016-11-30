@@ -17,6 +17,9 @@ import javax.validation.constraints.NotNull;
 @Entity
 @Table(name = "PE_PERGUNTA_ENQUETE")
 public class Pergunta extends ComponentePortal {
+
+    public Pergunta() {
+    }
     
     @NotNull
     @ManyToOne

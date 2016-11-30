@@ -5,8 +5,13 @@
  */
 package portalefika.comunicao.controller;
 
+import br.com.caelum.vraptor.Consumes;
 import br.com.caelum.vraptor.Controller;
+import br.com.caelum.vraptor.Post;
 import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
+import portalefika.comunicao.dal.EnqueteDAO;
+import portalefika.comunicao.entidades.Enquete;
 import portalefika.controller.AbstractController;
 
 /**
@@ -16,11 +21,33 @@ import portalefika.controller.AbstractController;
 @Controller
 @RequestScoped
 public class EnqueteController extends AbstractController {
+    
+    @Inject
+    private EnqueteDAO enqueteDAO;
 
     public EnqueteController() {
     }
     
     public void create() {
+        
+        
+        
+    }
+    
+    @Post
+    @Consumes("application/json")
+    public void cadastrar(Enquete enquete) {
+        
+        try {
+            
+            this.enqueteDAO.cadastrar(enquete);
+            
+        } catch (Exception e) {
+        }
+        
+    }
+    
+    public void listar() {
         
         
         

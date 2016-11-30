@@ -22,6 +22,9 @@ import portalefika.autenticacao.dal.webservice.Usuario;
 @Entity
 @Table(name = "PE_RESPOSTA_ENQUETE")
 public class RespostaEnquete implements Serializable {
+
+    public RespostaEnquete() {
+    }  
     
     @Id
     @GeneratedValue
@@ -33,10 +36,6 @@ public class RespostaEnquete implements Serializable {
     @NotNull
     @ManyToOne
     private Pergunta pergunta;
-
-    @NotNull
-    @ManyToOne
-    private Usuario usuario;
     
     @NotNull
     @ManyToOne
@@ -64,14 +63,6 @@ public class RespostaEnquete implements Serializable {
 
     public void setPergunta(Pergunta pergunta) {
         this.pergunta = pergunta;
-    }
-
-    public Usuario getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
     }
 
     public Enquete getEnquete() {
