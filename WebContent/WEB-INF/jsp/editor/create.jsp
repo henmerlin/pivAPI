@@ -21,7 +21,7 @@
                             <tr>
                                 <th>Titulo</th>
                                 <th>Ativa</th>
-                                <th>Excluir</th>
+                                <th>Opções</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -51,7 +51,7 @@
                             </tr>
                         </tbody>
                     </table>
-                    <button class="btn btn-success btn-xs" @click="adicionarAba">Adicionar</button>
+                    <button class="btn btn-success btn-xs" @click="novaAba">Adicionar</button>
                 </div>
             </div>
             <div class="col-md-5">
@@ -63,7 +63,7 @@
                             <tr>
                                 <th>Titulo</th>
                                 <th>Ativa</th>
-                                <th>Excluir</th>
+                                <th>Opções</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -91,7 +91,7 @@
                             </tr>
                         </tbody>
                     </table>
-                    <button class="btn btn-success btn-xs" @click="adicionarSubAba(activedAba)">Adicionar</button>
+                    <button class="btn btn-success btn-xs" @click="novaSubAba(activedAba)">Adicionar</button>
                 </div>
             </div>
 
@@ -143,26 +143,49 @@
                 deletedSubAba: null,
             },
             created: function() {
-                this.fetchData()
+                this.getAbas()
             },
             methods: {
+                getAbas: function() {
+                    var self = this;
+                    $.get(abaURL, function(data) {
+                        self.abas = data.list;
+                    })
+                },
                 fetchData: function() {
                     var self = this;
 
                     self.editedAba = null;
                     self.activedAba = null;
 
-                    $.get(abaURL, function(data) {
-                        self.abas = data.list;
-                    })
-                },
-                adicionarAba: function() {
-                    var self = this;
-                    $.post(abaURL)
-
                     setTimeout(function() {
-                        self.fetchData()
+                        self.getAbas()
                     }, 600)
+                },
+                // Aba:
+                novaAba: function() {
+                    var self = this;
+                    var novaAba = h = {"abaPortal": {"titulo": "Nova Aba", "ativo": false}};
+                    self.adicionarAba(novaAba);
+
+                },
+                adicionarAba: function(abaPortal) {
+                    var self = this;
+
+                    $.ajax({
+                        type: "POST",
+                        url: abaURL,
+                        data: JSON.stringify(abaPortal),
+                        dataType: "json",
+                        beforeSend: function(xhrObj) {
+                            xhrObj.setRequestHeader("Content-Type", "application/json");
+                        },
+                        success: function(data) {
+                            self.activedAba = data
+                        }
+                    });
+
+                    self.fetchData()
                 },
                 editAba: function(h) {
                     var self = this
@@ -188,29 +211,24 @@
                             xhrObj.setRequestHeader("Content-Type", "application/json");
                         },
                         success: function(json) {
-
                             $('#modalAba').modal('hide');
                         }
                     });
 
                     self.deletedAba = null
-
-                    setTimeout(function() {
-                        self.fetchData()
-                    }, 1500)
+                    self.fetchData()
 
                 },
                 selectAba: function(h) {
                     var self = this
                     self.activedAba = h
+                    self.buscaAbaPorId(h)
                 },
-                doneEditAba: function(h) {
-                    var self = this;
+                updateAba: function(h) {
+                    var self = this
 
                     if (!h.titulo) {
-                        setTimeout(function() {
-                            self.fetchData()
-                        }, 600)
+                        self.fetchData()
                         return;
                     }
 
@@ -223,21 +241,62 @@
                             xhrObj.setRequestHeader("Content-Type", "application/json");
                         },
                         success: function(json) {
-                            setTimeout(function() {
-                                self.fetchData()
-                            }, 600)
+                            self.fetchData()
                         }
                     });
+                },
+                doneEditAba: function(h) {
+                    var self = this;
 
+                    if (!h.titulo) {
+                        self.fetchData()
+                        return;
+                    }
+                    self.updateAba(h)
                     self.editedAba = null;
+                },
+                // SubAba:
+                novaSubAba: function(h) {
+                    var self = this;
+
+                    self.activedAba = h;
+
+                    var novaSubAba = h = {"subAbaPortal": {"titulo": "Nova SubAba", "ativo": false}};
+
+                    self.adicionarSubAba(novaSubAba);
                 },
                 adicionarSubAba: function(h) {
                     var self = this;
 
-                    console.log(h);
-                    h.subAbas.push({"subAba": {"titulo": "Nova Aba", "ativo": false}});
-                    self.doneEditAba(h);
-                    console.log(h);
+                    $.ajax({
+                        type: "POST",
+                        url: subAbaURL,
+                        data: JSON.stringify(h),
+                        dataType: "json",
+                        beforeSend: function(xhrObj) {
+                            xhrObj.setRequestHeader("Content-Type", "application/json");
+                        },
+                        success: function(data) {
+
+                            self.activedSubAba = data;
+                            self.activedAba.subAbas.push(data);
+
+                            $.ajax({
+                                type: "POST",
+                                url: abaURL + "update",
+                                data: JSON.stringify(self.activedAba),
+                                dataType: "json",
+                                beforeSend: function(xhrObj) {
+                                    xhrObj.setRequestHeader("Content-Type", "application/json");
+                                }
+                            });
+                            self.fetchData()
+                        }
+                    });
+
+
+
+
                 },
                 editSubAba: function(h) {
                     var self = this
@@ -272,7 +331,7 @@
 
                     setTimeout(function() {
                         self.fetchData()
-                    }, 1500)
+                    }, 500)
 
                 },
                 selectSubAba: function(h) {
@@ -283,9 +342,7 @@
                     var self = this;
 
                     if (!h.titulo) {
-                        setTimeout(function() {
-                            self.fetchData()
-                        }, 600)
+                        self.fetchData()
                         return;
                     }
 
@@ -298,13 +355,24 @@
                             xhrObj.setRequestHeader("Content-Type", "application/json");
                         },
                         success: function(json) {
-                            setTimeout(function() {
-                                self.fetchData()
-                            }, 600)
+                            self.fetchData()
                         }
                     });
 
                     self.editedSubAba = null;
+                },
+                // Util
+                buscaAbaPorId: function(h) {
+                    var self = this;
+                    $.get(abaURL + h.id, function(data) {
+                        self.activedAba = data.abaPortal;
+                    })
+                },
+                buscaSubAbaPorId: function(h) {
+                    var self = this;
+                    $.get(subAbaPortal + h.id, function(data) {
+                        self.activedSubAba = data.subAbaPortal;
+                    })
                 }
             }
         })

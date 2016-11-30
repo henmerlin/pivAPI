@@ -31,17 +31,20 @@ public class AbaPortalController extends AbstractController {
         AbaPortal a1 = (AbaPortal) abaDao.buscarPorId(a);
 
         if (a1 != null) {
-            result.use(Results.json()).from(a1).serialize();
+            result.use(Results.json()).from(a1).include("subAbas").serialize();
         }
     }
 
     @Post
+    @Consumes("application/json")
     @Path("/comunicacao/aba/")
-    public void adiciona() {
-        AbaPortal a = new AbaPortal();
-        a.setTitulo("Nova Aba");
-        a.setAtivo(false);
-        abaDao.cadastrar(a);
+    public void adiciona(AbaPortal abaPortal) {
+        try {
+            abaDao.cadastrar(abaPortal);
+            result.use(Results.json()).from(abaPortal).include("subAbas").serialize();
+        } catch (Exception e) {
+            result.use(Results.json()).from(e).serialize();
+        }
     }
 
     @Get
@@ -58,8 +61,8 @@ public class AbaPortalController extends AbstractController {
     @Consumes("application/json")
     @Path("/comunicacao/aba/delete")
     @Post
-    public void remove(AbaPortal a) {
-        abaDao.excluir(a);
+    public void remove(AbaPortal abaPortal) {
+        abaDao.excluir(abaPortal);
     }
 
     @Consumes("application/json")
