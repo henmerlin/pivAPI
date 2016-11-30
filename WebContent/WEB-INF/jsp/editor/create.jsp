@@ -13,7 +13,7 @@
     <div id="editor">
 
         <div class="row">
-            <div class="col-md-5">
+            <div class="col-md-12">
                 <h4>Abas</h4>
                 <div>
                     <table class="table table-bordered small">
@@ -52,10 +52,10 @@
                         </tbody>
                     </table>
                     <button class="btn btn-success btn-xs" @click="novaAba">Adicionar</button>
+                    <br>
                 </div>
             </div>
-            <div class="col-md-5">
-
+            <div class="col-md-12">
                 <h4>SubAbas</h4>
                 <div v-if="activedAba">
                     <table class="table table-bordered small">
@@ -81,21 +81,24 @@
                                 </td>
 
                                 <td>
-                                    <input type="checkbox" v-model="subAba.ativo" @change="doneEditAba(subAba)"></input>
+                                    <input type="checkbox" v-model="subAba.ativo" @change="doneEditSubAba(subAba)"></input>
                                 </td>
 
                                 <td>
-                                    <button class="btn btn-danger glyphicon glyphicon-trash btn-sm" @click="deleteSubAba(aba)" data-toggle="modal" data-target="#modalSubAba"></button>
+                                    <button class="btn btn-danger glyphicon glyphicon-trash btn-sm" @click="deleteSubAba(subAba)" data-toggle="modal" data-target="#modalSubAba"></button>
                                 </td>
 
                             </tr>
                         </tbody>
                     </table>
-                    <button class="btn btn-success btn-xs" @click="novaSubAba(activedAba)">Adicionar</button>
+                    <button class="btn btn-success btn-xs" @click="novaSubAba">Adicionar</button>
+                    <br>
                 </div>
             </div>
 
-            <div class="col-md-2"></div>
+            <div class="col-md-12">
+
+            </div>
         </div>
 
 
@@ -117,6 +120,45 @@
                 </div>
             </div>
         </div>
+
+        <!-- Modal Aba -->
+        <div class="modal fade" id="modalAba" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"  v-if="deletedSubAba">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">Excluir </h4>
+                    </div>
+                    <div class="modal-body">
+                        Deseja excluir a SubAba  <strong v-html="deletedSubAba.titulo"></strong> e seus respectivos conteúdos?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                        <button type="button" class="btn btn-danger" @click="doneDeleteAba" data-dismiss="modal">Excluir</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal SubAba -->
+        <div class="modal fade" id="modalSubAba" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"  v-if="deletedSubAba">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">Excluir </h4>
+                    </div>
+                    <div class="modal-body">
+                        Deseja excluir a SubAba  <strong v-html="deletedSubAba.titulo"></strong> e seus respectivos conteúdos?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                        <button type="button" class="btn btn-danger" @click="doneDeleteSubAba" data-dismiss="modal">Excluir</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
 
     </div>
 
@@ -155,9 +197,6 @@
                 fetchData: function() {
                     var self = this;
 
-                    self.editedAba = null;
-                    self.activedAba = null;
-
                     setTimeout(function() {
                         self.getAbas()
                     }, 600)
@@ -165,8 +204,9 @@
                 // Aba:
                 novaAba: function() {
                     var self = this;
-                    var novaAba = h = {"abaPortal": {"titulo": "Nova Aba", "ativo": false}};
-                    self.adicionarAba(novaAba);
+
+                    var _novaAba = h = {"abaPortal": {"titulo": "Nova Aba", "ativo": false}};
+                    self.adicionarAba(_novaAba);
 
                 },
                 adicionarAba: function(abaPortal) {
@@ -179,9 +219,6 @@
                         dataType: "json",
                         beforeSend: function(xhrObj) {
                             xhrObj.setRequestHeader("Content-Type", "application/json");
-                        },
-                        success: function(data) {
-                            self.activedAba = data
                         }
                     });
 
@@ -232,6 +269,9 @@
                         return;
                     }
 
+                    console.log("Update");
+                    console.log(h);
+
                     $.ajax({
                         type: "POST",
                         url: abaURL + "update",
@@ -254,19 +294,20 @@
                     }
                     self.updateAba(h)
                     self.editedAba = null;
+
                 },
                 // SubAba:
-                novaSubAba: function(h) {
+                novaSubAba: function() {
                     var self = this;
-
-                    self.activedAba = h;
-
-                    var novaSubAba = h = {"subAbaPortal": {"titulo": "Nova SubAba", "ativo": false}};
-
-                    self.adicionarSubAba(novaSubAba);
+                    var _novaSubAba = {"subAbaPortal": {"titulo": "Nova SubAba", "ativo": false}};
+                    self.adicionarSubAba(_novaSubAba);
                 },
                 adicionarSubAba: function(h) {
                     var self = this;
+
+                    console.log("Add");
+                    h.subAbaPortal.abaPortal = self.activedAba;
+                    console.log(h);
 
                     $.ajax({
                         type: "POST",
@@ -277,23 +318,10 @@
                             xhrObj.setRequestHeader("Content-Type", "application/json");
                         },
                         success: function(data) {
-
                             self.activedSubAba = data;
-                            self.activedAba.subAbas.push(data);
-
-                            $.ajax({
-                                type: "POST",
-                                url: abaURL + "update",
-                                data: JSON.stringify(self.activedAba),
-                                dataType: "json",
-                                beforeSend: function(xhrObj) {
-                                    xhrObj.setRequestHeader("Content-Type", "application/json");
-                                }
-                            });
-                            self.fetchData()
+                            self.activedAba.subAbas.push(data.subAbaPortal)
                         }
                     });
-
 
 
 
@@ -322,7 +350,6 @@
                             xhrObj.setRequestHeader("Content-Type", "application/json");
                         },
                         success: function(json) {
-
                             $('#modalAba').modal('hide');
                         }
                     });

@@ -13,7 +13,7 @@ import javax.persistence.Table;
 @Table(name = "PE_ABA")
 public class AbaPortal extends ComponentePortal {
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "abaPortal", cascade = CascadeType.REFRESH)
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "abaPortal", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<SubAbaPortal> subAbas;
 
     public AbaPortal() {

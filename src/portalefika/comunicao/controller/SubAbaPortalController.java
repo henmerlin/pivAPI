@@ -31,7 +31,7 @@ public class SubAbaPortalController extends AbstractController {
         SubAbaPortal a1 = (SubAbaPortal) saDao.buscarPorId(a);
 
         if (a1 != null) {
-            result.use(Results.json()).from(a1).serialize();
+            result.use(Results.json()).from(a1).include("abaPortal").include("conteudos").serialize();
         }
     }
 
@@ -39,8 +39,12 @@ public class SubAbaPortalController extends AbstractController {
     @Consumes("application/json")
     @Path("/comunicacao/subAba/")
     public void adiciona(SubAbaPortal subAbaPortal) {
-        subAbaPortal.setAtivo(false);
-        saDao.cadastrar(subAbaPortal);
+        try {
+            saDao.cadastrar(subAbaPortal);
+            result.use(Results.json()).from(subAbaPortal).include("conteudos").include("abaPortal").serialize();
+        } catch (Exception e) {
+            result.use(Results.json()).from(e).serialize();
+        }
     }
 
     @Get
@@ -50,7 +54,7 @@ public class SubAbaPortalController extends AbstractController {
         List<ComponentePortal> l = saDao.listar(new SubAbaPortal());
 
         if (l != null) {
-            result.use(Results.json()).from(l).serialize();
+            result.use(Results.json()).from(l).include("abaPortal").include("conteudos").serialize();
         }
     }
 

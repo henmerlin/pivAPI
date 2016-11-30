@@ -69,7 +69,12 @@ public class AbaPortalController extends AbstractController {
     @Path("/comunicacao/aba/update")
     @Post
     public void atualiza(AbaPortal abaPortal) {
-        abaDao.editar(abaPortal);
+        try {
+            abaDao.editar(abaPortal);
+            result.use(Results.json()).from(abaPortal).include("subAbas").serialize();
+        } catch (Exception e) {
+            result.use(Results.json()).from(e).serialize();
+        }
     }
 
 }
