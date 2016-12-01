@@ -7,7 +7,11 @@ package portalefika.comunicao.controller;
 
 import br.com.caelum.vraptor.Consumes;
 import br.com.caelum.vraptor.Controller;
+import br.com.caelum.vraptor.Get;
+import br.com.caelum.vraptor.Path;
 import br.com.caelum.vraptor.Post;
+import br.com.caelum.vraptor.view.Results;
+import java.util.List;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import portalefika.comunicao.dal.EnqueteDAO;
@@ -36,20 +40,33 @@ public class EnqueteController extends AbstractController {
     
     @Post
     @Consumes("application/json")
+    @Path("/comunicacao/enquete/cadastrar")
     public void cadastrar(Enquete enquete) {
         
         try {
             
             this.enqueteDAO.cadastrar(enquete);
+            result.use(Results.json()).from(enquete).include("enquetes").serialize();
             
         } catch (Exception e) {
+            
+            result.use(Results.json()).from(e).serialize();
+            
         }
         
     }
     
+    @Get
+    @Path("/comunicacao/enquete/listar")
     public void listar() {
         
+        List<Enquete> l = this.enqueteDAO.listarEnquetesAtivo();
         
+        if (l != null) {
+            
+            this.result.use(Results.json()).from(l).include("enquetes").serialize();
+            
+        }
         
     }
     
