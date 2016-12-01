@@ -1,4 +1,4 @@
-<%-- 
+<%--
     Document   : create
     Created on : 30/11/2016, 12:53:55
     Author     : G0034481
@@ -20,10 +20,7 @@
         <div class="row">
 
             <div class="col-md-12">
-
-                <h4>Abas</h4>
                 <div>
-
                     <table class="table table-bordered small">
 
                         <thead>
@@ -58,7 +55,7 @@
 
                                     <label>{{enquete.dataFim}}</label>
 
-                                </td>                                
+                                </td>
 
                             </tr>
 
@@ -80,58 +77,47 @@
         var enqURL = "${pageContext.request.contextPath}/comunicacao/enquete/";
 
         new Vue({
-
             el: '#enquete',
-
             data: {
-
                 enquetes: null
-
+            },
+            created: function() {
+                this.getEnquetes()
             },
             methods: {
 
-                getEnquetes: function () {
-
+                getEnquetes: function() {
                     var self = this;
 
-                    $.get(enqURL + "listar", function (data) {
-
+                    $.get(enqURL + "listar", function(data) {
                         self.enquetes = data.list;
-
                     })
 
                 },
-                adicionaEnquete: function (enquete) {
-
+                adicionaEnquete: function(enquete) {
                     var self = this;
 
                     $.ajax({
-
                         type: "POST",
                         url: enqURL + "cadastrar",
                         data: JSON.stringify(enquete),
                         dataType: "json",
-                        beforeSend: function (xhrObj) {
-
+                        beforeSend: function(xhrObj) {
                             xhrObj.setRequestHeader("Content-Type", "application/json");
-
                         }
-
                     });
 
                     self.fetchData()
 
                 },
-                fetchData: function () {
+                fetchData: function() {
                     var self = this;
 
-                    setTimeout(function () {
+                    setTimeout(function() {
                         self.getEnquetes()
                     }, 600)
                 }
-
             }
-
         });
 
     </script>

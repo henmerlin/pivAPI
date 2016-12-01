@@ -15,6 +15,7 @@ import java.util.List;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import portalefika.comunicao.dal.EnqueteDAO;
+import portalefika.comunicao.entidades.AbaPortal;
 import portalefika.comunicao.entidades.Enquete;
 import portalefika.controller.AbstractController;
 
@@ -25,49 +26,55 @@ import portalefika.controller.AbstractController;
 @Controller
 @RequestScoped
 public class EnqueteController extends AbstractController {
-    
+
     @Inject
     private EnqueteDAO enqueteDAO;
 
     public EnqueteController() {
     }
-    
+
     public void create() {
-        
-        
-        
+
     }
-    
+
+    @Get
+    @Path("/comunicacao/enquete/{enquete.id}")
+    public void visualiza(Enquete enquete) {
+        Enquete a1 = (Enquete) enqueteDAO.buscarPorId(enquete);
+
+        if (a1 != null) {
+            result.use(Results.json()).from(a1).serialize();
+        }
+    }
+
     @Post
     @Consumes("application/json")
     @Path("/comunicacao/enquete/cadastrar")
     public void cadastrar(Enquete enquete) {
-        
+
         try {
-            
+
             this.enqueteDAO.cadastrar(enquete);
             result.use(Results.json()).from(enquete).include("enquetes").serialize();
-            
+
         } catch (Exception e) {
-            
+
             result.use(Results.json()).from(e).serialize();
-            
+
         }
-        
+
     }
-    
+
     @Get
     @Path("/comunicacao/enquete/listar")
     public void listar() {
-        
+
         List<Enquete> l = this.enqueteDAO.listarEnquetesAtivo();
-        
+
         if (l != null) {
-            
-            this.result.use(Results.json()).from(l).include("enquetes").serialize();
-            
+            this.result.use(Results.json()).from(l).serialize();
         }
-        
+
     }
-    
+
 }

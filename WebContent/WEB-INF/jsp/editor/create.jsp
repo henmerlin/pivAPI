@@ -35,8 +35,7 @@
                                 <td v-if="aba == editedAba">
                                     <input class="form-control" type="text"
                                            v-model="aba.titulo"
-                                           @blur="doneEditAba(aba)"
-                                           @keyup.enter="doneEditAba(aba)">
+                                           @blur="doneEditAba(aba)">
                                 </td>
 
                                 <td>
@@ -56,8 +55,8 @@
                 </div>
             </div>
             <div class="col-md-12">
-                <h4>SubAbas</h4>
                 <div v-if="activedAba">
+                    <h4>SubAbas <span v-text="activedAba.titulo"></span></h4>
                     <table class="table table-bordered small">
                         <thead>
                             <tr>
@@ -76,16 +75,15 @@
                                 <td v-if="subAba == editedSubAba">
                                     <input class="form-control" type="text"
                                            v-model="subAba.titulo"
-                                           @blur="doneEditSubAba(subAba)"
-                                           @keyup.enter="doneEditSubAba(subAba)">
+                                           @blur="doneEditSubAba()">
                                 </td>
 
                                 <td>
-                                    <input type="checkbox" v-model="subAba.ativo" @change="doneEditSubAba(subAba)"></input>
+                                    <input type="checkbox" v-model="subAba.ativo" @change="doneEditSubAba()"></input>
                                 </td>
 
                                 <td>
-                                    <button class="btn btn-danger glyphicon glyphicon-trash btn-sm" @click="deleteSubAba(subAba)" data-toggle="modal" data-target="#modalSubAba"></button>
+                                    <button class="btn btn-danger glyphicon glyphicon-trash btn-sm" @click="clickDeleteSubAba(subAba)" data-toggle="modal" data-target="#modalSubAba"></button>
                                 </td>
 
                             </tr>
@@ -322,15 +320,23 @@
                             self.activedAba.subAbas.push(data.subAbaPortal)
                         }
                     });
-
-
-
                 },
                 editSubAba: function(h) {
                     var self = this
                     self.editedSubAba = h;
                 },
-                deleteSubAba: function(h) {
+                doneEditSubAba: function() {
+                    var self = this;
+
+                    if (!self.editedSubAba.titulo) {
+                        self.fetchData()
+                        return;
+                    }
+
+                    self.updateSubAba()
+                    self.editedSubAba = null;
+                },
+                clickDeleteSubAba: function(h) {
                     var self = this
                     self.deletedSubAba = h;
                 },
@@ -340,20 +346,7 @@
                     if (!self.deletedSubAba) {
                         return;
                     }
-
-                    $.ajax({
-                        type: "POST",
-                        url: subAbaURL + "delete",
-                        data: JSON.stringify(self.deletedSubAba),
-                        dataType: "json",
-                        beforeSend: function(xhrObj) {
-                            xhrObj.setRequestHeader("Content-Type", "application/json");
-                        },
-                        success: function(json) {
-                            $('#modalAba').modal('hide');
-                        }
-                    });
-
+                    self.deleteSubAba(self.deletedSubAba)
                     self.deletedSubAba = null;
 
                     setTimeout(function() {
@@ -365,18 +358,35 @@
                     var self = this
                     self.activedSubAba = h
                 },
-                doneEditSubAba: function(h) {
-                    var self = this;
+                deleteSubAba: function(h) {
 
-                    if (!h.titulo) {
-                        self.fetchData()
+                    $.ajax({
+                        type: "POST",
+                        url: subAbaURL + "delete",
+                        data: JSON.stringify(h),
+                        dataType: "json",
+                        beforeSend: function(xhrObj) {
+                            xhrObj.setRequestHeader("Content-Type", "application/json");
+                        },
+                        success: function(json) {
+                            $('#modalAba').modal('hide');
+                        }
+                    });
+                },
+                updateSubAba: function() {
+                    var self = this
+
+                    if (!self.editedSubAba.titulo) {
                         return;
                     }
+
+                    console.log("Update SubAba");
+                    console.log(self.editedSubAba);
 
                     $.ajax({
                         type: "POST",
                         url: subAbaURL + "update",
-                        data: JSON.stringify(h),
+                        data: JSON.stringify(self.editedSubAba),
                         dataType: "json",
                         beforeSend: function(xhrObj) {
                             xhrObj.setRequestHeader("Content-Type", "application/json");
@@ -385,8 +395,6 @@
                             self.fetchData()
                         }
                     });
-
-                    self.editedSubAba = null;
                 },
                 // Util
                 buscaAbaPorId: function(h) {
@@ -397,7 +405,7 @@
                 },
                 buscaSubAbaPorId: function(h) {
                     var self = this;
-                    $.get(subAbaPortal + h.id, function(data) {
+                    $.get(subAbaURL + h.id, function(data) {
                         self.activedSubAba = data.subAbaPortal;
                     })
                 }

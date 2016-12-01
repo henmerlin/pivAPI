@@ -98,7 +98,7 @@
                                     <li><a href="${linkTo[UsuarioController].logout()}">${sessionUsuarioEfika.usuario.login}, Sair</a></li>
                                     <li role="separator" class="divider"></li>
                                     <li><a href="${linkTo[EditorController].create()}">Editor</a></li>
-                                    <li><a href="#">Another action</a></li>
+                                    <li><a href="${linkTo[EnqueteController].create()}">Enquete</a></li>
                                     <li><a href="#">Something else here</a></li>
                                     <li role="separator" class="divider"></li>
                                     <li><a href="#">Separated link</a></li>
@@ -112,7 +112,7 @@
                 </div><!-- /.container-fluid -->
             </nav>
 
-        </c:if>       
+        </c:if>
 
         <div>
             <decorator:body/>
