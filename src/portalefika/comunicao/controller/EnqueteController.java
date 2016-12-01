@@ -50,12 +50,12 @@ public class EnqueteController extends AbstractController {
     @Post
     @Consumes("application/json")
     @Path("/comunicacao/enquete/cadastrar")
-    public void cadastrar(Enquete enquete) {
+    public void cadastrar(Enquete addEnquetes) {
 
         try {
-
-            this.enqueteDAO.cadastrar(enquete);
-            result.use(Results.json()).from(enquete).include("enquetes").serialize();
+                       
+            this.enqueteDAO.cadastrar(addEnquetes);
+            result.use(Results.json()).from(addEnquetes).include("enquetes").serialize();
 
         } catch (Exception e) {
 

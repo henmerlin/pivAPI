@@ -21,6 +21,10 @@
 
             <div class="col-md-12">
                 <div>
+
+                    <button class="btn btn-success btn-xs" data-toggle="modal" data-target="#criaEnquete">Criar enquete</button>
+                    <br />
+
                     <table class="table table-bordered small">
 
                         <thead>
@@ -30,6 +34,7 @@
                                 <th>Titulo</th>
                                 <th>Data Inicio</th>
                                 <th>Data Fim</th>
+                                <th>Status</th>
 
                             </tr>
 
@@ -57,14 +62,57 @@
 
                                 </td>
 
+                                <td>
+
+                                    <label v-if="enquete.ativo == true" >Ativo</label>
+                                    <label v-if="enquete.ativo == false" >Inativo</label>
+
+                                </td>
+
                             </tr>
 
                         </tbody>
 
-                    </table>
+                    </table>                                   
 
                 </div>
 
+                <!-- Modal -->
+                <div class="modal fade" id="criaEnquete" tabindex="-1" role="dialog" aria-labelledby="criaEnqueteLabel">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title" id="myModalLabel">Criar Enquete</h4>
+                            </div>
+                            <div class="modal-body">
+
+                                <label>Titulo</label>
+                                <input class="form-control" type="text" v-model="addEnquetes.enquete.titulo"/>
+
+                                <br/>
+
+                                <label>Ativo</label>
+                                <input type="checkbox" v-model="addEnquetes.enquete.ativo"/>
+
+                                <br/>
+
+                                <label>Data inicio</label>
+                                <input class="form-control" type="date" v-model="addEnquetes.enquete.dataInicio"/>
+
+                                <br/>
+
+                                <label>Data fim</label>
+                                <input class="form-control" type="date" v-model="addEnquetes.enquete.dataFim"/>
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary" @click="adicionaEnquete(addEnquetes)" data-dismiss="modal">Save changes</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
             </div>
 
@@ -79,30 +127,35 @@
         new Vue({
             el: '#enquete',
             data: {
-                enquetes: null
+                enquetes: null,
+                addEnquetes: {"enquete":
+                            {
+                                "dataInicio": null,
+                                "dataFim": null, 
+                                "id": null, 
+                                "titulo": null,
+                                "ativo": false}}
             },
-            created: function() {
+            created: function () {
                 this.getEnquetes()
             },
             methods: {
-
-                getEnquetes: function() {
+                getEnquetes: function () {
                     var self = this;
 
-                    $.get(enqURL + "listar", function(data) {
+                    $.get(enqURL + "listar", function (data) {
                         self.enquetes = data.list;
                     })
 
                 },
-                adicionaEnquete: function(enquete) {
+                adicionaEnquete: function () {
                     var self = this;
-
                     $.ajax({
                         type: "POST",
                         url: enqURL + "cadastrar",
-                        data: JSON.stringify(enquete),
+                        data: JSON.stringify(self.addEnquetes),
                         dataType: "json",
-                        beforeSend: function(xhrObj) {
+                        beforeSend: function (xhrObj) {
                             xhrObj.setRequestHeader("Content-Type", "application/json");
                         }
                     });
@@ -110,13 +163,14 @@
                     self.fetchData()
 
                 },
-                fetchData: function() {
+                fetchData: function () {
                     var self = this;
 
-                    setTimeout(function() {
+                    setTimeout(function () {
                         self.getEnquetes()
                     }, 600)
                 }
+
             }
         });
 
