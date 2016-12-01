@@ -8,6 +8,9 @@ nbproject/*
 !nbproject/project.properties
 !nbproject/project.xml
 
+#allow dist resources
+!node_modules
+
 #java specific
 *.class
 
