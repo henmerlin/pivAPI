@@ -27,6 +27,8 @@
         src="${pageContext.request.contextPath}/resources/node_modules/vue/dist/vue.js"></script>
         <script
         src="${pageContext.request.contextPath}/resources/custom/components.js"></script>
+        <script
+        src="${pageContext.request.contextPath}/resources/custom/moment.js"></script>
         <script src="${pageContext.request.contextPath}/resources/node_modules/element-ui/lib/index.js"></script>
         <script
         src="${pageContext.request.contextPath}/resources/jquery-3.1.1/jquery-3.1.1.min.js"></script>
