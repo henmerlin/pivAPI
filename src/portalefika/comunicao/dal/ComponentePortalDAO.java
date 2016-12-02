@@ -19,6 +19,7 @@ public class ComponentePortalDAO {
     public ComponentePortalDAO() {
     }
 
+    @Transactional
     public void cadastrar(ComponentePortal c) {
         this.entityManager.persist(c);
     }

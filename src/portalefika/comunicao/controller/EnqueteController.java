@@ -16,6 +16,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
+import javax.validation.Valid;
 import portalefika.comunicao.dal.EnqueteDAO;
 import portalefika.comunicao.entidades.Enquete;
 import portalefika.controller.AbstractController;
@@ -52,46 +53,30 @@ public class EnqueteController extends AbstractController {
     @Consumes("application/json")
     @Path("/comunicacao/enquete/cadastrar")
     public void cadastrar(Enquete addEnquetes) {
-
         try {
-            
-            System.out.println(addEnquetes.getTitulo());
-            
             this.enqueteDAO.cadastrar(addEnquetes);
             result.use(Results.json()).from(addEnquetes).include("enquetes").serialize();
-
         } catch (Exception e) {
-
             result.use(Results.json()).from(e).serialize();
-
         }
-
     }
 
     @Get
     @Path("/comunicacao/enquete/listar")
     public void listar() {
-
         List<Enquete> l = this.enqueteDAO.listarTodasEnquetes();
 
         if (l != null) {
             this.result.use(Results.json()).from(l).serialize();
         }
-
     }
-    
+
     public void exclui(Enquete enquete) {
-        
         try {
-            
             this.enqueteDAO.excluir(enquete);
-            
         } catch (Exception e) {
-            
             result.use(Results.json()).from(e).serialize();
-            
         }
-        
     }
 
 }

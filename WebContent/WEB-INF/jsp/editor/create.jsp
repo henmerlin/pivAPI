@@ -19,9 +19,9 @@
                     <table class="table table-bordered small">
                         <thead>
                             <tr>
-                                <th>Titulo</th>
+                                <th>Título</th>
                                 <th>Ativa</th>
-                                <th>Opções</th>
+                                <th>Ações</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -43,8 +43,8 @@
                                 </td>
 
                                 <td>
-                                    <button class="btn btn-danger glyphicon glyphicon-trash btn-sm" @click="deleteAba(aba)" data-toggle="modal" data-target="#modalAba"></button>
                                     <button class="btn btn-primary glyphicon glyphicon-th-list btn-sm" @click="selectAba(aba)"></button>
+                                    <button class="btn btn-danger glyphicon glyphicon-trash btn-sm" @click="deleteAba(aba)" data-toggle="modal" data-target="#modalAba"></button>
                                 </td>
 
                             </tr>
@@ -54,15 +54,16 @@
                     <br>
                 </div>
             </div>
+            <div class="col-md-12"><p></p></div>
             <div class="col-md-12">
                 <div v-if="activedAba">
                     <h4>SubAbas <span v-text="activedAba.titulo"></span></h4>
                     <table class="table table-bordered small">
                         <thead>
                             <tr>
-                                <th>Titulo</th>
+                                <th>Título</th>
                                 <th>Ativa</th>
-                                <th>Opções</th>
+                                <th>Ações</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -267,9 +268,6 @@
                         return;
                     }
 
-                    console.log("Update");
-                    console.log(h);
-
                     $.ajax({
                         type: "POST",
                         url: abaURL + "update",
@@ -303,9 +301,7 @@
                 adicionarSubAba: function(h) {
                     var self = this;
 
-                    console.log("Add");
                     h.subAbaPortal.abaPortal = self.activedAba;
-                    console.log(h);
 
                     $.ajax({
                         type: "POST",

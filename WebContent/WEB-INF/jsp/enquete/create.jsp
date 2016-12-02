@@ -18,27 +18,18 @@
     <div id="enquete">
 
         <div class="row">
-
             <div class="col-md-12">
                 <div>
-
-                    <button class="btn btn-success btn-xs" data-toggle="modal" data-target="#criaEnquete">Criar enquete</button>
-                    <br />
-
                     <table class="table table-bordered small">
 
                         <thead>
-
                             <tr>
-
                                 <th>Titulo</th>
                                 <th>Data Inicio</th>
                                 <th>Data Fim</th>
                                 <th>Status</th>
                                 <th>Ações</th>
-
                             </tr>
-
                         </thead>
 
                         <tbody>
@@ -71,14 +62,9 @@
                                 </td>
 
                                 <td style="width: 20%;">
-
-                                    <div class="btn-group" role="group">
-
-                                        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#modEnquete" @click="editarEnquete(enquete)">Modificar</button>
-                                        <button type="button" class="btn btn-danger">Excluir</button>
-
-                                    </div>
-
+                                    <button type="button" class="btn btn-primary glyphicon glyphicon-edit
+                                            glyphicon glyphicon-edit btn-sm" data-toggle="modal" data-target="#modEnquete" @click="editarEnquete(enquete)"></button>
+                                    <button class="btn btn-danger glyphicon glyphicon-trash btn-sm" @click="clickDeleteSubAba(subAba)" data-toggle="modal" data-target="#modalSubAba"></button>
                                 </td>
 
                             </tr>
@@ -99,28 +85,28 @@
                             </div>
                             <div class="modal-body">
 
-                                <label>Titulo</label>
-                                <input class="form-control" type="text" v-model="addEnquetes.enquete.titulo"/>
+                                <label>Título</label>
+                                <input class="form-control" placeholder="Título" type="text" v-model="addEnquete.enquete.titulo"/>
 
                                 <br/>
 
                                 <label>Ativo</label>
-                                <input type="checkbox" v-model="addEnquetes.enquete.ativo"/>
+                                <input type="checkbox" v-model="addEnquete.enquete.ativo"/>
 
                                 <br/>
 
                                 <label>Data inicio</label>
-                                <input class="form-control" type="date" v-model="addEnquetes.enquete.dataInicio"/>
+                                <input class="form-control" type="date" v-model="addEnquete.enquete.dataInicio"/>
 
                                 <br/>
 
                                 <label>Data fim</label>
-                                <input class="form-control" type="date" v-model="addEnquetes.enquete.dataFim"/>
+                                <input class="form-control" type="date" v-model="addEnquete.enquete.dataFim"/>
 
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-primary" @click="adicionaEnquete(addEnquetes)" data-dismiss="modal">Save changes</button>
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                                <button type="button" class="btn btn-success" @click="adicionaEnquete(addEnquete)" data-dismiss="modal">Inserir</button>
                             </div>
                         </div>
                     </div>
@@ -156,16 +142,15 @@
 
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-primary">Save changes</button>
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                                <button type="button" class="btn btn-primary">Alterar</button>
                             </div>
                         </div>
                     </div>
                 </div>
-
             </div>
-
         </div>
+        <button class="btn btn-success btn-xs" data-toggle="modal" data-target="#criaEnquete">Adicionar</button>
 
     </div>
 
@@ -176,7 +161,6 @@
         new Vue({
             el: '#enquete',
             data: {
-
                 enquetes: null,
                 editEnquete: {
                     "enquete":
@@ -188,7 +172,7 @@
                                 "ativo": false
                             }
                 },
-                addEnquetes: {
+                addEnquete: {
                     "enquete":
                             {
                                 "dataInicio": null,
@@ -202,8 +186,22 @@
             },
             created: function() {
                 this.getEnquetes()
+                this.resetObjects()
             },
             methods: {
+                resetObjects: function() {
+                    var self = this;
+
+                    self.addEnquete = {
+                        "enquete":
+                                {
+                                    "dataInicio": null,
+                                    "dataFim": null,
+                                    "id": null,
+                                    "titulo": null,
+                                    "ativo": false
+                                }};
+                },
                 dateInput: function(h) {
                     return moment(h).format("YYYY-MM-DD");
                 },
@@ -211,40 +209,34 @@
                     return  moment(h).format('L');
                 },
                 getEnquetes: function() {
-
                     var self = this;
 
                     $.get(enqURL + "listar", function(data) {
-
                         self.enquetes = data.list;
-
                     })
 
                 },
                 adicionaEnquete: function() {
                     var self = this;
-
-
-                    var enqt = self.addEnquetes.enquete;
-
-                    enqt.dataInicio = moment(enqt.dataInicio);
-                    enqt.dataFim = enqt.dataFim;
-
-
                     $.ajax({
                         type: "POST",
                         url: enqURL + "cadastrar",
-                        data: JSON.stringify(self.addEnquetes.enquete),
+                        data: JSON.stringify(self.addEnquete.enquete),
                         dataType: "json",
                         beforeSend: function(xhrObj) {
                             xhrObj.setRequestHeader("Content-Type", "application/json");
                         },
                         success: function() {
-                            self.addEnquetes.enquete = null;
+                            self.resetObjects()
+                        },
+                        error: function(jqXHR, textStatus, errorThrown) {
+
+                            console.log(jqXHR);
+
                         }
                     });
-                    self.fetchData()
 
+                    self.fetchData()
                 },
                 editarEnquete: function(enquets) {
 
