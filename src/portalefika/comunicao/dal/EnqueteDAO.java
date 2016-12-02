@@ -47,6 +47,20 @@ public class EnqueteDAO extends ComponentePortalDAO {
         
     }
     
+    public void excluir(Enquete enquete) throws Exception {
+        
+        try {
+            
+            super.excluir(enquete);
+            
+        } catch (Exception e) {
+            
+            throw new Exception("Erro ao remover enquete");
+            
+        }
+        
+    }
+    
     public List<Enquete> listarTodasEnquetes() {
         
         try {

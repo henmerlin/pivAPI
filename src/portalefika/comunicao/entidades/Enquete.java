@@ -8,7 +8,6 @@ package portalefika.comunicao.entidades;
 import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 
 /**
  *
@@ -21,10 +20,8 @@ public class Enquete extends ComponentePortal {
     public Enquete() {
     }
     
-    @NotNull
     private Date dataInicio;
     
-    @NotNull
     private Date dataFim;
 
     public Date getDataInicio() {

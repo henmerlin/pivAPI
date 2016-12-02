@@ -12,10 +12,11 @@ import br.com.caelum.vraptor.Path;
 import br.com.caelum.vraptor.Post;
 import br.com.caelum.vraptor.view.Results;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import portalefika.comunicao.dal.EnqueteDAO;
-import portalefika.comunicao.entidades.AbaPortal;
 import portalefika.comunicao.entidades.Enquete;
 import portalefika.controller.AbstractController;
 
@@ -53,7 +54,9 @@ public class EnqueteController extends AbstractController {
     public void cadastrar(Enquete addEnquetes) {
 
         try {
-                       
+            
+            System.out.println(addEnquetes.getTitulo());
+            
             this.enqueteDAO.cadastrar(addEnquetes);
             result.use(Results.json()).from(addEnquetes).include("enquetes").serialize();
 
@@ -69,12 +72,26 @@ public class EnqueteController extends AbstractController {
     @Path("/comunicacao/enquete/listar")
     public void listar() {
 
-        List<Enquete> l = this.enqueteDAO.listarEnquetesAtivo();
+        List<Enquete> l = this.enqueteDAO.listarTodasEnquetes();
 
         if (l != null) {
             this.result.use(Results.json()).from(l).serialize();
         }
 
+    }
+    
+    public void exclui(Enquete enquete) {
+        
+        try {
+            
+            this.enqueteDAO.excluir(enquete);
+            
+        } catch (Exception e) {
+            
+            result.use(Results.json()).from(e).serialize();
+            
+        }
+        
     }
 
 }
