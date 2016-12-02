@@ -53,13 +53,13 @@
 
                                 <td>
 
-                                    <label>{{enquete.dataInicio}}</label>
+                                    <label>{{dateFormat(enquete.dataInicio)}}</label>
 
                                 </td>
 
                                 <td>
 
-                                    <label>{{enquete.dataFim}}</label>
+                                    <label>{{dateFormat(enquete.dataFim)}}</label>
 
                                 </td>
 
@@ -85,11 +85,11 @@
 
                         </tbody>
 
-                    </table>                                   
+                    </table>
 
                 </div>
 
-                <!-- Modal -->
+                <!-- Modal CRIAR -->
                 <div class="modal fade" id="criaEnquete" tabindex="-1" role="dialog" aria-labelledby="criaEnqueteLabel">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
@@ -147,12 +147,12 @@
                                 <br/>
 
                                 <label>Data inicio</label>
-                                <input class="form-control" type="date" v-model="editEnquete.dataInicio"/>
+                                <input class="form-control" type="date" v-model="dateInput(editEnquete.dataInicio)"/>
 
                                 <br/>
 
                                 <label>Data fim</label>
-                                <input class="form-control" type="date" v-model="editEnquete.dataFim"/>
+                                <input class="form-control" type="date" v-model="dateInput(editEnquete.dataFim)"/>
 
                             </div>
                             <div class="modal-footer">
@@ -200,50 +200,62 @@
                 }
 
             },
-            created: function () {
+            created: function() {
                 this.getEnquetes()
             },
             methods: {
-                getEnquetes: function () {
+                dateInput: function(h) {
+                    return moment(h).format("YYYY-MM-DD");
+                },
+                dateFormat: function(h) {
+                    return  moment(h).format('L');
+                },
+                getEnquetes: function() {
 
                     var self = this;
 
-                    $.get(enqURL + "listar", function (data) {
+                    $.get(enqURL + "listar", function(data) {
 
                         self.enquetes = data.list;
 
                     })
 
                 },
-                adicionaEnquete: function () {
-
+                adicionaEnquete: function() {
                     var self = this;
+
+
+                    var enqt = self.addEnquetes.enquete;
+
+                    enqt.dataInicio = moment(enqt.dataInicio);
+                    enqt.dataFim = enqt.dataFim;
+
+
                     $.ajax({
                         type: "POST",
                         url: enqURL + "cadastrar",
                         data: JSON.stringify(self.addEnquetes.enquete),
                         dataType: "json",
-                        beforeSend: function (xhrObj) {
+                        beforeSend: function(xhrObj) {
                             xhrObj.setRequestHeader("Content-Type", "application/json");
                         },
-                        success: function () {
-
+                        success: function() {
                             self.addEnquetes.enquete = null;
                         }
                     });
                     self.fetchData()
 
                 },
-                editarEnquete: function (enquets) {
+                editarEnquete: function(enquets) {
 
                     var self = this
                     self.editEnquete = enquets
 
                 },
-                fetchData: function () {
+                fetchData: function() {
 
                     var self = this;
-                    setTimeout(function () {
+                    setTimeout(function() {
 
                         self.getEnquetes()
 

@@ -5,39 +5,35 @@
  */
 package portalefika.comunicao.entidades;
 
-import java.util.Date;
+import java.util.Calendar;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
-/**
- *
- * @author G0034481
- */
 @Entity
 @Table(name = "PE_ENQUETE")
 public class Enquete extends ComponentePortal {
 
     public Enquete() {
     }
-    
-    private Date dataInicio;
-    
-    private Date dataFim;
 
-    public Date getDataInicio() {
+    private Calendar dataInicio;
+
+    private Calendar dataFim;
+
+    public Calendar getDataInicio() {
         return dataInicio;
     }
 
-    public void setDataInicio(Date dataInicio) {
+    public void setDataInicio(Calendar dataInicio) {
         this.dataInicio = dataInicio;
     }
 
-    public Date getDataFim() {
+    public Calendar getDataFim() {
         return dataFim;
     }
 
-    public void setDataFim(Date dataFim) {
+    public void setDataFim(Calendar dataFim) {
         this.dataFim = dataFim;
-    }    
-    
+    }
+
 }
