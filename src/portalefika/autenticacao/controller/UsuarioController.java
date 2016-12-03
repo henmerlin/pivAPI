@@ -30,7 +30,7 @@ public class UsuarioController {
     }
 
     public void login(Usuario u) {
-        
+
         System.out.println(u.getLogin());
         System.out.println(u.getSenha());
 
@@ -46,8 +46,8 @@ public class UsuarioController {
 
             } else {
 
-                result.include("mensagemFalha", "Credênciais incorrentas.");
-                result.forwardTo(this).create();
+                result.include("mensagemFalha", "Credênciais incorretas.");
+                result.redirectTo(this).create();
             }
 
         } catch (Exception e) {
