@@ -120,25 +120,6 @@
             </div>
         </div>
 
-        <!-- Modal Aba -->
-        <div class="modal fade" id="modalAba" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"  v-if="deletedSubAba">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title" id="myModalLabel">Excluir </h4>
-                    </div>
-                    <div class="modal-body">
-                        Deseja excluir a SubAba  <strong v-html="deletedSubAba.titulo"></strong> e seus respectivos conteúdos?
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
-                        <button type="button" class="btn btn-danger" @click="doneDeleteAba" data-dismiss="modal">Excluir</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
         <!-- Modal SubAba -->
         <div class="modal fade" id="modalSubAba" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"  v-if="deletedSubAba">
             <div class="modal-dialog" role="document">
@@ -187,6 +168,17 @@
                 this.getAbas()
             },
             methods: {
+                clearVars: function() {
+                    var self = this;
+
+                    self.editedAba = null;
+                    self.activedAba = null;
+                    self.deletedAba = null;
+                    self.editedSubAba = null;
+                    self.activedSubAba = null;
+                    self.deletedSubAba = null;
+
+                },
                 getAbas: function() {
                     var self = this;
                     $.get(abaURL, function(data) {
@@ -251,7 +243,7 @@
                         }
                     });
 
-                    self.deletedAba = null
+                    self.clearVars()
                     self.fetchData()
 
                 },
@@ -289,7 +281,7 @@
                         return;
                     }
                     self.updateAba(h)
-                    self.editedAba = null;
+                    self.clearVars()
 
                 },
                 // SubAba:
@@ -330,7 +322,8 @@
                     }
 
                     self.updateSubAba()
-                    self.editedSubAba = null;
+                    self.clearVars()
+
                 },
                 clickDeleteSubAba: function(h) {
                     var self = this
@@ -342,8 +335,12 @@
                     if (!self.deletedSubAba) {
                         return;
                     }
+
+                    var aba = self.activedAba;
+
                     self.deleteSubAba(self.deletedSubAba)
-                    self.deletedSubAba = null;
+                    self.clearVars()
+                    self.activedAba = aba;
 
                     setTimeout(function() {
                         self.fetchData()
@@ -355,6 +352,8 @@
                     self.activedSubAba = h
                 },
                 deleteSubAba: function(h) {
+
+                    console.log(h);
 
                     $.ajax({
                         type: "POST",
