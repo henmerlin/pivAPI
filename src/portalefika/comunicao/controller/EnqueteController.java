@@ -52,10 +52,14 @@ public class EnqueteController extends AbstractController {
     @Path("/comunicacao/enquete/cadastrar")
     public void cadastrar(Enquete addEnquetes) {
         try {
+
             this.enqueteDAO.cadastrar(addEnquetes);
-            this.result.use(Results.json()).from(addEnquetes).include("enquetes").serialize();
+            this.result.use(Results.json()).from(addEnquetes).serialize();
+
         } catch (PersistenciaException e) {
+
             this.result.use(Results.json()).from(e).serialize();
+
         }
     }
 
@@ -75,18 +79,26 @@ public class EnqueteController extends AbstractController {
     public void modificar(Enquete enquete) {
         try {
             this.enqueteDAO.editar(enquete);
-            this.result.use(Results.json()).from(enquete).include("enquetes").serialize();
+            this.result.use(Results.json()).from(enquete).serialize();
 
         } catch (PersistenciaException e) {
             this.result.use(Results.json()).from(e).serialize();
         }
     }
 
+    @Post
+    @Consumes("application/json")
+    @Path("/comunicacao/enquete/exclui")
     public void exclui(Enquete enquete) {
         try {
+
             this.enqueteDAO.excluir(enquete);
+            this.result.use(Results.json()).from(enquete).serialize();
+
         } catch (PersistenciaException e) {
-            result.use(Results.json()).from(e).serialize();
+
+            this.result.use(Results.json()).from(e).serialize();
+
         }
     }
 

@@ -34,7 +34,7 @@ public class ComponentePortalDAO {
         try {
             this.entityManager.merge(c);
         } catch (Exception e) {
-            throw new PersistenciaException("Falha ao cadastrar " + c.getClass().getSimpleName() + ".");
+            throw new PersistenciaException("Falha ao editar " + c.getClass().getSimpleName() + ".");
         }
     }
 
@@ -43,7 +43,7 @@ public class ComponentePortalDAO {
         try {
             this.entityManager.remove(this.entityManager.merge(c));
         } catch (Exception e) {
-            throw new PersistenciaException("Falha ao cadastrar " + c.getClass().getSimpleName() + ".");
+            throw new PersistenciaException("Falha ao excluir " + c.getClass().getSimpleName() + ".");
         }
     }
 

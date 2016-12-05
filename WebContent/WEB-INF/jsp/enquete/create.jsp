@@ -64,7 +64,7 @@
                                 <td style="width: 20%;">
                                     <button type="button" class="btn btn-primary glyphicon glyphicon-edit
                                             glyphicon glyphicon-edit btn-sm" data-toggle="modal" data-target="#modEnquete" @click="editarEnquete(enquete)"></button>
-                                    <button class="btn btn-danger glyphicon glyphicon-trash btn-sm" @click="clickDeleteSubAba(subAba)" data-toggle="modal" data-target="#modalSubAba"></button>
+                                    <button class="btn btn-danger glyphicon glyphicon-trash btn-sm" @click="excluiEnquete(enquete)" data-toggle="modal" data-target="#excluiEnquete"></button>
                                 </td>
 
                             </tr>
@@ -112,7 +112,7 @@
                     </div>
                 </div>
 
-                <!-- Modal -->
+                <!-- Modal Modificar -->
                 <div class="modal fade" id="modEnquete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
@@ -140,6 +140,10 @@
                                 <label>Data fim</label>
                                 <input class="form-control" type="date" v-model="dateInput(editEnquete.dataFim)"/>
 
+                                <br/>
+
+                                <button class="btn btn-success">Adicionar Pergunta</button>
+
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
@@ -148,8 +152,49 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- Modal Excluir-->
+                <div class="modal fade" id="excluiEnquete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title" id="myModalLabel">Excluir</h4>
+                            </div>
+                            <div class="modal-body">
+                                Deseja excluir a Enquete  <strong v-html="delEnquete.titulo"></strong> e seus respectivos conteúdos?
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                                <button type="button" class="btn btn-primary" @click="doneExcluiEnquete(delEnquete)">Excluir</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
+
+        <!-- Modal Pergunta-->
+        <div class="modal fade" id="criaPerguntaEnquete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">Pergunta Enquete</h4>
+                    </div>
+                    <div class="modal-body">
+                        
+                        
+                        
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <button class="btn btn-success btn-xs" data-toggle="modal" data-target="#criaEnquete">Adicionar</button>
 
     </div>
@@ -181,17 +226,26 @@
                                 "titulo": null,
                                 "ativo": false
                             }
+                },
+                delEnquete: {
+                    "enquete":
+                            {
+                                "dataInicio": null,
+                                "dataFim": null,
+                                "id": null,
+                                "titulo": null,
+                                "ativo": false
+                            }
                 }
 
             },
-            created: function() {
+            created: function () {
                 this.getEnquetes()
                 this.resetObjects()
             },
             methods: {
-                resetObjects: function() {
+                resetObjects: function () {
                     var self = this;
-
                     self.addEnquete = {
                         "enquete":
                                 {
@@ -201,69 +255,89 @@
                                     "titulo": null,
                                     "ativo": false
                                 }};
+
                 },
-                dateInput: function(h) {
+                dateInput: function (h) {
                     return moment(h).format("YYYY-MM-DD");
                 },
-                dateFormat: function(h) {
+                dateFormat: function (h) {
                     return  moment(h).format('DD/MM/YYYY');
                 },
-                getEnquetes: function() {
+                getEnquetes: function () {
                     var self = this;
-
-                    $.get(enqURL + "listar", function(data) {
+                    $.get(enqURL + "listar", function (data) {
                         self.enquetes = data.list;
                     })
 
                 },
-                adicionaEnquete: function() {
+                adicionaEnquete: function () {
                     var self = this;
                     $.ajax({
                         type: "POST",
                         url: enqURL + "cadastrar",
                         data: JSON.stringify(self.addEnquete.enquete),
                         dataType: "json",
-                        beforeSend: function(xhrObj) {
+                        beforeSend: function (xhrObj) {
                             xhrObj.setRequestHeader("Content-Type", "application/json");
                         },
-                        success: function() {
+                        success: function () {
                             self.resetObjects()
-                        },
-                        error: function(jqXHR, textStatus, errorThrown) {
-
-                            console.log(jqXHR);
-
                         }
                     });
-
                     self.fetchData()
                 },
-                editarEnquete: function(h) {
+                editarEnquete: function (h) {
 
                     var self = this
                     self.editEnquete = h
 
                 },
-                doneEditaEnquete: function(h) {
+                doneEditaEnquete: function (h) {
 
                     $.ajax({
                         type: "POST",
                         url: enqURL + "modificar",
                         data: JSON.stringify(h),
                         dataType: "json",
-                        beforeSend: function(xhr) {
+                        beforeSend: function (xhr) {
                             xhr.setRequestHeader("Content-Type", "application/json");
                         },
-                        success: function() {
+                        success: function () {
                             $('#modEnquete').modal('hide');
                         }
                     });
+                },
+                excluiEnquete: function (h) {
+
+                    var self = this
+
+                    self.delEnquete = h
 
                 },
-                fetchData: function() {
+                doneExcluiEnquete: function (h) {
+
+                    var self = this
+
+                    $.ajax({
+                        type: "POST",
+                        url: enqURL + "exclui",
+                        data: JSON.stringify(h),
+                        dataType: "json",
+                        beforeSend: function (xhr) {
+                            xhr.setRequestHeader("Content-Type", "application/json");
+                        },
+                        success: function () {
+
+                            $('#excluiEnquete').modal('hide');
+
+                        }
+                    });
+                    self.fetchData()
+                },
+                fetchData: function () {
 
                     var self = this;
-                    setTimeout(function() {
+                    setTimeout(function () {
 
                         self.getEnquetes()
 
