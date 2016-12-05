@@ -80,7 +80,7 @@
                                 </td>
 
                                 <td>
-                                    <input type="checkbox" v-model="subAba.ativo" @change="editSubAba(subAba); doneEditSubAba()"></input>
+                                    <input type="checkbox" v-model="subAba.ativo" @change="doneEditSubAba(subAba)"></input>
                                 </td>
 
                                 <td>
@@ -280,6 +280,9 @@
                         self.fetchData()
                         return;
                     }
+                    console.log("doneEditAba")
+                    console.log(h)
+
                     self.updateAba(h)
                     self.clearVars()
 
@@ -313,7 +316,7 @@
                     var self = this
                     self.editedSubAba = h;
                 },
-                doneEditSubAba: function() {
+                doneEditSubAba: function(h) {
                     var self = this;
 
                     if (!self.editedSubAba.titulo) {
@@ -340,20 +343,15 @@
 
                     self.deleteSubAba(self.deletedSubAba)
                     self.clearVars()
-                    self.activedAba = aba;
+                    self.fetchData()
 
-                    setTimeout(function() {
-                        self.fetchData()
-                    }, 500)
-
+                    self.selectAba(aba);
                 },
                 selectSubAba: function(h) {
                     var self = this
                     self.activedSubAba = h
                 },
                 deleteSubAba: function(h) {
-
-                    console.log(h);
 
                     $.ajax({
                         type: "POST",
@@ -374,10 +372,6 @@
                     if (!self.editedSubAba.titulo) {
                         return;
                     }
-
-                    self.editedSubAba.abaPortal = self.activedAba;
-                    console.log("Update SubAba");
-                    console.log(self.editedSubAba);
 
                     $.ajax({
                         type: "POST",
