@@ -10,6 +10,7 @@ import java.util.List;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import portalefika.comunicao.dal.SubAbaPortalDAO;
+import portalefika.comunicao.dal.exception.PersistenciaException;
 import portalefika.comunicao.entidades.ComponentePortal;
 import portalefika.comunicao.entidades.SubAbaPortal;
 import portalefika.controller.AbstractController;
@@ -42,7 +43,7 @@ public class SubAbaPortalController extends AbstractController {
         try {
             saDao.cadastrar(subAbaPortal);
             result.use(Results.json()).from(subAbaPortal).include("conteudos").include("abaPortal").serialize();
-        } catch (Exception e) {
+        } catch (PersistenciaException e) {
             result.use(Results.json()).from(e).serialize();
         }
     }
@@ -62,14 +63,24 @@ public class SubAbaPortalController extends AbstractController {
     @Path("/comunicacao/subAba/delete")
     @Post
     public void remove(SubAbaPortal a) {
-        saDao.excluir(a);
+        try {
+            this.saDao.excluir(a);
+        } catch (PersistenciaException e) {
+            result.use(Results.json()).from(a).serialize();
+        }
     }
 
     @Consumes("application/json")
     @Path("/comunicacao/subAba/update")
     @Post
     public void atualiza(SubAbaPortal subAbaPortal) {
-        saDao.editar(subAbaPortal);
+
+        try {
+            this.saDao.editar(subAbaPortal);
+            this.result.use(Results.json()).from(subAbaPortal).include("abaPortal").include("conteudos").serialize();
+        } catch (PersistenciaException e) {
+            this.result.use(Results.json()).from(e).serialize();
+        }
     }
 
 }

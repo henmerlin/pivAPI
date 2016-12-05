@@ -80,7 +80,7 @@
                                 </td>
 
                                 <td>
-                                    <input type="checkbox" v-model="subAba.ativo" @change="doneEditSubAba()"></input>
+                                    <input type="checkbox" v-model="subAba.ativo" @change="editSubAba(subAba); doneEditSubAba()"></input>
                                 </td>
 
                                 <td>
@@ -376,6 +376,7 @@
                         return;
                     }
 
+                    self.editedSubAba.abaPortal = self.activedAba;
                     console.log("Update SubAba");
                     console.log(self.editedSubAba);
 

@@ -184,12 +184,12 @@
                 }
 
             },
-            created: function () {
+            created: function() {
                 this.getEnquetes()
                 this.resetObjects()
             },
             methods: {
-                resetObjects: function () {
+                resetObjects: function() {
                     var self = this;
 
                     self.addEnquete = {
@@ -202,34 +202,34 @@
                                     "ativo": false
                                 }};
                 },
-                dateInput: function (h) {
+                dateInput: function(h) {
                     return moment(h).format("YYYY-MM-DD");
                 },
-                dateFormat: function (h) {
-                    return  moment(h).format('L');
+                dateFormat: function(h) {
+                    return  moment(h).format('DD/MM/YYYY');
                 },
-                getEnquetes: function () {
+                getEnquetes: function() {
                     var self = this;
 
-                    $.get(enqURL + "listar", function (data) {
+                    $.get(enqURL + "listar", function(data) {
                         self.enquetes = data.list;
                     })
 
                 },
-                adicionaEnquete: function () {
+                adicionaEnquete: function() {
                     var self = this;
                     $.ajax({
                         type: "POST",
                         url: enqURL + "cadastrar",
                         data: JSON.stringify(self.addEnquete.enquete),
                         dataType: "json",
-                        beforeSend: function (xhrObj) {
+                        beforeSend: function(xhrObj) {
                             xhrObj.setRequestHeader("Content-Type", "application/json");
                         },
-                        success: function () {
+                        success: function() {
                             self.resetObjects()
                         },
-                        error: function (jqXHR, textStatus, errorThrown) {
+                        error: function(jqXHR, textStatus, errorThrown) {
 
                             console.log(jqXHR);
 
@@ -238,32 +238,32 @@
 
                     self.fetchData()
                 },
-                editarEnquete: function (h) {
+                editarEnquete: function(h) {
 
                     var self = this
                     self.editEnquete = h
 
                 },
-                doneEditaEnquete: function (h) {
+                doneEditaEnquete: function(h) {
 
                     $.ajax({
                         type: "POST",
                         url: enqURL + "modificar",
                         data: JSON.stringify(h),
                         dataType: "json",
-                        beforeSend: function (xhr) {
+                        beforeSend: function(xhr) {
                             xhr.setRequestHeader("Content-Type", "application/json");
                         },
-                        success: function () {                            
+                        success: function() {
                             $('#modEnquete').modal('hide');
                         }
                     });
 
                 },
-                fetchData: function () {
+                fetchData: function() {
 
                     var self = this;
-                    setTimeout(function () {
+                    setTimeout(function() {
 
                         self.getEnquetes()
 

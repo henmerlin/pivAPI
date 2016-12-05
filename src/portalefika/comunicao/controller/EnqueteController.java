@@ -12,12 +12,10 @@ import br.com.caelum.vraptor.Path;
 import br.com.caelum.vraptor.Post;
 import br.com.caelum.vraptor.view.Results;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
-import javax.validation.Valid;
 import portalefika.comunicao.dal.EnqueteDAO;
+import portalefika.comunicao.dal.exception.PersistenciaException;
 import portalefika.comunicao.entidades.Enquete;
 import portalefika.controller.AbstractController;
 
@@ -56,7 +54,7 @@ public class EnqueteController extends AbstractController {
         try {
             this.enqueteDAO.cadastrar(addEnquetes);
             this.result.use(Results.json()).from(addEnquetes).include("enquetes").serialize();
-        } catch (Exception e) {
+        } catch (PersistenciaException e) {
             this.result.use(Results.json()).from(e).serialize();
         }
     }
@@ -70,31 +68,24 @@ public class EnqueteController extends AbstractController {
             this.result.use(Results.json()).from(l).serialize();
         }
     }
+
     @Post
     @Consumes("application/json")
     @Path("/comunicacao/enquete/modificar")
     public void modificar(Enquete enquete) {
-        
         try {
-            
-            System.out.println(enquete.getId());
-            System.out.println(enquete.getTitulo());
-            
-            enqueteDAO.modificar(enquete);
+            this.enqueteDAO.editar(enquete);
             this.result.use(Results.json()).from(enquete).include("enquetes").serialize();
-            
-        } catch (Exception e) {
-            
-            this.result.use(Results.json()).from(e).serialize();            
-            
+
+        } catch (PersistenciaException e) {
+            this.result.use(Results.json()).from(e).serialize();
         }
-        
     }
 
     public void exclui(Enquete enquete) {
         try {
             this.enqueteDAO.excluir(enquete);
-        } catch (Exception e) {
+        } catch (PersistenciaException e) {
             result.use(Results.json()).from(e).serialize();
         }
     }

@@ -7,6 +7,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.transaction.Transactional;
+import portalefika.comunicao.dal.exception.PersistenciaException;
 
 import portalefika.comunicao.entidades.ComponentePortal;
 
@@ -20,18 +21,30 @@ public class ComponentePortalDAO {
     }
 
     @Transactional
-    public void cadastrar(ComponentePortal c) {
-        this.entityManager.persist(c);
+    public void cadastrar(ComponentePortal c) throws PersistenciaException {
+        try {
+            this.entityManager.persist(c);
+        } catch (Exception e) {
+            throw new PersistenciaException("Falha ao cadastrar " + c.getClass().getSimpleName() + ".");
+        }
     }
 
     @Transactional
-    public void editar(ComponentePortal c) {
-        this.entityManager.merge(c);
+    public void editar(ComponentePortal c) throws PersistenciaException {
+        try {
+            this.entityManager.merge(c);
+        } catch (Exception e) {
+            throw new PersistenciaException("Falha ao cadastrar " + c.getClass().getSimpleName() + ".");
+        }
     }
 
     @Transactional
-    public void excluir(ComponentePortal c) {
-        this.entityManager.remove(this.entityManager.merge(c));
+    public void excluir(ComponentePortal c) throws PersistenciaException {
+        try {
+            this.entityManager.remove(this.entityManager.merge(c));
+        } catch (Exception e) {
+            throw new PersistenciaException("Falha ao cadastrar " + c.getClass().getSimpleName() + ".");
+        }
     }
 
     public List<ComponentePortal> listar(ComponentePortal a) {

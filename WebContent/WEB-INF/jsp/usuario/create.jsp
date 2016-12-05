@@ -27,7 +27,7 @@
 
 </style>
 
-<div id="formAuth">
+<div id="formAuth" style="padding: 3%;">
 
     <form action="${linkTo[UsuarioController].login}" method="post">
 
@@ -76,23 +76,12 @@
 
         <br>
         <div>
-            <c:if test="${not empty mensagem}">
-                <span class="alert alert-success" role="alert">
-                    <span
-                        class="glyphicon glyphicon glyphicon-ok" aria-hidden="true"></span>
-                    ${mensagem}
-                </span>
-            </c:if>
             <c:if test="${not empty mensagemFalha}">
                 <span class="alert alert-danger" role="alert">
-                    <span class="glyphicon glyphicon glyphicon-remove" aria-hidden="true"></span>
+                    <label class="glyphicon glyphicon glyphicon-remove" aria-hidden="true"></label>
                     ${mensagemFalha}
                 </span>
             </c:if>
         </div>
-
-        <br>
-        <br>
-
     </form>
 </div>
