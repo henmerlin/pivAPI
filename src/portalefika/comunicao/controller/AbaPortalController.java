@@ -10,6 +10,7 @@ import java.util.List;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import portalefika.comunicao.dal.AbaPortalDAO;
+import portalefika.comunicao.dal.exception.PersistenciaException;
 import portalefika.comunicao.entidades.AbaPortal;
 import portalefika.comunicao.entidades.ComponentePortal;
 import portalefika.controller.AbstractController;
@@ -42,7 +43,7 @@ public class AbaPortalController extends AbstractController {
         try {
             abaDao.cadastrar(abaPortal);
             result.use(Results.json()).from(abaPortal).include("subAbas").serialize();
-        } catch (Exception e) {
+        } catch (PersistenciaException e) {
             result.use(Results.json()).from(e).serialize();
         }
     }
@@ -62,7 +63,11 @@ public class AbaPortalController extends AbstractController {
     @Path("/comunicacao/aba/delete")
     @Post
     public void remove(AbaPortal abaPortal) {
-        abaDao.excluir(abaPortal);
+        try {
+            this.abaDao.excluir(abaPortal);
+        } catch (PersistenciaException e) {
+            result.use(Results.json()).from(e).serialize();
+        }
     }
 
     @Consumes("application/json")
@@ -72,7 +77,7 @@ public class AbaPortalController extends AbstractController {
         try {
             abaDao.editar(abaPortal);
             result.use(Results.json()).from(abaPortal).include("subAbas").serialize();
-        } catch (Exception e) {
+        } catch (PersistenciaException e) {
             result.use(Results.json()).from(e).serialize();
         }
     }
