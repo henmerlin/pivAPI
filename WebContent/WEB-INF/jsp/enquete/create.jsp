@@ -143,7 +143,7 @@
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
-                                <button type="button" class="btn btn-primary">Alterar</button>
+                                <button type="button" class="btn btn-primary" data-dismiss="modal" @click="doneEditaEnquete(editEnquete)">Alterar</button>
                             </div>
                         </div>
                     </div>
@@ -184,12 +184,12 @@
                 }
 
             },
-            created: function() {
+            created: function () {
                 this.getEnquetes()
                 this.resetObjects()
             },
             methods: {
-                resetObjects: function() {
+                resetObjects: function () {
                     var self = this;
 
                     self.addEnquete = {
@@ -202,34 +202,34 @@
                                     "ativo": false
                                 }};
                 },
-                dateInput: function(h) {
+                dateInput: function (h) {
                     return moment(h).format("YYYY-MM-DD");
                 },
-                dateFormat: function(h) {
+                dateFormat: function (h) {
                     return  moment(h).format('L');
                 },
-                getEnquetes: function() {
+                getEnquetes: function () {
                     var self = this;
 
-                    $.get(enqURL + "listar", function(data) {
+                    $.get(enqURL + "listar", function (data) {
                         self.enquetes = data.list;
                     })
 
                 },
-                adicionaEnquete: function() {
+                adicionaEnquete: function () {
                     var self = this;
                     $.ajax({
                         type: "POST",
                         url: enqURL + "cadastrar",
                         data: JSON.stringify(self.addEnquete.enquete),
                         dataType: "json",
-                        beforeSend: function(xhrObj) {
+                        beforeSend: function (xhrObj) {
                             xhrObj.setRequestHeader("Content-Type", "application/json");
                         },
-                        success: function() {
+                        success: function () {
                             self.resetObjects()
                         },
-                        error: function(jqXHR, textStatus, errorThrown) {
+                        error: function (jqXHR, textStatus, errorThrown) {
 
                             console.log(jqXHR);
 
@@ -238,16 +238,32 @@
 
                     self.fetchData()
                 },
-                editarEnquete: function(enquets) {
+                editarEnquete: function (h) {
 
                     var self = this
-                    self.editEnquete = enquets
+                    self.editEnquete = h
 
                 },
-                fetchData: function() {
+                doneEditaEnquete: function (h) {
+
+                    $.ajax({
+                        type: "POST",
+                        url: enqURL + "modificar",
+                        data: JSON.stringify(h),
+                        dataType: "json",
+                        beforeSend: function (xhr) {
+                            xhr.setRequestHeader("Content-Type", "application/json");
+                        },
+                        success: function () {                            
+                            $('#modEnquete').modal('hide');
+                        }
+                    });
+
+                },
+                fetchData: function () {
 
                     var self = this;
-                    setTimeout(function() {
+                    setTimeout(function () {
 
                         self.getEnquetes()
 

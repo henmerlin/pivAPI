@@ -42,10 +42,10 @@ public class EnqueteController extends AbstractController {
     @Get
     @Path("/comunicacao/enquete/{enquete.id}")
     public void visualiza(Enquete enquete) {
-        Enquete a1 = (Enquete) enqueteDAO.buscarPorId(enquete);
+        Enquete a1 = (Enquete) this.enqueteDAO.buscarPorId(enquete);
 
         if (a1 != null) {
-            result.use(Results.json()).from(a1).serialize();
+            this.result.use(Results.json()).from(a1).serialize();
         }
     }
 
@@ -55,9 +55,9 @@ public class EnqueteController extends AbstractController {
     public void cadastrar(Enquete addEnquetes) {
         try {
             this.enqueteDAO.cadastrar(addEnquetes);
-            result.use(Results.json()).from(addEnquetes).include("enquetes").serialize();
+            this.result.use(Results.json()).from(addEnquetes).include("enquetes").serialize();
         } catch (Exception e) {
-            result.use(Results.json()).from(e).serialize();
+            this.result.use(Results.json()).from(e).serialize();
         }
     }
 
@@ -69,6 +69,26 @@ public class EnqueteController extends AbstractController {
         if (l != null) {
             this.result.use(Results.json()).from(l).serialize();
         }
+    }
+    @Post
+    @Consumes("application/json")
+    @Path("/comunicacao/enquete/modificar")
+    public void modificar(Enquete enquete) {
+        
+        try {
+            
+            System.out.println(enquete.getId());
+            System.out.println(enquete.getTitulo());
+            
+            enqueteDAO.modificar(enquete);
+            this.result.use(Results.json()).from(enquete).include("enquetes").serialize();
+            
+        } catch (Exception e) {
+            
+            this.result.use(Results.json()).from(e).serialize();            
+            
+        }
+        
     }
 
     public void exclui(Enquete enquete) {

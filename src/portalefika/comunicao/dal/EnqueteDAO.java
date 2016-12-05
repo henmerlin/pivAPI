@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Query;
+import javax.transaction.Transactional;
 import portalefika.comunicao.entidades.Enquete;
 
 /**
@@ -12,6 +13,7 @@ import portalefika.comunicao.entidades.Enquete;
  */
 public class EnqueteDAO extends ComponentePortalDAO {
 
+    @Transactional
     public void modificar(Enquete enquete) throws Exception {
 
         try {
