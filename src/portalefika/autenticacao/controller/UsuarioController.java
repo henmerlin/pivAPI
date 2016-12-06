@@ -31,9 +31,6 @@ public class UsuarioController {
 
     public void login(Usuario u) {
 
-        System.out.println(u.getLogin());
-        System.out.println(u.getSenha());
-
         try {
 
             ws = new EfikaUsersProxy();

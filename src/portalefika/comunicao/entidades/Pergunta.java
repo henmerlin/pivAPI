@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+import org.hibernate.validator.constraints.NotEmpty;
 
 /**
  *
@@ -25,8 +26,8 @@ public class Pergunta extends ComponentePortal {
     @ManyToOne
     private Enquete enquete;
     
-    @NotNull
-    private Boolean tipoPergunta;
+    @NotEmpty
+    private String tipoPergunta;
 
     public Enquete getEnquete() {
         return enquete;
@@ -36,11 +37,11 @@ public class Pergunta extends ComponentePortal {
         this.enquete = enquete;
     }
 
-    public Boolean getTipoPergunta() {
+    public String getTipoPergunta() {
         return tipoPergunta;
     }
 
-    public void setTipoPergunta(Boolean tipoPergunta) {
+    public void setTipoPergunta(String tipoPergunta) {
         this.tipoPergunta = tipoPergunta;
     }   
     
