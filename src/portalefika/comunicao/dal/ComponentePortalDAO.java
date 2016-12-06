@@ -49,7 +49,7 @@ public class ComponentePortalDAO {
 
     public List<ComponentePortal> listar(ComponentePortal a) {
         try {
-            return (List<ComponentePortal>) this.entityManager.createQuery("SELECT a FROM " + a.getClass().getSimpleName() + " a", a.getClass()).getResultList();
+            return (List<ComponentePortal>) this.entityManager.createQuery("SELECT a FROM " + a.getClass().getSimpleName() + " a ORDER BY id ASC", a.getClass()).getResultList();
         } catch (Exception e) {
             return new ArrayList<ComponentePortal>();
         }

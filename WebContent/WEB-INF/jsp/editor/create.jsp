@@ -3,15 +3,11 @@
 <%@ taglib uri="http://www.opensymphony.com/sitemesh/decorator"
            prefix="decorator"%>
 
-
 <div class="container">
-
     <div class="page-header">
         <h1>Editor</h1>
     </div>
-
     <div id="editor">
-
         <div class="row">
             <div class="col-md-12">
                 <h4>Abas</h4>
@@ -44,7 +40,7 @@
 
                                 <td>
                                     <button class="btn btn-primary glyphicon glyphicon-th-list btn-sm" @click="selectAba(aba)"></button>
-                                    <button class="btn btn-danger glyphicon glyphicon-trash btn-sm" @click="deleteAba(aba)" data-toggle="modal" data-target="#modalAba"></button>
+                                    <button class="btn btn-danger glyphicon glyphicon-trash btn-sm" @click="clickDeleteAba(aba)" data-toggle="modal" data-target="#modalAba"></button>
                                 </td>
 
                             </tr>
@@ -57,6 +53,7 @@
             <div class="col-md-12"><p></p></div>
             <div class="col-md-12">
                 <div v-if="activedAba">
+                    <hr>
                     <h4>SubAbas <span v-text="activedAba.titulo"></span></h4>
                     <table class="table table-bordered small">
                         <thead>
@@ -76,7 +73,7 @@
                                 <td v-if="subAba == editedSubAba">
                                     <input class="form-control" type="text"
                                            v-model="subAba.titulo"
-                                           @blur="doneEditSubAba()">
+                                           @blur="doneEditSubAba(subAba)">
                                 </td>
 
                                 <td>
@@ -138,268 +135,5 @@
                 </div>
             </div>
         </div>
-
-
     </div>
-
-
-    <script>
-
-
-        // URL - REST
-        var abaURL = "${pageContext.request.contextPath}/comunicacao/aba/";
-        var subAbaURL = "${pageContext.request.contextPath}/comunicacao/subAba/";
-
-        // Instancia
-        new Vue({
-            el: '#editor',
-            data: {
-                abas: null,
-                // aba
-                editedAba: null,
-                activedAba: null,
-                deletedAba: null,
-                // subAbas
-                editedSubAba: null,
-                activedSubAba: null,
-                deletedSubAba: null,
-            },
-            created: function() {
-                this.getAbas()
-            },
-            methods: {
-                clearVars: function() {
-                    var self = this;
-
-                    self.editedAba = null;
-                    self.activedAba = null;
-                    self.deletedAba = null;
-                    self.editedSubAba = null;
-                    self.activedSubAba = null;
-                    self.deletedSubAba = null;
-
-                },
-                getAbas: function() {
-                    var self = this;
-                    $.get(abaURL, function(data) {
-                        self.abas = data.list;
-                    })
-                },
-                fetchData: function() {
-                    var self = this;
-
-                    setTimeout(function() {
-                        self.getAbas()
-                    }, 600)
-                },
-                // Aba:
-                novaAba: function() {
-                    var self = this;
-
-                    var _novaAba = h = {"abaPortal": {"titulo": "Nova Aba", "ativo": false}};
-                    self.adicionarAba(_novaAba);
-
-                },
-                adicionarAba: function(abaPortal) {
-                    var self = this;
-
-                    $.ajax({
-                        type: "POST",
-                        url: abaURL,
-                        data: JSON.stringify(abaPortal),
-                        dataType: "json",
-                        beforeSend: function(xhrObj) {
-                            xhrObj.setRequestHeader("Content-Type", "application/json");
-                        }
-                    });
-
-                    self.fetchData()
-                },
-                editAba: function(h) {
-                    var self = this
-                    self.editedAba = h
-                },
-                deleteAba: function(h) {
-                    var self = this
-                    self.deletedAba = h
-                },
-                doneDeleteAba: function() {
-                    var self = this
-
-                    if (!self.deletedAba) {
-                        return;
-                    }
-
-                    $.ajax({
-                        type: "POST",
-                        url: abaURL + "delete",
-                        data: JSON.stringify(self.deletedAba),
-                        dataType: "json",
-                        beforeSend: function(xhrObj) {
-                            xhrObj.setRequestHeader("Content-Type", "application/json");
-                        },
-                        success: function(json) {
-                            $('#modalAba').modal('hide');
-                        }
-                    });
-
-                    self.clearVars()
-                    self.fetchData()
-
-                },
-                selectAba: function(h) {
-                    var self = this
-                    self.activedAba = h
-                    self.buscaAbaPorId(h)
-                },
-                updateAba: function(h) {
-                    var self = this
-
-                    if (!h.titulo) {
-                        self.fetchData()
-                        return;
-                    }
-
-                    $.ajax({
-                        type: "POST",
-                        url: abaURL + "update",
-                        data: JSON.stringify(h),
-                        dataType: "json",
-                        beforeSend: function(xhrObj) {
-                            xhrObj.setRequestHeader("Content-Type", "application/json");
-                        },
-                        success: function(json) {
-                            self.fetchData()
-                        }
-                    });
-                },
-                doneEditAba: function(h) {
-                    var self = this;
-
-                    if (!h.titulo) {
-                        self.fetchData()
-                        return;
-                    }
-                    console.log("doneEditAba")
-                    console.log(h)
-
-                    self.updateAba(h)
-                    self.clearVars()
-
-                },
-                // SubAba:
-                novaSubAba: function() {
-                    var self = this;
-                    var _novaSubAba = {"subAbaPortal": {"titulo": "Nova SubAba", "ativo": false}};
-                    self.adicionarSubAba(_novaSubAba);
-                },
-                adicionarSubAba: function(h) {
-                    var self = this;
-
-                    h.subAbaPortal.abaPortal = self.activedAba;
-
-                    $.ajax({
-                        type: "POST",
-                        url: subAbaURL,
-                        data: JSON.stringify(h),
-                        dataType: "json",
-                        beforeSend: function(xhrObj) {
-                            xhrObj.setRequestHeader("Content-Type", "application/json");
-                        },
-                        success: function(data) {
-                            self.activedSubAba = data;
-                            self.activedAba.subAbas.push(data.subAbaPortal)
-                        }
-                    });
-                },
-                editSubAba: function(h) {
-                    var self = this
-                    self.editedSubAba = h;
-                },
-                doneEditSubAba: function(h) {
-                    var self = this;
-
-                    if (!self.editedSubAba.titulo) {
-                        self.fetchData()
-                        return;
-                    }
-
-                    self.updateSubAba()
-                    self.clearVars()
-
-                },
-                clickDeleteSubAba: function(h) {
-                    var self = this
-                    self.deletedSubAba = h;
-                },
-                doneDeleteSubAba: function() {
-                    var self = this
-
-                    if (!self.deletedSubAba) {
-                        return;
-                    }
-
-                    var aba = self.activedAba;
-
-                    self.deleteSubAba(self.deletedSubAba)
-                    self.clearVars()
-                    self.fetchData()
-
-                    self.selectAba(aba);
-                },
-                selectSubAba: function(h) {
-                    var self = this
-                    self.activedSubAba = h
-                },
-                deleteSubAba: function(h) {
-
-                    $.ajax({
-                        type: "POST",
-                        url: subAbaURL + "delete",
-                        data: JSON.stringify(h),
-                        dataType: "json",
-                        beforeSend: function(xhrObj) {
-                            xhrObj.setRequestHeader("Content-Type", "application/json");
-                        },
-                        success: function(json) {
-                            $('#modalAba').modal('hide');
-                        }
-                    });
-                },
-                updateSubAba: function() {
-                    var self = this
-
-                    if (!self.editedSubAba.titulo) {
-                        return;
-                    }
-
-                    $.ajax({
-                        type: "POST",
-                        url: subAbaURL + "update",
-                        data: JSON.stringify(self.editedSubAba),
-                        dataType: "json",
-                        beforeSend: function(xhrObj) {
-                            xhrObj.setRequestHeader("Content-Type", "application/json");
-                        },
-                        success: function(json) {
-                            self.fetchData()
-                        }
-                    });
-                },
-                // Util
-                buscaAbaPorId: function(h) {
-                    var self = this;
-                    $.get(abaURL + h.id, function(data) {
-                        self.activedAba = data.abaPortal;
-                    })
-                },
-                buscaSubAbaPorId: function(h) {
-                    var self = this;
-                    $.get(subAbaURL + h.id, function(data) {
-                        self.activedSubAba = data.subAbaPortal;
-                    })
-                }
-            }
-        })
-
-    </script>
+    <script src="${pageContext.request.contextPath}/resources/vue-components/editor.js"></script>
