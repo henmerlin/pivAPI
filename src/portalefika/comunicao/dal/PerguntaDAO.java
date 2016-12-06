@@ -51,8 +51,8 @@ public class PerguntaDAO extends ComponentePortalDAO {
         
         try {
             
-            Query query = this.entityManager.createQuery("FROM Pergunta p WHERE p.enquete =:param1");
-            query.setParameter("param1", enquete);
+            Query query = this.entityManager.createQuery("FROM Pergunta p WHERE p.enquete.id =:param1");
+            query.setParameter("param1", enquete.getId());
             return query.getResultList();
             
         } catch (Exception e) {

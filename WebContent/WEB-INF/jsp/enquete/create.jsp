@@ -96,7 +96,7 @@
                                 <br/>
 
                                 <label>Data inicio</label>
-                                <input class="form-control" type="date" v-model="addEnquete.enquete.dataInicio"/>
+                                <input class="form-control" type="date" v-model="addEnquete.enquete.dataInicio" />
 
                                 <br/>
 
@@ -142,7 +142,47 @@
 
                                 <br/>
 
-                                <button class="btn btn-success">Adicionar Pergunta</button>
+                                <table class="table table-bordered small">
+
+                                    <thead>
+                                        <tr>
+                                            <th>Pergunta</th>
+                                            <th>Ativo</th>
+                                            <th>Tipo pergunta</th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+
+                                        <tr v-for="pergunta in perguntasEnquetes" :key="pergunta.id">
+
+                                            <td>
+
+                                                <label>{{pergunta.titulo}}</label>
+
+                                            </td>
+
+                                            <td>
+
+                                                <label v-if="pergunta.ativo == true" >Ativo</label>
+                                                <label v-if="pergunta.ativo == false" >Inativo</label>
+
+                                            </td>
+
+                                            <td>
+
+                                                <label v-if="pergunta.tipoPergunta == true" >Escolha</label>
+                                                <label v-if="pergunta.tipoPergunta == false" >Descritivo</label>
+
+                                            </td>
+
+                                        </tr>
+
+                                    </tbody>
+
+                                </table>
+
+                                <button class="btn btn-success btn-xs" data-toggle="modal" data-dismiss="modal" data-target="#criaPerguntaEnquete">Adicionar Pergunta</button>
 
                             </div>
                             <div class="modal-footer">
@@ -166,7 +206,7 @@
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
-                                <button type="button" class="btn btn-primary" @click="doneExcluiEnquete(delEnquete)">Excluir</button>
+                                <button type="button" class="btn btn-danger" @click="doneExcluiEnquete(delEnquete)">Excluir</button>
                             </div>
                         </div>
                     </div>
@@ -184,9 +224,24 @@
                         <h4 class="modal-title" id="myModalLabel">Pergunta Enquete</h4>
                     </div>
                     <div class="modal-body">
-                        
-                        
-                        
+
+                        <label>Título</label>
+                        <input class="form-control" placeholder="Título" type="text" v-model="addPerguntaEnquete.pergunta.titulo"/>
+
+                        <br/>
+
+                        <label>Ativo</label>
+                        <input type="checkbox" v-model="addPerguntaEnquete.pergunta.ativo"/>
+
+                        <br/>
+
+                        <label>Tipo pergunta</label>
+                        <input type="checkbox" v-model="addPerguntaEnquete.pergunta.tipoPergunta"/>
+
+                        <br/>
+
+                        <button type="button" class="btn btn-primary" @click="adicionaPerguntaEnquete(addPerguntaEnquete)">Adiiconar</button>
+
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
@@ -202,42 +257,55 @@
     <script>
 
         var enqURL = "${pageContext.request.contextPath}/comunicacao/enquete/";
+        var enqPerguntaURL = "${pageContext.request.contextPath}/comunicacao/pergunta/";
 
         new Vue({
             el: '#enquete',
             data: {
                 enquetes: null,
+                perguntasEnquetes: null,
                 editEnquete: {
-                    "enquete":
-                            {
-                                "dataInicio": null,
-                                "dataFim": null,
-                                "id": null,
-                                "titulo": null,
-                                "ativo": false
-                            }
+                    "enquete": {
+                        "dataInicio": null,
+                        "dataFim": null,
+                        "id": null,
+                        "titulo": null,
+                        "ativo": false
+                    }
                 },
                 addEnquete: {
-                    "enquete":
-                            {
-                                "dataInicio": null,
-                                "dataFim": null,
-                                "id": null,
-                                "titulo": null,
-                                "ativo": false
-                            }
+                    "enquete": {
+                        "dataInicio": null,
+                        "dataFim": null,
+                        "id": null,
+                        "titulo": null,
+                        "ativo": false
+                    }
                 },
                 delEnquete: {
-                    "enquete":
-                            {
-                                "dataInicio": null,
-                                "dataFim": null,
-                                "id": null,
-                                "titulo": null,
-                                "ativo": false
-                            }
-                }
+                    "enquete": {
+                        "dataInicio": null,
+                        "dataFim": null,
+                        "id": null,
+                        "titulo": null,
+                        "ativo": false
+                    }
+                },
+                addPerguntaEnquete: {
+                    "pergunta": {
+                        "id": null,
+                        "titulo": null,
+                        "ativo": false,
+                        "enquete": {
+                            "dataInicio": null,
+                            "dataFim": null,
+                            "id": null,
+                            "titulo": null,
+                            "ativo": false
+                        }
+                    }
 
+                }
             },
             created: function () {
                 this.getEnquetes()
@@ -290,6 +358,7 @@
 
                     var self = this
                     self.editEnquete = h
+                    self.getPerguntasEnquetes(h)
 
                 },
                 doneEditaEnquete: function (h) {
@@ -343,6 +412,34 @@
 
                     }, 600)
 
+                },
+                getPerguntasEnquetes: function (h) {
+                    var self = this;
+                    $.get(enqPerguntaURL + "lista/" + h.id, function (data) {
+                        self.enquetes = data.list;
+                    })
+
+                },
+                adicionaPerguntaEnquete: function (h) {
+
+                    var self = this;
+
+                    self.addPerguntaEnquete = h;
+
+                    self.addPerguntaEnquete.enquete = self.editEnquete;
+
+                    $.ajax({
+                        type: "POST",
+                        url: enqPerguntaURL + "cadastrar",
+                        data: JSON.stringify(h.addPerguntaEnquete),
+                        dataType: "json",
+                        beforeSend: function (xhrObj) {
+
+                            xhrObj.setRequestHeader("Content-Type", "application/json");
+
+                        }
+
+                    });
                 }
 
             }
