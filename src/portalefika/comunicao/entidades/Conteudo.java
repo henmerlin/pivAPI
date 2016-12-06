@@ -11,7 +11,7 @@ import javax.validation.constraints.NotNull;
 @Table(name = "PE_CONTEUDO")
 public class Conteudo extends ComponenteComImagem {
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne
     private SubAbaPortal subAba;
 
     public Conteudo() {
