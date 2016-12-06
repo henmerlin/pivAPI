@@ -162,11 +162,11 @@ new Vue({
         novaSubAba: function() {
             var self = this;
 
-            console.log(self.activedAba);
-
             var _novaSubAba = {"subAbaPortal": {"titulo": "Nova SubAba",
                     "ativo": false,
-                    "abaPortal": self.activedAba}};
+                    "abaPortal": self.activedAba,
+                    "conteudo": {"titulo": "Novo Conteudo",
+                        "ativo": false}}};
 
             self.adicionarSubAba(_novaSubAba);
         },
@@ -272,10 +272,15 @@ new Vue({
         },
         selectSubAba: function(h) {
             var self = this
-            console.log(h)
             self.buscaSubAbaPorId(h)
         },
         // Conteúdo
+        clickConteudo: function(h) {
+            var self = this
+            self.editedConteudo = h
+            self.buscaConteudoPorId(h)
+
+        },
         novaConteudo: function() {
             var self = this;
             var _novoConteudo = {"conteudo": {"titulo": "Novo Conteúdo", "ativo": false}};
@@ -405,7 +410,7 @@ new Vue({
         buscaConteudoPorId: function(h) {
             var self = this;
             $.get(conteudoURL + h.id, function(data) {
-                self.activedConteudo = data.conteudo;
+                self.editedConteudo = data.conteudo;
             })
         }
     }

@@ -1,5 +1,8 @@
 package portalefika.comunicao.entidades;
 
+import javax.persistence.MappedSuperclass;
+
+@MappedSuperclass
 public abstract class ComponenteComImagem extends ComponentePortal {
 
     private String imagemUrl;
