@@ -6,6 +6,7 @@
 
 var enqURL = "/comunicacao/enquete/";
 var enqPerguntaURL = "/comunicacao/pergunta/";
+var escolhaPerguntaURL = "/comunicacao/escolhapergunta/";
 
 new Vue({
     el: '#enquete',
@@ -13,6 +14,7 @@ new Vue({
         tipoPergutna: null,
         enquetes: null,
         perguntasEnquetes: null,
+        escolhaPerguntas: null,
         editEnquete: {
             "enquete": {
                 "dataInicio": null,
@@ -54,7 +56,35 @@ new Vue({
                     "ativo": false
                 }
             }
+        },
+        editPerguntaEnquete: {
+            "pergunta": {
+                "id": null,
+                "titulo": null,
+                "ativo": false,
+                "tipoPergunta": null,
+                "enquete": {
+                    "dataInicio": null,
+                    "dataFim": null,
+                    "id": null,
+                    "titulo": null,
+                    "ativo": false
+                }
+            }
+        },
+        addEscolhaPergunta: {
+            "escolhaPergunta": {
+                "id": null,
+                "titulo": null,
+                "ativo": false,
+                "pergunta": {
+                    "id": null,
+                    "titulo": null,
+                    "ativo": false,
+                    "tipoPergunta": null,
+                }
 
+            }
         }
     },
     created: function () {
@@ -106,9 +136,9 @@ new Vue({
         },
         editarEnquete: function (h) {
 
-            var self = this
-            self.editEnquete = h
-            self.getPerguntasEnquetes(h)
+            var self = this;
+            self.editEnquete = h;
+            self.getPerguntasEnquetes(self.editEnquete);
 
         },
         doneEditaEnquete: function (h) {
@@ -158,16 +188,16 @@ new Vue({
             var self = this;
             setTimeout(function () {
 
-                self.getEnquetes()
+                self.getEnquetes();
 
-            }, 600)
+            }, 600);
 
         },
         getPerguntasEnquetes: function (h) {
             var self = this;
             $.get(enqPerguntaURL + "lista/" + h.id, function (data) {
                 self.perguntasEnquetes = data.list;
-            })
+            });
 
         },
         adicionaPerguntaEnquete: function (h) {
@@ -193,17 +223,22 @@ new Vue({
                     self.resetObjectsPergunta();
                 }
             });
-            self.fetchDataPergunta(self.editEnquete)
+            self.fetchDataPergunta(self.editEnquete);
         },
+        editarPerguntaEnquete: function (h) {
 
+            var self = this;
+            self.editPerguntaEnquete = h;
+
+        },
         fetchDataPergunta: function (h) {
 
             var self = this;
             setTimeout(function () {
 
-                self.getPerguntasEnquetes(h)
+                self.getPerguntasEnquetes(h);
 
-            }, 600)
+            }, 600);
 
         },
         resetObjectsPergunta: function () {
@@ -224,7 +259,37 @@ new Vue({
                     }
                 }
             }
-        }
+        },
+        getEscolhaPerguntas: function (h) {
+            var self = this;
+            $.get(escolhaPerguntaURL + "lista/" + h.id, function (data) {
+                self.escolhaPerguntas = data.list;
+            });
+        },
+        adicionaEscolhaPergunta: function (h) {
 
+            var self = this;
+
+            h.addEscolhaPergunta.pergunta = self.editPerguntaEnquete;
+
+            $.ajax({
+                type: "POST",
+                url: enqPerguntaURL + "cadastrar",
+                data: JSON.stringify(h),
+                dataType: "json",
+                beforeSend: function (xhrObj) {
+
+                    xhrObj.setRequestHeader("Content-Type", "application/json");
+
+                },
+                success: function () {
+
+                    $('#criaPerguntaEnquete').modal('hide');
+                    $('#modEnquete').modal('show');
+                    self.resetObjectsPergunta();
+                }
+            });
+            self.fetchDataPergunta(self.editEnquete);
+        }
     }
 });

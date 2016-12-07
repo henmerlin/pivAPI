@@ -58,10 +58,7 @@ public class PerguntaController extends AbstractController {
     public void cadastrar(Pergunta pergunta) {
         
         try {
-            
-            System.out.println(pergunta.getTitulo());
-            System.out.println(pergunta.getEnquete().getTitulo());
-            
+                        
             this.perguntaDAO.cadastrar(pergunta);
             this.result.use(Results.json()).from(pergunta).serialize();
             
