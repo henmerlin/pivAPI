@@ -16,6 +16,7 @@ import portalefika.comunicao.entidades.ComponentePortal;
 import portalefika.comunicao.entidades.Conteudo;
 import portalefika.controller.AbstractController;
 import portalefika.dal.ArquivoManager;
+import portalefika.dal.exception.UploadException;
 
 @Controller
 @RequestScoped
@@ -58,11 +59,11 @@ public class ConteudoController extends AbstractController {
     public void upload(Conteudo c, UploadedFile imagem) {
 
         try {
-            c.setImagemUrl(imagem.getFileName());
-            am.upload(imagem);
+            c = (Conteudo) dao.buscarPorId(c);
+            c.setImagemUrl(am.upload(imagem));
             dao.editar(c);
             result.use(Results.json()).from(c).serialize();
-        } catch (Exception e) {
+        } catch (PersistenciaException | UploadException e) {
             result.use(Results.json()).from(e).serialize();
         }
     }
@@ -90,7 +91,7 @@ public class ConteudoController extends AbstractController {
     }
 
     @Consumes("application/json")
-    @Path("/comunicacao/subAba/update")
+    @Path("/comunicacao/conteudo/update")
     @Post
     public void atualiza(Conteudo c) {
 

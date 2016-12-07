@@ -12,23 +12,27 @@ import portalefika.util.StringUtil;
  */
 public class ArquivoManager {
 
-    private final String str;
+    private String str;
 
-    private final File file;
+    private File file;
+
+    private static final String DIR = "C:/UploadedFiles/portalefika";
 
     public ArquivoManager() {
         this.str = StringUtil.randomString(20);
-        this.file = new File("C:/UploadedFiles/portalefika", str);
+        this.file = null;
     }
 
     public String upload(UploadedFile foto) throws UploadException {
         try {
+
+            String imgUrl = this.str + StringUtil.getArquivoSuffix(foto.getFileName());
+            this.file = new File(DIR, imgUrl);
             foto.writeTo(file);
-            return str;
+            return imgUrl;
+
         } catch (IOException e) {
             throw new UploadException("Falha ao realizar Upload.");
         }
-
     }
-
 }

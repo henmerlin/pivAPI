@@ -15,4 +15,9 @@ public class StringUtil {
         }
         return sb.toString();
     }
+
+    public static String getArquivoSuffix(String str) {
+        String[] oi = str.split("\\.[^.]*$");
+        return oi[0];
+    }
 }

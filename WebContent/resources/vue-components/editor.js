@@ -183,8 +183,6 @@ new Vue({
             }
             self.updateSubAba(h)
 
-            self.fetchData()
-
             setTimeout(function() {
                 self.selectAba(h.abaPortal);
             }, 400)

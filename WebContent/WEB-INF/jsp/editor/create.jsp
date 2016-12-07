@@ -155,8 +155,7 @@
                         <form action="${pageContext.request.contextPath}/comunicacao/conteudo/upload" method="post" enctype="multipart/form-data">
                             <div class="form-group">
                                 <label for="imagem">Imagem</label>
-                                <input type="hidden" name="c.id" v-model="editedConteudo.id"/>
-                                <input type="hidden" name="c.imagemUrl" v-model="editedConteudo.imagemUrl"/>
+                                <input type="hidden" name="c.id" :value="editedConteudo.id"/>
                                 <input type="file" id="imagem" name="imagem">
                                 <p class="help-block">Será exibida ao lado do Título do Conteúdo.</p>
                             </div>
