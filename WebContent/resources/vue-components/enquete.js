@@ -82,42 +82,54 @@ new Vue({
                     "titulo": null,
                     "ativo": false,
                     "tipoPergunta": null,
+                    "enquete": {
+                        "dataInicio": null,
+                        "dataFim": null,
+                        "id": null,
+                        "titulo": null,
+                        "ativo": false
+                    }
+                }
+
+            }
+        },
+        editEscolhaPergunta: {
+            "escolhaPergunta": {
+                "id": null,
+                "titulo": null,
+                "ativo": false,
+                "pergunta": {
+                    "id": null,
+                    "titulo": null,
+                    "ativo": false,
+                    "tipoPergunta": null,
+                    "enquete": {
+                        "dataInicio": null,
+                        "dataFim": null,
+                        "id": null,
+                        "titulo": null,
+                        "ativo": false
+                    }
                 }
 
             }
         }
     },
     created: function () {
-        this.getEnquetes()
-        this.resetObjects()
+        this.getEnquetes();
+        this.resetObjects();
     },
-    methods: {
-        resetObjects: function () {
-            var self = this;
-            self.addEnquete = {
-                "enquete":
-                        {
-                            "dataInicio": null,
-                            "dataFim": null,
-                            "id": null,
-                            "titulo": null,
-                            "ativo": false
-                        }};
-
-        },
+    methods: {        
+                
+        //Comandos Formatação   
         dateInput: function (h) {
             return moment(h).format("YYYY-MM-DD");
         },
         dateFormat: function (h) {
             return  moment(h).format('DD/MM/YYYY');
         },
-        getEnquetes: function () {
-            var self = this;
-            $.get(enqURL + "listar", function (data) {
-                self.enquetes = data.list;
-            })
-
-        },
+        
+        //Comandos Criação
         adicionaEnquete: function () {
             var self = this;
             $.ajax({
@@ -134,6 +146,81 @@ new Vue({
             });
             self.fetchData()
         },
+        adicionaPerguntaEnquete: function (h) {
+
+            var self = this;
+
+            h.pergunta.enquete = self.editEnquete;
+
+            $.ajax({
+                type: "POST",
+                url: enqPerguntaURL + "cadastrar",
+                data: JSON.stringify(h),
+                dataType: "json",
+                beforeSend: function (xhrObj) {
+
+                    xhrObj.setRequestHeader("Content-Type", "application/json");
+
+                },
+                success: function () {
+
+                    $('#criaPerguntaEnquete').modal('hide');
+                    $('#modEnquete').modal('show');
+                    self.resetObjects();
+                }
+            });
+            self.fetchDataPergunta(self.editEnquete);
+        },
+        adicionaEscolhaPergunta: function () {
+
+            var self = this;
+
+            self.addEscolhaPergunta.escolhaPergunta.pergunta = self.editPerguntaEnquete;
+
+            $.ajax({
+                type: "POST",
+                url: escolhaPerguntaURL + "cadastrar",
+                data: JSON.stringify(self.addEscolhaPergunta.escolhaPergunta),
+                dataType: "json",
+                beforeSend: function (xhrObj) {
+
+                    xhrObj.setRequestHeader("Content-Type", "application/json");
+
+                },
+                success: function () {
+
+                    $('#criaEscolhaPergunta').modal('hide');
+                    $('#escolhaPergunta').modal('show');
+                    self.resetObjects();
+                }
+            });
+            self.fetchDataEscolhaPerguntas(self.editPerguntaEnquete);
+        },
+        
+        //Comandos Lista
+        getEnquetes: function () {
+            var self = this;
+            $.get(enqURL + "listar", function (data) {
+                self.enquetes = data.list;
+            })
+
+        },
+        getPerguntasEnquetes: function (h) {
+            var self = this;
+            $.get(enqPerguntaURL + "lista/" + h.id, function (data) {
+                self.perguntasEnquetes = data.list;
+            });
+
+        },
+        getEscolhaPerguntas: function (h) {
+
+            var self = this;
+            $.get(escolhaPerguntaURL + "lista/" + h.id, function (data) {
+                self.escolhaPerguntas = data.list;
+            });
+        },
+        
+        //Comandos Modifica
         editarEnquete: function (h) {
 
             var self = this;
@@ -141,6 +228,19 @@ new Vue({
             self.getPerguntasEnquetes(self.editEnquete);
 
         },
+        editarPerguntaEnquete: function (h) {
+
+            var self = this;
+            self.editPerguntaEnquete = h;
+            self.getEscolhaPerguntas(h);
+
+        },
+        editarEscolhaPergunta: function (h) {
+
+            var self = this;
+            self.editEscolhaPergunta = h;
+
+        },                
         doneEditaEnquete: function (h) {
 
             $.ajax({
@@ -156,6 +256,47 @@ new Vue({
                 }
             });
         },
+        doneEditaPergunta: function () {
+
+            var self = this;
+
+            self.editPerguntaEnquete.enquete = self.editEnquete;
+
+            $.ajax({
+                type: "POST",
+                url: enqPerguntaURL + "modificar",
+                data: JSON.stringify(self.editPerguntaEnquete),
+                dataType: "json",
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("Content-Type", "application/json");
+                },
+                success: function () {
+                    $('#escolhaPergunta').modal('hide');
+                }
+            });
+        },
+        doneEditaEscolhaPergunta: function (h) {
+            
+            var self = this;
+            
+            self.editEscolhaPergunta.pergunta = self.editPerguntaEnquete;
+            self.editEscolhaPergunta.pergunta.enquete = self.editEnquete;
+            
+            $.ajax({
+                type: "POST",
+                url: escolhaPerguntaURL + "modificar",
+                data: JSON.stringify(h),
+                dataType: "json",
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("Content-Type", "application/json");
+                },
+                success: function () {
+                    $('#editaEscolhaPergunta').modal('hide');
+                }
+            });
+        },
+        
+        //Comandos Delete
         excluiEnquete: function (h) {
 
             var self = this
@@ -183,6 +324,8 @@ new Vue({
             });
             self.fetchData()
         },
+        
+        //Comandos Fetch
         fetchData: function () {
 
             var self = this;
@@ -191,44 +334,6 @@ new Vue({
                 self.getEnquetes();
 
             }, 600);
-
-        },
-        getPerguntasEnquetes: function (h) {
-            var self = this;
-            $.get(enqPerguntaURL + "lista/" + h.id, function (data) {
-                self.perguntasEnquetes = data.list;
-            });
-
-        },
-        adicionaPerguntaEnquete: function (h) {
-
-            var self = this;
-
-            h.pergunta.enquete = self.editEnquete;
-
-            $.ajax({
-                type: "POST",
-                url: enqPerguntaURL + "cadastrar",
-                data: JSON.stringify(h),
-                dataType: "json",
-                beforeSend: function (xhrObj) {
-
-                    xhrObj.setRequestHeader("Content-Type", "application/json");
-
-                },
-                success: function () {
-
-                    $('#criaPerguntaEnquete').modal('hide');
-                    $('#modEnquete').modal('show');
-                    self.resetObjectsPergunta();
-                }
-            });
-            self.fetchDataPergunta(self.editEnquete);
-        },
-        editarPerguntaEnquete: function (h) {
-
-            var self = this;
-            self.editPerguntaEnquete = h;
 
         },
         fetchDataPergunta: function (h) {
@@ -241,9 +346,29 @@ new Vue({
             }, 600);
 
         },
-        resetObjectsPergunta: function () {
-            var self = this;
+        fetchDataEscolhaPerguntas: function (h) {
 
+            var self = this;
+            setTimeout(function () {
+
+                self.getEscolhaPerguntas(h);
+
+            }, 600);
+
+        },
+        
+        //Comandos Reset Objects
+        resetObjects: function () {
+            var self = this;
+            self.addEnquete = {
+                "enquete": {
+                    "dataInicio": null,
+                    "dataFim": null,
+                    "id": null,
+                    "titulo": null,
+                    "ativo": false
+                }
+            };
             self.addPerguntaEnquete = {
                 "pergunta": {
                     "id": null,
@@ -258,38 +383,27 @@ new Vue({
                         "ativo": false
                     }
                 }
-            }
-        },
-        getEscolhaPerguntas: function (h) {
-            var self = this;
-            $.get(escolhaPerguntaURL + "lista/" + h.id, function (data) {
-                self.escolhaPerguntas = data.list;
-            });
-        },
-        adicionaEscolhaPergunta: function (h) {
-
-            var self = this;
-
-            h.addEscolhaPergunta.pergunta = self.editPerguntaEnquete;
-
-            $.ajax({
-                type: "POST",
-                url: enqPerguntaURL + "cadastrar",
-                data: JSON.stringify(h),
-                dataType: "json",
-                beforeSend: function (xhrObj) {
-
-                    xhrObj.setRequestHeader("Content-Type", "application/json");
-
-                },
-                success: function () {
-
-                    $('#criaPerguntaEnquete').modal('hide');
-                    $('#modEnquete').modal('show');
-                    self.resetObjectsPergunta();
+            };
+            self.addEscolhaPergunta = {
+                "escolhaPergunta": {
+                    "id": null,
+                    "titulo": null,
+                    "ativo": false,
+                    "pergunta": {
+                        "id": null,
+                        "titulo": null,
+                        "ativo": false,
+                        "tipoPergunta": null,
+                        "enquete": {
+                            "dataInicio": null,
+                            "dataFim": null,
+                            "id": null,
+                            "titulo": null,
+                            "ativo": false
+                        }
+                    }
                 }
-            });
-            self.fetchDataPergunta(self.editEnquete);
+            };
         }
     }
 });

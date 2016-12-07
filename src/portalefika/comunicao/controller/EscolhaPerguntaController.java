@@ -38,9 +38,9 @@ public class EscolhaPerguntaController extends AbstractController {
     }
     
     @Get
-    @Path("/comunicacao/escolhapergunta/lista/{e.id}")
+    @Path("/comunicacao/escolhapergunta/lista/{p.id}")
     public void visualizar(Pergunta p) {
-        
+                                
         List<EscolhaPergunta> l = this.escolhaPerguntaDAO.listarEscolhasPerguntas(p);
         
         if (l != null) {
@@ -65,6 +65,24 @@ public class EscolhaPerguntaController extends AbstractController {
             
             this.result.use(Results.json()).from(e).serialize();
                         
+        }
+        
+    }
+    
+    @Post
+    @Consumes("application/json")
+    @Path("/comunicacao/escolhapergunta/modificar")
+    public void modificar(EscolhaPergunta escolhaPergunta) {
+        
+        try {
+            
+            this.escolhaPerguntaDAO.modificar(escolhaPergunta);
+            this.result.use(Results.json()).from(escolhaPergunta).serialize();
+            
+        } catch (Exception e) {
+            
+            this.result.use(Results.json()).from(e).serialize();
+            
         }
         
     }

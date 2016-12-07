@@ -64,7 +64,6 @@
                                 <td style="width: 20%;">
                                     <button type="button" class="btn btn-primary glyphicon glyphicon-edit
                                             glyphicon glyphicon-edit btn-sm" data-toggle="modal" data-target="#modEnquete" @click="editarEnquete(enquete)" data-backdrop="static"></button>
-                                    <button class="btn btn-danger glyphicon glyphicon-trash btn-sm" @click="excluiEnquete(enquete)" data-toggle="modal" data-target="#excluiEnquete"></button>
                                 </td>
 
                             </tr>
@@ -179,7 +178,6 @@
                                             <td>
 
                                                 <button type="button" class="btn btn-primary glyphicon glyphicon-edit glyphicon glyphicon-edit btn-sm" data-toggle="modal" data-target="#escolhaPergunta" @click="editarPerguntaEnquete(pergunta)" data-backdrop="static"></button>
-                                                <button type="button" class="btn btn-danger glyphicon glyphicon-trash btn-sm"></button>
 
                                             </td>
 
@@ -279,6 +277,8 @@
                         <label>Ativo</label>
                         <input type="checkbox" v-model="editPerguntaEnquete.ativo"/>
 
+                        <hr/>
+
                         <div v-if="editPerguntaEnquete.tipoPergunta == 'Múltipla Escolha'">
 
                             Escolhas:
@@ -293,6 +293,7 @@
 
                                         <th>Titulo</th>
                                         <th>Ativo</th>
+                                        <th>Ações</th>
 
                                     </tr>
 
@@ -300,12 +301,17 @@
 
                                 <tbody>
 
-                                    <tr v-for="escolha in escolhaPerguntas" :key="escolhaPerguntas.id">
+                                    <tr v-for="escolha in escolhaPerguntas" :key="escolha.id">
 
                                         <td>{{escolha.titulo}}</td>
                                         <td>
-                                            <label v-if="pergunta.ativo == true" >Ativo</label>
-                                            <label v-if="pergunta.ativo == false" >Inativo</label>
+                                            <label v-if="escolha.ativo == true" >Ativo</label>
+                                            <label v-if="escolha.ativo == false" >Inativo</label>
+                                        </td>
+                                        <td>
+
+                                            <button type="button" class="btn btn-primary glyphicon glyphicon-edit glyphicon glyphicon-edit btn-sm" data-toggle="modal" data-target="#editaEscolhaPergunta" data-backdrop="static" @click="editarEscolhaPergunta(escolha)"></button>
+
                                         </td>
 
                                     </tr>
@@ -323,7 +329,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
-                        <button type="button" class="btn btn-primary"  >Modificar</button>
+                        <button type="button" class="btn btn-primary" @click="doneEditaPergunta(editPerguntaEnquete)" >Modificar</button>
                     </div>
                 </div>
             </div>
@@ -350,11 +356,38 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
-                        <button type="button" class="btn btn-primary" >Cadastrar</button>
+                        <button type="button" class="btn btn-primary" @click="adicionaEscolhaPergunta(addEscolhaPergunta)">Cadastrar</button>
                     </div>
                 </div>
             </div>
         </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="editaEscolhaPergunta" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">Modifica Escolha</h4>
+                    </div>
+                    <div class="modal-body">
+
+                        <label>Nome</label>
+                        <input class="form-control" type="text" v-model="editEscolhaPergunta.titulo"/>
+
+                        <br/>
+
+                        <label>Ativo</label>
+                        <input type="checkbox" v-model="editEscolhaPergunta.ativo"/>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                        <button type="button" class="btn btn-primary" @click="doneEditaEscolhaPergunta(editEscolhaPergunta)">Modificar</button>
+                    </div>
+                </div>
+            </div>
+        </div>        
 
         <button class="btn btn-success btn-xs" data-toggle="modal" data-target="#criaEnquete" data-backdrop="static">Adicionar</button>
 

@@ -40,7 +40,7 @@ public class PerguntaController extends AbstractController {
     
     @Get
     @Path("/comunicacao/pergunta/lista/{e.id}")
-    public void visualiza(Enquete e) {
+    public void visualiza(Enquete e) {   
         
         List<Pergunta> l = this.perguntaDAO.listarPerguntasEnquete(e);
         
@@ -60,6 +60,24 @@ public class PerguntaController extends AbstractController {
         try {
                         
             this.perguntaDAO.cadastrar(pergunta);
+            this.result.use(Results.json()).from(pergunta).serialize();
+            
+        } catch (Exception e) {
+            
+            this.result.use(Results.json()).from(e).serialize();
+            
+        }
+        
+    }
+    
+    @Post
+    @Consumes("application/json")
+    @Path("/comunicacao/pergunta/modificar")
+    public void modificar(Pergunta pergunta) {
+        
+        try {
+            
+            this.perguntaDAO.modificar(pergunta);
             this.result.use(Results.json()).from(pergunta).serialize();
             
         } catch (Exception e) {
