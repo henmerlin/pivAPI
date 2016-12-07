@@ -1,4 +1,4 @@
-Portal Efika - Modulo ComunicaÃ§Ã£o
+Portal Efika - Modulo Comunicação
 ===================
 ### Desenvolvedor
 \#| Nome
@@ -15,7 +15,7 @@ UML| JDeveloper 12c
 
 ===================
 
-### ImplementaÃ§Ã£o
+### Implementação
 
 Item     | Ferramenta
 -------- | ---

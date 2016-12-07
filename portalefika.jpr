@@ -158,9 +158,8 @@
                </list>
             </hash>
             <hash>
-               <url n="content-folder-url" path="src/portalefika/comunicao/entidades/"/>
                <list n="pattern-filters">
-                  <string v="+portalefika/comunicao/entidades/"/>
+                  <string v="+**"/>
                </list>
                <list n="url-path">
                   <url path="src/"/>
