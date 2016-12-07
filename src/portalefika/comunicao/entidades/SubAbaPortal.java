@@ -1,42 +1,42 @@
 package portalefika.comunicao.entidades;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.persistence.MapsId;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "PE_SUBABA")
 public class SubAbaPortal extends ComponentePortal {
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "subAba", cascade = CascadeType.REMOVE)
-    private List<Conteudo> conteudos;
+    @MapsId
+    @OneToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    private Conteudo conteudo;
 
     @ManyToOne
     private AbaPortal abaPortal;
 
     public SubAbaPortal() {
-        this.conteudos = new ArrayList<>();
+        conteudo = new Conteudo();
     }
 
-    public void setConteudos(List<Conteudo> conteudos) {
-        this.conteudos = conteudos;
+    public Conteudo getConteudo() {
+        return conteudo;
     }
 
-    public List<Conteudo> getConteudos() {
-        return conteudos;
+    public void setConteudo(Conteudo conteudo) {
+        this.conteudo = conteudo;
+    }
+
+    public AbaPortal getAbaPortal() {
+        return abaPortal;
     }
 
     public void setAbaPortal(AbaPortal abaPortal) {
         this.abaPortal = abaPortal;
     }
 
-    public AbaPortal getAbaPortal() {
-        return abaPortal;
-    }
 }

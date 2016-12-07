@@ -81,7 +81,7 @@
                                 </td>
 
                                 <td>
-                                    <button class="btn btn-primary glyphicon glyphicon-th-list btn-sm" @click="selectSubAba(subAba)"></button>
+                                    <button class="btn btn-primary glyphicon glyphicon-save-file btn-sm" @click="clickConteudo(subAba.conteudo)" data-toggle="modal" data-target="#modalInserirConteudo"></button>
                                     <button class="btn btn-danger glyphicon glyphicon-trash btn-sm" @click="clickDeleteSubAba(subAba)" data-toggle="modal" data-target="#modalSubAba"></button>
                                 </td>
 
@@ -89,49 +89,6 @@
                         </tbody>
                     </table>
                     <button class="btn btn-success btn-xs" @click="novaSubAba">Adicionar</button>
-                    <br>
-                </div>
-            </div>
-
-            <! -- CONTEUDO -->
-            <div class="col-md-12">
-                <div v-if="activedSubAba">
-                    <hr>
-                    <h4>Conteúdos <span v-text="activedConteudo.titulo"></span></h4>
-                    <table class="table table-bordered small">
-                        <thead>
-                            <tr>
-                                <th>Título</th>
-                                <th>Ativo</th>
-                                <th>Ações</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr v-for="conteudo in activedSubAbas.conteudos" v-bind:class="{ active: activedConteudo == conteudo}" :key="conteudo.id">
-
-                                <td class="view" v-if="conteudo != editedConteudo" @dblclick="editConteudo(conteudo)" @click="selectConteudo(conteudo)">
-                                    <label>{{ conteudo.titulo }}</label>
-                                </td>
-
-                                <td v-if="conteudo == editedConteudo">
-                                    <input class="form-control" type="text"
-                                           v-model="conteudo.titulo"
-                                           @blur="doneEditConteudo(conteudo)">
-                                </td>
-
-                                <td>
-                                    <input type="checkbox" v-model="conteudo.ativo" @change="doneEditConteudo(conteudo)"></input>
-                                </td>
-
-                                <td>
-                                    <button class="btn btn-primary glyphicon glyphicon-th-list btn-sm" @click="selectConteudo(conteudo)"></button>
-                                    <button class="btn btn-danger glyphicon glyphicon-trash btn-sm" @click="clickDeleteConteudo(conteudo)" data-toggle="modal" data-target="#modalSubAba"></button>
-                                </td>
-
-                            </tr>
-                        </tbody>
-                    </table>
-                    <button class="btn btn-success btn-xs" @click="novoConteudo">Adicionar</button>
                     <br>
                 </div>
             </div>
@@ -178,25 +135,41 @@
 
 
 
-        <!-- Modal SubAba -->
-        <div class="modal fade" id="modalConteudo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"  v-if="deletedConteudo">
-            <div class="modal-dialog" role="document">
+        <!-- Modal Conteudo -->
+        <div class="modal fade" id="modalInserirConteudo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"  v-if="editedConteudo">
+            <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title" id="myModalLabel">Excluir </h4>
+                        <h4 class="modal-title" id="myModalLabel">Inserir Conteúdo</h4>
                     </div>
                     <div class="modal-body">
-                        Deseja excluir o Conteúdo <strong v-html="deletedConteudo.titulo"></strong>?
+
+                        <div class="form-group">
+                            <label for="titulo">Título</label>
+                            <input class="form-control" type="text" id="titulo"
+                                   v-model="editedConteudo.titulo"
+                                   @blur="doneEditConteudo(editedConteudo)">
+                        </div>
+
+                        <form action="${pageContext.request.contextPath}/comunicacao/conteudo/upload" method="post" enctype="multipart/form-data">
+                            <div class="form-group">
+                                <label for="imagem">Imagem</label>
+                                <input type="hidden" name="c.id" v-model="editedConteudo.id"/>
+                                <input type="hidden" name="c.imagemUrl" v-model="editedConteudo.imagemUrl"/>
+                                <input type="file" id="imagem" name="imagem">
+                                <p class="help-block">Será exibida ao lado do Título do Conteúdo.</p>
+                            </div>
+                            <input type="submit" value="Upload"/>
+                        </form>
+
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
-                        <button type="button" class="btn btn-danger" @click="doneDeleteConteudo" data-dismiss="modal">Excluir</button>
+                        <button type="button" class="btn btn-success" @click="updateConteudo(editedConteudo)" data-dismiss="modal">Alterar</button>
                     </div>
                 </div>
             </div>
         </div>
-
-
     </div>
     <script src="${pageContext.request.contextPath}/resources/vue-components/editor.js"></script>

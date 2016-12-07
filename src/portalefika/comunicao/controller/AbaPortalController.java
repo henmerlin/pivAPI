@@ -32,7 +32,7 @@ public class AbaPortalController extends AbstractController {
         AbaPortal a1 = (AbaPortal) abaDao.buscarPorId(a);
 
         if (a1 != null) {
-            result.use(Results.json()).from(a1).include("subAbas").include("subAbas.conteudos").serialize();
+            result.use(Results.json()).from(a1).include("subAbas").include("subAbas.conteudo").serialize();
         }
     }
 
@@ -42,7 +42,7 @@ public class AbaPortalController extends AbstractController {
     public void adiciona(AbaPortal abaPortal) {
         try {
             abaDao.cadastrar(abaPortal);
-            result.use(Results.json()).from(abaPortal).include("subAbas").include("subAbas.conteudos").serialize();
+            result.use(Results.json()).from(abaPortal).include("subAbas").include("subAbas.conteudo").serialize();
         } catch (PersistenciaException e) {
             result.use(Results.json()).from(e).serialize();
         }
@@ -55,7 +55,7 @@ public class AbaPortalController extends AbstractController {
         List<ComponentePortal> l = abaDao.listar(new AbaPortal());
 
         if (l != null) {
-            result.use(Results.json()).from(l).include("subAbas").include("subAbas.conteudos").serialize();
+            result.use(Results.json()).from(l).include("subAbas").include("subAbas.conteudo").serialize();
         }
     }
 
@@ -76,7 +76,7 @@ public class AbaPortalController extends AbstractController {
     public void atualiza(AbaPortal abaPortal) {
         try {
             abaDao.editar(abaPortal);
-            result.use(Results.json()).from(abaPortal).include("subAbas").include("subAbas.conteudos").serialize();
+            result.use(Results.json()).from(abaPortal).include("subAbas").include("subAbas.conteudo").serialize();
         } catch (PersistenciaException e) {
             result.use(Results.json()).from(e).serialize();
         }

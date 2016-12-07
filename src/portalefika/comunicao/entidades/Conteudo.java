@@ -1,28 +1,26 @@
 package portalefika.comunicao.entidades;
 
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.ManyToOne;
+import javax.persistence.Lob;
 import javax.persistence.Table;
-
-import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "PE_CONTEUDO")
 public class Conteudo extends ComponenteComImagem {
 
-    @ManyToOne
-    private SubAbaPortal subAba;
+    @Lob
+    private String texto;
 
     public Conteudo() {
 
     }
 
-    public void setSubAba(SubAbaPortal subAba) {
-        this.subAba = subAba;
+    public String getTexto() {
+        return texto;
     }
 
-    public SubAbaPortal getSubAba() {
-        return subAba;
+    public void setTexto(String texto) {
+        this.texto = texto;
     }
+
 }
