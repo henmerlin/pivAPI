@@ -299,10 +299,10 @@ new Vue({
         //Comandos Delete
         excluiEnquete: function (h) {
 
-            var self = this
+            var self = this;
 
-            self.delEnquete = h
-
+            self.delEnquete = h;
+            
         },
         doneExcluiEnquete: function (h) {
 
@@ -322,7 +322,7 @@ new Vue({
 
                 }
             });
-            self.fetchData()
+            self.fetchData();
         },
         
         //Comandos Fetch
