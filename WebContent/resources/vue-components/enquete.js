@@ -126,7 +126,7 @@ new Vue({
         this.getEnquetes();
         this.resetObjects();
     },
-    methods: {        
+    methods: {
                 
         //Comandos Formatação   
         dateInput: function (h) {

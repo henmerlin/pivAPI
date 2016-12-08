@@ -31,6 +31,12 @@ public class ConteudoController extends AbstractController {
     public ConteudoController() {
 
     }
+        
+    public void create() {
+        
+        
+        
+    }
 
     @Get
     @Path("/comunicacao/conteudo/{a.id}")

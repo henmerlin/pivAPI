@@ -4,6 +4,8 @@ import java.util.Calendar;
 
 import javax.persistence.Entity;
 import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.NotEmpty;
@@ -16,6 +18,7 @@ public class Conteudo extends ComponentePortal {
     private String texto;
     
     @NotNull
+    @ManyToOne
     private Notificacao notificacao;
     
     @NotNull
@@ -25,6 +28,7 @@ public class Conteudo extends ComponentePortal {
     private Calendar dataCriacao; 
     
     @NotNull
+    @ManyToOne
     private ConteudoCategoria categoria;
 
     public Conteudo() {
