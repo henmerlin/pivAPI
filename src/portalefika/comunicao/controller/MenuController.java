@@ -17,17 +17,17 @@ import portalefika.controller.AbstractController;
 
 @Controller
 @RequestScoped
-public class AbaPortalController extends AbstractController {
+public class MenuController extends AbstractController {
 
     @Inject
     private AbaPortalDAO abaDao;
 
-    public AbaPortalController() {
+    public MenuController() {
 
     }
 
     @Get
-    @Path("/comunicacao/aba/{a.id}")
+    @Path("/portalefika/menu/{a.id}")
     public void visualiza(AbaPortal a) {
         AbaPortal a1 = (AbaPortal) abaDao.buscarPorId(a);
 
@@ -38,7 +38,7 @@ public class AbaPortalController extends AbstractController {
 
     @Post
     @Consumes("application/json")
-    @Path("/comunicacao/aba/")
+    @Path("/portalefika/menu/")
     public void adiciona(AbaPortal abaPortal) {
         try {
             abaDao.cadastrar(abaPortal);
@@ -49,7 +49,7 @@ public class AbaPortalController extends AbstractController {
     }
 
     @Get
-    @Path("/comunicacao/aba/")
+    @Path("/portalefika/menu/")
     public void lista() {
 
         List<ComponentePortal> l = abaDao.listar(new AbaPortal());
@@ -60,7 +60,7 @@ public class AbaPortalController extends AbstractController {
     }
 
     @Consumes("application/json")
-    @Path("/comunicacao/aba/delete")
+    @Path("/portalefika/menu/delete")
     @Post
     public void remove(AbaPortal abaPortal) {
         try {
@@ -71,7 +71,7 @@ public class AbaPortalController extends AbstractController {
     }
 
     @Consumes("application/json")
-    @Path("/comunicacao/aba/update")
+    @Path("/portalefika/menu/update")
     @Post
     public void atualiza(AbaPortal abaPortal) {
         try {

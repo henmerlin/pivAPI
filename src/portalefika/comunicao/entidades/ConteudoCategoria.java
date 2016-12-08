@@ -1,21 +1,25 @@
 package portalefika.comunicao.entidades;
 
 import java.util.List;
+import javax.persistence.CascadeType;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "PE_COMUNICACAO_CATEGORIA_CONTEUDO")
-public class ConteudoCategoria {
+public class ConteudoCategoria extends ComponentePortal {
 
-    private List<Conteudo> categorias;
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "categoria", cascade = CascadeType.REMOVE, orphanRemoval = true)
+    private List<Conteudo> conteudos;
 
-    public void setCategorias(List<Conteudo> categorias) {
-        this.categorias = categorias;
+    public List<Conteudo> getConteudos() {
+        return conteudos;
     }
 
-    public List<Conteudo> getCategorias() {
-        return categorias;
+    public void setConteudos(List<Conteudo> conteudos) {
+        this.conteudos = conteudos;
     }
 }
