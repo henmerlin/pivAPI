@@ -6,10 +6,12 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "PE_CONTEUDO")
-public class Conteudo extends ComponenteComImagem {
+public class Conteudo extends ComponentePortal {
 
     @Lob
     private String texto;
+    
+    private Notificacao notificacao;
 
     public Conteudo() {
 
@@ -23,4 +25,11 @@ public class Conteudo extends ComponenteComImagem {
         this.texto = texto;
     }
 
+    public void setNotificacao(Notificacao notificacao) {
+        this.notificacao = notificacao;
+    }
+
+    public Notificacao getNotificacao() {
+        return notificacao;
+    }
 }

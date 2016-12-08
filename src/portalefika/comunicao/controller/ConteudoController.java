@@ -54,19 +54,19 @@ public class ConteudoController extends AbstractController {
         }
     }
 
-    @Post
-    @Path("/comunicacao/conteudo/upload")
-    public void upload(Conteudo c, UploadedFile imagem) {
-
-        try {
-            c = (Conteudo) dao.buscarPorId(c);
-            c.setImagemUrl(am.upload(imagem));
-            dao.editar(c);
-            result.use(Results.json()).from(c).serialize();
-        } catch (PersistenciaException | UploadException e) {
-            result.use(Results.json()).from(e).serialize();
-        }
-    }
+//    @Post
+//    @Path("/comunicacao/conteudo/upload")
+//    public void upload(Conteudo c, UploadedFile imagem) {
+//
+//        try {
+//            c = (Conteudo) dao.buscarPorId(c);
+//            //c.setImagem(am.upload(imagem));
+//            dao.editar(c);
+//            result.use(Results.json()).from(c).serialize();
+//        } catch (PersistenciaException | UploadException e) {
+//            result.use(Results.json()).from(e).serialize();
+//        }
+//    }
 
     @Get
     @Path("/comunicacao/conteudo/")

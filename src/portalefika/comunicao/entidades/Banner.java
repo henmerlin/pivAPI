@@ -4,7 +4,7 @@ import java.util.Date;
 
 import javax.validation.constraints.NotNull;
 
-public class Banner extends ComponenteComImagem {
+public class Banner extends ComponentePortal {
 
     @NotNull
     private BannerLocais local;

@@ -14,37 +14,16 @@ import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+
 @Entity
 @Table(name = "PE_ENQUETE")
-public class Enquete extends ComponentePortal {
-
-    public Enquete() {
-        
-        this.perguntas = new ArrayList<>();
-        
-    }
+public class Enquete extends ComponenteExpiravel {
 
     @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "enquete", fetch = FetchType.EAGER, orphanRemoval = true)
     private List<Pergunta> perguntas;
-    
-    private Calendar dataInicio;
 
-    private Calendar dataFim;
-
-    public Calendar getDataInicio() {
-        return dataInicio;
-    }
-
-    public void setDataInicio(Calendar dataInicio) {
-        this.dataInicio = dataInicio;
-    }
-
-    public Calendar getDataFim() {
-        return dataFim;
-    }
-
-    public void setDataFim(Calendar dataFim) {
-        this.dataFim = dataFim;
+    public Enquete() {
+        this.perguntas = new ArrayList<>();
     }
 
     public List<Pergunta> getPerguntas() {
