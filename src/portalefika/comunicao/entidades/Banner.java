@@ -2,50 +2,38 @@ package portalefika.comunicao.entidades;
 
 import java.util.Date;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
 import javax.validation.constraints.NotNull;
 
-public class Banner extends ComponentePortal {
+
+@Entity
+@Table(name = "PE_COMUNICACAO_BANNER")
+public class Banner extends ComponentePortalExpiravel {
 
     @NotNull
-    private BannerLocais local;
-
-    @NotNull
-    private Date entrada;
-
-    @NotNull
-    private Date saida;
+    private BannerLocal local;
     
+    @NotNull
     private Conteudo conteudo;
     
     private Integer ordem;
+    
+    @NotNull
+    private ImagemPortal imagem;
     
 
     public Banner() {
 
     }
 
-    public void setLocal(BannerLocais local) {
+    public void setLocal(BannerLocal local) {
         this.local = local;
     }
 
-    public BannerLocais getLocal() {
+    public BannerLocal getLocal() {
         return local;
-    }
-
-    public void setEntrada(Date entrada) {
-        this.entrada = entrada;
-    }
-
-    public Date getEntrada() {
-        return entrada;
-    }
-
-    public void setSaida(Date saida) {
-        this.saida = saida;
-    }
-
-    public Date getSaida() {
-        return saida;
     }
 
     public void setOrdem(Integer ordem) {
@@ -62,5 +50,13 @@ public class Banner extends ComponentePortal {
 
     public Conteudo getConteudo() {
         return conteudo;
+    }
+
+    public void setImagem(ImagemPortal imagem) {
+        this.imagem = imagem;
+    }
+
+    public ImagemPortal getImagem() {
+        return imagem;
     }
 }

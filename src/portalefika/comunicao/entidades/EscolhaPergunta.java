@@ -15,7 +15,7 @@ import javax.validation.constraints.NotNull;
  * @author G0034481
  */
 @Entity
-@Table(name = "PE_ESCOLHA_PERGUNTA_ENQUETE")
+@Table(name = "PE_COMUNICACAO_ESCOLHA_PERGUNTA")
 public class EscolhaPergunta extends ComponentePortal {
 
     public EscolhaPergunta() {

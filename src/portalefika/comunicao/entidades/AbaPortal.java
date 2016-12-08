@@ -10,7 +10,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "PE_ABA")
+@Table(name = "PE_COMUNICACAO_ABA")
 public class AbaPortal extends ComponentePortal {
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "abaPortal", cascade = CascadeType.REMOVE, orphanRemoval = true)

@@ -20,7 +20,7 @@ import org.hibernate.validator.constraints.NotEmpty;
  * @author G0034481
  */
 @Entity
-@Table(name = "PE_RESPOSTA_ENQUETE")
+@Table(name = "PE_COMUNICACAO_RESPOSTA_ENQUETE")
 public class RespostaEnquete implements Serializable {
 
     public RespostaEnquete() {

@@ -2,7 +2,8 @@ package portalefika.comunicao.entidades;
 
 import java.sql.Blob;
 
-public class ImagemPortal {
+
+public class ImagemPortal extends Component{
     
     
     private Blob imagem;

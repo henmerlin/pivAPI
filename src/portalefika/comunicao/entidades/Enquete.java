@@ -16,8 +16,8 @@ import javax.persistence.Table;
 
 
 @Entity
-@Table(name = "PE_ENQUETE")
-public class Enquete extends ComponenteExpiravel {
+@Table(name = "PE_COMUNICACAO_ENQUETE")
+public class Enquete extends ComponentePortalExpiravel {
 
     @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "enquete", fetch = FetchType.EAGER, orphanRemoval = true)
     private List<Pergunta> perguntas;

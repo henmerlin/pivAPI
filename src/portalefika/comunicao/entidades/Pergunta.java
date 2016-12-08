@@ -21,7 +21,7 @@ import org.hibernate.validator.constraints.NotEmpty;
  * @author G0034481
  */
 @Entity
-@Table(name = "PE_PERGUNTA_ENQUETE")
+@Table(name = "PE_COMUNICACAO_PERGUNTA_ENQUETE")
 public class Pergunta extends ComponentePortal {
 
     public Pergunta() {

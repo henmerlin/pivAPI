@@ -5,6 +5,8 @@
  */
 package testes.string;
 
+import portalefika.comunicao.entidades.DimensaoImagemPortal;
+
 import portalefika.util.StringUtil;
 
 /**
@@ -17,10 +19,11 @@ public class String {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-
-        java.lang.String oi = "bozo.xls";
-
-        StringUtil.getArquivoSuffix(oi);
+        
+        
+        System.out.print(DimensaoImagemPortal.Media);
+        
+        
 
     }
 

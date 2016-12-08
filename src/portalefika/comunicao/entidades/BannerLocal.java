@@ -1,14 +1,8 @@
 package portalefika.comunicao.entidades;
 
 
-public enum BannerLocais {
+public enum BannerLocal {
 
-    BillBoard("BillBoard");
-
-    String nome;
-
-    BannerLocais(String nome) {
-        this.nome = nome;
-    }
+    Carousel, MiniCarousel;
 
 }

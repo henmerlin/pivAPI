@@ -6,7 +6,7 @@ import javax.persistence.MappedSuperclass;
 
 
 @MappedSuperclass
-public abstract class ComponenteExpiravel extends ComponentePortal {
+public abstract class ComponentePortalExpiravel extends ComponentePortal {
     
     private Calendar dataInicio;
 
