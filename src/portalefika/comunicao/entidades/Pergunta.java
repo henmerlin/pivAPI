@@ -5,8 +5,13 @@
  */
 package portalefika.comunicao.entidades;
 
+import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.NotEmpty;
@@ -20,7 +25,13 @@ import org.hibernate.validator.constraints.NotEmpty;
 public class Pergunta extends ComponentePortal {
 
     public Pergunta() {
+        
+        this.escolhaPerguntas = new ArrayList<>();
+        
     }
+    
+    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "pergunta", fetch = FetchType.EAGER, orphanRemoval = true)
+    private List<EscolhaPergunta> escolhaPerguntas;
     
     @NotNull
     @ManyToOne
@@ -44,5 +55,13 @@ public class Pergunta extends ComponentePortal {
     public void setTipoPergunta(String tipoPergunta) {
         this.tipoPergunta = tipoPergunta;
     }   
+
+    public List<EscolhaPergunta> getEscolhaPerguntas() {
+        return escolhaPerguntas;
+    }
+
+    public void setEscolhaPerguntas(List<EscolhaPergunta> escolhaPerguntas) {
+        this.escolhaPerguntas = escolhaPerguntas;
+    }
     
 }
