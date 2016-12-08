@@ -1,4 +1,4 @@
-Portal Efika - Modulo Comunicação
+Portal Efika - Modulo ComunicaÃ§Ã£o
 ===================
 ### Desenvolvedor
 \#| Nome
@@ -15,7 +15,7 @@ UML| JDeveloper 12c
 
 ===================
 
-### Implementação
+### ImplementaÃ§Ã£o
 
 Item     | Ferramenta
 -------- | ---
@@ -23,4 +23,3 @@ Framework Server-Side| Vraptor 4
 Framework Client-Side| Vue.js 2.0
 Templates| Sitemesh
 ORM| JPA (Hibernate)
-WebServices| SOAP
