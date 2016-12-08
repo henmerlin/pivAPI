@@ -5,6 +5,8 @@ import java.util.Calendar;
 import javax.persistence.Entity;
 import javax.persistence.Lob;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 @Table(name = "PE_COMUNICACAO_CONTEUDO")
@@ -13,12 +15,16 @@ public class Conteudo extends ComponentePortal {
     @Lob
     private String texto;
     
+    @NotNull
     private Notificacao notificacao;
     
+    @NotNull
     private TipoConteudo tipo;
     
+    @NotEmpty
     private Calendar dataCriacao; 
     
+    @NotNull
     private ConteudoCategoria categoria;
 
     public Conteudo() {

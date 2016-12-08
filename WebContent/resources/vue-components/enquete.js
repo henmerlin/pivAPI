@@ -17,6 +17,7 @@ new Vue({
         escolhaPerguntas: null,
         editEnquete: {
             "enquete": {
+                "usuario": null,
                 "dataInicio": null,
                 "dataFim": null,
                 "id": null,
@@ -26,6 +27,7 @@ new Vue({
         },
         addEnquete: {
             "enquete": {
+                "usuario": null,
                 "dataInicio": null,
                 "dataFim": null,
                 "id": null,
@@ -35,6 +37,7 @@ new Vue({
         },
         delEnquete: {
             "enquete": {
+                "usuario": null,
                 "dataInicio": null,
                 "dataFim": null,
                 "id": null,
@@ -49,6 +52,7 @@ new Vue({
                 "ativo": false,
                 "tipoPergunta": null,
                 "enquete": {
+                    "usuario": null,
                     "dataInicio": null,
                     "dataFim": null,
                     "id": null,
@@ -64,6 +68,7 @@ new Vue({
                 "ativo": false,
                 "tipoPergunta": null,
                 "enquete": {
+                    "usuario": null,
                     "dataInicio": null,
                     "dataFim": null,
                     "id": null,
@@ -83,6 +88,7 @@ new Vue({
                     "ativo": false,
                     "tipoPergunta": null,
                     "enquete": {
+                        "usuario": null,
                         "dataInicio": null,
                         "dataFim": null,
                         "id": null,
@@ -104,6 +110,7 @@ new Vue({
                     "ativo": false,
                     "tipoPergunta": null,
                     "enquete": {
+                        "usuario": null,
                         "dataInicio": null,
                         "dataFim": null,
                         "id": null,

@@ -14,6 +14,7 @@ import br.com.caelum.vraptor.view.Results;
 import java.util.List;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
+import portalefika.autenticacao.annotation.Admin;
 import portalefika.comunicao.dal.EnqueteDAO;
 import portalefika.comunicao.dal.exception.PersistenciaException;
 import portalefika.comunicao.entidades.Enquete;
@@ -33,6 +34,7 @@ public class EnqueteController extends AbstractController {
     public EnqueteController() {
     }
 
+    @Admin
     public void create() {
 
     }

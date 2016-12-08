@@ -2,20 +2,21 @@ package portalefika.comunicao.entidades;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
-
-import portalefika.autenticacao.dal.webservice.Usuario;
+import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 @Table(name = "PE_COMUNICACAO_NOTIFICACAO")
 public class Notificacao extends ComponentePortalExpiravel {
     
-    private Usuario criador;
+    @NotEmpty
+    private String usuario;
 
-    public void setCriador(Usuario criador) {
-        this.criador = criador;
+    public String getUsuario() {
+        return usuario;
     }
 
-    public Usuario getCriador() {
-        return criador;
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
     }
+    
 }

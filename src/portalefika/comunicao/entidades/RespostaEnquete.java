@@ -6,7 +6,6 @@
 package portalefika.comunicao.entidades;
 
 import java.io.Serializable;
-import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -37,6 +36,9 @@ public class RespostaEnquete implements Serializable {
     @ManyToOne
     private Pergunta pergunta;
     
+    @NotEmpty
+    private String usuario;
+    
     public Integer getId() {
         return id;
     }
@@ -60,5 +62,13 @@ public class RespostaEnquete implements Serializable {
     public void setPergunta(Pergunta pergunta) {
         this.pergunta = pergunta;
     }  
+
+    public String getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
+    }   
     
 }

@@ -6,7 +6,6 @@
 package portalefika.comunicao.entidades;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -18,6 +17,8 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "PE_COMUNICACAO_ENQUETE")
 public class Enquete extends ComponentePortalExpiravel {
+    
+    private String usuario;
 
     @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "enquete", fetch = FetchType.EAGER, orphanRemoval = true)
     private List<Pergunta> perguntas;
@@ -33,7 +34,13 @@ public class Enquete extends ComponentePortalExpiravel {
     public void setPerguntas(List<Pergunta> perguntas) {
         this.perguntas = perguntas;
     }
-    
-    
+
+    public String getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
+    }
 
 }
