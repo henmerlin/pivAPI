@@ -12,7 +12,7 @@ import portalefika.util.StringUtil;
  */
 public class ArquivoManager {
 
-    private String str;
+    private final String str;
 
     private File file;
 
@@ -25,7 +25,6 @@ public class ArquivoManager {
 
     public String upload(UploadedFile foto) throws UploadException {
         try {
-
             String imgUrl = this.str + StringUtil.getArquivoSuffix(foto.getFileName());
             this.file = new File(DIR, imgUrl);
             foto.writeTo(file);

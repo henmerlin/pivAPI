@@ -134,8 +134,6 @@ new Vue({
                     self.fetchData()
                 }
             });
-
-            self.fetchData()
         },
         updateAba: function(h) {
             var self = this
