@@ -62,9 +62,8 @@
                                 </td>
 
                                 <td style="width: 20%;">
-                                    <button type="button" class="btn btn-primary glyphicon glyphicon-edit
-                                            glyphicon glyphicon-edit btn-sm" data-toggle="modal" data-target="#modEnquete" @click="editarEnquete(enquete)" data-backdrop="static"></button>
-                                    <button class="btn btn-danger glyphicon glyphicon-trash btn-sm" @click="excluiEnquete(enquete)" data-toggle="modal" data-target="#excluiEnquete"></button>
+                                    <button type="button" class="btn btn-primary glyphicon glyphicon-edit btn-sm" data-toggle="modal" data-target="#modEnquete" @click="editarEnquete(enquete)" data-backdrop="static"></button>
+                                    <button type="button" class="btn btn-danger glyphicon glyphicon-trash btn-sm" @click="excluiEnquete(enquete)" data-toggle="modal" data-target="#excluiEnquete"></button>
                                 </td>
 
                             </tr>

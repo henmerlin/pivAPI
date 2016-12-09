@@ -17,7 +17,6 @@ public class Conteudo extends ComponentePortal {
     @Lob
     private String texto;
     
-    @NotNull
     @ManyToOne
     private Notificacao notificacao;
     
