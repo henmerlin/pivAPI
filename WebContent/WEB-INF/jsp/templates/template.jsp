@@ -29,6 +29,8 @@
         src="${pageContext.request.contextPath}/resources/jquery-3.1.1/jquery-3.1.1.min.js"></script>
         <script
         src="${pageContext.request.contextPath}/resources/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+        <script
+        src="${pageContext.request.contextPath}/resources/custom/custom.js"></script>
 
         <style>
 
@@ -70,40 +72,56 @@
                             <li><a href="#">Link <span class="sr-only">(current)</span></a></li>
                             <li><a href="#">Link</a></li>
                             <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Funcionalidades <span class="caret"></span></a>
                                 <ul class="dropdown-menu">
-
-                                    <li><a href="#">Action</a></li>
-                                    <li><a href="#">Another action</a></li>
-                                    <li><a href="#">Something else here</a></li>
-                                    <li role="separator" class="divider"></li>
-                                    <li><a href="#">Separated link</a></li>
-                                    <li role="separator" class="divider"></li>
-                                    <li><a href="#">One more separated link</a></li>
-
-                                </ul>
-                            </li>
-                        </ul>
-                        <ul class="nav navbar-nav navbar-right">
-
-
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                    <span class="glyphicon glyphicon-cog " aria-hidden="true"></span> Administração <span class="caret"></span></a>
-                                <ul class="dropdown-menu">
-
-                                    <li><a href="${linkTo[UsuarioController].logout()}">${sessionUsuarioEfika.usuario.login}, Sair</a></li>
-                                    <li role="separator" class="divider"></li>
                                     <li><a href="${linkTo[EditorController].create()}">Editor</a></li>
                                     <li><a href="${linkTo[EnqueteController].create()}">Enquete</a></li>
                                     <li><a href="${linkTo[ConteudoController].create()}">PopUp</a></li>
                                     <li role="separator" class="divider"></li>
                                     <li><a href="#">Separated link</a></li>
-
+                                    <li role="separator" class="divider"></li>
+                                    <li><a href="#">One more separated link</a></li>
                                 </ul>
                             </li>
+                        </ul>
+                        <ul class="nav navbar-nav navbar-right">
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-user"></span>Perfil <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
 
-
+                                    <li>
+                                        <div class="navbar-login">
+                                            <div class="row">
+                                                <div class="col-lg-4">
+                                                    <p class="text-center">
+                                                        <span class="glyphicon glyphicon-user icon-size"></span>
+                                                    </p>
+                                                </div>
+                                                <div class="col-lg-7">
+                                                    <p class="text-left"><strong>Nome</strong></p>
+                                                    <p class="text-left small">nome.sobrenome@telefonica.com</p>
+                                                    <p class="text-left">
+                                                        <a href="#" class="btn btn-primary btn-block btn-sm">Meu Perfil</a>
+                                                    </p>
+                                                </div>
+                                                <div class="col-lg-1"></div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="divider"></li>
+                                    <li>
+                                        <div class="navbar-login navbar-login-session">
+                                            <div class="row">
+                                                <div class="col-lg-12">
+                                                    <p>
+                                                        <a href="${linkTo[UsuarioController].logout()}" class="btn btn-danger btn-block">Sair</a>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </li>
                         </ul>
                     </div><!-- /.navbar-collapse -->
                 </div><!-- /.container-fluid -->
