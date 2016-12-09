@@ -7,7 +7,9 @@
     <div class="page-header">
         <h1>Editor</h1>
     </div>
-    <div id="editor">
+
+    <div id="valert"></div>
+    <div id="editor" v-cloak>
         <div class="row">
             <div class="col-md-12">
                 <h4>Abas</h4>

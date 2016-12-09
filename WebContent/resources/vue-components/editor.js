@@ -6,13 +6,46 @@
 
 
 // URL - REST
-abaURL = "/comunicacao/aba/";
-subAbaURL = "/comunicacao/subAba/";
-conteudoURL = "/comunicacao/conteudo/";
+var abaURL = "/comunicacao/aba/";
+var subAbaURL = "/comunicacao/subAba/";
+var conteudoURL = "/comunicacao/conteudo/";
 
+var alert = new Vue({
+    el: '#valert',
+    template: '<div class="alert alert-danger" v-show="ativo" role="alert">\
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">\n\
+                    <span aria-hidden="true">&times;</span>\n\
+                    </button><strong>{{premsg}}</strong> {{ mensagem }}</div>',
+    data: {
+        ativo: false,
+        premsg: "Erro!",
+        mensagem: "Mensagem de Teste."
+    },
+    methods: {
+        error: function(msg) {
+            this.ativo = false;
+            this.ativo = true;
+            this.premsg = "Erro!"
+            this.mensagem = msg
+
+
+            console.log(this.ativo)
+
+        },
+        success: function(msg) {
+            this.premsg = "Sucesso!"
+            this.mensagem = msg
+        },
+        limpar: function() {
+            this.ativo = false
+            this.erro = false;
+            this.mensagem = "";
+        }
+    },
+})
 
 // Instancia
-new Vue({
+var dev = new Vue({
     el: '#editor',
     data: {
         abas: null,
@@ -29,25 +62,22 @@ new Vue({
         activedConteudo: null,
         deletedConteudo: null
     },
+    components: {},
     created: function() {
         this.getAbas();
     },
     methods: {
         clearVars: function() {
             var self = this;
-
             self.activedAba_ = null;
             self.editedAba = null;
             self.deletedAba = null;
-
             self.editedSubAba = null;
             self.activedSubAba = null;
             self.deletedSubAba = null;
-
             self.editedConteudo = null;
             self.activedConteudo = null;
             self.deletedConteudo = null;
-
         },
         getAbas: function() {
             var self = this;
@@ -57,7 +87,6 @@ new Vue({
         },
         fetchData: function() {
             var self = this;
-
             setTimeout(function() {
                 self.getAbas()
             }, 600)
@@ -65,10 +94,8 @@ new Vue({
         // Aba:
         novaAba: function() {
             var self = this;
-
             var _novaAba = {"abaPortal": {"titulo": "Nova Aba", "ativo": false}};
             self.adicionarAba(_novaAba);
-
         },
         editAba: function(h) {
             var self = this
@@ -97,7 +124,6 @@ new Vue({
                     $('#modalAba').modal('hide');
                 }
             });
-
             self.clearVars()
             self.fetchData()
 
@@ -108,7 +134,6 @@ new Vue({
         },
         doneEditAba: function(h) {
             var self = this;
-
             if (!h.titulo) {
                 self.fetchData()
                 return;
@@ -120,7 +145,6 @@ new Vue({
         // Aba
         adicionarAba: function(h) {
             var self = this;
-
             $.ajax({
                 type: "POST",
                 url: abaURL,
@@ -159,13 +183,11 @@ new Vue({
         // SubAba
         novaSubAba: function() {
             var self = this;
-
             var _novaSubAba = {"subAbaPortal": {"titulo": "Nova SubAba",
                     "ativo": false,
                     "abaPortal": self.activedAba,
                     "conteudo": {"titulo": "Novo Conteudo",
                         "ativo": false}}};
-
             self.adicionarSubAba(_novaSubAba);
         },
         editSubAba: function(h) {
@@ -174,7 +196,6 @@ new Vue({
         },
         doneEditSubAba: function(h) {
             var self = this;
-
             if (!h.titulo) {
                 self.fetchData()
                 return;
@@ -198,7 +219,6 @@ new Vue({
             }
 
             var aba = self.activedAba;
-
             self.deleteSubAba(self.deletedSubAba)
 
             self.fetchData()
@@ -209,7 +229,6 @@ new Vue({
         },
         adicionarSubAba: function(h) {
             var self = this;
-
             $.ajax({
                 type: "POST",
                 url: subAbaURL,
@@ -220,13 +239,19 @@ new Vue({
                 },
                 success: function(data) {
                     console.log(data)
-                    self.activedAba.subAbas.push(data.subAbaPortal)
-                    self.fetchData()
+
+                    if (data.persistenciaException) {
+                        alert.error("Teste");
+                        return;
+                    } else {
+                        self.activedAba.subAbas.push(data.subAbaPortal)
+                        self.fetchData()
+                    }
+
                 }
             });
         },
         deleteSubAba: function(h) {
-
             $.ajax({
                 type: "POST",
                 url: subAbaURL + "delete",
@@ -248,7 +273,6 @@ new Vue({
             // Resolver Circularidade nos Objetos
             self.activedAba.subAbas = null;
             h.abaPortal = self.activedAba;
-
             if (!h.titulo) {
                 return;
             }
@@ -288,7 +312,6 @@ new Vue({
         },
         doneEditConteudo: function(h) {
             var self = this;
-
             if (!h.titulo) {
                 self.fetchData()
                 return;
@@ -315,7 +338,6 @@ new Vue({
             }
 
             var subAba = self.activedSubAba;
-
             self.deleteConteudo(self.deletedConteudo)
 
             self.fetchData()
@@ -326,9 +348,7 @@ new Vue({
         },
         adicionarConteudo: function(h) {
             var self = this;
-
             h.conteudo.subAbaPortal = self.activedSubAba;
-
             $.ajax({
                 type: "POST",
                 url: conteudoURL,
@@ -367,7 +387,6 @@ new Vue({
             // Resolver Circularidade nos Objetos
             self.activedSubAba.conteudos = null;
             h.subAbaPortal = self.activedSubAba;
-
             if (!h.titulo) {
                 return;
             }
