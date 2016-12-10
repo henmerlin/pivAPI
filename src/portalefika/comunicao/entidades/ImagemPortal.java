@@ -2,13 +2,9 @@ package portalefika.comunicao.entidades;
 
 import java.sql.Blob;
 
+public class ImagemPortal extends Component {
 
-public class ImagemPortal extends Component{
-    
-    
     private Blob imagem;
-    
-    private DimensaoImagemPortal dimensao;
 
     public ImagemPortal() {
     }
@@ -21,11 +17,4 @@ public class ImagemPortal extends Component{
         return imagem;
     }
 
-    public void setDimensao(DimensaoImagemPortal dimensao) {
-        this.dimensao = dimensao;
-    }
-
-    public DimensaoImagemPortal getDimensao() {
-        return dimensao;
-    }
 }

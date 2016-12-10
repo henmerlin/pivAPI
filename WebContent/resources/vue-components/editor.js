@@ -5,7 +5,7 @@
  */
 
 
-// URL - REST
+// URL - REST Controllers
 var abaURL = "/comunicacao/aba/";
 var subAbaURL = "/comunicacao/subAba/";
 var conteudoURL = "/comunicacao/conteudo/";
@@ -27,10 +27,6 @@ var alert = new Vue({
             this.ativo = true;
             this.premsg = "Erro!"
             this.mensagem = msg
-
-
-            console.log(this.ativo)
-
         },
         success: function(msg) {
             this.premsg = "Sucesso!"
@@ -153,7 +149,7 @@ var dev = new Vue({
                 beforeSend: function(xhrObj) {
                     xhrObj.setRequestHeader("Content-Type", "application/json");
                 },
-                success: function(data, textStatus, jqXHR) {
+                success: function(data) {
                     self.abas.push(data.abaPortal)
                     self.fetchData()
                 }
@@ -186,8 +182,12 @@ var dev = new Vue({
             var _novaSubAba = {"subAbaPortal": {"titulo": "Nova SubAba",
                     "ativo": false,
                     "abaPortal": self.activedAba,
-                    "conteudo": {"titulo": "Novo Conteudo",
-                        "ativo": false}}};
+                    "conteudo": {
+                        "titulo": "Novo Conteudo",
+                        "ativo": false,
+                        "dataCriacao": new Date()
+                    }}};
+
             self.adicionarSubAba(_novaSubAba);
         },
         editSubAba: function(h) {
@@ -303,7 +303,7 @@ var dev = new Vue({
         },
         novaConteudo: function() {
             var self = this;
-            var _novoConteudo = {"conteudo": {"titulo": "Novo ConteÃºdo", "ativo": false}};
+            var _novoConteudo = {"conteudo": {"titulo": "Novo Conteúdo", "ativo": false}};
             self.adicionarConteudo(_novoConteudo);
         },
         editConteudo: function(h) {

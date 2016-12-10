@@ -17,10 +17,8 @@ public class ConteudoCategoria extends ComponentePortal {
     private List<Conteudo> conteudos;
 
     public ConteudoCategoria() {
-        
         this.conteudos = new ArrayList<>();
-        
-    }       
+    }
 
     public List<Conteudo> getConteudos() {
         return conteudos;

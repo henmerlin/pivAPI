@@ -1,15 +1,5 @@
-
-var data = {counter: 0}
-
-Vue.component('uploader', {
-    template: '<input type="file" @change="onFileChange">',
-    data: function() {
-        return data
-    }
-})
-
 new Vue({
-    el: '#uploader',
+    el: '#app',
     data: {
         image: ''
     },
