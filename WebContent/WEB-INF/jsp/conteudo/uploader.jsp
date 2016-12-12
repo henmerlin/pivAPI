@@ -10,12 +10,18 @@
 
     <div id="app">
         <div v-if="!image">
-            <h2>Select an image</h2>
-            <input type="file" @change="onFileChange">
+            <h4>Selecione uma imagem</h4>
+            <span class="btn btn-default">
+                <input type="file" @change="onFileChange">
+            </span>
         </div>
         <div v-else>
-            <img :src="image" />
-            <button @click="removeImage">Remove image</button>
+            <img :src="image" style="width: 450px"/>
+            <br>
+            <br>
+            <button type="button" class="btn btn-default" type="file" @click="removeImage">
+                <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+            </button>
         </div>
         {{image}}
     </div>

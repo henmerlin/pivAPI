@@ -303,7 +303,7 @@ var dev = new Vue({
         },
         novaConteudo: function() {
             var self = this;
-            var _novoConteudo = {"conteudo": {"titulo": "Novo Conteúdo", "ativo": false}};
+            var _novoConteudo = {"conteudo": {"titulo": "Novo Conteï¿½do", "ativo": false}};
             self.adicionarConteudo(_novoConteudo);
         },
         editConteudo: function(h) {
@@ -359,7 +359,6 @@ var dev = new Vue({
                 },
                 success: function(data) {
                     self.activedConteudo = data;
-                    self.activedSubAba.conteudos.push(data.conteudo)
                     self.fetchData()
                 }
             });
@@ -376,7 +375,6 @@ var dev = new Vue({
                 },
                 success: function() {
                     $('#modalConteudo').modal('hide');
-                    self.activedSubAba.conteudos.pop(h)
                     self.fetchData()
                 }
             });
@@ -385,7 +383,6 @@ var dev = new Vue({
             var self = this
 
             // Resolver Circularidade nos Objetos
-            self.activedSubAba.conteudos = null;
             h.subAbaPortal = self.activedSubAba;
             if (!h.titulo) {
                 return;
@@ -393,7 +390,7 @@ var dev = new Vue({
 
             $.ajax({
                 type: "POST",
-                url: conteudoURL + "update",
+                url: conteudoURL + "modificar",
                 data: JSON.stringify(h),
                 dataType: "json",
                 beforeSend: function(xhrObj) {
@@ -409,6 +406,11 @@ var dev = new Vue({
             self.activedConteudo = h
             self.buscaConteudoPorId(h)
         },
+        // Imagem Uploader
+
+
+
+
         // Util
         buscaAbaPorId: function(h) {
             var self = this;

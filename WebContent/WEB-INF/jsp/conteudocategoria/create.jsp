@@ -1,4 +1,4 @@
-<%-- 
+<%--
     Document   : create
     Created on : 09/12/2016, 10:11:55
     Author     : G0034481
@@ -15,16 +15,16 @@
         <h1>Conteudo categoria</h1>
     </div>
 
-    <div id="conteduocategoria">
+    <div id="conteduocategoria" v-cloak>
 
         <table class="table table-bordered">
 
-            <thead>                
-                <tr>                    
+            <thead>
+                <tr>
                     <th>Nome</th>
                     <th>Ativo</th>
-                    <th>Ações</th>                    
-                </tr>                
+                    <th>Ações</th>
+                </tr>
             </thead>
             <tbody>
                 <tr v-for="categoria in categorias" :key="categoria.id">
@@ -33,12 +33,12 @@
                         <label v-if="categoria.ativo == true" >Ativo</label>
                         <label v-if="categoria.ativo == false" >Inativo</label>
                     </td>
-                    <td>                        
+                    <td>
                         <button type="button" class="btn btn-primary glyphicon glyphicon-edit btn-sm" data-toggle="modal" data-target="#modConteudo" @click="updateModConteudo(categoria)"></button>
-                        <button type="button" class="btn btn-danger glyphicon glyphicon-trash btn-sm" data-toggle="modal" data-target="#excluiConteudo" @click="updateDelConteudo(categoria)"></button>                        
+                        <button type="button" class="btn btn-danger glyphicon glyphicon-trash btn-sm" data-toggle="modal" data-target="#excluiConteudo" @click="updateDelConteudo(categoria)"></button>
                     </td>
                 </tr>
-            </tbody>            
+            </tbody>
         </table>
 
         <br />

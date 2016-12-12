@@ -3,6 +3,7 @@ package portalefika.comunicao.entidades;
 import java.util.Calendar;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -21,9 +22,8 @@ public class Conteudo extends ComponentePortal {
     @ManyToOne
     private ConteudoCategoria categoria;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     private ImagemPortal imagem;
-    
 
     public Conteudo() {
 

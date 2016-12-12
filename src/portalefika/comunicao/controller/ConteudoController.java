@@ -42,7 +42,7 @@ public class ConteudoController extends AbstractController {
         Conteudo a1 = (Conteudo) dao.buscarPorId(a);
 
         if (a1 != null) {
-            result.use(Results.json()).from(a1).serialize();
+            includeSerializer(a1);
         }
     }
 
@@ -52,27 +52,14 @@ public class ConteudoController extends AbstractController {
     public void adiciona(Conteudo c) {
         try {
             Calendar calendar = Calendar.getInstance();
-            c.setDataCriacao(calendar);            
+            c.setDataCriacao(calendar);
             dao.cadastrar(c);
-            result.use(Results.json()).from(c).serialize();
+            includeSerializer(c);
         } catch (PersistenciaException e) {
             result.use(Results.json()).from(e).serialize();
         }
     }
 
-//    @Post
-//    @Path("/comunicacao/conteudo/upload")
-//    public void upload(Conteudo c, UploadedFile imagem) {
-//
-//        try {
-//            c = (Conteudo) dao.buscarPorId(c);
-//            //c.setImagem(am.upload(imagem));
-//            dao.editar(c);
-//            result.use(Results.json()).from(c).serialize();
-//        } catch (PersistenciaException | UploadException e) {
-//            result.use(Results.json()).from(e).serialize();
-//        }
-//    }
     @Get
     @Path("/comunicacao/conteudo/lista")
     public void lista() {
@@ -80,7 +67,7 @@ public class ConteudoController extends AbstractController {
         List<ComponentePortal> l = dao.listar(new Conteudo());
 
         if (l != null) {
-            result.use(Results.json()).from(l).include("categoria").include("imagem").serialize();
+            includeSerializer(l);
         }
     }
 
@@ -91,7 +78,7 @@ public class ConteudoController extends AbstractController {
         try {
             this.dao.excluir(a);
         } catch (PersistenciaException e) {
-            result.use(Results.json()).from(a).serialize();
+            result.use(Results.json()).from(e).serialize();
         }
     }
 
@@ -102,10 +89,14 @@ public class ConteudoController extends AbstractController {
 
         try {
             this.dao.editar(c);
-            this.result.use(Results.json()).from(c).serialize();
+            includeSerializer(c);
         } catch (PersistenciaException e) {
             this.result.use(Results.json()).from(e).serialize();
         }
+    }
+
+    private void includeSerializer(Object a) {
+        result.use(Results.json()).from(a).include("categoria").include("imagem").serialize();
     }
 
     public void exibir() {

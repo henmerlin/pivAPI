@@ -15,7 +15,7 @@
         <h1>Enquete</h1>
     </div>
 
-    <div id="enquete">
+    <div id="enquete" v-cloak>
 
         <div class="row">
             <div class="col-md-12">
@@ -387,7 +387,7 @@
                     </div>
                 </div>
             </div>
-        </div>        
+        </div>
 
         <button class="btn btn-success btn-xs" data-toggle="modal" data-target="#criaEnquete" data-backdrop="static">Adicionar</button>
 
