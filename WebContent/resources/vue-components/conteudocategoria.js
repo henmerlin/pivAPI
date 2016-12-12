@@ -46,7 +46,7 @@ new Vue({
         //Comando lista
         getConteudoCategoria: function () {
             var self = this;
-            $.get(conteudoURL + "listar", function (data) {
+            $.get(conteudoURL + "lista", function (data) {
                 self.categorias = data.list;
             });
         },
@@ -112,9 +112,9 @@ new Vue({
                 success: function () {
                     self.resetObjects();
                     self.fetchConteudo();
-                    
+
                     $('#excluiConteudo').modal('hide');
-                    
+
                 }
             });
         },

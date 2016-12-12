@@ -56,8 +56,8 @@
                     <div class="modal-body">
 
                         <div class="form-group">
-                            <label>Titulo</label>
-                            <input type="text" class="form-control" placeholder="Titulo" v-model="addcategoria.categoria.titulo">
+                            <label>Nome</label>
+                            <input type="text" class="form-control" placeholder="Nome" v-model="addcategoria.categoria.titulo">
                         </div>
                         <div class="checkbox">
                             <label>
