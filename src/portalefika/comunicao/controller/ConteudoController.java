@@ -5,7 +5,6 @@ import br.com.caelum.vraptor.Controller;
 import br.com.caelum.vraptor.Get;
 import br.com.caelum.vraptor.Path;
 import br.com.caelum.vraptor.Post;
-import br.com.caelum.vraptor.observer.upload.UploadedFile;
 import br.com.caelum.vraptor.view.Results;
 import java.util.List;
 import javax.enterprise.context.RequestScoped;
@@ -16,7 +15,6 @@ import portalefika.comunicao.entidades.ComponentePortal;
 import portalefika.comunicao.entidades.Conteudo;
 import portalefika.controller.AbstractController;
 import portalefika.dal.ArquivoManager;
-import portalefika.dal.exception.UploadException;
 
 @Controller
 @RequestScoped
@@ -50,7 +48,7 @@ public class ConteudoController extends AbstractController {
 
     @Post
     @Consumes("application/json")
-    @Path("/comunicacao/conteudo/")
+    @Path("/comunicacao/conteudo/cadastrar")
     public void adiciona(Conteudo c) {
         try {
             dao.cadastrar(c);
@@ -75,7 +73,7 @@ public class ConteudoController extends AbstractController {
 //    }
 
     @Get
-    @Path("/comunicacao/conteudo/")
+    @Path("/comunicacao/conteudo/lista")
     public void lista() {
 
         List<ComponentePortal> l = dao.listar(new Conteudo());
@@ -86,7 +84,7 @@ public class ConteudoController extends AbstractController {
     }
 
     @Consumes("application/json")
-    @Path("/comunicacao/conteudo/delete")
+    @Path("/comunicacao/conteudo/excluir")
     @Post
     public void remove(Conteudo a) {
         try {
@@ -97,7 +95,7 @@ public class ConteudoController extends AbstractController {
     }
 
     @Consumes("application/json")
-    @Path("/comunicacao/conteudo/update")
+    @Path("/comunicacao/conteudo/modificar")
     @Post
     public void atualiza(Conteudo c) {
 
