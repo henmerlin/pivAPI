@@ -6,9 +6,11 @@ import br.com.caelum.vraptor.Get;
 import br.com.caelum.vraptor.Path;
 import br.com.caelum.vraptor.Post;
 import br.com.caelum.vraptor.view.Results;
+import java.util.Calendar;
 import java.util.List;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
+import portalefika.autenticacao.annotation.Logado;
 import portalefika.comunicao.dal.AbaPortalDAO;
 import portalefika.comunicao.dal.exception.PersistenciaException;
 import portalefika.comunicao.entidades.ComponentePortal;
@@ -29,11 +31,9 @@ public class ConteudoController extends AbstractController {
     public ConteudoController() {
 
     }
-        
+
     public void create() {
-        
-        
-        
+
     }
 
     @Get
@@ -71,7 +71,6 @@ public class ConteudoController extends AbstractController {
 //            result.use(Results.json()).from(e).serialize();
 //        }
 //    }
-
     @Get
     @Path("/comunicacao/conteudo/lista")
     public void lista() {
@@ -105,6 +104,14 @@ public class ConteudoController extends AbstractController {
         } catch (PersistenciaException e) {
             this.result.use(Results.json()).from(e).serialize();
         }
+    }
+
+    public void exibir() {
+
+    }
+
+    public void uploader() {
+
     }
 
 }

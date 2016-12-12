@@ -7,7 +7,6 @@ import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
-import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 @Table(name = "PE_COMUNICACAO_CONTEUDO")
@@ -15,19 +14,15 @@ public class Conteudo extends ComponentePortal {
 
     @Lob
     private String texto;
-    
-    @ManyToOne
-    private Notificacao notificacao;
-    
+
     @NotNull
-    private TipoConteudo tipo;
-    
-    @NotEmpty
-    private Calendar dataCriacao; 
-    
-    @NotNull
+    private Calendar dataCriacao;
+
     @ManyToOne
     private ConteudoCategoria categoria;
+
+    @ManyToOne
+    private ImagemPortal imagem;
 
     public Conteudo() {
 
@@ -39,22 +34,6 @@ public class Conteudo extends ComponentePortal {
 
     public void setTexto(String texto) {
         this.texto = texto;
-    }
-
-    public void setNotificacao(Notificacao notificacao) {
-        this.notificacao = notificacao;
-    }
-
-    public Notificacao getNotificacao() {
-        return notificacao;
-    }
-
-    public void setTipo(TipoConteudo tipo) {
-        this.tipo = tipo;
-    }
-
-    public TipoConteudo getTipo() {
-        return tipo;
     }
 
     public void setCategoria(ConteudoCategoria categoria) {
@@ -72,4 +51,13 @@ public class Conteudo extends ComponentePortal {
     public Calendar getDataCriacao() {
         return dataCriacao;
     }
+
+    public ImagemPortal getImagem() {
+        return imagem;
+    }
+
+    public void setImagem(ImagemPortal imagem) {
+        this.imagem = imagem;
+    }
+
 }

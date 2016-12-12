@@ -32,6 +32,7 @@ body{
 }
 
 
+
 .navbar-login
 {
     width: 305px;
@@ -49,4 +50,9 @@ body{
 .icon-size
 {
     font-size: 87px;
+}
+
+
+[v-cloak] {
+    display: none;
 }
