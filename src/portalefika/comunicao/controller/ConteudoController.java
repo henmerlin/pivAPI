@@ -7,10 +7,10 @@ import br.com.caelum.vraptor.Path;
 import br.com.caelum.vraptor.Post;
 import br.com.caelum.vraptor.view.Results;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
-import portalefika.autenticacao.annotation.Logado;
 import portalefika.comunicao.dal.AbaPortalDAO;
 import portalefika.comunicao.dal.exception.PersistenciaException;
 import portalefika.comunicao.entidades.ComponentePortal;
@@ -51,6 +51,8 @@ public class ConteudoController extends AbstractController {
     @Path("/comunicacao/conteudo/cadastrar")
     public void adiciona(Conteudo c) {
         try {
+            Calendar calendar = Calendar.getInstance();
+            c.setDataCriacao(calendar);            
             dao.cadastrar(c);
             result.use(Results.json()).from(c).serialize();
         } catch (PersistenciaException e) {
@@ -78,7 +80,7 @@ public class ConteudoController extends AbstractController {
         List<ComponentePortal> l = dao.listar(new Conteudo());
 
         if (l != null) {
-            result.use(Results.json()).from(l).serialize();
+            result.use(Results.json()).from(l).include("categoria").include("imagem").serialize();
         }
     }
 

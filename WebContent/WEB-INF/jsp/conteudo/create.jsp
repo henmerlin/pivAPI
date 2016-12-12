@@ -16,47 +16,132 @@
 
     <div id="conteudo">
 
-        <div class="row">
+        <div>
 
-            <div class="col-md-12">
+            <table class="table table-bordered">                    
+                <thead>                        
+                    <tr>                            
+                        <th>Titulo</th>
+                        <th>Ativo</th>
+                        <th>Texto</th>
+                        <th>Data Criação</th>
+                        <th>Conteudo Categoria</th>
+                        <th>Ações</th>                        
+                    </tr>                        
+                </thead>                    
+                <tbody>                        
+                    <tr v-for="conteudo in conteudos" :key="conteudo.id">                            
+                        <td>{{conteudo.titulo}}</td>
+                        <td>
+                            <label v-if="conteudo.ativo == true" >Ativo</label>
+                            <label v-if="conteudo.ativo == false" >Inativo</label>
+                        </td>
+                        <td>{{conteudo.texto}}</td>
+                        <td>{{dateFormat(conteudo.dataCriacao)}}</td>
+                        <td>{{conteudo.categoria.titulo}}</td>
+                        <td>                            
+                            <button type="button" class="btn btn-primary glyphicon glyphicon-edit btn-sm" @click="updateModConteudo(conteudo)" data-toggle="modal" data-target="#modConteudo"></button>
+                            <button type="button" class="btn btn-danger glyphicon glyphicon-trash btn-sm"></button>                            
+                        </td>
+                    </tr>                        
+                </tbody>                    
+            </table>
 
-                <form>                    
+            <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#criaConteudo" data-backdrop="static">Criar Conteudo</button>
 
-                    <div class="form-group">
-                        <label >Le Titulo</label>
-                        <input type="text" class="form-control" placeholder="Le Titulo">
+        </div>        
+        <!-- Modal Cria conteudo-->
+        <div class="modal fade" id="criaConteudo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">Cria Conteudo</h4>
                     </div>
-                    <div class="form-group">
-                        <label>Aqtive</label>
-                        <input type="checkbox" />
-                    </div>
-                    <div class="form-group">
-                        <label >?Notifiqé?</label>
-                        <input type="text" class="form-control" placeholder="?Notifiqé?">
-                    </div>
-                    <div class="form-group">
-                        <label >?Tipe Conteude?</label>
-                        <select class="form-control">
-                            <option disabled="true" selected="true" >Selecione</option>
-                            <option>Opcione uno</option>
-                            <option>Opcione doise</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label >?Conteude de La Catigoria?</label>
-                        <select class="form-control">
-                            <option disabled="true" selected="true" >Selecione</option>
-                            <option>Opcione uno</option>
-                            <option>Opcione doise</option>
-                        </select>
-                    </div>
+                    <div class="modal-body">
 
-                </form>
-
+                        <div class="form-group">
+                            <label >Titulo</label>
+                            <input type="text" class="form-control" placeholder="Titulo" v-model="addconteudo.conteudo.titulo">
+                        </div>
+                        <div class="form-group">
+                            <label>Ativo</label>
+                            <input type="checkbox" v-model="addconteudo.conteudo.ativo"/>
+                        </div>
+                        <div class="form-group">
+                            <label>Texto</label>     
+                            <textarea class="form-control" rows="3" v-model="addconteudo.conteudo.texto" placeholder="Texto"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label >Conteudo categoria</label>
+                            <select class="form-control" v-model="categoriaselec">
+                                <option v-for="categoria in categorias" v-bind:value="categoria">
+                                    {{categoria.titulo}}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                        <button type="button" class="btn btn-primary" @click="addConteudo()">Cadastrar</button>
+                    </div>
+                </div>
             </div>
+        </div>
 
+        <!-- Modal modifica conteudo-->
+        <div class="modal fade" id="modConteudo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">Modificar Conteudo</h4>
+                    </div>
+                    <div class="modal-body">
+
+                        <div class="form-group">
+                            <label >Titulo</label>
+                            <input type="text" class="form-control" placeholder="Titulo" v-model="modconteudo.conteudo.titulo">
+                        </div>
+                        <div class="form-group">
+                            <label>Ativo</label>
+                            <input type="checkbox" v-model="modconteudo.conteudo.ativo"/>
+                        </div>
+                        <div class="form-group">
+                            <label>Texto</label>     
+                            <textarea class="form-control" rows="3" v-model="modconteudo.conteudo.texto" placeholder="Texto"></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label >Conteudo categoria</label>
+                            <select class="form-control" v-model="categoriaselec">
+
+                                <div v-if="{{categoria.id === modconteudo.conteudo.id}}">
+
+                                    <option v-for="categoria in categorias" v-bind:value="categoria.id" selected="selected">
+                                        {{categoria.titulo}}
+                                    </option>
+
+                                </div>
+                                <div v-else>
+                                    <option v-for="categoria in categorias" v-bind:value="categoria.id" v-else>
+                                        {{categoria.titulo}}
+                                    </option>
+                                </div>
+                            </select>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                        <button type="button" class="btn btn-primary" @click="updateConteudo()">Modificar</button>
+                    </div>
+                </div>
+            </div>
         </div>
 
     </div>
+
+    <script src="${pageContext.request.contextPath}/resources/vue-components/conteudo.js"></script>
 
 </div>

@@ -9,18 +9,19 @@ var conteudoCategoriaURL = "/comunicacao/conteudocategoria/";
 
 new Vue({
 
-    el: '#conteduo',
+    el: '#conteudo',
     data: {
 
         conteudos: null,
         categorias: null,
+        categoriaselec: null,
+        categoria: null,
         addconteudo: {
             "conteudo": {
                 "id": null,
                 "titulo": null,
                 "ativo": false,
                 "texto": null,
-                "tipo": null,
                 "dataCriacao": null,
                 "categoria": {
                     "id": null,
@@ -65,10 +66,14 @@ new Vue({
         this.getcategoria();
     },
     methods: {
+        //Comando Format
+        dateFormat: function (h) {
+            return  moment(h).format('DD/MM/YYYY');
+        },
         //Comando lista
         getconteudo: function () {
             var self = this;
-            $.get(conteudoURL + "listar", function (data) {
+            $.get(conteudoURL + "lista", function (data) {
                 self.conteudos = data.list;
             });
         },
@@ -83,6 +88,9 @@ new Vue({
         //Comando cadastra
         addConteudo: function () {
             var self = this;
+
+            self.addconteudo.conteudo.categoria = self.categoriaselec;
+
             $.ajax({
                 type: "POST",
                 url: conteudoURL + "cadastrar",
@@ -91,8 +99,8 @@ new Vue({
                 beforeSend: function (xhr) {
                     xhr.setRequestHeader("Content-Type", "application/json");
                 },
-                success: function () {
-
+                success: function () {                    
+                    $('#criaConteudo').modal('hide');
                     self.resetObjects();
                     self.fetchConteudo();
                 }
@@ -120,7 +128,7 @@ new Vue({
                     xhr.setRequestHeader("Content-Type", "application/json");
                 },
                 success: function () {
-
+                    $('modConteudo').modal('hide');
                     self.resetObjects();
                     self.fetchConteudo();
                 }

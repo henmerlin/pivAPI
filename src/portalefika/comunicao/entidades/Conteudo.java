@@ -23,6 +23,7 @@ public class Conteudo extends ComponentePortal {
 
     @ManyToOne
     private ImagemPortal imagem;
+    
 
     public Conteudo() {
 

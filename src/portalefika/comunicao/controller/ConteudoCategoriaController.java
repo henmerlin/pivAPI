@@ -38,13 +38,20 @@ public class ConteudoCategoriaController extends AbstractController {
     @Get
     @Path("/comunicacao/conteudocategoria/listar")
     public void lista() {
-        
         List<ConteudoCategoria> l = this.conteudoCategoriaDAO.listar();
         
-        if (l != null) {
-            
-            this.result.use(Results.json()).from(l).serialize();
-            
+        if (l != null) {            
+            this.result.use(Results.json()).from(l).serialize();            
+        }        
+    }
+    
+    @Get 
+    @Path("/comunicacao/conteudocategoria/especifico/{conteudoCategoria.id}")
+    public void listarEspecifico(ConteudoCategoria conteudoCategoria) {        
+        ConteudoCategoria c = (ConteudoCategoria) this.conteudoCategoriaDAO.buscarPorId(conteudoCategoria);
+        
+        if (c != null) {            
+            this.result.use(Results.json()).from(c).serialize();            
         }
         
     }

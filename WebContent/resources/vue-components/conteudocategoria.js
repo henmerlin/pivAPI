@@ -46,7 +46,7 @@ new Vue({
         //Comando lista
         getConteudoCategoria: function () {
             var self = this;
-            $.get(conteudoURL + "lista", function (data) {
+            $.get(conteudoURL + "listar", function (data) {
                 self.categorias = data.list;
             });
         },
