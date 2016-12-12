@@ -6,53 +6,61 @@ import br.com.caelum.vraptor.Get;
 import br.com.caelum.vraptor.Path;
 import br.com.caelum.vraptor.Post;
 import br.com.caelum.vraptor.view.Results;
+import java.util.Calendar;
 import java.util.List;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import portalefika.comunicao.dal.AbaPortalDAO;
 import portalefika.comunicao.dal.exception.PersistenciaException;
-import portalefika.comunicao.entidades.AbaPortal;
 import portalefika.comunicao.entidades.Component;
+import portalefika.comunicao.entidades.Conteudo;
+import portalefika.comunicao.entidades.ImagemPortal;
 import portalefika.controller.AbstractController;
 
 @Controller
 @RequestScoped
-public class AbaPortalController extends AbstractController {
+public class ImagemPortalController extends AbstractController {
 
     @Inject
-    private AbaPortalDAO abaDao;
+    private AbaPortalDAO dao;
 
-    public AbaPortalController() {
+    public ImagemPortalController() {
+
+    }
+
+    public void create() {
 
     }
 
     @Get
-    @Path("/comunicacao/aba/{a.id}")
-    public void visualiza(AbaPortal a) {
-        AbaPortal a1 = (AbaPortal) abaDao.buscarPorId(a);
+    @Path("/comunicacao/imagemPortal/{a.id}")
+    public void visualiza(ImagemPortal a) {
+        ImagemPortal a1 = (ImagemPortal) dao.buscarPorId(a);
 
         if (a1 != null) {
-            result.use(Results.json()).from(a1).include("subAbas").include("subAbas.conteudo").serialize();
+            includeSerializer(a1);
         }
     }
 
     @Post
     @Consumes("application/json")
-    @Path("/comunicacao/aba/")
-    public void adiciona(AbaPortal abaPortal) {
+    @Path("/comunicacao/imagemPortal/cadastrar")
+    public void adiciona(ImagemPortal c) {
         try {
-            abaDao.cadastrar(abaPortal);
-            includeSerializer(abaPortal);
+            Calendar calendar = Calendar.getInstance();
+            c.setDataUpload(calendar);
+            dao.cadastrar(c);
+            includeSerializer(c);
         } catch (PersistenciaException e) {
             result.use(Results.json()).from(e).serialize();
         }
     }
 
     @Get
-    @Path("/comunicacao/aba/")
+    @Path("/comunicacao/imagemPortal/lista")
     public void lista() {
 
-        List<Component> l = abaDao.listar(new AbaPortal());
+        List<Component> l = dao.listar(new Conteudo());
 
         if (l != null) {
             includeSerializer(l);
@@ -60,35 +68,30 @@ public class AbaPortalController extends AbstractController {
     }
 
     @Consumes("application/json")
-    @Path("/comunicacao/aba/delete")
+    @Path("/comunicacao/imagemPortal/excluir")
     @Post
-    public void remove(AbaPortal abaPortal) {
+    public void remove(Conteudo a) {
         try {
-            this.abaDao.excluir(abaPortal);
+            this.dao.excluir(a);
         } catch (PersistenciaException e) {
             result.use(Results.json()).from(e).serialize();
         }
     }
 
     @Consumes("application/json")
-    @Path("/comunicacao/aba/update")
+    @Path("/comunicacao/imagemPortal/modificar")
     @Post
-    public void atualiza(AbaPortal abaPortal) {
+    public void atualiza(Conteudo c) {
+
         try {
-            abaDao.editar(abaPortal);
-            includeSerializer(abaPortal);
+            this.dao.editar(c);
+            includeSerializer(c);
         } catch (PersistenciaException e) {
-            result.use(Results.json()).from(e).serialize();
+            this.result.use(Results.json()).from(e).serialize();
         }
     }
 
-    /**
-     * Serializa Objeto com Padrão Definido
-     *
-     * @param a
-     */
-    protected void includeSerializer(Object a) {
-        result.use(Results.json()).from(a).include("subAbas").include("subAbas.conteudo").serialize();
+    private void includeSerializer(Object a) {
+        result.use(Results.json()).from(a).serialize();
     }
-
 }

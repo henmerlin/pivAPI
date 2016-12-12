@@ -12,7 +12,7 @@ import javax.inject.Inject;
 import portalefika.comunicao.dal.AbaPortalDAO;
 import portalefika.comunicao.dal.exception.PersistenciaException;
 import portalefika.comunicao.entidades.AbaPortal;
-import portalefika.comunicao.entidades.ComponentePortal;
+import portalefika.comunicao.entidades.Component;
 import portalefika.controller.AbstractController;
 
 @Controller
@@ -52,7 +52,7 @@ public class MenuController extends AbstractController {
     @Path("/portalefika/menu/")
     public void lista() {
 
-        List<ComponentePortal> l = abaDao.listar(new AbaPortal());
+        List<Component> l = abaDao.listar(new AbaPortal());
 
         if (l != null) {
             includeSerializer(l);

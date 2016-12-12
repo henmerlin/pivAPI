@@ -7,16 +7,14 @@ import br.com.caelum.vraptor.Path;
 import br.com.caelum.vraptor.Post;
 import br.com.caelum.vraptor.view.Results;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import portalefika.comunicao.dal.AbaPortalDAO;
 import portalefika.comunicao.dal.exception.PersistenciaException;
-import portalefika.comunicao.entidades.ComponentePortal;
+import portalefika.comunicao.entidades.Component;
 import portalefika.comunicao.entidades.Conteudo;
 import portalefika.controller.AbstractController;
-import portalefika.dal.ArquivoManager;
 
 @Controller
 @RequestScoped
@@ -24,9 +22,6 @@ public class ConteudoController extends AbstractController {
 
     @Inject
     private AbaPortalDAO dao;
-
-    @Inject
-    private ArquivoManager am;
 
     public ConteudoController() {
 
@@ -64,7 +59,7 @@ public class ConteudoController extends AbstractController {
     @Path("/comunicacao/conteudo/lista")
     public void lista() {
 
-        List<ComponentePortal> l = dao.listar(new Conteudo());
+        List<Component> l = dao.listar(new Conteudo());
 
         if (l != null) {
             includeSerializer(l);

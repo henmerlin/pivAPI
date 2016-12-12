@@ -11,7 +11,7 @@ import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import portalefika.comunicao.dal.SubAbaPortalDAO;
 import portalefika.comunicao.dal.exception.PersistenciaException;
-import portalefika.comunicao.entidades.ComponentePortal;
+import portalefika.comunicao.entidades.Component;
 import portalefika.comunicao.entidades.SubAbaPortal;
 import portalefika.controller.AbstractController;
 
@@ -52,7 +52,7 @@ public class SubAbaPortalController extends AbstractController {
     @Path("/comunicacao/subAba/")
     public void lista() {
 
-        List<ComponentePortal> l = saDao.listar(new SubAbaPortal());
+        List<Component> l = saDao.listar(new SubAbaPortal());
 
         if (l != null) {
             result.use(Results.json()).from(l).include("abaPortal").include("conteudo").serialize();
