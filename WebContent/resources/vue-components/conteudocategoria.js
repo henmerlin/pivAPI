@@ -110,11 +110,9 @@ new Vue({
                     xhr.setRequestHeader("Content-Type", "application/json");
                 },
                 success: function () {
+                    $('#excluiConteudo').modal('hide');
                     self.resetObjects();
                     self.fetchConteudo();
-
-                    $('#excluiConteudo').modal('hide');
-
                 }
             });
         },

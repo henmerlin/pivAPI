@@ -77,6 +77,7 @@ public class ConteudoController extends AbstractController {
     public void remove(Conteudo a) {
         try {
             this.dao.excluir(a);
+            this.result.use(Results.json()).from(a).serialize();
         } catch (PersistenciaException e) {
             result.use(Results.json()).from(e).serialize();
         }

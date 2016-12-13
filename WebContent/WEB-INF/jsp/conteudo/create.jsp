@@ -41,7 +41,7 @@
                         <td>{{conteudo.categoria.titulo}}</td>
                         <td>                            
                             <button type="button" class="btn btn-primary glyphicon glyphicon-edit btn-sm" @click="updateModConteudo(conteudo)" data-toggle="modal" data-target="#modConteudo"></button>
-                            <button type="button" class="btn btn-danger glyphicon glyphicon-trash btn-sm"></button>                            
+                            <button type="button" class="btn btn-danger glyphicon glyphicon-trash btn-sm" @click="updateDelConteudo(conteudo)" data-toggle="modal" data-target="#delConteudo"></button>                            
                         </td>
                     </tr>                        
                 </tbody>                    
@@ -114,20 +114,10 @@
 
                         <div class="form-group">
                             <label >Conteudo categoria</label>
-                            <select class="form-control" v-model="categoriaselec">
-
-                                <div v-if="{{categoria.id === modconteudo.conteudo.id}}">
-
-                                    <option v-for="categoria in categorias" v-bind:value="categoria.id" selected="selected">
-                                        {{categoria.titulo}}
-                                    </option>
-
-                                </div>
-                                <div v-else>
-                                    <option v-for="categoria in categorias" v-bind:value="categoria.id" v-else>
-                                        {{categoria.titulo}}
-                                    </option>
-                                </div>
+                            <select class="form-control" v-model="modconteudo.conteudo.categoria.id">
+                                <option v-for="categoria in categorias" v-bind:value="categoria.id">
+                                    {{categoria.titulo}}
+                                </option>
                             </select>
                         </div>
 
@@ -135,6 +125,27 @@
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
                         <button type="button" class="btn btn-primary" @click="updateConteudo()">Modificar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal Exclui conteudo-->
+        <div class="modal fade" id="delConteudo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">Excluir Conteudo</h4>
+                    </div>
+                    <div class="modal-body">
+                        
+                        Deseja realmente excluir <label>{{delconteudo.conteudo.titulo}}</label> ?
+                                                                        
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                        <button type="button" class="btn btn-danger" @click="delConteudo()">Excluir</button>
                     </div>
                 </div>
             </div>

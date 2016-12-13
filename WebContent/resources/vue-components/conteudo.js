@@ -128,7 +128,7 @@ new Vue({
                     xhr.setRequestHeader("Content-Type", "application/json");
                 },
                 success: function () {
-                    $('modConteudo').modal('hide');
+                    $('#modConteudo').modal('hide');
                     self.resetObjects();
                     self.fetchConteudo();
                 }
@@ -136,6 +136,23 @@ new Vue({
         },
 
         //Comando exclui
+        delConteudo: function () {
+            var self = this;
+            $.ajax({
+                type: "POST",
+                url: conteudoURL + "excluir",
+                data: JSON.stringify(self.delconteudo.conteudo),
+                dataType: "json",
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("Content-Type", "application/json");
+                },
+                success: function () {
+                    $('#delConteudo').modal('hide');
+                    self.resetObjects();
+                    self.fetchConteudo();
+                }
+            });
+        },
 
         //Fetch
         fetchConteudo: function () {
@@ -201,7 +218,6 @@ new Vue({
                     }
                 }
             };
-
         }
     }
 });
