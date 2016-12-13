@@ -1,5 +1,6 @@
 package portalefika.comunicao.entidades;
 
+import java.util.Calendar;
 import java.util.Date;
 
 import javax.persistence.Entity;
@@ -15,13 +16,12 @@ public class Banner extends ComponentePortalExpiravel {
     @NotNull
     private BannerLocal local;
     
-    @NotNull
     private Conteudo conteudo;
-    
-    private Integer ordem;
-    
+        
     @NotNull
     private ImagemPortal imagem;
+    
+    private Calendar dataCriacao;
     
 
     public Banner() {
@@ -36,13 +36,6 @@ public class Banner extends ComponentePortalExpiravel {
         return local;
     }
 
-    public void setOrdem(Integer ordem) {
-        this.ordem = ordem;
-    }
-
-    public Integer getOrdem() {
-        return ordem;
-    }
 
     public void setConteudo(Conteudo conteudo) {
         this.conteudo = conteudo;
@@ -58,5 +51,13 @@ public class Banner extends ComponentePortalExpiravel {
 
     public ImagemPortal getImagem() {
         return imagem;
+    }
+
+    public void setDataCriacao(Calendar dataCriacao) {
+        this.dataCriacao = dataCriacao;
+    }
+
+    public Calendar getDataCriacao() {
+        return dataCriacao;
     }
 }
