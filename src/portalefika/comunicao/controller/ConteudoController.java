@@ -28,7 +28,6 @@ public class ConteudoController extends AbstractController {
     }
 
     public void create() {
-
     }
 
     @Get

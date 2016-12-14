@@ -24,7 +24,8 @@ public class ComponentePortalDAO {
         try {
             this.entityManager.persist(c);
         } catch (Exception e) {
-            throw new PersistenciaException("Falha ao cadastrar " + c.getClass().getSimpleName() + ".");
+            throw new PersistenciaException(e.getMessage());
+            //throw new PersistenciaException("Falha ao cadastrar " + c.getClass().getSimpleName() + ".");
         }
     }
 

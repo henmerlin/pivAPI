@@ -14,7 +14,7 @@
         <h1>Conteudo</h1>
     </div>
 
-    <div id="conteudo">
+    <div id="conteudo" v-cloak>
 
         <div>
 
@@ -129,7 +129,7 @@
                 </div>
             </div>
         </div>
-
+        
         <!-- Modal Exclui conteudo-->
         <div class="modal fade" id="delConteudo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
             <div class="modal-dialog" role="document">

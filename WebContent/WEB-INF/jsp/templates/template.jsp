@@ -78,6 +78,7 @@
                                     <li><a href="${linkTo[EnqueteController].create()}">Enquete</a></li>
                                     <li><a href="${linkTo[ConteudoController].create()}">Conteudo</a></li>
                                     <li><a href="${linkTo[ConteudoCategoriaController].create()}">Conteudo Categoria</a></li>
+                                    <li><a href="${linkTo[BannerController].create()}">Gerenciar Banner</a></li>                                    
                                     <li role="separator" class="divider"></li>
                                     <li><a href="#">Separated link</a></li>
                                     <li role="separator" class="divider"></li>

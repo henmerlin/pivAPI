@@ -1,6 +1,7 @@
 package portalefika.comunicao.entidades;
 
 import java.util.Calendar;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
