@@ -4,12 +4,14 @@ import java.util.Calendar;
 import javax.persistence.Entity;
 import javax.persistence.Lob;
 import javax.persistence.Table;
+import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 @Table(name = "PE_COMUNICACAO_IMAGEM_PORTAL")
 public class ImagemPortal extends Component {
 
     @Lob
+    @NotEmpty(message = "Favor inserir a imagem")
     private String base64;
 
     private Calendar dataUpload;

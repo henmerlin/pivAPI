@@ -51,9 +51,13 @@ public class BannerController extends AbstractController {
     @Consumes("application/json")
     @Path("/comunicacao/banner/cadastrar")
     public void adiciona(Banner banner) {
-        try {
-            Calendar calendar = Calendar.getInstance();
-            banner.setDataCriacao(calendar);
+        try {            
+            if (banner.getConteudo().getId() == null) {                
+                banner.setConteudo(null);                
+            }            
+            Calendar calendar = Calendar.getInstance();            
+            banner.setDataCriacao(calendar);            
+            banner.getImagem().setDataUpload(calendar);
             this.bannerDAO.cadastrar(banner);
             this.includeSerializer(banner);
         } catch (Exception e) {
@@ -97,13 +101,12 @@ public class BannerController extends AbstractController {
     @Get
     @Path("/comunicacao/banner/listaBannerLocal")
     public void listaBannerLocal() {
-
         result.use(Results.json()).from(BannerLocal.values()).serialize();
-
     }
-
+    
     protected void includeSerializer(Object a) {
-        result.use(Results.json()).from(a).include("conteudo").serialize();
+        result.use(Results.json()).from(a).include("conteudo").include("imagem").serialize();
+        //result.use(Results.json()).from(a).serialize();
     }
 
 }

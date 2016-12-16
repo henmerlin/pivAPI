@@ -19,7 +19,6 @@
         <link
             href="${pageContext.request.contextPath}/resources/custom/custom.css" rel="stylesheet" />
 
-
         <!-- import JavaScript -->
         <script
         src="${pageContext.request.contextPath}/resources/node_modules/vue/dist/vue.js"></script>

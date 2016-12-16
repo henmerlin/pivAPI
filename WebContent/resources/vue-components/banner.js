@@ -4,67 +4,86 @@
  * and open the template in the editor.
  */
 
+
+
 var bannerURL = "/comunicacao/banner/";
 var conteudoURL = "/comunicacao/conteudo/";
-
 new Vue({
     el: '#banner',
     data: {
         banners: null,
+        addbanner: {
+            "id": null,
+            "ativo": false,
+            "dataInicio": null,
+            "dataFim": null,
+            "dataCriacao": null,
+            "local": null,
+            "conteudo": {
+                "id": null
+            },
+            "imagem": {
+                "id": null,
+                "base64": null,
+                "dataUpload": null
+            }
+        },
+        modbanner: {
+            "id": null,
+            "ativo": false,
+            "dataInicio": null,
+            "dataFim": null,
+            "dataCriacao": null,
+            "local": null,
+            "conteudo": {
+                "id": null
+            },
+            "imagem": {
+                "id": null,
+                "base64": null,
+                "dataUpload": null
+            }
+        },
+        delbanner: null,
         bannerLocalList: null,
         conteudos: null,
-        checkedconteudo: false,
-        seconteudo: null,
-        addBanner: {
-            "banner": {
-                "id": null,
-                "titulo": null,
-                "ativo": false,
-                "dataInicio": null,
-                "dataFim": null,
-                "dataCriacao": null,
-                "local": null,
-                "conteudo": {
-                    "id": null
-                }
+        image: null,
+        seconteudo: {
+            "conteudo": {
+                "id": null
             }
         },
-        modiBanner: {
-            "banner": {
-                "id": null,
-                "titulo": null,
-                "ativo": false,
-                "dataInicio": null,
-                "dataFim": null,
-                "dataCriacao": null,
-                "local": null,
-                "conteudo": {
-                    "id": null
-                }
-            }
-        },
-        delBanner: {
-            "banner": {
-                "id": null,
-                "titulo": null,
-                "ativo": false,
-                "dataInicio": null,
-                "dataFim": null,
-                "dataCriacao": null,
-                "local": null,
-                "conteudo": {
-                    "id": null
-                }
-            }
-        }
+
+        checkedconteudo: false
+
     },
     created: function () {
-        var self = this;
-        self.fetchbanner();
-        self.getenumbannerlocal();
-        self.getconteudo();
+        this.getbanner();
+        this.getenumbannerlocal();
+        this.getconteudo();
     },
     methods: {
+        //Uploader
+        onFileChange(e) {
+            var files = e.target.files || e.dataTransfer.files;
+            if (!files.length)
+                return;
+            this.createImage(files[0]);
+        },
+        createImage(file) {
+            var image = new Image();
+            var reader = new FileReader();
+            var self = this;
+            reader.onload = (e) => {
+                self.image = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        },
+        removeImage: function (e) {
+            var self = this;
+            self.image = '';
+        },
+
         //Comando Format
         dateFormat: function (h) {
             return  moment(h).format('DD/MM/YYYY');
@@ -91,22 +110,20 @@ new Vue({
                 self.conteudos = data.list;
             });
         },
-
         //Comando Cadastra
-        addbanner: function () {
+        adcbanner: function () {
             var self = this;
-
+            self.addbanner.imagem.base64 = self.image;
             $.ajax({
                 type: "POST",
                 url: bannerURL + "cadastrar",
-                data: JSON.stringify(self.addBanner.banner),
+                data: JSON.stringify(self.addbanner),
                 dataType: "json",
                 beforeSend: function (xhr) {
                     xhr.setRequestHeader("Content-Type", "application/json");
                 },
                 success: function () {
                     $('#addbanner').modal('hide');
-                    self.resetobjects();
                     self.fetchbanner();
                 }
             });
@@ -114,48 +131,49 @@ new Vue({
         //Update Variaveis
         updatemodbanner: function (h) {
             var self = this;
-            self.modiBanner.banner = h;
+            self.modbanner = h;
+            self.image = self.modbanner.imagem.base64;
         },
         updatedelbanner: function (h) {
             var self = this;
-            self.delBanner.banner = h;
-
+            self.delbanner = h;
         },
         //Comando Modifica
-        modbanner: function () {
+        modibanner: function () {
             var self = this;
-
-            self.modiBanner.banner.conteudo = self.seconteudo;
-
+            if (self.checkedconteudo) {
+                self.modbanner.conteudo = {};
+                self.modbanner.conteudo = self.seconteudo.conteudo;
+            }
+            self.modbanner.imagem.base64 = self.image;
             $.ajax({
                 type: "POST",
                 url: bannerURL + "modificar",
-                data: JSON.stringify(self.modiBanner.banner),
+                data: JSON.stringify(self.modbanner),
                 dataType: "json",
                 beforeSend: function (xhr) {
                     xhr.setRequestHeader("Content-Type", "application/json");
                 },
                 success: function () {
                     $('#modBanner').modal('hide');
-                    self.resetobjects();
                     self.fetchbanner();
                 }
             });
+
         },
         //Comando Deleta
-        delbanner: function () {
+        deletbanner: function () {
             var self = this;
             $.ajax({
                 type: "POST",
                 url: bannerURL + "excluir",
-                data: JSON.stringify(self.delBanner.banner),
+                data: JSON.stringify(self.delbanner),
                 dataType: "json",
                 beforeSend: function (xhr) {
                     xhr.setRequestHeader("Content-Type", "application/json");
                 },
                 success: function () {
-                    $('#delBanner').modal('hide');
-                    self.resetobjects();
+                    $('#delbanner').modal('hide');
                     self.fetchbanner();
                 }
             });
@@ -166,63 +184,8 @@ new Vue({
             setTimeout(function () {
                 self.getbanner();
             }, 600);
-        },
-        //Reset
-        resetobjects: function () {
-
-            var self = this;
-            self.addBanner = {
-                "banner": {
-                    "id": null,
-                    "titulo": null,
-                    "ativo": false,
-                    "dataInicio": null,
-                    "dataFim": null,
-                    "dataCriacao": null,
-                    "conteudo": {
-                        "id": null,
-                        "titulo": null,
-                        "ativo": false,
-                        "texto": null,
-                        "dataCriacao": null
-                    }
-                }
-            };
-            self.modiBanner = {
-                "banner": {
-                    "id": null,
-                    "titulo": null,
-                    "ativo": false,
-                    "dataInicio": null,
-                    "dataFim": null,
-                    "dataCriacao": null,
-                    "conteudo": {
-                        "id": null,
-                        "titulo": null,
-                        "ativo": false,
-                        "texto": null,
-                        "dataCriacao": null
-                    }
-                }
-            };
-            self.delBanner = {
-                "banner": {
-                    "id": null,
-                    "titulo": null,
-                    "ativo": false,
-                    "dataInicio": null,
-                    "dataFim": null,
-                    "dataCriacao": null,
-                    "conteudo": {
-                        "id": null,
-                        "titulo": null,
-                        "ativo": false,
-                        "texto": null,
-                        "dataCriacao": null
-                    }
-                }
-            };
         }
-    }
 
+        //Reset
+    }
 });

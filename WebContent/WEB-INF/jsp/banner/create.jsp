@@ -53,8 +53,8 @@
                         </td>
                         <td>{{banner.local}}</td>
                         <td>
-                            <button type="button" class="btn btn-primary glyphicon glyphicon-edit btn-sm" data-toggle="modal" data-target="#modBanner" @click="updatemodbanner(banner)"></button>
-                            <button type="button" class="btn btn-danger glyphicon glyphicon-trash btn-sm" data-toggle="modal" data-target="#delBanner" @click="updatedelbanner(banner)"></button>                            
+                            <button type="button" class="btn btn-primary glyphicon glyphicon-edit btn-sm" @click="updatemodbanner(banner)" data-toggle="modal" data-target="#modBanner" data-backdrop="static"></button>
+                            <button type="button" class="btn btn-danger glyphicon glyphicon-trash btn-sm" @click="updatedelbanner(banner)" data-toggle="modal" data-target="#delbanner" data-backdrop="static"></button> 
                         </td>
                     </tr>
                 </tbody>
@@ -64,7 +64,7 @@
 
         <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#addbanner" data-backdrop="static">Cadastrar Banner</button>
 
-        <!-- Modal Cria Banner-->
+        <!-- Modal Cadastra Banner-->
         <div class="modal fade" id="addbanner" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -73,27 +73,26 @@
                         <h4 class="modal-title" id="myModalLabel">Cadastrar Banner</h4>
                     </div>
                     <div class="modal-body">
-
                         <div class="form-group">
                             <label>Titulo</label>
-                            <input type="text" class="form-control" placeholder="Titulo" v-model="addBanner.banner.titulo">
+                            <input type="text" class="form-control" placeholder="Titulo" v-model="addbanner.titulo">
                         </div>
-                        <div class="form-group">
-                            <label>Ativo</label>
-                            <input type="checkbox" v-model="addBanner.banner.ativo"/>
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" v-model="addbanner.ativo"> Ativo
+                            </label>
                         </div>
                         <div class="form-group">
                             <label>Data Início</label>
-                            <input type="date" class="form-control" v-model="addBanner.banner.dataInicio"/>
+                            <input id="datainicio" type="date" class="form-control" placeholder="Data início" v-model="addbanner.dataInicio">
                         </div>
                         <div class="form-group">
                             <label>Data Fim</label>
-                            <input type="date" class="form-control" v-model="addBanner.banner.dataFim"/>
+                            <input id="datafim" type="date" class="form-control" placeholder="Data Fim" v-model="addbanner.dataFim">
                         </div>
-
                         <div class="form-group">
                             <label>Local Banner</label>
-                            <select class="form-control" v-model="addBanner.banner.local">
+                            <select class="form-control" v-model="addbanner.local">
                                 <option v-for="bannerlocal in bannerLocalList" v-bind:value="bannerlocal">
                                     {{bannerlocal}}
                                 </option>
@@ -104,26 +103,38 @@
                             <input id="linkconteudo" type="checkbox" v-model="checkedconteudo"/>
                             <label for="linkconteudo">Linkar Conteudo</label>
                         </div>
-
                         <div class="form-group" v-if="checkedconteudo">
                             <label>Conteudo</label>
-                            <select class="form-control" v-model="addBanner.banner.conteudo.id">
+                            <select class="form-control" v-model="addbanner.conteudo.id">
                                 <option v-for="conteudo in conteudos" v-bind:value="conteudo.id">
                                     {{conteudo.titulo}}
                                 </option>
                             </select>
                         </div>
-
+                        <div v-if="!image">
+                            <h4>Selecione uma imagem</h4>
+                            <span class="btn btn-default">
+                                <input type="file" @change="onFileChange">
+                            </span>
+                        </div>
+                        <div v-else>
+                            <img :src="image" style="width: 450px"/>
+                            <br>
+                            <br>
+                            <button type="button" class="btn btn-default" type="file" @click="removeImage">
+                                <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                            </button>
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
-                        <button type="button" class="btn btn-primary" @click="addbanner()">Cadastrar</button>
+                        <button type="button" class="btn btn-primary" @click="adcbanner()">Cadastrar</button>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Modal modifica banner-->
+        <!-- Modal Modifica Banner-->
         <div class="modal fade" id="modBanner" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -135,23 +146,24 @@
 
                         <div class="form-group">
                             <label>Titulo</label>
-                            <input type="text" class="form-control" placeholder="Titulo" v-model="modiBanner.banner.titulo">
+                            <input type="text" class="form-control" placeholder="Titulo" v-model="modbanner.titulo">
                         </div>
-                        <div class="form-group">
-                            <label>Ativo</label>
-                            <input type="checkbox" v-model="modiBanner.banner.ativo"/>
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" v-model="modbanner.ativo"> Ativo
+                            </label>
                         </div>
                         <div class="form-group">
                             <label>Data Início</label>
-                            <input type="date" class="form-control" v-model="dateInput(modiBanner.banner.dataInicio)"/>
+                            <input id="datainicio" type="date" class="form-control" placeholder="Data início" v-model="dateInput(modbanner.dataInicio)">
                         </div>
                         <div class="form-group">
                             <label>Data Fim</label>
-                            <input type="date" class="form-control" v-model="dateInput(modiBanner.banner.dataFim)"/>
+                            <input id="datafim" type="date" class="form-control" placeholder="Data Fim" v-model="dateInput(modbanner.dataFim)">
                         </div>
                         <div class="form-group">
                             <label>Local Banner</label>
-                            <select class="form-control" v-model="modiBanner.banner.local">
+                            <select class="form-control" v-model="modbanner.local">
                                 <option v-for="bannerlocal in bannerLocalList" v-bind:value="bannerlocal">
                                     {{bannerlocal}}
                                 </option>
@@ -162,41 +174,52 @@
                             <input id="linkconteudo" type="checkbox" v-model="checkedconteudo"/>
                             <label for="linkconteudo">Linkar Conteudo</label>
                         </div>
-
                         <div class="form-group" v-if="checkedconteudo">
                             <label>Conteudo</label>
-                            <select class="form-control" v-model="seconteudo">
-                                <option v-for="conteudo in conteudos" v-bind:value="conteudo">
+                            <select class="form-control" v-model="seconteudo.conteudo.id">
+                                <option v-for="conteudo in conteudos" v-bind:value="conteudo.id">
                                     {{conteudo.titulo}}
                                 </option>
                             </select>
+                        </div>
+                        <div v-if="!image">
+                            <h4>Selecione uma imagem</h4>
+                            <span class="btn btn-default">
+                                <input type="file" @change="onFileChange">
+                            </span>
+                        </div>
+                        <div v-else>
+                            <img :src="image" style="width: 450px"/>
+                            <br>
+                            <br>
+                            <button type="button" class="btn btn-default" type="file" @click="removeImage">
+                                <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                            </button>
                         </div>
 
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
-                        <button type="button" class="btn btn-primary" @click="modbanner()">Modificar</button>
+                        <button type="button" class="btn btn-primary" @click="modibanner()">Modificar</button>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Modal exclui banner-->
-        <div class="modal fade" id="delBanner" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <!-- Modal -->
+        <div class="modal fade" id="delbanner" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title" id="myModalLabel">Excluir Banner</h4>
+                        <h4 class="modal-title" id="myModalLabel">Excluir banner</h4>
                     </div>
                     <div class="modal-body">
-
-                        Você deseja excluir <label>{{delBanner.banner.titulo}}</label>?
-
+                        Deseja excluir o banner?
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
-                        <button type="button" class="btn btn-danger" @click="delbanner()">Excluir</button>
+                        <button type="button" class="btn btn-danger" @click="deletbanner()">Excluir</button>
                     </div>
                 </div>
             </div>

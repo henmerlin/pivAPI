@@ -1,6 +1,7 @@
 package portalefika.comunicao.entidades;
 
 import java.util.Calendar;
+import javax.persistence.CascadeType;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -20,6 +21,7 @@ public class Banner extends ComponentePortalExpiravel {
     @ManyToOne(fetch = FetchType.EAGER)
     private Conteudo conteudo;
     
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private ImagemPortal imagem;
     
     private Calendar dataCriacao;
