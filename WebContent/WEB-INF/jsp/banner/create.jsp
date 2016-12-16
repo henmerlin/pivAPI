@@ -62,7 +62,7 @@
 
         </div>
 
-        <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#addbanner" data-backdrop="static">Cadastrar Banner</button>
+        <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#addbanner" data-backdrop="static" @click="resetObjects()">Cadastrar Banner</button>
 
         <!-- Modal Cadastra Banner-->
         <div class="modal fade" id="addbanner" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
