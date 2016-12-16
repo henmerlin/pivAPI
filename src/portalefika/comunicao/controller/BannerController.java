@@ -18,7 +18,6 @@ import javax.inject.Inject;
 import portalefika.comunicao.dal.BannerDAO;
 import portalefika.comunicao.entidades.Banner;
 import portalefika.comunicao.entidades.BannerLocal;
-import portalefika.comunicao.entidades.Conteudo;
 import portalefika.controller.AbstractController;
 
 /**

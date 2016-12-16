@@ -16,6 +16,7 @@ new Vue({
         categorias: null,
         categoriaselec: null,
         categoria: null,
+        image: null,
         addconteudo: {
             "conteudo": {
                 "id": null,
@@ -27,6 +28,11 @@ new Vue({
                     "id": null,
                     "titulo": null,
                     "ativo": false
+                },
+                "imagem": {
+                    "id": null,
+                    "base64": null,
+                    "dataUpload": null
                 }
             }
         },
@@ -42,30 +48,41 @@ new Vue({
                     "id": null,
                     "titulo": null,
                     "ativo": false
+                },
+                "imagem": {
+                    "id": null,
+                    "base64": null,
+                    "dataUpload": null
                 }
             }
         },
-        delconteudo: {
-            "conteudo": {
-                "id": null,
-                "titulo": null,
-                "ativo": false,
-                "texto": null,
-                "tipo": null,
-                "dataCriacao": null,
-                "categoria": {
-                    "id": null,
-                    "titulo": null,
-                    "ativo": false
-                }
-            }
-        }
+        delconteudo: null
     },
     created: function () {
         this.getconteudo();
         this.getcategoria();
     },
     methods: {
+        //Uploader
+        onFileChange(e) {
+            var files = e.target.files || e.dataTransfer.files;
+            if (!files.length)
+                return;
+            this.createImage(files[0]);
+        },
+        createImage(file) {
+            var image = new Image();
+            var reader = new FileReader();
+            var self = this;
+            reader.onload = (e) => {
+                self.image = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        },
+        removeImage: function (e) {
+            var self = this;
+            self.image = '';
+        },
         //Comando Format
         dateFormat: function (h) {
             return  moment(h).format('DD/MM/YYYY');
@@ -88,9 +105,8 @@ new Vue({
         //Comando cadastra
         addConteudo: function () {
             var self = this;
-
             self.addconteudo.conteudo.categoria = self.categoriaselec;
-
+            self.addconteudo.conteudo.imagem.base64 = self.image;
             $.ajax({
                 type: "POST",
                 url: conteudoURL + "cadastrar",
@@ -99,10 +115,11 @@ new Vue({
                 beforeSend: function (xhr) {
                     xhr.setRequestHeader("Content-Type", "application/json");
                 },
-                success: function () {                    
+                success: function () {
                     $('#criaConteudo').modal('hide');
                     self.resetObjects();
                     self.fetchConteudo();
+                    self.image = null;
                 }
             });
         },
@@ -111,14 +128,16 @@ new Vue({
         updateModConteudo: function (h) {
             var self = this;
             self.modconteudo.conteudo = h;
+            self.image = self.modconteudo.conteudo.imagem.base64;
         },
         updateDelConteudo: function (h) {
             var self = this;
-            self.delconteudo.conteudo = h;
+            self.delconteudo = h;
         },
         //Comando modifica
         updateConteudo: function () {
             var self = this;
+            self.modconteudo.conteudo.imagem.base64 = self.image;
             $.ajax({
                 type: "POST",
                 url: conteudoURL + "modificar",
@@ -141,7 +160,7 @@ new Vue({
             $.ajax({
                 type: "POST",
                 url: conteudoURL + "excluir",
-                data: JSON.stringify(self.delconteudo.conteudo),
+                data: JSON.stringify(self.delconteudo),
                 dataType: "json",
                 beforeSend: function (xhr) {
                     xhr.setRequestHeader("Content-Type", "application/json");
@@ -170,9 +189,8 @@ new Vue({
 
         //Resets
         resetObjects: function () {
-
             var self = this;
-
+            self.image = null;
             self.addconteudo = {
                 "conteudo": {
                     "id": null,
@@ -185,7 +203,13 @@ new Vue({
                         "id": null,
                         "titulo": null,
                         "ativo": false
+                    },
+                    "imagem": {
+                        "id": null,
+                        "base64": null,
+                        "dataUpload": null
                     }
+
                 }
             };
             self.modconteudo = {
@@ -200,24 +224,15 @@ new Vue({
                         "id": null,
                         "titulo": null,
                         "ativo": false
-                    }
-                }
-            };
-            self.delconteudo = {
-                "conteudo": {
-                    "id": null,
-                    "titulo": null,
-                    "ativo": false,
-                    "texto": null,
-                    "tipo": null,
-                    "dataCriacao": null,
-                    "categoria": {
+                    },
+                    "imagem": {
                         "id": null,
-                        "titulo": null,
-                        "ativo": false
+                        "base64": null,
+                        "dataUpload": null
                     }
                 }
             };
+            self.delconteudo = null;
         }
     }
 });

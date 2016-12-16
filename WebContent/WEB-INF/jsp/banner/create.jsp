@@ -30,6 +30,7 @@
                         <th>Data cricação</th>
                         <th>Conteudo</th>                        
                         <th>Local</th>
+                        <th>Imagem</th>
                         <th>Ações</th>
                     </tr>
 
@@ -52,6 +53,9 @@
                             </span>
                         </td>
                         <td>{{banner.local}}</td>
+                        <td>
+                            <img :src="banner.imagem.base64" style="width: 50px;"/>
+                        </td>
                         <td>
                             <button type="button" class="btn btn-primary glyphicon glyphicon-edit btn-sm" @click="updatemodbanner(banner)" data-toggle="modal" data-target="#modBanner" data-backdrop="static"></button>
                             <button type="button" class="btn btn-danger glyphicon glyphicon-trash btn-sm" @click="updatedelbanner(banner)" data-toggle="modal" data-target="#delbanner" data-backdrop="static"></button> 

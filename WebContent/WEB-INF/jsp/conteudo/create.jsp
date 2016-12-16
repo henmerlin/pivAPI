@@ -17,7 +17,6 @@
     <div id="conteudo" v-cloak>
 
         <div>
-
             <table class="table table-bordered">                    
                 <thead>                        
                     <tr>                            
@@ -26,6 +25,7 @@
                         <th>Texto</th>
                         <th>Data Criação</th>
                         <th>Conteudo Categoria</th>
+                        <th>Imagem</th>
                         <th>Ações</th>                        
                     </tr>                        
                 </thead>                    
@@ -39,6 +39,9 @@
                         <td>{{conteudo.texto}}</td>
                         <td>{{dateFormat(conteudo.dataCriacao)}}</td>
                         <td>{{conteudo.categoria.titulo}}</td>
+                        <td>
+                            <img :src="conteudo.imagem.base64" style="width: 50px"/>                            
+                        </td>
                         <td>                            
                             <button type="button" class="btn btn-primary glyphicon glyphicon-edit btn-sm" @click="updateModConteudo(conteudo)" data-toggle="modal" data-target="#modConteudo"></button>
                             <button type="button" class="btn btn-danger glyphicon glyphicon-trash btn-sm" @click="updateDelConteudo(conteudo)" data-toggle="modal" data-target="#delConteudo"></button>                            
@@ -46,9 +49,7 @@
                     </tr>                        
                 </tbody>                    
             </table>
-
-            <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#criaConteudo" data-backdrop="static">Criar Conteudo</button>
-
+            <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#criaConteudo" data-backdrop="static" @click="resetObjects()">Criar Conteudo</button>
         </div>        
         <!-- Modal Cria conteudo-->
         <div class="modal fade" id="criaConteudo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -79,6 +80,20 @@
                                     {{categoria.titulo}}
                                 </option>
                             </select>
+                        </div>
+                        <div v-if="!image">
+                            <h4>Selecione uma imagem</h4>
+                            <span class="btn btn-default">
+                                <input type="file" @change="onFileChange">
+                            </span>
+                        </div>
+                        <div v-else>
+                            <img :src="image" style="width: 450px"/>
+                            <br>
+                            <br>
+                            <button type="button" class="btn btn-default" type="file" @click="removeImage">
+                                <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                            </button>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -121,6 +136,21 @@
                             </select>
                         </div>
 
+                        <div v-if="!image">
+                            <h4>Selecione uma imagem</h4>
+                            <span class="btn btn-default">
+                                <input type="file" @change="onFileChange">
+                            </span>
+                        </div>
+                        <div v-else>
+                            <img :src="image" style="width: 450px"/>
+                            <br>
+                            <br>
+                            <button type="button" class="btn btn-default" type="file" @click="removeImage">
+                                <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                            </button>
+                        </div>
+
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
@@ -129,7 +159,7 @@
                 </div>
             </div>
         </div>
-        
+
         <!-- Modal Exclui conteudo-->
         <div class="modal fade" id="delConteudo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
             <div class="modal-dialog" role="document">
@@ -139,9 +169,9 @@
                         <h4 class="modal-title" id="myModalLabel">Excluir Conteudo</h4>
                     </div>
                     <div class="modal-body">
-                        
-                        Deseja realmente excluir <label>{{delconteudo.conteudo.titulo}}</label> ?
-                                                                        
+
+                        Deseja realmente excluir este conteudo?
+
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
