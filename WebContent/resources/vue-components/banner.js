@@ -53,7 +53,6 @@ new Vue({
                 "id": null
             }
         },
-
         checkedconteudo: false
 
     },
@@ -83,7 +82,6 @@ new Vue({
             var self = this;
             self.image = '';
         },
-
         //Comando Format
         dateFormat: function (h) {
             return  moment(h).format('DD/MM/YYYY');
@@ -125,6 +123,7 @@ new Vue({
                 success: function () {
                     $('#addbanner').modal('hide');
                     self.fetchbanner();
+                    self.resetObjects();
                 }
             });
         },
@@ -157,9 +156,9 @@ new Vue({
                 success: function () {
                     $('#modBanner').modal('hide');
                     self.fetchbanner();
+                    self.resetObjects();
                 }
             });
-
         },
         //Comando Deleta
         deletbanner: function () {
@@ -175,6 +174,7 @@ new Vue({
                 success: function () {
                     $('#delbanner').modal('hide');
                     self.fetchbanner();
+                    self.resetObjects();
                 }
             });
         },
@@ -184,8 +184,51 @@ new Vue({
             setTimeout(function () {
                 self.getbanner();
             }, 600);
-        }
-
+        },
         //Reset
+        resetObjects: function () {
+            var self = this;
+            self.addbanner = {
+                "id": null,
+                "ativo": false,
+                "dataInicio": null,
+                "dataFim": null,
+                "dataCriacao": null,
+                "local": null,
+                "conteudo": {
+                    "id": null
+                },
+                "imagem": {
+                    "id": null,
+                    "base64": null,
+                    "dataUpload": null
+                }
+            };
+            self.modbanner = {
+                "id": null,
+                "ativo": false,
+                "dataInicio": null,
+                "dataFim": null,
+                "dataCriacao": null,
+                "local": null,
+                "conteudo": {
+                    "id": null
+                },
+                "imagem": {
+                    "id": null,
+                    "base64": null,
+                    "dataUpload": null
+                }
+            };
+            self.delbanner = null;
+            self.image = null;
+            self.seconteudo = {
+                "conteudo": {
+                    "id": null
+                }
+            };
+            self.checkedconteudo = false;
+        }
     }
-});
+}
+);
