@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/recursos/template/template.xhtml">
+
+	<ui:define name="tituloPagina">
+		 Suporte PA
+	</ui:define>
+	<ui:define name="tituloPrincipal">
+		<i class="fa fa-list"> </i> Suporte PA</ui:define>
+	<ui:define name="tituloSecundario"></ui:define>
+
+	<ui:define name="botoesAcao"></ui:define>
+
+	<ui:insert name="eventos">
+
+		<f:metadata>
+
+			<f:event listener="#{loginBean.isNotLogadoRedireciona()}"
+				type="preRenderView" />
+
+			<f:event listener="#{loginBean.isNotAtivoRedireciona()}"
+				type="preRenderView" />
+
+		</f:metadata>
+
+	</ui:insert>
+
+	<ui:define name="conteudo">
+
+		<p:panel header="Registrar atendimento" style="height: 600px;">
+
+			<h:panelGrid columns="2" layout="grid"
+				style="float: left; width: 50%;" cellspacing="20">
+
+				<h:outputText value="Matricula" />
+				<p:inputText
+					value="#{atendimentoBean.atendimento.matriculaOperador}"
+					maxlength="8" />
+
+				<h:outputText value="Instância" />
+				<p:inputText value="#{atendimentoBean.atendimento.instancia}"
+					maxlength="10" />
+
+				<h:outputText value="Transmissão" />
+				<p:selectOneButton converter="omnifaces.SelectItemsConverter"
+					value="#{atendimentoBean.atendimento.transmissao}">
+
+					<f:selectItems
+						value="#{transmissaoBean.listarTransmissaoAtivo(true)}"
+						var="transmissao" itemLabel="#{transmissao.nome}"
+						itemValue="#{transmissao}" />
+
+				</p:selectOneButton>
+
+				<h:outputText value="Ordem" />
+				<p:selectOneButton value="#{atendimentoBean.atendimento.ordem}">
+
+					<f:selectItem itemLabel="BA" itemValue="BA" />
+					<f:selectItem itemLabel="TT" itemValue="TT" />
+
+				</p:selectOneButton>
+
+				<h:outputText value="BA/Código PON" />
+				<p:inputText value="#{atendimentoBean.atendimento.codigo}" />
+
+
+				<h:outputText value="Produto" />
+				<p:selectOneMenu value="#{atendimentoBean.infoProduto.produto}"
+					converter="omnifaces.SelectItemsConverter">
+
+					<f:selectItem itemLabel="-- Selecione --" itemValue="" />
+					<f:selectItems value="#{produtoBean.listarProdutoAtivo(true)}"
+						var="produto" itemLabel="#{produto.nome}" itemValue="#{produto}" />
+					<f:ajax event="itemSelect" render="subProdutoOnChange" />
+
+				</p:selectOneMenu>
+
+				<h:outputText value="Sub Produto" />
+				<p:selectOneMenu id="subProdutoOnChange"
+					value="#{atendimentoBean.infoProduto.subProdutoMotivo}"
+					converter="omnifaces.SelectItemsConverter">
+
+					<f:selectItem itemLabel="-- Selecione --" itemValue="" />
+					<f:selectItems
+						value="#{subProdutoMotivoBean.listarSubProdutoMotivoProdutoEspecifico(atendimentoBean.infoProduto.produto, true)}"
+						var="subProduto" itemLabel="#{subProduto.nome}"
+						itemValue="#{subProduto}" />
+
+				</p:selectOneMenu>
+
+				<h:outputText value="Duvida/Dificuldade" />
+				<p:selectOneMenu value="#{atendimentoBean.atendimento.duvida}"
+					converter="omnifaces.SelectItemsConverter" filter="true" filterMatchMode="contains">
+
+					<f:selectItem itemLabel="-- Selecione --" itemValue="" />
+					<f:selectItems value="#{duvidaBean.listaDuvidasLista(true, true)}"
+						var="duvidaList" itemLabel="#{duvidaList.nome}"
+						itemValue="#{duvidaList}" />
+					<p:ajax
+						listener="#{atendimentoBean.selecionadoOutros(atendimentoBean.atendimento.duvida.nome)}"
+						event="itemSelect" update="formTemplate:msgs" />
+
+				</p:selectOneMenu>
+
+				<h:outputText value="Detalhes da duvida" />
+				<p:selectOneMenu
+					value="#{atendimentoBean.atendimento.detalheDuvida}"
+					converter="omnifaces.SelectItemsConverter">
+
+					<f:selectItem itemLabel="-- Selecione --" itemValue="" />
+					<f:selectItems
+						value="#{detalheDuvidaBean.listardetalheDuvidaLista(true, true)}"
+						var="detDuvida" itemLabel="#{detDuvida.nome}"
+						itemValue="#{detDuvida}" />
+					<p:ajax
+						listener="#{atendimentoBean.selecionadoOutros(atendimentoBean.atendimento.detalheDuvida.nome)}"
+						event="itemSelect" update="formTemplate:msgs" />
+
+				</p:selectOneMenu>
+
+			</h:panelGrid>
+
+			<h:panelGrid columns="2" layout="grid"
+				style="float: right; width:50%;" cellspacing="10">
+
+				<h:outputText value="Acionado suporte" />
+				<p:selectBooleanCheckbox
+					value="#{atendimentoBean.atendimento.acionadoSuporte}">
+
+					<f:ajax event="change" render="nameTec" />
+
+				</p:selectBooleanCheckbox>
+
+				<h:outputText value="Nome Suporte" />
+				<p:inputText id="nameTec"
+					value="#{atendimentoBean.atendimento.nomeSuporte}"
+					disabled="#{!atendimentoBean.atendimento.acionadoSuporte}" />
+
+				<h:outputText value="Falha Sistêmica" />
+				<p:selectBooleanCheckbox
+					value="#{atendimentoBean.atendimento.acionadoFalhaSis}">
+
+					<f:ajax event="change" render="nameFalha" />
+
+				</p:selectBooleanCheckbox>
+
+				<h:outputText value="Qual falha sistemica?" />
+				<p:inputTextarea id="nameFalha"
+					value="#{atendimentoBean.atendimento.falhaSis}"
+					disabled="#{!atendimentoBean.atendimento.acionadoFalhaSis}" />
+
+				<h:outputText value="Falha Equipamento" />
+				<p:selectBooleanCheckbox
+					value="#{atendimentoBean.atendimento.acionadoFalhaEqp}">
+
+					<f:ajax event="change" render="nameFalhaEqp eqps fabri mods" />
+
+				</p:selectBooleanCheckbox>
+
+				<h:outputText value="Qual falha do equipamento?" />
+				<p:inputTextarea id="nameFalhaEqp"
+					value="#{atendimentoBean.atendimento.falhaEqp}"
+					disabled="#{!atendimentoBean.atendimento.acionadoFalhaEqp}" />
+
+				<h:outputText value="Equipamento" />
+				<p:selectOneMenu
+					disabled="#{!atendimentoBean.atendimento.acionadoFalhaEqp}"
+					id="eqps" value="#{atendimentoBean.infoEquipamento.equipamento}"
+					converter="omnifaces.SelectItemsConverter">
+
+					<f:selectItem itemLabel="-- Selecione --" itemValue="" />
+					<f:selectItems
+						value="#{equipamentoBean.listarEquipamentosLista(true, true)}"
+						var="equipamento" itemLabel="#{equipamento.nome}"
+						itemValue="#{equipamento}" />
+					<p:ajax
+						listener="#{atendimentoBean.selecionadoOutros(atendimentoBean.infoEquipamento.equipamento.nome)}"
+						event="itemSelect" update="formTemplate:msgs" />
+
+				</p:selectOneMenu>
+
+				<h:outputText value="Fabricante" />
+				<p:selectOneMenu
+					disabled="#{!atendimentoBean.atendimento.acionadoFalhaEqp}"
+					value="#{atendimentoBean.infoEquipamento.fabricante}" id="fabri"
+					converter="omnifaces.SelectItemsConverter">
+
+					<f:selectItem itemLabel="-- Selecione --" itemValue="" />
+					<f:selectItems
+						value="#{fabricanteBean.listarFabricantesLista(true, true)}"
+						var="fabricante" itemLabel="#{fabricante.nome}"
+						itemValue="#{fabricante}" />
+					<f:ajax event="itemSelect" render="mods" />
+					<p:ajax
+						listener="#{atendimentoBean.selecionadoOutros(atendimentoBean.infoEquipamento.fabricante.nome)}"
+						event="itemSelect" update="formTemplate:msgs" />
+
+				</p:selectOneMenu>
+
+				<h:outputText value="Modelo" />
+				<p:selectOneMenu value="#{atendimentoBean.infoEquipamento.modelo}"
+					disabled="#{!atendimentoBean.atendimento.acionadoFalhaEqp}"
+					id="mods" converter="omnifaces.SelectItemsConverter">
+
+					<f:selectItem itemLabel="-- Selecione --" itemValue="" />
+					<f:selectItems
+						value="#{modeloBean.listarModelosListaFabricante(atendimentoBean.infoEquipamento.fabricante, true)}"
+						var="modelo" itemLabel="#{modelo.nome}" itemValue="#{modelo}" />
+
+				</p:selectOneMenu>
+
+				<h:outputText value="Solução" />
+				<p:selectOneMenu value="#{atendimentoBean.atendimento.solucao}"
+					converter="omnifaces.SelectItemsConverter" filter="true" filterMatchMode="contains">
+
+					<f:selectItem itemLabel="-- Selecione --" itemValue="" />
+					<f:selectItems
+						value="#{solucaoBean.listarSolucoesLista(true, true)}"
+						var="solucao" itemLabel="#{solucao.nome}" itemValue="#{solucao}" />
+					<p:ajax
+						listener="#{atendimentoBean.selecionadoOutros(atendimentoBean.atendimento.solucao.nome)}"
+						event="itemSelect" update="formTemplate:msgs" />
+
+				</p:selectOneMenu>
+
+				<h:outputText value="Outras Informações" />
+				<p:inputTextarea
+					value="#{atendimentoBean.atendimento.outrasInformacoes}" />
+
+			</h:panelGrid>
+
+			<br />
+
+			<p:commandButton value="Cadastrar"
+				action="#{atendimentoBean.cadastrarAtendimento()}" update="@all"
+				style="margin-top: 70px; float: right;" />
+
+		</p:panel>
+
+	</ui:define>
+</ui:composition>
+</html>

@@ -1,0 +1,1088 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/recursos/template/template.xhtml">
+
+	<ui:define name="tituloPagina">
+		 Gerenciar Sistema
+	</ui:define>
+	<ui:define name="tituloPrincipal">
+		<i class="fa fa-cogs"> </i> Gerenciar Sistema</ui:define>
+	<ui:define name="tituloSecundario"></ui:define>
+
+	<ui:define name="botoesAcao"></ui:define>
+
+	<ui:insert name="eventos">
+
+		<f:metadata>
+
+			<f:event listener="#{loginBean.validaPagina('adm')}"
+				type="preRenderView" />
+
+			<f:event listener="#{loginBean.isNotAdmRedireciona()}"
+				type="preRenderView" />
+
+		</f:metadata>
+
+	</ui:insert>
+
+	<ui:define name="conteudo">
+
+		<h:form id="form">
+
+			<p:tabView id="tabview" dynamic="true">
+
+				<p:tab title="Controle de Usuário">
+
+					<p:dataTable
+						value="#{usuarioEfikaBean.listarUsuarioEfikaAtivo(false)}"
+						var="userFalse" emptyMessage="Não há usuários registrados"
+						paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} "
+						paginator="true"
+						currentPageReportTemplate="[{startRecord} de {endRecord}]"
+						filteredValue="#{controleUsuarioBean.listaFiltradaDeControleUsuario}">
+
+						<f:facet name="header"> Usuários Inativos </f:facet>
+
+						<p:column headerText="Login" style="text-align: center;">
+
+							<h:outputText value="#{userFalse.login}" />
+
+						</p:column>
+
+						<p:column headerText="Equipe" style="text-align: center;">
+
+							<h:outputText value="#{userFalse.equipe.nome}" />
+
+						</p:column>
+
+						<p:column headerText="Ativo?" style="text-align: center;">
+
+							<h:outputText value="Sim" rendered="#{userFalse.ativo}" />
+							<h:outputText value="Não" rendered="#{!userFalse.ativo}" />
+
+						</p:column>
+
+						<p:column headerText="Adm?" style="text-align: center;">
+
+							<h:outputText value="Sim" rendered="#{userFalse.adm}" />
+							<h:outputText value="Não" rendered="#{!userFalse.adm}" />
+
+						</p:column>
+
+						<p:column headerText="Modifica"
+							style="text-align: center; width: 80px;">
+
+							<p:commandButton update="@form:tabview:detalhesModUsuario"
+								oncomplete="PF('modUser').show()" icon="ui-icon-pencil"
+								title="Editar">
+
+								<f:setPropertyActionListener value="#{userFalse}"
+									target="#{usuarioEfikaBean.usuarioEfikaModifica}" />
+
+							</p:commandButton>
+
+						</p:column>
+
+					</p:dataTable>
+
+					<br />
+
+					<p:dataTable
+						value="#{usuarioEfikaBean.listarUsuarioEfikaAtivo(true)}"
+						var="userTrue" emptyMessage="Não há usuários registrados"
+						paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
+						paginator="true"
+						currentPageReportTemplate="[{startRecord} de {endRecord}]"
+						filteredValue="#{controleUsuarioBean.listaFiltradaDeControleUsuario}">
+
+						<f:facet name="header">	Usuários Ativos </f:facet>
+
+						<p:column headerText="Login" style="text-align: center;">
+
+							<h:outputText value="#{userTrue.login}" />
+
+						</p:column>
+
+						<p:column headerText="Equipe" style="text-align: center;">
+
+							<h:outputText value="#{userTrue.equipe.nome}" />
+
+						</p:column>
+
+						<p:column headerText="Ativo?" style="text-align: center;">
+
+							<h:outputText value="Sim" rendered="#{userTrue.ativo}" />
+							<h:outputText value="Não" rendered="#{!userTrue.ativo}" />
+
+						</p:column>
+
+						<p:column headerText="Adm?" style="text-align: center;">
+
+							<h:outputText value="Sim" rendered="#{userTrue.adm}" />
+							<h:outputText value="Não" rendered="#{!userTrue.adm}" />
+
+						</p:column>
+
+						<p:column headerText="Modifica"
+							style="text-align: center; width: 80px;">
+
+							<p:commandButton update="@form:tabview:detalhesModUsuario"
+								oncomplete="PF('modUser').show()" icon="ui-icon-pencil"
+								title="Editar">
+
+								<f:setPropertyActionListener value="#{userTrue}"
+									target="#{usuarioEfikaBean.usuarioEfikaModifica}" />
+
+							</p:commandButton>
+
+						</p:column>
+
+					</p:dataTable>
+
+					<p:dialog header="Edita Controle Usuário" widgetVar="modUser"
+						modal="true" showEffect="fade" hideEffect="fade" resizable="false"
+						width="300" height="200">
+
+						<h:panelGroup id="detalhesModUsuario">
+
+							<h:panelGrid>
+
+								<h:outputText value="Login" />
+								<h:outputText
+									value="#{usuarioEfikaBean.usuarioEfikaModifica.login}" />
+
+								<h:outputText value="Equipe" />
+								<p:selectOneMenu
+									value="#{usuarioEfikaBean.usuarioEfikaModifica.equipe}"
+									converter="omnifaces.SelectItemsConverter" filter="true"
+									filterMatchMode="startsWith">
+
+									<f:selectItem itemLabel="-- Selecione --" itemValue="" />
+									<f:selectItems value="#{equipeBean.listaEquipe()}" var="eqps"
+										itemLabel="#{eqps.nome}" itemValue="#{eqps}" />
+
+								</p:selectOneMenu>
+
+								<h:outputText value="Adm?" />
+								<p:selectBooleanCheckbox
+									value="#{usuarioEfikaBean.usuarioEfikaModifica.adm}" />
+
+								<h:outputText value="Ativo?" />
+								<p:selectBooleanCheckbox
+									value="#{usuarioEfikaBean.usuarioEfikaModifica.ativo}" />
+
+								<p:commandButton value="Modificar"
+									action="#{usuarioEfikaBean.modificarUsuarioEfika()}"
+									update="@all" />
+
+							</h:panelGrid>
+
+						</h:panelGroup>
+
+
+					</p:dialog>
+
+				</p:tab>
+
+				<p:tab title="Equipe">
+
+					<h:panelGrid>
+
+						<h:outputText value="Nome" />
+						<p:inputText value="#{equipeBean.equipe.nome}" />
+
+						<p:commandButton value="Cadastrar"
+							action="#{equipeBean.cadastrarEquipe()}" update="@all" />
+
+					</h:panelGrid>
+
+					<br />
+
+					<p:dataTable value="#{equipeBean.listaEquipe()}" var="equipe">
+
+						<p:column headerText="Nome" style="text-align: center;">
+
+							<h:outputText value="#{equipe.nome}" />
+
+						</p:column>
+
+						<p:column headerText="Ativo" style="text-align: center;">
+
+							<h:outputText rendered="#{equipe.ativo}" value="Ativo" />
+							<h:outputText rendered="#{!equipe.ativo}" value="Inativo" />
+
+						</p:column>
+
+						<p:column headerText="Modifica"
+							style="text-align: center; width: 80px;">
+
+							<p:commandButton update="@form:tabview:detalhesModEquipe"
+								oncomplete="PF('modEquipe').show()" icon="ui-icon-pencil"
+								title="Editar">
+
+								<f:setPropertyActionListener value="#{equipe}"
+									target="#{equipeBean.equipeModifica}" />
+
+							</p:commandButton>
+
+						</p:column>
+
+					</p:dataTable>
+
+					<p:dialog header="Edita Equipe" widgetVar="modEquipe" modal="true"
+						showEffect="fade" hideEffect="fade" resizable="false" width="300"
+						height="200">
+
+						<h:panelGroup id="detalhesModEquipe">
+
+							<h:panelGrid>
+
+								<h:outputText value="Nome" />
+								<p:inputText value="#{equipeBean.equipeModifica.nome}" />
+
+								<h:outputText value="Ativo?" />
+								<p:selectBooleanCheckbox
+									value="#{equipeBean.equipeModifica.ativo}" />
+
+								<p:commandButton value="Modificar"
+									action="#{equipeBean.modificarEquipe()}" update="@all" />
+
+							</h:panelGrid>
+
+						</h:panelGroup>
+
+					</p:dialog>
+
+				</p:tab>
+
+				<p:tab title="Solução">
+
+					<h:panelGrid>
+
+						<h:outputText value="Nome" />
+						<p:inputText value="#{solucaoBean.solucao.nome}" />
+
+						<p:commandButton value="Cadastrar"
+							action="#{solucaoBean.cadastrarSolucao()}" update="@all" />
+
+					</h:panelGrid>
+
+					<br />
+
+					<p:dataTable value="#{solucaoBean.listarTodasSolucoes()}"
+						var="solucoes" emptyMessage="Não há Falha sistemicas registradas"
+						paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
+						paginator="true"
+						currentPageReportTemplate="[{startRecord} de {endRecord}]">
+
+						<p:column headerText="Nome" style="text-align: center;">
+
+							<h:outputText value="#{solucoes.nome}" />
+
+						</p:column>
+
+						<p:column headerText="Ativo" style="text-align: center;">
+
+							<h:outputText rendered="#{solucoes.ativo}" value="Ativo" />
+							<h:outputText rendered="#{!solucoes.ativo}" value="Inativo" />
+
+						</p:column>
+
+						<p:column headerText="Criado pelo usuário"
+							style="text-align: center;">
+
+							<h:outputText rendered="#{!solucoes.lista}" value="Sim" />
+							<h:outputText rendered="#{solucoes.lista}" value="Não" />
+
+						</p:column>
+
+						<p:column headerText="Modifica"
+							style="text-align: center; width: 80px;">
+
+							<p:commandButton update="@form:tabview:detalhesModSolucoes"
+								oncomplete="PF('falhaSolucoes').show()" icon="ui-icon-pencil"
+								title="Editar">
+
+								<f:setPropertyActionListener value="#{solucoes}"
+									target="#{solucaoBean.solucaoModifica}" />
+
+							</p:commandButton>
+
+						</p:column>
+
+					</p:dataTable>
+
+					<p:dialog header="Edita Solução" widgetVar="falhaSolucoes"
+						modal="true" showEffect="fade" hideEffect="fade" resizable="false"
+						width="300" height="200">
+
+						<h:panelGroup id="detalhesModSolucoes">
+
+							<h:panelGrid>
+
+								<h:outputText value="Nome" />
+								<p:inputText value="#{solucaoBean.solucaoModifica.nome}" />
+
+								<h:outputText value="Ativo?" />
+								<p:selectBooleanCheckbox
+									value="#{solucaoBean.solucaoModifica.ativo}" />
+
+								<p:commandButton value="Modificar"
+									action="#{solucaoBean.modificaSolucao()}" update="@all" />
+
+							</h:panelGrid>
+
+						</h:panelGroup>
+
+					</p:dialog>
+
+				</p:tab>
+
+				<p:tab title="Duvida">
+
+					<p:panel header="Duvida">
+
+						<h:panelGrid>
+
+							<h:outputText value="Nome" />
+							<p:inputText value="#{duvidaBean.duvida.nome}" />
+
+							<p:commandButton value="Cadastrar"
+								action="#{duvidaBean.cadastrarDuvida()}" update="@all" />
+
+						</h:panelGrid>
+
+						<br />
+
+						<p:dataTable value="#{duvidaBean.listaTodasDuvidas()}"
+							var="duvida" emptyMessage="Não há duvidas registradas"
+							paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+							paginator="true" rows="5"
+							currentPageReportTemplate="[{startRecord} de {endRecord}]">
+
+							<p:column headerText="Nome" style="text-align: center;">
+
+								<h:outputText value="#{duvida.nome}" />
+
+							</p:column>
+
+							<p:column headerText="Ativo" style="text-align: center;">
+
+								<h:outputText rendered="#{duvida.ativo}" value="Ativo" />
+								<h:outputText rendered="#{!duvida.ativo}" value="Inativo" />
+
+							</p:column>
+
+							<p:column headerText="Criado pelo usuário"
+								style="text-align: center;">
+
+								<h:outputText rendered="#{!duvida.lista}" value="Sim" />
+								<h:outputText rendered="#{duvida.lista}" value="Não" />
+
+							</p:column>
+
+							<p:column headerText="Modifica"
+								style="text-align: center; width: 80px;">
+
+								<p:commandButton update="@form:tabview:detalhesModDuvida"
+									oncomplete="PF('falhaDuvida').show()" icon="ui-icon-pencil"
+									title="Editar">
+
+									<f:setPropertyActionListener value="#{duvida}"
+										target="#{duvidaBean.duvidaModifica}" />
+
+								</p:commandButton>
+
+							</p:column>
+
+						</p:dataTable>
+
+						<p:dialog header="Edita Duvida" widgetVar="falhaDuvida"
+							modal="true" showEffect="fade" hideEffect="fade"
+							resizable="false" width="300" height="200">
+
+							<h:panelGroup id="detalhesModDuvida">
+
+								<h:panelGrid>
+
+									<h:outputText value="Nome" />
+									<p:inputText value="#{duvidaBean.duvidaModifica.nome}" />
+
+									<h:outputText value="Ativo?" />
+									<p:selectBooleanCheckbox
+										value="#{duvidaBean.duvidaModifica.ativo}" />
+
+									<p:commandButton value="Modificar"
+										action="#{duvidaBean.modificaDuvida()}" update="@all" />
+
+								</h:panelGrid>
+
+							</h:panelGroup>
+
+						</p:dialog>
+
+					</p:panel>
+
+					<br />
+
+					<p:panel header="Detalhe duvida">
+
+						<h:panelGrid>
+
+							<h:outputText value="Nome" />
+							<p:inputText value="#{detalheDuvidaBean.detalheDuvida.nome}" />
+
+							<p:commandButton value="Cadastrar"
+								action="#{detalheDuvidaBean.cadastrarDetalheDuvida()}"
+								update="@all" />
+
+						</h:panelGrid>
+
+						<br />
+
+						<p:dataTable value="#{detalheDuvidaBean.listardetalheDuvida()}"
+							var="detalheDuvida"
+							emptyMessage="Não há detalhes duvidas registradas"
+							paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+							paginator="true" rows="5"
+							currentPageReportTemplate="[{startRecord} de {endRecord}]">
+
+							<p:column headerText="Nome" style="text-align: center;">
+
+								<h:outputText value="#{detalheDuvida.nome}" />
+
+							</p:column>
+
+							<p:column headerText="Ativo" style="text-align: center;">
+
+								<h:outputText rendered="#{detalheDuvida.ativo}" value="Ativo" />
+								<h:outputText rendered="#{!detalheDuvida.ativo}" value="Inativo" />
+
+							</p:column>
+
+							<p:column headerText="Criado pelo usuário"
+								style="text-align: center;">
+
+								<h:outputText rendered="#{!detalheDuvida.lista}" value="Sim" />
+								<h:outputText rendered="#{detalheDuvida.lista}" value="Não" />
+
+							</p:column>
+
+							<p:column headerText="Modifica"
+								style="text-align: center; width: 80px;">
+
+								<p:commandButton update="@form:tabview:detalhesModDetDuvida"
+									oncomplete="PF('modDetDuvida').show()" icon="ui-icon-pencil"
+									title="Editar">
+
+									<f:setPropertyActionListener value="#{detalheDuvida}"
+										target="#{detalheDuvidaBean.detalheDuvidaModifica}" />
+
+								</p:commandButton>
+
+							</p:column>
+
+						</p:dataTable>
+
+						<p:dialog header="Edita Duvida" widgetVar="modDetDuvida"
+							modal="true" showEffect="fade" hideEffect="fade"
+							resizable="false" width="300" height="200">
+
+							<h:panelGroup id="detalhesModDetDuvida">
+
+								<h:panelGrid>
+
+									<h:outputText value="Nome" />
+									<p:inputText
+										value="#{detalheDuvidaBean.detalheDuvidaModifica.nome}" />
+
+									<h:outputText value="Ativo?" />
+									<p:selectBooleanCheckbox
+										value="#{detalheDuvidaBean.detalheDuvidaModifica.ativo}" />
+
+									<p:commandButton value="Modificar"
+										action="#{detalheDuvidaBean.modificarDetalheDuvida()}"
+										update="@all" />
+
+								</h:panelGrid>
+
+							</h:panelGroup>
+
+						</p:dialog>
+
+					</p:panel>
+
+				</p:tab>
+
+				<p:tab title="Transmissão">
+
+					<h:panelGrid>
+
+						<h:outputText value="Nome" />
+						<p:inputText value="#{transmissaoBean.transmissao.nome}" />
+
+						<p:commandButton value="Cadastrar"
+							action="#{transmissaoBean.cadastrarTransmissao()}" update="@all" />
+
+					</h:panelGrid>
+
+					<br />
+
+					<p:dataTable value="#{transmissaoBean.listarTransmissao()}"
+						var="transmissao" emptyMessage="Não há duvidas registradas"
+						paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
+						paginator="true"
+						currentPageReportTemplate="[{startRecord} de {endRecord}]">
+
+						<p:column headerText="Nome" style="text-align: center;">
+
+							<h:outputText value="#{transmissao.nome}" />
+
+						</p:column>
+
+						<p:column headerText="Ativo" style="text-align: center;">
+
+							<h:outputText rendered="#{transmissao.ativo}" value="Ativo" />
+							<h:outputText rendered="#{!transmissao.ativo}" value="Inativo" />
+
+						</p:column>
+
+						<p:column headerText="Modifica"
+							style="text-align: center; width: 80px;">
+
+							<p:commandButton update="@form:tabview:detalhesModTransmicao"
+								oncomplete="PF('falhaTransmissao').show()" icon="ui-icon-pencil"
+								title="Editar">
+
+								<f:setPropertyActionListener value="#{transmissao}"
+									target="#{transmissaoBean.transmissaoModifica}" />
+
+							</p:commandButton>
+
+						</p:column>
+
+					</p:dataTable>
+
+					<p:dialog header="Edita Transmissão" widgetVar="falhaTransmissao"
+						modal="true" showEffect="fade" hideEffect="fade" resizable="false"
+						width="300" height="200">
+
+						<h:panelGroup id="detalhesModTransmicao">
+
+							<h:panelGrid>
+
+								<h:outputText value="Nome" />
+								<p:inputText value="#{transmissaoBean.transmissaoModifica.nome}" />
+
+								<h:outputText value="Ativo?" />
+								<p:selectBooleanCheckbox
+									value="#{transmissaoBean.transmissaoModifica.ativo}" />
+
+								<p:commandButton value="Modificar"
+									action="#{transmissaoBean.modificarTransmissao()}"
+									update="@all" />
+
+							</h:panelGrid>
+
+						</h:panelGroup>
+
+					</p:dialog>
+
+				</p:tab>
+
+				<p:tab title="Produto">
+
+					<p:panel header="Cadastrar Produto" style="height: 300px;">
+
+						<h:panelGrid style="float: left;">
+
+							<h:outputText value="Nome" />
+							<p:inputText value="#{produtoBean.produto.nome}" />
+
+							<p:commandButton value="Cadastrar"
+								action="#{produtoBean.cadastrarProduto()}" update="@all" />
+
+						</h:panelGrid>
+
+						<br />
+
+						<p:dataTable value="#{produtoBean.listarProduto()}" var="produto"
+							style="float: right; width: 60%;"
+							emptyMessage="Não há Produtos registradas"
+							paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+							paginator="true" rows="5"
+							currentPageReportTemplate="[{startRecord} de {endRecord}]">
+
+							<p:column headerText="Nome" style="text-align: center;">
+
+								<h:outputText value="#{produto.nome}" />
+
+							</p:column>
+
+							<p:column headerText="Ativo" style="text-align: center;">
+
+								<h:outputText rendered="#{produto.ativo}" value="Ativo" />
+								<h:outputText rendered="#{!produto.ativo}" value="Inativo" />
+
+							</p:column>
+
+							<p:column headerText="Modifica"
+								style="text-align: center; width: 80px;">
+
+								<p:commandButton update="@form:tabview:detalhesModProduto"
+									oncomplete="PF('modProduto').show()" icon="ui-icon-pencil"
+									title="Editar">
+
+									<f:setPropertyActionListener value="#{produto}"
+										target="#{produtoBean.produtoModifica}" />
+
+								</p:commandButton>
+
+							</p:column>
+
+						</p:dataTable>
+
+						<p:dialog header="Edita Produto" widgetVar="modProduto"
+							modal="true" showEffect="fade" hideEffect="fade"
+							resizable="false" width="300" height="200">
+
+							<h:panelGroup id="detalhesModProduto">
+
+								<h:panelGrid>
+
+									<h:outputText value="Nome" />
+									<p:inputText value="#{produtoBean.produtoModifica.nome}" />
+
+									<h:outputText value="Ativo?" />
+									<p:selectBooleanCheckbox
+										value="#{produtoBean.produtoModifica.ativo}" />
+
+									<p:commandButton value="Cadastrar"
+										action="#{produtoBean.modificarProduto()}" update="@all" />
+
+								</h:panelGrid>
+
+							</h:panelGroup>
+
+						</p:dialog>
+
+					</p:panel>
+
+					<br />
+
+					<p:panel header="Cadastrar Sub Produto" style="height: 300px;">
+
+						<h:panelGrid style="float: left;">
+
+							<h:outputText value="Nome" />
+							<p:inputText
+								value="#{subProdutoMotivoBean.subProdutoMotivo.nome}" />
+
+							<h:outputText value="Produto" />
+							<p:selectOneMenu
+								value="#{subProdutoMotivoBean.subProdutoMotivo.produto}"
+								converter="omnifaces.SelectItemsConverter" filter="true"
+								filterMatchMode="startsWith">
+
+								<f:selectItem itemLabel="-- Selecione --" itemValue="" />
+
+								<f:selectItems value="#{produtoBean.listarProduto()}" var="prod"
+									itemLabel="#{prod.nome}" itemValue="#{prod}" />
+
+							</p:selectOneMenu>
+
+							<p:commandButton value="Modifica"
+								action="#{subProdutoMotivoBean.cadastrarSubProdutoMotivo()}"
+								update="@all" />
+
+						</h:panelGrid>
+
+						<p:dataTable
+							value="#{subProdutoMotivoBean.listarSubProdutoMotivo()}"
+							var="subProduto"
+							style="float: right; width: 60%; margin-top: 20px;"
+							emptyMessage="Não há Sub Produtos registradas"
+							paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+							paginator="true" rows="5"
+							currentPageReportTemplate="[{startRecord} de {endRecord}]">
+
+							<p:column headerText="Nome" style="text-align: center;">
+
+								<h:outputText value="#{subProduto.nome}" />
+
+							</p:column>							
+
+							<p:column headerText="Produto" style="text-align: center;">
+
+								<h:outputText value="#{subProduto.produto.nome}" />
+
+							</p:column>
+							
+							<p:column headerText="Ativo" style="text-align: center;">
+
+								<h:outputText rendered="#{subProduto.ativo}" value="Ativo" />
+								<h:outputText rendered="#{!subProduto.ativo}" value="Inativo" />
+
+							</p:column>
+
+							<p:column headerText="Modifica"
+								style="text-align: center; width: 80px;">
+
+								<p:commandButton update="@form:tabview:detalhesModSubProduto"
+									oncomplete="PF('modSubProduto').show()" icon="ui-icon-pencil"
+									title="Editar">
+
+									<f:setPropertyActionListener value="#{subProduto}"
+										target="#{subProdutoMotivoBean.subProdutoMotivoModifica}" />
+
+								</p:commandButton>
+
+							</p:column>
+
+						</p:dataTable>
+
+						<p:dialog header="Edita Sub Produto" widgetVar="modSubProduto"
+							modal="true" showEffect="fade" hideEffect="fade"
+							resizable="false" width="300" height="200">
+
+							<h:panelGroup id="detalhesModSubProduto">
+
+								<h:panelGrid>
+
+									<h:outputText value="Nome" />
+									<p:inputText
+										value="#{subProdutoMotivoBean.subProdutoMotivoModifica.nome}" />
+
+									<h:outputText value="Produto" />
+									<p:selectOneMenu
+										value="#{subProdutoMotivoBean.subProdutoMotivoModifica.produto}"
+										converter="omnifaces.SelectItemsConverter" filter="true"
+										filterMatchMode="startsWith">
+
+										<f:selectItem itemLabel="-- Selecione --" itemValue="" />
+
+										<f:selectItems value="#{produtoBean.listarProduto()}"
+											var="prod" itemLabel="#{prod.nome}" itemValue="#{prod}" />
+
+									</p:selectOneMenu>
+
+									<h:outputText value="Ativo?" />
+									<p:selectBooleanCheckbox
+										value="#{subProdutoMotivoBean.subProdutoMotivoModifica.ativo}" />
+
+									<p:commandButton value="Modificar"
+										action="#{subProdutoMotivoBean.modificarSubProdutoMotivo()}"
+										update="@all" />
+
+								</h:panelGrid>
+
+							</h:panelGroup>
+
+						</p:dialog>
+
+					</p:panel>
+
+				</p:tab>
+
+				<p:tab title="Equipamentos">
+
+					<p:panel header="Fabricante" style="height: 300px;">
+
+						<h:panelGrid style="float: left;">
+
+							<h:outputText value="Nome" />
+							<p:inputText value="#{fabricanteBean.fabricante.nome}" />
+
+							<p:commandButton value="Cadastrar"
+								action="#{fabricanteBean.cadastrarFabricante()}" update="@all" />
+
+						</h:panelGrid>
+
+						<p:dataTable value="#{fabricanteBean.listarTodosFabricantes()}"
+							var="fabricante"
+							style="float: right; width: 60%; margin-top: 20px;"
+							emptyMessage="Não há modelos registradas"
+							paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+							paginator="true" rows="5"
+							currentPageReportTemplate="[{startRecord} de {endRecord}]">
+
+							<p:column headerText="Nome" style="text-align: center;">
+
+								<h:outputText value="#{fabricante.nome}" />
+
+							</p:column>
+
+							<p:column headerText="Ativo" style="text-align: center;">
+
+								<h:outputText rendered="#{fabricante.ativo}" value="Ativo" />
+								<h:outputText rendered="#{!fabricante.ativo}" value="Inativo" />
+
+							</p:column>
+							
+							<p:column headerText="Criado pelo usuário" style="text-align: center;">
+
+								<h:outputText rendered="#{!fabricante.lista}" value="Sim" />
+								<h:outputText rendered="#{fabricante.lista}" value="Não" />
+
+							</p:column>
+
+							<p:column headerText="Modifica"
+								style="text-align: center; width: 80px;">
+
+								<p:commandButton update="@form:tabview:detalhesModFabricante"
+									oncomplete="PF('modFabricante').show()" icon="ui-icon-pencil"
+									title="Editar">
+
+									<f:setPropertyActionListener value="#{fabricante}"
+										target="#{fabricanteBean.fabricanteModifica}" />
+
+								</p:commandButton>
+
+							</p:column>
+
+						</p:dataTable>
+
+						<p:dialog header="Edita Fabricante" widgetVar="modFabricante"
+							modal="true" showEffect="fade" hideEffect="fade"
+							resizable="false" width="300" height="200">
+
+							<h:panelGroup id="detalhesModFabricante">
+
+								<h:panelGrid>
+
+									<h:outputText value="Nome" />
+									<p:inputText value="#{fabricanteBean.fabricanteModifica.nome}" />
+
+									<h:outputText value="Ativo?" />
+									<p:selectBooleanCheckbox
+										value="#{fabricanteBean.fabricanteModifica.ativo}" />
+
+									<p:commandButton value="Cadastrar"
+										action="#{fabricanteBean.modificaFabricante()}" update="@all" />
+
+								</h:panelGrid>
+
+							</h:panelGroup>
+
+						</p:dialog>
+
+					</p:panel>
+
+					<br />
+
+					<p:panel header="Modelo" style="height: 300px;">
+
+						<h:panelGrid style="float: left;">
+
+							<h:outputText value="Nome" />
+							<p:inputText value="#{modeloBean.modelo.nome}" />
+
+							<h:outputText value="Fabricante" />
+							<p:selectOneMenu value="#{modeloBean.modelo.fabricante}"
+								converter="omnifaces.SelectItemsConverter" filter="true"
+								filterMatchMode="startsWith">
+
+								<f:selectItem itemLabel="-- Selecione --" itemValue="" />
+
+								<f:selectItems
+									value="#{fabricanteBean.listarFabricantesLista(true, true)}"
+									var="fabricante" itemLabel="#{fabricante.nome}"
+									itemValue="#{fabricante}" />
+
+							</p:selectOneMenu>
+
+							<p:commandButton value="Cadastrar"
+								action="#{modeloBean.cadastrarModelo()}" update="@all" />
+
+						</h:panelGrid>
+
+						<p:dataTable value="#{modeloBean.listarTodosModelos()}"
+							var="modelo" style="float: right; width: 60%; margin-top: 20px;"
+							emptyMessage="Não há modelos registradas"
+							paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+							paginator="true" rows="5"
+							currentPageReportTemplate="[{startRecord} de {endRecord}]">
+
+							<p:column headerText="Nome" style="text-align: center;">
+
+								<h:outputText value="#{modelo.nome}" />
+
+							</p:column>							
+
+							<p:column headerText="Fabricante" style="text-align: center;">
+
+								<h:outputText value="#{modelo.fabricante.nome}" />
+
+							</p:column>
+							
+							<p:column headerText="Ativo" style="text-align: center;">
+
+								<h:outputText rendered="#{modelo.ativo}" value="Ativo" />
+								<h:outputText rendered="#{!modelo.ativo}" value="Inativo" />
+
+							</p:column>
+							
+							<p:column headerText="Criado pelo usuário" style="text-align: center;">
+
+								<h:outputText rendered="#{!modelo.lista}" value="Sim" />
+								<h:outputText rendered="#{modelo.lista}" value="Não" />
+
+							</p:column>
+
+							<p:column headerText="Modifica"
+								style="text-align: center; width: 80px;">
+
+								<p:commandButton update="@form:tabview:detalhesModModelo"
+									oncomplete="PF('modModelo').show()" icon="ui-icon-pencil"
+									title="Editar">
+
+									<f:setPropertyActionListener value="#{modelo}"
+										target="#{modeloBean.modeloModifica}" />
+
+								</p:commandButton>
+
+							</p:column>
+
+						</p:dataTable>
+
+						<p:dialog header="Edita Modelo" widgetVar="modModelo" modal="true"
+							showEffect="fade" hideEffect="fade" resizable="false" width="300"
+							height="200">
+
+							<h:panelGroup id="detalhesModModelo">
+
+								<h:panelGrid>
+
+									<h:outputText value="Nome" />
+									<p:inputText value="#{modeloBean.modeloModifica.nome}" />
+
+									<h:outputText value="Fabricante" />
+									<p:selectOneMenu
+										value="#{modeloBean.modeloModifica.fabricante}"
+										converter="omnifaces.SelectItemsConverter" filter="true"
+										filterMatchMode="startsWith">
+
+										<f:selectItem itemLabel="-- Selecione --" itemValue="" />
+
+										<f:selectItems
+											value="#{fabricanteBean.listarFabricantesLista(true, true)}"
+											var="fabricante" itemLabel="#{fabricante.nome}"
+											itemValue="#{fabricante}" />
+
+									</p:selectOneMenu>
+
+									<h:outputText value="Ativo?" />
+									<p:selectBooleanCheckbox
+										value="#{modeloBean.modeloModifica.ativo}" />
+
+									<p:commandButton value="Modifica"
+										action="#{modeloBean.modificarModelo()}" update="@all" />
+
+								</h:panelGrid>
+
+							</h:panelGroup>
+
+						</p:dialog>
+
+					</p:panel>
+
+					<br />
+
+					<p:panel header="Equipamento" style="height: 300px;">
+
+						<h:panelGrid style="float: left;">
+
+							<h:outputText value="Nome" />
+							<p:inputText value="#{equipamentoBean.equipamento.nome}" />
+
+							<p:commandButton value="Cadastrar"
+								action="#{equipamentoBean.cadastrarEquipamento()}" update="@all" />
+
+						</h:panelGrid>
+
+						<p:dataTable value="#{equipamentoBean.listarTodosEquipamentos()}"
+							var="equipamento"
+							style="float: right; width: 60%; margin-top: 20px;"
+							emptyMessage="Não há equipamento registradas"
+							paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+							paginator="true" rows="5"
+							currentPageReportTemplate="[{startRecord} de {endRecord}]">
+
+							<p:column headerText="Nome" style="text-align: center;">
+
+								<h:outputText value="#{equipamento.nome}" />
+
+							</p:column>
+
+							<p:column headerText="Ativo" style="text-align: center;">
+
+								<h:outputText rendered="#{equipamento.ativo}" value="Ativo" />
+								<h:outputText rendered="#{!equipamento.ativo}" value="Inativo" />
+
+							</p:column>
+							
+							<p:column headerText="Criado pelo usuário" style="text-align: center;">
+
+								<h:outputText rendered="#{!equipamento.lista}" value="Sim" />
+								<h:outputText rendered="#{equipamento.lista}" value="Não" />
+
+							</p:column>
+
+							<p:column headerText="Modifica"
+								style="text-align: center; width: 80px;">
+
+								<p:commandButton update="@form:tabview:detalhesModEquipamento"
+									oncomplete="PF('modEquipamento').show()" icon="ui-icon-pencil"
+									title="Editar">
+
+									<f:setPropertyActionListener value="#{equipamento}"
+										target="#{equipamentoBean.equipamentoModifica}" />
+
+								</p:commandButton>
+
+							</p:column>
+
+						</p:dataTable>
+
+						<p:dialog header="Edita Equipamento" widgetVar="modEquipamento"
+							modal="true" showEffect="fade" hideEffect="fade"
+							resizable="false" width="300" height="200">
+
+							<h:panelGroup id="detalhesModEquipamento">
+
+								<h:panelGrid>
+
+									<h:outputText value="Nome" />
+									<p:inputText
+										value="#{equipamentoBean.equipamentoModifica.nome}" />
+
+									<h:outputText value="Ativo?" />
+									<p:selectBooleanCheckbox
+										value="#{equipamentoBean.equipamentoModifica.ativo}" />
+
+									<p:commandButton value="Cadastrar"
+										action="#{equipamentoBean.modificarEquipamento()}"
+										update="@all" />
+
+								</h:panelGrid>
+
+							</h:panelGroup>
+
+						</p:dialog>
+
+					</p:panel>
+
+				</p:tab>
+
+			</p:tabView>
+
+		</h:form>
+
+	</ui:define>
+</ui:composition>
+</html>

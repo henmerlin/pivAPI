@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition>
+
+	<ul id="menu">
+
+		<h:panelGroup rendered="#{loginBean.pagina==''}">
+
+			<li><a href="/Anjo/"> <i class="fa fa-home" /> Início
+			</a></li>
+
+			<h:panelGroup rendered="#{loginBean.logado and loginBean.verificaSeAtivo()}">
+
+				<li><a href="/Anjo/sistema/atendimento.jsf"> <i
+						class="fa fa-list" /> Atendimento
+				</a></li>
+				
+				<li><a href="/Anjo/sistemaInc/atendimentoInc.jsf"> <i
+						class="fa fa-list-alt" /> Atendimento INC
+				</a></li>
+
+			</h:panelGroup>
+
+			<h:panelGroup rendered="#{loginBean.verificaAdm()}">
+
+				<li><a href="/Anjo/adm/index.jsf"> <i class="fa fa-cogs" />
+						Adm
+				</a></li>
+
+			</h:panelGroup>
+
+		</h:panelGroup>
+
+		<h:panelGroup rendered="#{loginBean.pagina.equalsIgnoreCase('adm')}">
+
+			<li><a href="/Anjo/adm/gerenciarSis.jsf"> <i
+					class="fa fa-cogs" /> Gerenciar Sistema
+			</a></li>
+			
+			<li><a href="/Anjo/adm/lista.jsf"> <i
+					class="fa fa-pie-chart" /> Relatório Suporte PA
+			</a></li>
+			
+			<li><a href="/Anjo/admInc/lista.jsf"> <i
+					class="fa fa-pie-chart" /> Relatório INC
+			</a></li>
+
+		</h:panelGroup>
+
+	</ul>
+</ui:composition>
+</html>
