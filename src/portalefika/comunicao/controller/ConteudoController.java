@@ -10,6 +10,7 @@ import java.util.Calendar;
 import java.util.List;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
+import portalefika.autenticacao.annotation.Admin;
 import portalefika.comunicao.dal.AbaPortalDAO;
 import portalefika.comunicao.dal.exception.PersistenciaException;
 import portalefika.comunicao.entidades.Component;
@@ -27,6 +28,7 @@ public class ConteudoController extends AbstractController {
 
     }
 
+    @Admin
     public void create() {
     }
 

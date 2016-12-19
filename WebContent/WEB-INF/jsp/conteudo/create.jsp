@@ -50,6 +50,7 @@
                 </tbody>                    
             </table>
             <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#criaConteudo" data-backdrop="static" @click="resetObjects()">Criar Conteudo</button>
+            <a class="btn btn-primary btn-sm" href="${linkTo[ConteudoCategoriaController].create()}">Criar categoria</a>
         </div>        
         <!-- Modal Cria conteudo-->
         <div class="modal fade" id="criaConteudo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">

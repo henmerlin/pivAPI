@@ -15,6 +15,7 @@ import java.util.Calendar;
 import java.util.List;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
+import portalefika.autenticacao.annotation.Admin;
 import portalefika.comunicao.dal.BannerDAO;
 import portalefika.comunicao.entidades.Banner;
 import portalefika.comunicao.entidades.BannerLocal;
@@ -34,6 +35,7 @@ public class BannerController extends AbstractController {
     public BannerController() {
     }
 
+    @Admin
     public void create() {
     }
 

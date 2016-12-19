@@ -14,6 +14,7 @@ import br.com.caelum.vraptor.view.Results;
 import java.util.List;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
+import portalefika.autenticacao.annotation.Admin;
 import portalefika.comunicao.dal.ConteudoCategoriaDAO;
 import portalefika.comunicao.entidades.ConteudoCategoria;
 import portalefika.controller.AbstractController;
@@ -32,14 +33,23 @@ public class ConteudoCategoriaController extends AbstractController {
     public ConteudoCategoriaController() {
     }
     
+    @Admin
     public void create() {
     }
     
     @Get
     @Path("/comunicacao/conteudocategoria/listar")
     public void lista() {
-        List<ConteudoCategoria> l = this.conteudoCategoriaDAO.listar();
-        
+        List<ConteudoCategoria> l = this.conteudoCategoriaDAO.listar();        
+        if (l != null) {            
+            this.result.use(Results.json()).from(l).serialize();            
+        }        
+    }
+    
+    @Get
+    @Path("/comunicacao/conteudocategoria/listarAtivo")
+    public void listaAtivo() {
+        List<ConteudoCategoria> l = this.conteudoCategoriaDAO.listarAtivo();        
         if (l != null) {            
             this.result.use(Results.json()).from(l).serialize();            
         }        
@@ -48,8 +58,7 @@ public class ConteudoCategoriaController extends AbstractController {
     @Get 
     @Path("/comunicacao/conteudocategoria/especifico/{conteudoCategoria.id}")
     public void listarEspecifico(ConteudoCategoria conteudoCategoria) {        
-        ConteudoCategoria c = (ConteudoCategoria) this.conteudoCategoriaDAO.buscarPorId(conteudoCategoria);
-        
+        ConteudoCategoria c = (ConteudoCategoria) this.conteudoCategoriaDAO.buscarPorId(conteudoCategoria);        
         if (c != null) {            
             this.result.use(Results.json()).from(c).serialize();            
         }
@@ -59,55 +68,36 @@ public class ConteudoCategoriaController extends AbstractController {
     @Post
     @Consumes("application/json")
     @Path("/comunicacao/conteudocategoria/cadastrar")
-    public void cadastrar(ConteudoCategoria conteudoCategoria) {
-        
-        try {
-                        
+    public void cadastrar(ConteudoCategoria conteudoCategoria) {        
+        try {                        
             this.conteudoCategoriaDAO.cadastrar(conteudoCategoria);
-            this.result.use(Results.json()).from(conteudoCategoria).serialize();
-            
-        } catch (Exception e) {
-            
-            this.result.use(Results.json()).from(e).serialize();
-            
-        }
-        
+            this.result.use(Results.json()).from(conteudoCategoria).serialize();            
+        } catch (Exception e) {            
+            this.result.use(Results.json()).from(e).serialize();            
+        }        
     }
     
     @Post
     @Consumes("application/json")
     @Path("/comunicacao/conteudocategoria/modificar")
-    public void modificar(ConteudoCategoria conteudoCategoria) {
-        
-        try {
-            
+    public void modificar(ConteudoCategoria conteudoCategoria) {        
+        try {            
             this.conteudoCategoriaDAO.editar(conteudoCategoria);
-            this.result.use(Results.json()).from(conteudoCategoria).serialize();
-            
-        } catch (Exception e) {
-            
-            this.result.use(Results.json()).from(e).serialize();
-            
-        }
-        
+            this.result.use(Results.json()).from(conteudoCategoria).serialize();            
+        } catch (Exception e) {            
+            this.result.use(Results.json()).from(e).serialize();            
+        }        
     }
     
     @Post
     @Consumes("application/json")
     @Path("/comunicacao/conteudocategoria/excluir")
-    public void excluir(ConteudoCategoria conteudoCategoria) {
-        
-        try {
-            
+    public void excluir(ConteudoCategoria conteudoCategoria) {        
+        try {            
             this.conteudoCategoriaDAO.excluir(conteudoCategoria);
-            this.result.use(Results.json()).from(conteudoCategoria).serialize();
-            
-        } catch (Exception e) {
-            
-            this.result.use(Results.json()).from(e).serialize();
-            
-        }
-        
-    }
-    
+            this.result.use(Results.json()).from(conteudoCategoria).serialize();            
+        } catch (Exception e) {            
+            this.result.use(Results.json()).from(e).serialize();            
+        }        
+    }    
 }

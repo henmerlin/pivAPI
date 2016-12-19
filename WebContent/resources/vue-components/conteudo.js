@@ -96,12 +96,11 @@ new Vue({
         },
         getcategoria: function () {
             var self = this;
-            $.get(conteudoCategoriaURL + "listar", function (data) {
+            $.get(conteudoCategoriaURL + "listarAtivo", function (data) {
                 self.categorias = data.list;
             });
 
         },
-
         //Comando cadastra
         addConteudo: function () {
             var self = this;
@@ -123,7 +122,6 @@ new Vue({
                 }
             });
         },
-
         //Update variaveis
         updateModConteudo: function (h) {
             var self = this;
@@ -153,7 +151,6 @@ new Vue({
                 }
             });
         },
-
         //Comando exclui
         delConteudo: function () {
             var self = this;
@@ -172,7 +169,6 @@ new Vue({
                 }
             });
         },
-
         //Fetch
         fetchConteudo: function () {
             var self = this;
@@ -186,7 +182,6 @@ new Vue({
                 self.getcategoria();
             }, 600);
         },
-
         //Resets
         resetObjects: function () {
             var self = this;
@@ -209,7 +204,6 @@ new Vue({
                         "base64": null,
                         "dataUpload": null
                     }
-
                 }
             };
             self.modconteudo = {
@@ -233,6 +227,7 @@ new Vue({
                 }
             };
             self.delconteudo = null;
+            self.categoriaselec = null;
         }
     }
 });

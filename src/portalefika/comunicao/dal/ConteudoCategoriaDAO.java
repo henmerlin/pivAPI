@@ -19,20 +19,26 @@ public class ConteudoCategoriaDAO extends ComponentePortalDAO {
     public ConteudoCategoriaDAO() {
     }
     
-    public List<ConteudoCategoria> listar() {
-        
-        try {
-            
+    public List<ConteudoCategoria> listar() {        
+        try {            
             Query query = this.entityManager.createQuery("FROM ConteudoCategoria c");
-            return query.getResultList();
-            
-        } catch (Exception e) {
-            
-            return new ArrayList<>();
-            
-        }
-        
+            return query.getResultList();            
+        } catch (Exception e) {            
+            return new ArrayList<>();            
+        }        
     }
+    
+    public List<ConteudoCategoria> listarAtivo() {        
+        try {            
+            Query query = this.entityManager.createQuery("FROM ConteudoCategoria c WHERE c.ativo =:param1");
+            query.setParameter("param1", true);
+            return query.getResultList();
+        } catch (Exception e) {            
+            return new ArrayList<>();
+        }       
+    }
+    
+    
     
     
 }
