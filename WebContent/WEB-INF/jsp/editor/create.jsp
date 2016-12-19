@@ -143,25 +143,23 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title" id="myModalLabel">Inserir Conteúdo</h4>
+                        <h4 class="modal-title" id="myModalLabel">Vincular Conteúdo</h4>
                     </div>
                     <div class="modal-body">
 
                         <div class="form-group">
-                            <label for="titulo">Título</label>
-                            <input class="form-control" type="text" id="titulo"
-                                   v-model="editedConteudo.titulo"
-                                   @blur="doneEditConteudo(editedConteudo)">
+                            <label>Conteúdo</label>
+                            <select class="form-control" v-model="activedSubAba.conteudo.id">
+                                <option v-for="conteudo in conteudos" v-bind:value="conteudo.id">
+                                    {{conteudo.titulo}}
+                                </option>
+                            </select>
                         </div>
-
-
-
-
 
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
-                        <button type="button" class="btn btn-success" @click="updateConteudo(editedConteudo)" data-dismiss="modal">Alterar</button>
+                        <button type="button" class="btn btn-success" @click="updateSubAba(activedSubAba)" data-dismiss="modal">Alterar</button>
                     </div>
                 </div>
             </div>

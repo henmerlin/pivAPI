@@ -51,16 +51,19 @@ var dev = new Vue({
         deletedAba: null,
         // subAbas
         editedSubAba: null,
-        activedSubAba: null,
+        activedSubAba: {conteudo: {id: null}},
         deletedSubAba: null,
         // conteudo
         editedConteudo: null,
         activedConteudo: null,
-        deletedConteudo: null
+        deletedConteudo: null,
+        checkedconteudo: false,
+        conteudos: null
     },
     components: {},
     created: function() {
         this.getAbas();
+        this.getConteudos();
     },
     methods: {
         clearVars: function() {
@@ -69,11 +72,17 @@ var dev = new Vue({
             self.editedAba = null;
             self.deletedAba = null;
             self.editedSubAba = null;
-            self.activedSubAba = null;
+            self.activedSubAba = {conteudo: {id: null}}
             self.deletedSubAba = null;
             self.editedConteudo = null;
             self.activedConteudo = null;
             self.deletedConteudo = null;
+        },
+        getConteudos: function() {
+            var self = this;
+            $.get(conteudoURL + "lista", function(data) {
+                self.conteudos = data.list;
+            });
         },
         getAbas: function() {
             var self = this;
