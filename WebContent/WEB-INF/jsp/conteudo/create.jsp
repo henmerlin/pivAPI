@@ -17,7 +17,7 @@
     <div id="conteudo" v-cloak>
 
         <div>
-            <table class="table table-bordered">                    
+            <table class="table table-bordered" style="text-align: center;">                    
                 <thead>                        
                     <tr>                            
                         <th>Titulo</th>
@@ -89,7 +89,7 @@
                             </span>
                         </div>
                         <div v-else>
-                            <img :src="image" style="width: 450px"/>
+                            <img :src="image" style="width: 450px; text-align: center;"/>
                             <br>
                             <br>
                             <button type="button" class="btn btn-default" type="file" @click="removeImage">
@@ -144,7 +144,7 @@
                             </span>
                         </div>
                         <div v-else>
-                            <img :src="image" style="width: 450px"/>
+                            <img :src="image" style="width: 450px; text-align: center;"/>
                             <br>
                             <br>
                             <button type="button" class="btn btn-default" type="file" @click="removeImage">
