@@ -32,7 +32,7 @@ public class InfoProdutoBean {
 		try {
 			
 			this.infoProdutoServico.cadastrarInfoProduto(this.infoProduto);
-			JSFUtil.addInfoMessage("Informação do produto cadastrada com sucesso.");
+			JSFUtil.addInfoMessage("InformaÃ§oes do produto cadastrada com sucesso.");
 			this.infoProduto = new InfoProduto();
 			
 		} catch (Exception e) {
@@ -48,7 +48,7 @@ public class InfoProdutoBean {
 		try {
 			
 			this.infoProdutoServico.modificarInfoProduto(this.infoProdutoModifica);
-			JSFUtil.addInfoMessage("Informação do produto modificada com sucesso.");			
+			JSFUtil.addInfoMessage("InformaÃ§oes do produto modificada com sucesso.");			
 			this.infoProdutoModifica = new InfoProduto();
 			
 		} catch (Exception e) {

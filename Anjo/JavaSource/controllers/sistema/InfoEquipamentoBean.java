@@ -32,7 +32,7 @@ public class InfoEquipamentoBean {
 		try {
 			
 			this.infoEquipamentoServico.cadastrarInfoEquipamento(this.infoEquipamento);
-			JSFUtil.addInfoMessage("Informação de Equipamento foi cadastrado com sucesso.");
+			JSFUtil.addInfoMessage("InformaÃ§oes de Equipamento foi cadastrado com sucesso.");
 			this.infoEquipamento = new InfoEquipamento();
 			
 		} catch (Exception e) {
@@ -48,7 +48,7 @@ public class InfoEquipamentoBean {
 		try {
 			
 			this.infoEquipamentoServico.modificarInfoEquipamento(this.infoEquipamentoModifica);
-			JSFUtil.addInfoMessage("Informação de Equipamento foi modificada com sucesso.");		
+			JSFUtil.addInfoMessage("InformaÃ§oes de Equipamento foi modificada com sucesso.");		
 			this.infoEquipamentoModifica = new InfoEquipamento();
 			
 		} catch (Exception e) {

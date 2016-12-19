@@ -39,7 +39,7 @@ public class UsuarioEfikaBean {
 		try {
 			
 			this.usuarioEfikaServico.modificarUsuarioEfika(this.usuarioEfikaModifica);
-			JSFUtil.addInfoMessage("Usu·rio modificado com sucesso.");
+			JSFUtil.addInfoMessage("Usu√°rio modificado com sucesso.");
 			this.usuarioEfikaModifica = new UsuarioEfika();
 			
 		} catch (Exception e) {

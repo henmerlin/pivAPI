@@ -26,7 +26,7 @@ public class SolucaoServico {
 
 		} catch (Exception e) {
 
-			throw new Exception("Erro ao cadastrar Solucão");
+			throw new Exception("Erro ao cadastrar Solucï¿½o");
 
 		}
 
@@ -42,7 +42,7 @@ public class SolucaoServico {
 
 		} catch (Exception e) {
 
-			throw new Exception("Erro ao cadastrar Solucão");
+			throw new Exception("Erro ao cadastrar Solucï¿½o");
 
 		}
 
@@ -56,7 +56,7 @@ public class SolucaoServico {
 
 		} catch (Exception e) {
 
-			throw new Exception("Erro ao modificar Solucão");			
+			throw new Exception("Erro ao modificar Solucï¿½o");			
 
 		}
 
@@ -83,7 +83,7 @@ public class SolucaoServico {
 
 		try {
 
-			Query query = this.entityManager.createQuery("FROM Solucao s WHERE s.lista =:param1 AND s.ativo =:param2");
+			Query query = this.entityManager.createQuery("FROM Solucao s WHERE s.lista =:param1 AND s.ativo =:param2 ORDER BY s.nome ASC");
 			query.setParameter("param1", lista);
 			query.setParameter("param2", ativo);
 			return query.getResultList();			

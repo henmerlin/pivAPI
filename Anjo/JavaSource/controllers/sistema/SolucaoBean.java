@@ -34,7 +34,7 @@ public class SolucaoBean {
 		try {
 			
 			this.solucaoServico.cadastrarSolucao(this.solucao);
-			JSFUtil.addInfoMessage("SoluÁ„o cadastrada com sucesso.");
+			JSFUtil.addInfoMessage("Solu√ß√£o cadastrada com sucesso.");
 			this.solucao = new Solucao();
 			
 		} catch (Exception e) {
@@ -50,7 +50,7 @@ public class SolucaoBean {
 		try {
 			
 			this.solucaoServico.modificarSolucao(this.solucaoModifica);
-			JSFUtil.addInfoMessage("Soluc„o modificada com sucesso.");
+			JSFUtil.addInfoMessage("Solu√ß√£o modificada com sucesso.");
 			this.solucaoModifica = new Solucao();
 			
 		} catch (Exception e) {

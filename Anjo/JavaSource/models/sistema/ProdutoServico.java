@@ -65,7 +65,7 @@ public class ProdutoServico {
 
 		try {
 
-			Query query = this.entityManager.createQuery("FROM Produto p WHERE p.ativo =:param1");
+			Query query = this.entityManager.createQuery("FROM Produto p WHERE p.ativo =:param1 ORDER BY p.nome ASC");
 			query.setParameter("param1", ativo);
 			return query.getResultList();
 

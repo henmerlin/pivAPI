@@ -83,7 +83,7 @@ public class FabricanteServico {
 
 		try {
 
-			Query query = this.entityManager.createQuery("FROM Fabricante f WHERE f.lista =:param1 AND f.ativo =:param2");
+			Query query = this.entityManager.createQuery("FROM Fabricante f WHERE f.lista =:param1 AND f.ativo =:param2 ORDER BY f.nome ASC");
 			query.setParameter("param1", lista);
 			query.setParameter("param2", ativo);
 			return query.getResultList();

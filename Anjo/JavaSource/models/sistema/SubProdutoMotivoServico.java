@@ -66,7 +66,7 @@ public class SubProdutoMotivoServico {
 		
 		try {
 			
-			Query query = this.entityManager.createQuery("FROM SubProdutoMotivo s WHERE s.produto =:param1 AND s.ativo =:param2");
+			Query query = this.entityManager.createQuery("FROM SubProdutoMotivo s WHERE s.produto =:param1 AND s.ativo =:param2 ORDER BY s.nome ASC");
 			query.setParameter("param1", produto);
 			query.setParameter("param2", ativo);
 			return query.getResultList();

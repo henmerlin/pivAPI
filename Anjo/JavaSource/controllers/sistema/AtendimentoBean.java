@@ -158,14 +158,14 @@ public class AtendimentoBean {
 
 		if (this.atendimento.getInstancia().isEmpty()) {
 
-			nomeErro = nomeErro + " (inst‚ncia) ";
+			nomeErro = nomeErro + " (inst√¢ncia) ";
 			erro = true;
 
 		}
 
 		if (this.atendimento.getTransmissao() == null) {
 
-			nomeErro = nomeErro + " (transmiss„o) ";
+			nomeErro = nomeErro + " (transmiss√£o) ";
 			erro = true;
 
 		}		
@@ -179,7 +179,7 @@ public class AtendimentoBean {
 
 		if (this.atendimento.getCodigo().isEmpty()) {
 
-			nomeErro = nomeErro + " (cÛdigo) ";
+			nomeErro = nomeErro + " (c√≥digo) ";
 			erro = true;
 
 		}
@@ -256,7 +256,7 @@ public class AtendimentoBean {
 
 		if (this.atendimento.getSolucao() == null) {
 
-			nomeErro = nomeErro + " (soluÁ„o) ";
+			nomeErro = nomeErro + " (solu√ß√£o) ";
 			erro = true;
 
 		}
@@ -299,9 +299,9 @@ public class AtendimentoBean {
 	
 	public void selecionadoOutros(String select) {
 				
-		if (select.equalsIgnoreCase("Nenhuma das opıes disponÌveis")) {
+		if (select.equalsIgnoreCase("Nenhuma das op√ß√µes dispon√≠veis")) {
 			
-			JSFUtil.addWarnMessage("Descreva no campo \"Outras InformaÁıes\"");
+			JSFUtil.addWarnMessage("Descreva no campo \"Outras Informa√ß√µes\"");
 		
 		}		
 		

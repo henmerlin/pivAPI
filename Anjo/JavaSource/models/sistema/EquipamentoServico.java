@@ -81,7 +81,7 @@ public class EquipamentoServico {
 
 		try {
 
-			Query query = this.entityManager.createQuery("FROM Equipamento e WHERE e.lista =:param1 AND e.ativo =:param2");
+			Query query = this.entityManager.createQuery("FROM Equipamento e WHERE e.lista =:param1 AND e.ativo =:param2 ORDER BY e.nome ASC");
 			query.setParameter("param1", lista);
 			query.setParameter("param2", ativo);
 			return query.getResultList();			

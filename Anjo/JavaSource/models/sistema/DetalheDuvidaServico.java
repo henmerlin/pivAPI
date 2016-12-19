@@ -81,7 +81,7 @@ public class DetalheDuvidaServico {
 		
 		try {
 			
-			Query query = this.entityManager.createQuery("FROM DetalheDuvida d WHERE d.lista =:param1 AND d.ativo =:param2");
+			Query query = this.entityManager.createQuery("FROM DetalheDuvida d WHERE d.lista =:param1 AND d.ativo =:param2 ORDER BY d.nome ASC");
 			query.setParameter("param1", lista);
 			query.setParameter("param2", ativo);
 			return query.getResultList();
