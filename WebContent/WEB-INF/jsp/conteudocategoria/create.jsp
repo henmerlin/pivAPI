@@ -17,7 +17,7 @@
 
     <div id="conteduocategoria" v-cloak>
 
-        <table class="table table-bordered" style="text-align: center;">
+        <table class="table table-bordered">
 
             <thead>
                 <tr>

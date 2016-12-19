@@ -20,7 +20,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div>
-                    <table class="table table-bordered" style="text-align: center;">
+                    <table class="table table-bordered small">
 
                         <thead>
                             <tr>
@@ -389,7 +389,7 @@
             </div>
         </div>
 
-        <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#criaEnquete" data-backdrop="static">Adicionar Enquete</button>
+        <button class="btn btn-success btn-xs" data-toggle="modal" data-target="#criaEnquete" data-backdrop="static">Adicionar</button>
 
     </div>
 
