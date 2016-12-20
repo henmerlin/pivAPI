@@ -52,12 +52,12 @@ public class BannerController extends AbstractController {
     @Consumes("application/json")
     @Path("/comunicacao/banner/cadastrar")
     public void adiciona(Banner banner) {
-        try {            
-            if (banner.getConteudo().getId() == null) {                
-                banner.setConteudo(null);                
-            }            
-            Calendar calendar = Calendar.getInstance();            
-            banner.setDataCriacao(calendar);            
+        try {
+            if (banner.getConteudo().getId() == null) {
+                banner.setConteudo(null);
+            }
+            Calendar calendar = Calendar.getInstance();
+            banner.setDataCriacao(calendar);
             banner.getImagem().setDataUpload(calendar);
             this.bannerDAO.cadastrar(banner);
             this.includeSerializer(banner);
@@ -104,7 +104,25 @@ public class BannerController extends AbstractController {
     public void listaBannerLocal() {
         result.use(Results.json()).from(BannerLocal.values()).serialize();
     }
-    
+
+    @Get
+    @Path("/comunicacao/banner/listarBannerGrande")
+    public void listarBannerGrande() {
+        List<Banner> l = this.bannerDAO.listarBannerLocal(BannerLocal.Carousel);
+        if (l != null) {
+            this.includeSerializer(l);
+        }
+    }
+
+    @Get
+    @Path("/comunicacao/banner/listarBannerPequeno")
+    public void listarBannerPequeno() {
+        List<Banner> l = this.bannerDAO.listarBannerLocal(BannerLocal.MiniCarousel);
+        if (l != null) {
+            this.includeSerializer(l);
+        }
+    }
+
     protected void includeSerializer(Object a) {
         result.use(Results.json()).from(a).include("conteudo").include("imagem").serialize();
         //result.use(Results.json()).from(a).serialize();

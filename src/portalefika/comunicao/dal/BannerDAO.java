@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Query;
 import portalefika.comunicao.entidades.Banner;
+import portalefika.comunicao.entidades.BannerLocal;
 
 /**
  *
@@ -18,9 +19,20 @@ public class BannerDAO extends ComponentePortalDAO {
     
     public List<Banner> listarTodos() {
         
+        try {            
+            Query query = this.entityManager.createQuery("FROM Banner b");
+            return query.getResultList();            
+        } catch (Exception e) {            
+            return new ArrayList<>();            
+        }        
+    }
+    
+    public List<Banner> listarBannerLocal(BannerLocal bannerLocal) {
+        
         try {
             
-            Query query = this.entityManager.createQuery("FROM Banner b");
+            Query query = this.entityManager.createQuery("FROM Banner b WHERE b.local =:param1");
+            query.setParameter("param1", bannerLocal);
             return query.getResultList();
             
         } catch (Exception e) {

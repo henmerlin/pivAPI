@@ -227,5 +227,4 @@ new Vue({
             self.checkedconteudo = false;
         }
     }
-}
-);
+});

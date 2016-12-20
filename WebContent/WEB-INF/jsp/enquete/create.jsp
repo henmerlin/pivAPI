@@ -389,7 +389,7 @@
             </div>
         </div>
 
-        <button class="btn btn-success btn-xs" data-toggle="modal" data-target="#criaEnquete" data-backdrop="static">Adicionar</button>
+        <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#criaEnquete" data-backdrop="static">Adicionar</button>
 
     </div>
 
