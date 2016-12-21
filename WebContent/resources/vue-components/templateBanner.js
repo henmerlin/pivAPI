@@ -9,7 +9,8 @@ new Vue({
     el: '#allBanners',
     data: {
         bannersPequenos: null,
-        bannersGrandes: null
+        bannersGrandes: null,
+        sizeBannersPequenos: null,
     },
     created: function () {
         var self = this;
@@ -28,7 +29,20 @@ new Vue({
             var self = this;
             $.get(bannerURL + "listarBannerPequeno", function (data) {
                 self.bannersPequenos = data.list;
+                self.sizeBannersPequenos = (self.bannersPequenos.length / 2) ^ 0;
             });
         }
     }
 });
+
+function ls() {
+    $("#idbanPeq").lightSlider({
+        item: 4,
+        loop: true,
+        pauseOnHover: true
+    });
+}
+
+$(window).ready(setTimeout(function () {
+    ls();
+}, 1000));

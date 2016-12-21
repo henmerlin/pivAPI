@@ -13,8 +13,8 @@
         <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
             <!-- Wrapper for slides -->
             <div class="carousel-inner" role="listbox">              
-                <div class="item" :class="{active: index == 0}" v-for="(gbanner, index)  of bannersGrandes">
-                    <img :src="gbanner.imagem.base64">
+                <div class="item" :class="{active: index == 0}" v-for="(gbanner, index) of bannersGrandes">
+                    <img :src="gbanner.imagem.base64" style="width: 100%; height: 500px;">
                 </div>
             </div>
             <!-- Controls -->
@@ -30,15 +30,13 @@
     </div>    
     <br>
     <br>
-
-    <div id="bannersPequenos" class="container text-center">
-        <div class="row">
-            <div class="col-md-4" v-for="banner in banners">
-                <img @click="vai(banner)" v-bind:src="prefix + banner.imagem" v-bind:alt="banner.alt" class="img-responsive">
-            </div>
-        </div>
+    <div id="bannerPequeno">
+        <ul id="idbanPeq" onload="ls();">
+            <li v-for="pbanner in bannersPequenos">
+                <img :src="pbanner.imagem.base64" style="width: 350px; height: 350px;"/>
+            </li>
+        </ul>
     </div>
-
     <br>
     <br>
     <div class="row">
@@ -53,25 +51,5 @@
 <br>
 <br>
 <div class="footer">Portal Efika - Centro de Operações</div>
-
-<script>
-
-    var bannersPequenos = new Vue({
-        el: '#bannersPequenos',
-        data: {
-            prefix: '${pageContext.request.contextPath}/resources/images/',
-            banners: [
-                {imagem: '1_350x.jpg', alt: '1_350x'},
-                {imagem: '2_350x.jpg', alt: '2_350x'},
-                {imagem: '3_350x.jpg', alt: '3_350x'}
-            ]
-        },
-        methods: {
-            vai: function (h) {
-                alert(h.alt)
-            }
-        }
-    })
-</script>
 
 <script src="${pageContext.request.contextPath}/resources/vue-components/templateBanner.js"></script>
