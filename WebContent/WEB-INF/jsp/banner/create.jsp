@@ -117,6 +117,7 @@
                         </div>
                         <div v-if="!image">
                             <h4>Selecione uma imagem</h4>
+                            <h5>resolução 1500x720</h5>
                             <span class="btn btn-default">
                                 <input type="file" @change="onFileChange">
                             </span>

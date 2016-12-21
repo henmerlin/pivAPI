@@ -65,9 +65,9 @@ new Vue({
             if (!files.length)
                 return;
             this.createImage(files[0]);
+            this.readImage(files[0])
         },
         createImage(file) {
-            var image = new Image();
             var reader = new FileReader();
             var self = this;
             reader.onload = (e) => {
@@ -81,7 +81,7 @@ new Vue({
         },
         //Comando Format
         dateFormat: function (h) {
-            return  moment(h).format('DD/MM/YYYY');
+            return moment(h).format('DD/MM/YYYY');
         },
         dateInput: function (h) {
             return moment(h).format("YYYY-MM-DD");

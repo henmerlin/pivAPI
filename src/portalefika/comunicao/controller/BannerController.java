@@ -53,6 +53,9 @@ public class BannerController extends AbstractController {
     @Path("/comunicacao/banner/cadastrar")
     public void adiciona(Banner banner) {
         try {
+            
+            
+            
             if (banner.getConteudo().getId() == null) {
                 banner.setConteudo(null);
             }

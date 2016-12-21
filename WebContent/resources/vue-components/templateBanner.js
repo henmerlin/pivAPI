@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 var bannerURL = "/comunicacao/banner/";
 new Vue({
     el: '#allBanners',
@@ -23,26 +22,31 @@ new Vue({
             var self = this;
             $.get(bannerURL + "listarBannerGrande", function (data) {
                 self.bannersGrandes = data.list;
+                self.lsgra();
             });
         },
         getbannersPequenos: function () {
             var self = this;
             $.get(bannerURL + "listarBannerPequeno", function (data) {
                 self.bannersPequenos = data.list;
-                self.sizeBannersPequenos = (self.bannersPequenos.length / 2) ^ 0;
+                self.sizeBannersPequenos = self.bannersPequenos.lengt;
+                self.lspeq();
+            });
+        },
+        //Monta Carousels                
+        lspeq: function () {
+            $("#lspeq").lightSlider({
+                autoWidth: true,
+                loop: true
+            });
+        },
+        lsgra: function () {
+            $("#lsgra").lightSlider({
+                adaptiveHeight: true,
+                item: 1,
+                slideMargin: 0,
+                loop: true
             });
         }
     }
 });
-
-function ls() {
-    $("#idbanPeq").lightSlider({
-        item: 4,
-        loop: true,
-        pauseOnHover: true
-    });
-}
-
-$(window).ready(setTimeout(function () {
-    ls();
-}, 1000));

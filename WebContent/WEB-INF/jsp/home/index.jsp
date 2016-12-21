@@ -8,30 +8,16 @@
     }
 </style>
 
-<div id="allBanners">
-    <div id="bannerGrande">
-        <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-            <!-- Wrapper for slides -->
-            <div class="carousel-inner" role="listbox">              
-                <div class="item" :class="{active: index == 0}" v-for="(gbanner, index) of bannersGrandes">
-                    <img :src="gbanner.imagem.base64" style="width: 100%; height: 500px;">
-                </div>
-            </div>
-            <!-- Controls -->
-            <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
-                <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-                <span class="sr-only">Previous</span>
-            </a>
-            <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
-                <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-                <span class="sr-only">Next</span>
-            </a>
-        </div>
-    </div>    
-    <br>
-    <br>
+<div id="allBanners" style="margin-top: -20px;">
+    <div id="bannerGrande">        
+        <ul id="lsgra">
+            <li v-for="gbanner in bannersGrandes">
+                <img :src="gbanner.imagem.base64" style="width: 100%;">                
+            </li>            
+        </ul>
+    </div>
     <div id="bannerPequeno">
-        <ul id="idbanPeq" onload="ls();">
+        <ul id="lspeq">
             <li v-for="pbanner in bannersPequenos">
                 <img :src="pbanner.imagem.base64" style="width: 350px; height: 350px;"/>
             </li>
