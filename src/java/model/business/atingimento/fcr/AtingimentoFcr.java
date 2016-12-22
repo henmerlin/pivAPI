@@ -3,9 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package model.business.atingimento;
+package model.business.atingimento.fcr;
 
+import model.business.atingimento.AtingimentoInterface;
 import model.business.indicador.RealizadoCalcInterface;
+import model.entitiy.IndicadoresOperador;
 
 /**
  *
@@ -14,7 +16,7 @@ import model.business.indicador.RealizadoCalcInterface;
 public class AtingimentoFcr implements AtingimentoInterface {
 
     @Override
-    public Double calcularAtingimento(RealizadoCalcInterface i) {
+    public Double calcularAtingimento(RealizadoCalcInterface i, IndicadoresOperador op) {
 
         if (i.getRealizado() <= 0.59d) {
             return 0d;

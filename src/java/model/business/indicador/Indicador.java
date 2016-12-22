@@ -1,5 +1,7 @@
 package model.business.indicador;
 
+import model.entitiy.IndicadoresOperador;
+
 /**
  *
  * @author G0042204
@@ -45,5 +47,4 @@ public abstract class Indicador implements RealizadoCalcInterface {
     public void setPeso(Double peso) {
         this.peso = peso;
     }
-
 }

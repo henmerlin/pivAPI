@@ -3,17 +3,21 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package model.business.atingimento;
+package model.business.atingimento.tma;
 
-import model.business.indicador.RealizadoCalcInterface;
 import model.entitiy.IndicadoresOperador;
 
 /**
  *
  * @author G0042204
  */
-public interface AtingimentoInterface {
+public enum MediaTma {
 
-    public Double calcularAtingimento(RealizadoCalcInterface i, IndicadoresOperador op);
+    Especializada(560d);
 
+    public Double valor;
+
+    MediaTma(Double valor) {
+        this.valor = valor;
+    }
 }

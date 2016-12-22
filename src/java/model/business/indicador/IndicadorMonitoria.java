@@ -3,17 +3,19 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package model.business.atingimento;
+package model.business.indicador;
 
-import model.business.indicador.RealizadoCalcInterface;
 import model.entitiy.IndicadoresOperador;
 
 /**
  *
  * @author G0042204
  */
-public interface AtingimentoInterface {
+public class IndicadorMonitoria extends Indicador implements RealizadoCalcInterface {
 
-    public Double calcularAtingimento(RealizadoCalcInterface i, IndicadoresOperador op);
+    @Override
+    public void calcular(IndicadoresOperador op) throws Exception {
+        this.setRealizado(100d);
+    }
 
 }

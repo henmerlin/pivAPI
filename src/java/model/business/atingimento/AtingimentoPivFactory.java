@@ -5,7 +5,10 @@
  */
 package model.business.atingimento;
 
+import model.business.atingimento.fcr.AtingimentoFcr;
+import model.business.atingimento.monitoria.AtingimentoMonitoria;
 import model.business.indicador.IndicadorFcr;
+import model.business.indicador.IndicadorMonitoria;
 import model.business.indicador.RealizadoCalcInterface;
 
 /**
@@ -18,6 +21,8 @@ public class AtingimentoPivFactory {
 
         if (i instanceof IndicadorFcr) {
             return new AtingimentoFcr();
+        } else if (i instanceof IndicadorMonitoria) {
+            return new AtingimentoMonitoria();
         } else {
             return null;
         }
