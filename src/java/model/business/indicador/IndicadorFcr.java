@@ -12,12 +12,13 @@ public class IndicadorFcr extends Indicador implements RealizadoCalcInterface {
     }
 
     @Override
-    public void calcular(IndicadoresOperador op) throws Exception {
+    public void calcularRealizado(IndicadoresOperador op) throws Exception {
         if (op.getChamadasFCR() == null || op.getRechamadasFCR() == null) {
             throw new Exception("Indicadores não preenchidos.");
         }
         Double percent = 1 - ((op.getChamadasFCR() / op.getRechamadasFCR()) / 100d);
         this.setRealizado(percent);
+        this.setPeso(0.3d);
     }
 
 }

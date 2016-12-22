@@ -36,7 +36,7 @@ public class CalculoPiv {
 
         for (RealizadoCalcInterface indicador : indicadores) {
             try {
-                indicador.calcular(op);
+                indicador.calcularRealizado(op);
                 this.atingimentoPiv += factory.getAtingimento(indicador).calcularAtingimento(indicador, op);
             } catch (Exception ex) {
                 Logger.getLogger(CalculoPiv.class.getName()).log(Level.SEVERE, null, ex);

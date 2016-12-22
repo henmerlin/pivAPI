@@ -22,29 +22,29 @@ public class AtingimentoMonitoria implements AtingimentoInterface {
     public Double calcularAtingimento(RealizadoCalcInterface i, IndicadoresOperador op) {
 
         for (NotaAtingimento n : carregaNotaAtingimentos()) {
-            System.out.println("Monitoria: " + n.getNota() + " Atingimento: " + n.getAtingimento().floatValue());
+            // System.out.println("Monitoria: " + n.getNota() + " Atingimento: " + n.getAtingimento().floatValue());
         }
 
         return 0d;
     }
 
-    protected List<NotaAtingimento> carregaNotaAtingimentos() {
+    public List<NotaAtingimento> carregaNotaAtingimentos() {
 
         Double novePerc = 0.0909090909090909000d;
         Double cincoPerc = 0.0526315789473684000d;
 
         Double nota = new Double(84);
-        Double monitoria = 0d;
+        Double atingimento = 0d;
 
         List<NotaAtingimento> na = new ArrayList<>();
 
-        na.add(new NotaAtingimento(nota, monitoria));
+        na.add(new NotaAtingimento(nota, atingimento));
 
         nota += 1d;
-        monitoria = novePerc;
+        atingimento = novePerc;
 
         while (nota <= 100d) {
-            na.add(new NotaAtingimento(nota, monitoria));
+            na.add(new NotaAtingimento(nota, atingimento));
 
             if (nota == 97d) {
                 nota += 1d;
@@ -53,12 +53,11 @@ public class AtingimentoMonitoria implements AtingimentoInterface {
             }
 
             if (nota > 90) {
-                monitoria = cincoPerc + monitoria;
+                atingimento = cincoPerc + atingimento;
             } else {
-                monitoria = novePerc + monitoria;
+                atingimento = novePerc + atingimento;
             }
         }
         return na;
     }
-
 }

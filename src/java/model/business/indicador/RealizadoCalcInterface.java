@@ -13,7 +13,7 @@ import model.entitiy.IndicadoresOperador;
  */
 public interface RealizadoCalcInterface {
 
-    public void calcular(IndicadoresOperador op) throws Exception;
+    public void calcularRealizado(IndicadoresOperador op) throws Exception;
 
     public Double getRealizado();
 

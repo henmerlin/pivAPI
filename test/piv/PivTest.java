@@ -7,8 +7,8 @@ package piv;
 
 import java.util.ArrayList;
 import model.business.indicador.CalculoPiv;
-import model.business.indicador.Indicador;
 import model.business.indicador.IndicadorFcr;
+import model.business.indicador.IndicadorMonitoria;
 import model.business.indicador.RealizadoCalcInterface;
 import model.entitiy.IndicadoresOperador;
 
@@ -31,6 +31,7 @@ public class PivTest {
         ArrayList<RealizadoCalcInterface> indicadores = new ArrayList<RealizadoCalcInterface>();
 
         indicadores.add(new IndicadorFcr());
+        indicadores.add(new IndicadorMonitoria());
 
         CalculoPiv c = new CalculoPiv(op, indicadores);
 

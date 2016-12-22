@@ -5,15 +5,13 @@
  */
 package model.business.atingimento.tma;
 
-import model.entitiy.IndicadoresOperador;
-
 /**
  *
  * @author G0042204
  */
 public enum MediaTma {
 
-    Especializada(560d);
+    Especializada(560d), MultiskillNovos(503d), Multiskill(420d);
 
     public Double valor;
 

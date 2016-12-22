@@ -14,6 +14,15 @@ import model.entitiy.IndicadoresOperador;
 public class MediaTmaEquipeFactory {
 
     public static MediaTma getMedia(IndicadoresOperador op) {
-        return MediaTma.Especializada;
+
+        if (op.getEquipe().equalsIgnoreCase("MULTISKILL")) {
+            return MediaTma.Multiskill;
+        } else if (op.getEquipe().equalsIgnoreCase("MULTISKILL NOVOS")) {
+            return MediaTma.MultiskillNovos;
+        } else if (op.getEquipe().equalsIgnoreCase("ESPECIALIZADA")) {
+            return MediaTma.Especializada;
+        } else {
+            return MediaTma.Multiskill;
+        }
     }
 }

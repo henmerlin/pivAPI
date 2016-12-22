@@ -14,8 +14,9 @@ import model.entitiy.IndicadoresOperador;
 public class IndicadorMonitoria extends Indicador implements RealizadoCalcInterface {
 
     @Override
-    public void calcular(IndicadoresOperador op) throws Exception {
+    public void calcularRealizado(IndicadoresOperador op) throws Exception {
         this.setRealizado(100d);
+        this.setPeso(0.1d);
     }
 
 }
