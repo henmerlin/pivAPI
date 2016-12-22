@@ -88,11 +88,11 @@
                         </div>
                         <div class="form-group">
                             <label>Data Início</label>
-                            <input id="datainicio" type="date" class="form-control" placeholder="Data início" v-model="addbanner.dataInicio">
+                            <input id="datainicio" type="date" class="datainiciofrm form-control" placeholder="Data início" v-model="addbanner.dataInicio" @change="minimundate(addbanner.dataInicio)">
                         </div>
                         <div class="form-group">
                             <label>Data Fim</label>
-                            <input id="datafim" type="date" class="form-control" placeholder="Data Fim" v-model="addbanner.dataFim">
+                            <input id="datafim" type="date" class="datainiciofrm form-control" placeholder="Data Fim" v-model="addbanner.dataFim">
                         </div>
                         <div class="form-group">
                             <label>Local Banner</label>
@@ -160,11 +160,11 @@
                         </div>
                         <div class="form-group">
                             <label>Data Início</label>
-                            <input id="datainicio" type="date" class="form-control" placeholder="Data início" v-model="dateInput(modbanner.dataInicio)">
+                            <input id="moddatainicio" type="date" class="datainiciofrm form-control" placeholder="Data início" v-model="modbanner.dataInicio" @load="minimundate(modbanner.dataInicio)">
                         </div>
                         <div class="form-group">
                             <label>Data Fim</label>
-                            <input id="datafim" type="date" class="form-control" placeholder="Data Fim" v-model="dateInput(modbanner.dataFim)">
+                            <input id="moddatafim" type="date" class="datainiciofrm form-control" placeholder="Data Fim" v-model="modbanner.dataFim">
                         </div>
                         <div class="form-group">
                             <label>Local Banner</label>

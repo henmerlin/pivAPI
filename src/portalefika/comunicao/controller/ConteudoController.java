@@ -33,6 +33,16 @@ public class ConteudoController extends AbstractController {
     }
 
     @Get
+    @Path("/comunicacao/conteudo/list/{a.id}")
+    public void list(Conteudo a) {
+        Conteudo a1 = (Conteudo) dao.buscarPorId(a);
+        if (a1 != null) {
+            //includeSerializer(a1);            
+            this.result.include("conteudo", a1);
+        }        
+    }
+
+    @Get
     @Path("/comunicacao/conteudo/{a.id}")
     public void visualiza(Conteudo a) {
         Conteudo a1 = (Conteudo) dao.buscarPorId(a);

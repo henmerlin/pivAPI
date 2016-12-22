@@ -10,6 +10,7 @@ new Vue({
         bannersPequenos: null,
         bannersGrandes: null,
         sizeBannersPequenos: null,
+        url: null
     },
     created: function () {
         var self = this;
@@ -37,7 +38,8 @@ new Vue({
         lspeq: function () {
             $("#lspeq").lightSlider({
                 autoWidth: true,
-                loop: true
+                loop: true,
+                enableDrag: false
             });
         },
         lsgra: function () {
@@ -45,8 +47,17 @@ new Vue({
                 adaptiveHeight: true,
                 item: 1,
                 slideMargin: 0,
-                loop: true
+                loop: true,
+                enableDrag: false,
             });
+        },
+        
+        //redirecHref
+        conteudoimg: function (h) {            
+            var self = this;
+            self.url = "http://localhost:8080/comunicacao/conteudo/list/" + h.id;            
+            window.location = self.url;        
         }
+        
     }
 });

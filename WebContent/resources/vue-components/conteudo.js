@@ -84,6 +84,9 @@ new Vue({
             self.image = '';
         },
         //Comando Format
+        dateInput: function (h) {
+            return moment(h).format("YYYY-MM-DD");
+        },
         dateFormat: function (h) {
             return  moment(h).format('DD/MM/YYYY');
         },

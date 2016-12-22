@@ -22,7 +22,6 @@
                     <tr>                            
                         <th>Titulo</th>
                         <th>Ativo</th>
-                        <th>Texto</th>
                         <th>Data Criação</th>
                         <th>Conteudo Categoria</th>
                         <th>Imagem</th>
@@ -36,7 +35,6 @@
                             <label v-if="conteudo.ativo == true" >Ativo</label>
                             <label v-if="conteudo.ativo == false" >Inativo</label>
                         </td>
-                        <td>{{conteudo.texto}}</td>
                         <td>{{dateFormat(conteudo.dataCriacao)}}</td>
                         <td>{{conteudo.categoria.titulo}}</td>
                         <td>

@@ -128,7 +128,9 @@ new Vue({
         updatemodbanner: function (h) {
             var self = this;
             self.modbanner = h;
-            self.image = self.modbanner.imagem.base64;
+            self.image = self.modbanner.imagem.base64;            
+            self.modbanner.dataInicio = self.dateInput(self.modbanner.dataInicio);
+            self.modbanner.dataFim = self.dateInput(self.modbanner.dataFim);
         },
         updatedelbanner: function (h) {
             var self = this;
@@ -225,6 +227,9 @@ new Vue({
                 }
             };
             self.checkedconteudo = false;
-        }
+        },
+        minimundate: function (h) {
+            $(".datainiciofrm").attr("min", h);            
+        }        
     }
 });

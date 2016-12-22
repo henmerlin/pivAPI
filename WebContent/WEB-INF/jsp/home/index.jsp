@@ -12,14 +12,18 @@
     <div id="bannerGrande">        
         <ul id="lsgra">
             <li v-for="gbanner in bannersGrandes">
-                <img :src="gbanner.imagem.base64" style="width: 100%;">                
+                <a @click="conteudoimg(gbanner.conteudo)">
+                    <img :src="gbanner.imagem.base64" style="width: 100%;">
+                </a>                
             </li>            
         </ul>
     </div>
     <div id="bannerPequeno">
         <ul id="lspeq">
             <li v-for="pbanner in bannersPequenos">
-                <img :src="pbanner.imagem.base64" style="width: 350px; height: 350px;"/>
+                <a @click="conteudoimg(gbanner.conteudo)">
+                    <img :src="pbanner.imagem.base64" style="width: 350px; height: 350px;"/>                    
+                </a>
             </li>
         </ul>
     </div>

@@ -24,4 +24,3 @@
 <script src="${pageContext.request.contextPath}/resources/vue1/vue1.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/node_modules/tinymce/tinymce.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/vue-components/editorHtml.js"></script>
-
