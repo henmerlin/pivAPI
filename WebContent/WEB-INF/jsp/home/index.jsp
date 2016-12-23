@@ -18,10 +18,10 @@
             </li>            
         </ul>
     </div>
-    <div id="bannerPequeno">
+    <div id="bannerPequeno" style="margin-left: 20%; margin-right: 20%;">
         <ul id="lspeq">
             <li v-for="pbanner in bannersPequenos">
-                <a @click="conteudoimg(gbanner.conteudo)">
+                <a @click="conteudoimg(pbanner.conteudo)">
                     <img :src="pbanner.imagem.base64" style="width: 350px; height: 350px;"/>                    
                 </a>
             </li>

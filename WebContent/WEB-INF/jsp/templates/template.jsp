@@ -14,7 +14,7 @@
         <link href="${pageContext.request.contextPath}/resources/bootstrap-3.3.7-dist/css/bootstrap-theme.min.css" rel="stylesheet" />
         <link href="${pageContext.request.contextPath}/resources/custom/custom.css" rel="stylesheet" />        
         <link href="${pageContext.request.contextPath}/resources/custom/lightslider.min.css" rel="stylesheet" />
-        
+
         <!-- import JavaScript -->
         <script src="${pageContext.request.contextPath}/resources/jquery-3.1.1/jquery-3.1.1.min.js"></script>
         <script src="${pageContext.request.contextPath}/resources/node_modules/vue/dist/vue.js"></script>
@@ -65,11 +65,12 @@
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Funcionalidades <span class="caret"></span></a>
                                 <ul class="dropdown-menu">
+                                    <li class="dropdown-header">Adm</li>
                                     <li><a href="${linkTo[EditorController].create()}">Editor</a></li>
                                     <li><a href="${linkTo[EnqueteController].create()}">Enquete</a></li>
-                                    <li><a href="${linkTo[ConteudoController].create()}">Conteudo</a></li>
-                                    <li><a href="${linkTo[ConteudoCategoriaController].create()}">Conteudo Categoria</a></li>
-                                    <li><a href="${linkTo[BannerController].create()}">Gerenciar Banner</a></li>                                    
+                                    <li><a href="${linkTo[ConteudoController].create()}">Gerenciar Conteudo</a></li>
+                                    <li><a href="${linkTo[ConteudoCategoriaController].create()}">Gerenciar Categoria</a></li>
+                                    <li><a href="${linkTo[BannerController].create()}">Gerenciar Banner</a></li>
                                     <li role="separator" class="divider"></li>
                                     <li><a href="#">Separated link</a></li>
                                     <li role="separator" class="divider"></li>

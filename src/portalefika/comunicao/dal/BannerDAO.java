@@ -29,7 +29,7 @@ public class BannerDAO extends ComponentePortalDAO {
 
     public List<Banner> listarBannerLocal(BannerLocal bannerLocal) {
         try {
-            Query query = this.entityManager.createQuery("FROM Banner b WHERE b.local =:param1 AND b.ativo =:param2 AND CURRENT_TIMESTAMP BETWEEN b.dataInicio AND b.dataFim");
+            Query query = this.entityManager.createQuery("FROM Banner b WHERE b.local =:param1 AND b.ativo =:param2 AND CURDATE() BETWEEN b.dataInicio AND b.dataFim");
             query.setParameter("param1", bannerLocal);
             query.setParameter("param2", true);
             return query.getResultList();

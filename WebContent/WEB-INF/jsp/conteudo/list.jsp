@@ -14,9 +14,10 @@
         <h3>${conteudo.categoria.titulo}</h3>
     </div>
     <div id="conteudo">
-        <div>
-            <img align="left" src="${conteudo.imagem.base64}" class="img-rounded" style="width: 500px; height: 500px; margin-right: 10px; margin-bottom: 1px;"/>
-            <p>${conteudo.texto}</p>
+        <div style="width: 100%;">
+            <img align="left" src="${conteudo.imagem.base64}" class="img-rounded" style="width: 40%; margin-right: 20px; margin-bottom: 0.5px;"/>
+
+            <div class="text-justify">${conteudo.texto}</div>
         </div>       
     </div>
 </div>

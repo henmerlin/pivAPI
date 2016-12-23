@@ -11,6 +11,7 @@ import java.util.List;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import portalefika.autenticacao.annotation.Admin;
+import portalefika.autenticacao.annotation.Logado;
 import portalefika.comunicao.dal.AbaPortalDAO;
 import portalefika.comunicao.dal.exception.PersistenciaException;
 import portalefika.comunicao.entidades.Component;
@@ -32,6 +33,7 @@ public class ConteudoController extends AbstractController {
     public void create() {
     }
 
+    @Logado
     @Get
     @Path("/comunicacao/conteudo/list/{a.id}")
     public void list(Conteudo a) {

@@ -34,12 +34,13 @@ new Vue({
                 self.lspeq();
             });
         },
-        //Monta Carousels                
+        //Monta Carousels
         lspeq: function () {
             $("#lspeq").lightSlider({
                 autoWidth: true,
                 loop: true,
-                enableDrag: false
+                enableDrag: false,
+                item: 2
             });
         },
         lsgra: function () {

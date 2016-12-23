@@ -35,7 +35,7 @@ public class BannerController extends AbstractController {
     public BannerController() {
     }
 
-    //@Admin
+    @Admin
     public void create() {
 
     }

@@ -65,7 +65,6 @@ new Vue({
             if (!files.length)
                 return;
             this.createImage(files[0]);
-            this.readImage(files[0])
         },
         createImage(file) {
             var reader = new FileReader();
@@ -128,7 +127,7 @@ new Vue({
         updatemodbanner: function (h) {
             var self = this;
             self.modbanner = h;
-            self.image = self.modbanner.imagem.base64;            
+            self.image = self.modbanner.imagem.base64;
             self.modbanner.dataInicio = self.dateInput(self.modbanner.dataInicio);
             self.modbanner.dataFim = self.dateInput(self.modbanner.dataFim);
         },
@@ -229,7 +228,7 @@ new Vue({
             self.checkedconteudo = false;
         },
         minimundate: function (h) {
-            $(".datainiciofrm").attr("min", h);            
-        }        
+            $(".datainiciofrm").attr("min", h);
+        }
     }
 });
