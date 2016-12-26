@@ -20,13 +20,14 @@ public class IndicadoresFactory {
             inds.add(new IndicadorFcr(0.2d));                
             inds.add(new IndicadorTma(0.3d));   
             inds.add(new IndicadorGps(0.1d));
-            inds.add(new IndicadorAderencia(0.25d));
             inds.add(new IndicadorMonitoria(0.1d));
             
-            return inds;
-        } else {
-            return null;
-        }
+            }
+        
+        inds.add(new IndicadorAderencia(0.25d));
+        
+        return inds;
+
     }
    
 }
