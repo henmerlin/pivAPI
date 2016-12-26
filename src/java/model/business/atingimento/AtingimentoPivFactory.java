@@ -9,7 +9,7 @@ import model.business.atingimento.fcr.AtingimentoFcr;
 import model.business.atingimento.monitoria.AtingimentoMonitoria;
 import model.business.indicador.IndicadorFcr;
 import model.business.indicador.IndicadorMonitoria;
-import model.business.indicador.RealizadoCalcInterface;
+import model.business.realizado.RealizadoCalcInterface;
 
 /**
  *

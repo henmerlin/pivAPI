@@ -1,5 +1,7 @@
 package model.business.indicador;
 
+import model.business.realizado.RealizadoCalcInterface;
+
 import model.entitiy.IndicadoresOperador;
 
 /**
@@ -8,7 +10,8 @@ import model.entitiy.IndicadoresOperador;
  */
 public class IndicadorFcr extends Indicador implements RealizadoCalcInterface {
 
-    public IndicadorFcr() {
+    public IndicadorFcr(Double peso) {
+        this.setPeso(peso);
     }
 
     @Override

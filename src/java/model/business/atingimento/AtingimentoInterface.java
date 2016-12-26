@@ -5,7 +5,7 @@
  */
 package model.business.atingimento;
 
-import model.business.indicador.RealizadoCalcInterface;
+import model.business.realizado.RealizadoCalcInterface;
 import model.entitiy.IndicadoresOperador;
 
 /**

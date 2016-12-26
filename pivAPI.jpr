@@ -75,6 +75,7 @@
          <string v="Database"/>
          <string v="EJB"/>
          <string v="Java"/>
+         <string v="Java-Modeling"/>
          <string v="TopLink"/>
       </list>
    </hash>

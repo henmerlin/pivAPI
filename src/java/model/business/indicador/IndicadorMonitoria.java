@@ -5,6 +5,8 @@
  */
 package model.business.indicador;
 
+import model.business.realizado.RealizadoCalcInterface;
+
 import model.entitiy.IndicadoresOperador;
 
 /**
@@ -13,6 +15,9 @@ import model.entitiy.IndicadoresOperador;
  */
 public class IndicadorMonitoria extends Indicador implements RealizadoCalcInterface {
 
+    public IndicadorMonitoria(Double peso) {
+        this.setPeso(peso);
+    }
     @Override
     public void calcularRealizado(IndicadoresOperador op) throws Exception {
         this.setRealizado(100d);

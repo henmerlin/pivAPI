@@ -3,12 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package model.business.indicador;
+package model.business;
 
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.business.atingimento.AtingimentoPivFactory;
+import model.business.realizado.RealizadoCalcInterface;
+
 import model.entitiy.IndicadoresOperador;
 
 /**

@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import model.business.atingimento.AtingimentoInterface;
 import model.business.atingimento.NotaAtingimento;
-import model.business.indicador.RealizadoCalcInterface;
+import model.business.realizado.RealizadoCalcInterface;
 import model.entitiy.IndicadoresOperador;
 
 /**

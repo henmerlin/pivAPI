@@ -6,7 +6,7 @@
 package model.business.atingimento.fcr;
 
 import model.business.atingimento.AtingimentoInterface;
-import model.business.indicador.RealizadoCalcInterface;
+import model.business.realizado.RealizadoCalcInterface;
 import model.entitiy.IndicadoresOperador;
 
 /**
