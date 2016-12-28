@@ -18,10 +18,13 @@ public class IndicadorMonitoria extends Indicador implements RealizadoCalcInterf
     public IndicadorMonitoria(Double peso) {
         this.setPeso(peso);
     }
+
+    public IndicadorMonitoria() {
+    }
+
     @Override
     public void calcularRealizado(IndicadoresOperador op) throws Exception {
-        this.setRealizado(100d);
-        this.setPeso(0.1d);
+        this.setRealizado(200d);
     }
 
 }

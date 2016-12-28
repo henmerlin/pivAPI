@@ -10,6 +10,9 @@ import model.entitiy.IndicadoresOperador;
  */
 public class IndicadorFcr extends Indicador implements RealizadoCalcInterface {
 
+    public IndicadorFcr() {
+    }
+
     public IndicadorFcr(Double peso) {
         this.setPeso(peso);
     }
@@ -21,7 +24,6 @@ public class IndicadorFcr extends Indicador implements RealizadoCalcInterface {
         }
         Double percent = 1 - ((op.getChamadasFCR() / op.getRechamadasFCR()) / 100d);
         this.setRealizado(percent);
-        this.setPeso(0.3d);
     }
 
 }

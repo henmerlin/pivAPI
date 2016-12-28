@@ -5,11 +5,8 @@
  */
 package piv;
 
-import java.util.ArrayList;
-import model.business.indicador.CalculoPiv;
-import model.business.indicador.IndicadorFcr;
-import model.business.indicador.IndicadorMonitoria;
-import model.business.indicador.RealizadoCalcInterface;
+import model.business.CalculoPivFacade;
+import model.business.indicador.IndicadoresFactory;
 import model.entitiy.IndicadoresOperador;
 
 /**
@@ -25,15 +22,18 @@ public class PivTest {
 
         IndicadoresOperador op = new IndicadoresOperador();
 
+        // FCR
         op.setChamadasFCR(100);
         op.setRechamadasFCR(10);
 
-        ArrayList<RealizadoCalcInterface> indicadores = new ArrayList<RealizadoCalcInterface>();
+        // TMA
+        op.setChamadasAtendidas(548);
+        op.setTempoFalado(2.8831815717954145909677109248673219984d);
 
-        indicadores.add(new IndicadorFcr());
-        indicadores.add(new IndicadorMonitoria());
+        op.setEquipe("MULTISKILL");
 
-        CalculoPiv c = new CalculoPiv(op, indicadores);
+        CalculoPivFacade c;
+        c = new CalculoPivFacade(op, IndicadoresFactory.buscarIndicadores(op));
 
         c.calcular();
 

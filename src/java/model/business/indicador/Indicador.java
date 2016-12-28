@@ -2,8 +2,6 @@ package model.business.indicador;
 
 import model.business.realizado.RealizadoCalcInterface;
 
-import model.entitiy.IndicadoresOperador;
-
 /**
  *
  * @author G0042204
@@ -18,6 +16,9 @@ public abstract class Indicador implements RealizadoCalcInterface {
 
     private Double atingimento;
 
+    public Double getPontos() {
+        return this.atingimento * this.peso;
+    }
 
     public Double getAtingimento() {
         return atingimento;

@@ -5,10 +5,10 @@
  */
 package model.business.atingimento;
 
-import model.business.atingimento.fcr.AtingimentoFcr;
-import model.business.atingimento.monitoria.AtingimentoMonitoria;
+import model.business.indicador.IndicadorAderencia;
 import model.business.indicador.IndicadorFcr;
 import model.business.indicador.IndicadorMonitoria;
+import model.business.indicador.IndicadorTma;
 import model.business.realizado.RealizadoCalcInterface;
 
 /**
@@ -17,14 +17,18 @@ import model.business.realizado.RealizadoCalcInterface;
  */
 public class AtingimentoPivFactory {
 
-    public AtingimentoInterface getAtingimento(RealizadoCalcInterface i) {
+    public AtingimentoInterface getAtingimento(RealizadoCalcInterface i) throws Exception {
 
         if (i instanceof IndicadorFcr) {
             return new AtingimentoFcr();
+        } else if (i instanceof IndicadorTma) {
+            return new AtingimentoTma();
+        } else if (i instanceof IndicadorAderencia) {
+            return new AtingimentoAderencia();
         } else if (i instanceof IndicadorMonitoria) {
             return new AtingimentoMonitoria();
         } else {
-            return null;
+            throw new Exception("Atingimento não implementado");
         }
     }
 

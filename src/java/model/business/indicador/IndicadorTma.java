@@ -5,13 +5,17 @@ import model.business.realizado.RealizadoCalcInterface;
 import model.entitiy.IndicadoresOperador;
 
 public class IndicadorTma extends Indicador implements RealizadoCalcInterface {
-    
+
     public IndicadorTma(Double peso) {
         this.setPeso(peso);
     }
 
     @Override
     public void calcularRealizado(IndicadoresOperador op) throws Exception {
-        // TODO Implement this method
+        if (op.getChamadasAtendidas() == null || op.getTempoFalado() == null) {
+            throw new Exception("Indicadores não preenchidos.");
+        }
+        Double segundos = (op.getTempoFalado() / op.getChamadasAtendidas()) * 86400;
+        this.setRealizado(new Double(segundos.intValue()));
     }
 }
