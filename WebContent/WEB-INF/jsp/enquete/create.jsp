@@ -247,13 +247,12 @@
                         <label>Ativo</label>
                         <input type="checkbox" v-model="addPerguntaEnquete.pergunta.ativo"/>
 
-                        <br/>
-
-                        <button type="button" class="btn btn-primary" @click="adicionaPerguntaEnquete(addPerguntaEnquete)">Criar pergunta</button>
+                        <br/>                       
 
                     </div>
-                    <div class="modal-footer">
+                    <div class="modal-footer">                        
                         <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                        <button type="button" class="btn btn-primary" @click="adicionaPerguntaEnquete(addPerguntaEnquete)">Criar pergunta</button>
                     </div>
                 </div>
             </div>

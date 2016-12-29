@@ -7,15 +7,19 @@ package portalefika.comunicao.controller;
 
 import br.com.caelum.vraptor.Consumes;
 import br.com.caelum.vraptor.Controller;
+import br.com.caelum.vraptor.Get;
 import br.com.caelum.vraptor.Path;
 import br.com.caelum.vraptor.Post;
 import br.com.caelum.vraptor.view.Results;
+import java.util.ArrayList;
 import java.util.List;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.bean.ManagedProperty;
 import javax.inject.Inject;
 import portalefika.autenticacao.controller.SessionUsuarioEfika;
+import portalefika.comunicao.dal.EnqueteDAO;
 import portalefika.comunicao.dal.RespostaEnqueteDAO;
+import portalefika.comunicao.entidades.Enquete;
 import portalefika.comunicao.entidades.RespostaEnquete;
 import portalefika.controller.AbstractController;
 
@@ -26,12 +30,15 @@ import portalefika.controller.AbstractController;
 @Controller
 @RequestScoped
 public class RespostaEnqueteController extends AbstractController {
-    
-    @ManagedProperty(value = "#{sessionUsuarioEfika}")
-    private SessionUsuarioEfika sessionUsuarioEfika;
+
+    @Inject
+    private SessionUsuarioEfika session;
 
     @Inject
     private RespostaEnqueteDAO respostaEnqueteDAO;
+
+    @Inject
+    private EnqueteDAO enqueteDAO;
 
     @Post
     @Consumes("application/json")
@@ -39,8 +46,7 @@ public class RespostaEnqueteController extends AbstractController {
     public void cadastrar(List<RespostaEnquete> respostaEnquetes) {
         try {
             for (RespostaEnquete respostaEnquete : respostaEnquetes) {
-                //Adicionar matricula do usuario que está logado.
-                respostaEnquete.setUsuario(this.sessionUsuarioEfika.getUsuario().getLogin());                
+                respostaEnquete.setUsuario(this.session.getUsuario().getLogin());
                 this.respostaEnqueteDAO.cadastrar(respostaEnquete);
             }
             this.result.use(Results.json()).from(respostaEnquetes).serialize();
@@ -48,19 +54,25 @@ public class RespostaEnqueteController extends AbstractController {
             this.result.use(Results.json()).from(e).serialize();
         }
     }
-    
+
     public void vevoto() {
-        
-        
-        
+
     }
 
-    public SessionUsuarioEfika getSessionUsuarioEfika() {
-        return sessionUsuarioEfika;
+    @Get
+    @Path("/comunicacao/respostaEnquete/listar")
+    public void buscaEnqVoto() {
+        try {
+            List<RespostaEnquete> l = this.respostaEnqueteDAO.listarEnqEsp(this.session.getUsuario().getLogin());
+            List<Enquete> le = new ArrayList<>();
+            for (RespostaEnquete respostaEnquete : l) {
+                le.add(respostaEnquete.getPergunta().getEnquete());
+            }
+            List<Enquete> ler = this.enqueteDAO.listarEnqEsp(le);
+            this.result.use(Results.json()).from(ler).serialize();
+        } catch (Exception e) {
+            this.result.use(Results.json()).from(e).serialize();
+        }
     }
 
-    public void setSessionUsuarioEfika(SessionUsuarioEfika sessionUsuarioEfika) {
-        this.sessionUsuarioEfika = sessionUsuarioEfika;
-    }    
-    
 }

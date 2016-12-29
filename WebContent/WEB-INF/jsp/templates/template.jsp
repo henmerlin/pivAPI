@@ -67,11 +67,12 @@
                                 <ul class="dropdown-menu">
                                     <li class="dropdown-header">Adm</li>
                                     <li><a href="${linkTo[EditorController].create()}">Editor</a></li>
-                                    <li><a href="${linkTo[EnqueteController].create()}">Enquete</a></li>
-                                    <li><a href="${linkTo[ConteudoController].create()}">Gerenciar Conteudo</a></li>
+                                    <li><a href="${linkTo[EnqueteController].create()}">Gerenciar Enquete</a></li>
+                                    <li><a href="${linkTo[ConteudoController].create()}">Gerenciar Cwsieonteudo</a></li>
                                     <li><a href="${linkTo[ConteudoCategoriaController].create()}">Gerenciar Categoria</a></li>
                                     <li><a href="${linkTo[BannerController].create()}">Gerenciar Banner</a></li>
                                     <li role="separator" class="divider"></li>
+                                    <li class="dropdown-header">Usr</li>
                                     <li><a href="${linkTo[EnqueteController].list()}">Responder Enquete</a></li>
                                     <li role="separator" class="divider"></li>
                                     <li><a href="#">One more separated link</a></li>
