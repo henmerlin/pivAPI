@@ -40,7 +40,7 @@ public class RespostaEnqueteController extends AbstractController {
         try {
             for (RespostaEnquete respostaEnquete : respostaEnquetes) {
                 //Adicionar matricula do usuario que está logado.
-                respostaEnquete.setUsuario("G0034481");                
+                respostaEnquete.setUsuario(this.sessionUsuarioEfika.getUsuario().getLogin());                
                 this.respostaEnqueteDAO.cadastrar(respostaEnquete);
             }
             this.result.use(Results.json()).from(respostaEnquetes).serialize();
@@ -54,4 +54,13 @@ public class RespostaEnqueteController extends AbstractController {
         
         
     }
+
+    public SessionUsuarioEfika getSessionUsuarioEfika() {
+        return sessionUsuarioEfika;
+    }
+
+    public void setSessionUsuarioEfika(SessionUsuarioEfika sessionUsuarioEfika) {
+        this.sessionUsuarioEfika = sessionUsuarioEfika;
+    }    
+    
 }
