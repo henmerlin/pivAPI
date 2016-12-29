@@ -60,7 +60,7 @@ new Vue({
         //Comandos Lista
         getEnq: function () {
             var self = this;
-            $.get(enqURL + "listar", function (data) {
+            $.get(respostaEnq + "listar", function (data) {
                 self.enquetes = data.list;
             });
         },
@@ -117,6 +117,7 @@ new Vue({
                 success: function () {
                     $('#resEnq').modal('hide');
                     self.clear();
+                    self.getEnq();
                 }
             });
         },

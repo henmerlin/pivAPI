@@ -15,6 +15,8 @@ import java.util.List;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import portalefika.autenticacao.annotation.Admin;
+import portalefika.autenticacao.annotation.Logado;
+import portalefika.autenticacao.controller.SessionUsuarioEfika;
 import portalefika.comunicao.dal.EnqueteDAO;
 import portalefika.comunicao.dal.exception.PersistenciaException;
 import portalefika.comunicao.entidades.Enquete;
@@ -27,6 +29,9 @@ import portalefika.controller.AbstractController;
 @Controller
 @RequestScoped
 public class EnqueteController extends AbstractController {
+    
+    @Inject
+    private SessionUsuarioEfika session;
 
     @Inject
     private EnqueteDAO enqueteDAO;
@@ -39,6 +44,7 @@ public class EnqueteController extends AbstractController {
 
     }
     
+    @Logado
     @Path("/comunicacao/enquete/list")
     public void list() {
         
@@ -80,7 +86,7 @@ public class EnqueteController extends AbstractController {
             this.result.use(Results.json()).from(l).serialize();
         }
     }
-
+    
     @Post
     @Consumes("application/json")
     @Path("/comunicacao/enquete/modificar")

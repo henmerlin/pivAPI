@@ -2,6 +2,7 @@ package portalefika.comunicao.dal;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 import javax.persistence.Query;
 import portalefika.comunicao.entidades.Enquete;
@@ -21,7 +22,7 @@ public class EnqueteDAO extends ComponentePortalDAO {
 
         } catch (Exception e) {
 
-            return new ArrayList<Enquete>();
+            return new ArrayList<>();
 
         }
 
@@ -41,10 +42,36 @@ public class EnqueteDAO extends ComponentePortalDAO {
 
         } catch (Exception e) {
 
-            return new ArrayList<Enquete>();
+            return new ArrayList<>();
 
         }
 
+    }
+
+    public List<Enquete> listarEnqEsp(List<Enquete> le) {        
+        try {            
+            if (le.size() > 1) {
+                
+                le = new ArrayList<Enquete>(new HashSet<Enquete>(le));                
+                StringBuilder concat = new StringBuilder();
+                int cont = 0;
+                for (Enquete enquete : le) {
+                    if (cont == 0) {
+                        concat.append("e.id != " + enquete.getId() + " ");
+                        cont++;
+                    } else {
+                        concat.append(" AND e.id != " + enquete.getId());
+                    }
+                }                
+                Query query = this.entityManager.createQuery("FROM Enquete e WHERE " + concat.toString());
+                return query.getResultList();
+            } else {
+                Query query = this.entityManager.createQuery("FROM Enquete e");
+                return query.getResultList();
+            }
+        } catch (Exception e) {
+            return new ArrayList<>();
+        }
     }
 
 }
