@@ -12,15 +12,15 @@
         <!-- import CSS -->
         <link href="${pageContext.request.contextPath}/resources/bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet" />
         <link href="${pageContext.request.contextPath}/resources/bootstrap-3.3.7-dist/css/bootstrap-theme.min.css" rel="stylesheet" />
-        <link href="${pageContext.request.contextPath}/resources/custom/custom.css" rel="stylesheet" />        
+        <link href="${pageContext.request.contextPath}/resources/custom/custom.css" rel="stylesheet" />
         <link href="${pageContext.request.contextPath}/resources/custom/lightslider.min.css" rel="stylesheet" />
 
         <!-- import JavaScript -->
         <script src="${pageContext.request.contextPath}/resources/jquery-3.1.1/jquery-3.1.1.min.js"></script>
         <script src="${pageContext.request.contextPath}/resources/node_modules/vue/dist/vue.js"></script>
-        <script src="${pageContext.request.contextPath}/resources/moment/moment.js"></script>        
+        <script src="${pageContext.request.contextPath}/resources/moment/moment.js"></script>
         <script src="${pageContext.request.contextPath}/resources/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
-        <script src="${pageContext.request.contextPath}/resources/custom/custom.js"></script>        
+        <script src="${pageContext.request.contextPath}/resources/custom/custom.js"></script>
         <script src="${pageContext.request.contextPath}/resources/custom/lightslider.min.js"></script>
 
         <style>
@@ -61,7 +61,7 @@
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav">
                             <li><a href="${linkTo[HomeController].index()}">Home <span class="sr-only">(current)</span></a></li>
-                            <li><a href="#">Link</a></li>
+                            <li><a href="${linkTo[SimuladorController].index()}">Simulador PIV</a></li>
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Funcionalidades <span class="caret"></span></a>
                                 <ul class="dropdown-menu">
