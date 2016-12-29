@@ -11,9 +11,12 @@ import model.entitiy.IndicadoresOperador;
 public class IndicadorFcr extends Indicador implements RealizadoCalcInterface {
 
     public IndicadorFcr() {
+        this.setNome(IndicadorNome.Fcr);
     }
 
     public IndicadorFcr(Double peso) {
+        super();
+        this.setNome(IndicadorNome.Fcr);
         this.setPeso(peso);
     }
 

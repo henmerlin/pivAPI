@@ -6,7 +6,13 @@ import model.entitiy.IndicadoresOperador;
 
 public class IndicadorAderencia extends Indicador implements RealizadoCalcInterface {
 
+    public IndicadorAderencia() {
+        this.setNome(IndicadorNome.Aderencia);
+    }
+
     public IndicadorAderencia(Double peso) {
+        super();
+        this.setNome(IndicadorNome.Aderencia);
         this.setPeso(peso);
     }
 

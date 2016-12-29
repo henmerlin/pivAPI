@@ -6,7 +6,13 @@ import model.entitiy.IndicadoresOperador;
 
 public class IndicadorTma extends Indicador implements RealizadoCalcInterface {
 
+    public IndicadorTma() {
+        this.setNome(IndicadorNome.Tma);
+    }
+
     public IndicadorTma(Double peso) {
+        super();
+        this.setNome(IndicadorNome.Tma);
         this.setPeso(peso);
     }
 

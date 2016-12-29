@@ -11,6 +11,8 @@ import br.com.caelum.vraptor.Path;
 import br.com.caelum.vraptor.view.Results;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
+import model.business.CalculoPivFacade;
+import model.business.indicador.IndicadoresFactory;
 import model.dal.IndicadoresOperadorDAO;
 import model.entitiy.IndicadoresOperador;
 
@@ -27,13 +29,28 @@ public class OperadorController extends AbstractController {
     @Get
     @Path("/operador/{i.loginOperador}")
     public void visualiza(IndicadoresOperador i) {
-        System.out.println(i.getLoginOperador());
         IndicadoresOperador a;
         a = (IndicadoresOperador) dao.buscaPorLoginOperador(i);
 
         if (a != null) {
             includeSerializer(a);
         }
+    }
+
+    @Get
+    @Path("/operador/simulador/{loginOperador}")
+    public void simulador(String loginOperador) {
+
+        try {
+            IndicadoresOperador a;
+            a = (IndicadoresOperador) dao.buscaPorLoginOperador(new IndicadoresOperador(loginOperador));
+            CalculoPivFacade piv = new CalculoPivFacade(a, IndicadoresFactory.buscarIndicadores(a));
+            piv.calcular();
+            result.use(Results.json()).from(piv).recursive().serialize();
+        } catch (Exception e) {
+            result.use(Results.json()).from(e).serialize();
+        }
+
     }
 
     /**

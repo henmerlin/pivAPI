@@ -22,7 +22,7 @@ public final class IndicadoresFactory {
 
         }
 
-        inds.add(new IndicadorAderencia(0.25d));
+        // inds.add(new IndicadorAderencia(0.25d));
         return inds;
     }
 

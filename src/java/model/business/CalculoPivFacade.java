@@ -6,21 +6,14 @@
 package model.business;
 
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import model.business.atingimento.AtingimentoPivFactory;
 import model.business.indicador.Indicador;
 
 import model.entitiy.IndicadoresOperador;
 
-/**
- *
- * @author G0042204
- */
 public class CalculoPivFacade {
 
     private IndicadoresOperador op;
-    private AtingimentoPivFactory factory;
     private List<Indicador> indicadores;
     private Double pontos;
     private Double pesos;
@@ -28,7 +21,6 @@ public class CalculoPivFacade {
     public CalculoPivFacade(IndicadoresOperador op, List<Indicador> indicadores) {
         this.op = op;
         this.indicadores = indicadores;
-        this.factory = new AtingimentoPivFactory();
         this.pontos = 0d;
         this.pesos = 0d;
     }
@@ -38,7 +30,7 @@ public class CalculoPivFacade {
         indicadores.forEach((Indicador indicador) -> {
             try {
                 indicador.calcularRealizado(op);
-                Double a = factory.getAtingimento(indicador).calcularAtingimento(indicador, op);
+                Double a = AtingimentoPivFactory.getAtingimento(indicador).calcularAtingimento(indicador, op);
                 indicador.setAtingimento(a);
                 this.pontos += indicador.getPontos();
                 this.pesos += indicador.getPeso();

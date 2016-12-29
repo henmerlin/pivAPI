@@ -15,11 +15,14 @@ import model.entitiy.IndicadoresOperador;
  */
 public class IndicadorMonitoria extends Indicador implements RealizadoCalcInterface {
 
-    public IndicadorMonitoria(Double peso) {
-        this.setPeso(peso);
+    public IndicadorMonitoria() {
+        this.setNome(IndicadorNome.Monitoria);
     }
 
-    public IndicadorMonitoria() {
+    public IndicadorMonitoria(Double peso) {
+        super();
+        this.setNome(IndicadorNome.Monitoria);
+        this.setPeso(peso);
     }
 
     @Override

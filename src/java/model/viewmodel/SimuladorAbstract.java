@@ -3,19 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package model.business.atingimento.tma;
+package model.viewmodel;
+
+import model.business.indicador.IndicadorAderencia;
 
 /**
  *
  * @author G0042204
  */
-public enum MediaTma {
+public abstract class SimuladorAbstract {
 
-    Especializada(560d), MultiskillNovos(503d), Multiskill(420d);
+    private IndicadorAderencia adr;
 
-    public Double valor;
+    public abstract Double calcularPiv();
 
-    MediaTma(Double valor) {
-        this.valor = valor;
-    }
 }

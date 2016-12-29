@@ -15,9 +15,9 @@ import model.business.realizado.RealizadoCalcInterface;
  *
  * @author G0042204
  */
-public class AtingimentoPivFactory {
+public final class AtingimentoPivFactory {
 
-    public AtingimentoInterface getAtingimento(RealizadoCalcInterface i) throws Exception {
+    public static AtingimentoInterface getAtingimento(RealizadoCalcInterface i) throws Exception {
 
         if (i instanceof IndicadorFcr) {
             return new AtingimentoFcr();

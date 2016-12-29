@@ -53,6 +53,10 @@ public class IndicadoresOperador implements Serializable {
     public IndicadoresOperador() {
     }
 
+    public IndicadoresOperador(String loginOperador) {
+        this.loginOperador = loginOperador;
+    }
+
     public void setLoginOperador(String loginOperador) {
         this.loginOperador = loginOperador;
     }

@@ -16,8 +16,13 @@ public abstract class Indicador implements RealizadoCalcInterface {
 
     private Double atingimento;
 
+    private Double pontos;
+
+    private IndicadorNome nome;
+
     public Double getPontos() {
-        return this.atingimento * this.peso;
+        this.pontos = this.atingimento * this.peso;
+        return this.pontos;
     }
 
     public Double getAtingimento() {
@@ -50,5 +55,13 @@ public abstract class Indicador implements RealizadoCalcInterface {
 
     public void setPeso(Double peso) {
         this.peso = peso;
+    }
+
+    public IndicadorNome getNome() {
+        return nome;
+    }
+
+    public void setNome(IndicadorNome nome) {
+        this.nome = nome;
     }
 }
