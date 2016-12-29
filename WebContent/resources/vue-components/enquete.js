@@ -96,7 +96,6 @@ new Vue({
                         "ativo": false
                     }
                 }
-
             }
         },
         editEscolhaPergunta: {
@@ -126,16 +125,14 @@ new Vue({
         this.getEnquetes();
         this.resetObjects();
     },
-    methods: {
-                
+    methods: {                
         //Comandos Formatação   
         dateInput: function (h) {
             return moment(h).format("YYYY-MM-DD");
         },
         dateFormat: function (h) {
             return  moment(h).format('DD/MM/YYYY');
-        },
-        
+        },        
         //Comandos Criação
         adicionaEnquete: function () {
             var self = this;
@@ -154,23 +151,17 @@ new Vue({
             self.fetchData()
         },
         adicionaPerguntaEnquete: function (h) {
-
             var self = this;
-
             h.pergunta.enquete = self.editEnquete;
-
             $.ajax({
                 type: "POST",
                 url: enqPerguntaURL + "cadastrar",
                 data: JSON.stringify(h),
                 dataType: "json",
                 beforeSend: function (xhrObj) {
-
                     xhrObj.setRequestHeader("Content-Type", "application/json");
-
                 },
                 success: function () {
-
                     $('#criaPerguntaEnquete').modal('hide');
                     $('#modEnquete').modal('show');
                     self.resetObjects();
@@ -179,77 +170,59 @@ new Vue({
             self.fetchDataPergunta(self.editEnquete);
         },
         adicionaEscolhaPergunta: function () {
-
             var self = this;
-
             self.addEscolhaPergunta.escolhaPergunta.pergunta = self.editPerguntaEnquete;
-
             $.ajax({
                 type: "POST",
                 url: escolhaPerguntaURL + "cadastrar",
                 data: JSON.stringify(self.addEscolhaPergunta.escolhaPergunta),
                 dataType: "json",
                 beforeSend: function (xhrObj) {
-
                     xhrObj.setRequestHeader("Content-Type", "application/json");
-
                 },
                 success: function () {
-
                     $('#criaEscolhaPergunta').modal('hide');
                     $('#escolhaPergunta').modal('show');
                     self.resetObjects();
                 }
             });
             self.fetchDataEscolhaPerguntas(self.editPerguntaEnquete);
-        },
-        
+        },        
         //Comandos Lista
         getEnquetes: function () {
             var self = this;
             $.get(enqURL + "listar", function (data) {
                 self.enquetes = data.list;
-            })
-
+            });
         },
         getPerguntasEnquetes: function (h) {
             var self = this;
             $.get(enqPerguntaURL + "lista/" + h.id, function (data) {
                 self.perguntasEnquetes = data.list;
             });
-
         },
         getEscolhaPerguntas: function (h) {
-
             var self = this;
             $.get(escolhaPerguntaURL + "lista/" + h.id, function (data) {
                 self.escolhaPerguntas = data.list;
             });
         },
-        
         //Comandos Modifica
         editarEnquete: function (h) {
-
             var self = this;
             self.editEnquete = h;
             self.getPerguntasEnquetes(self.editEnquete);
-
         },
         editarPerguntaEnquete: function (h) {
-
             var self = this;
             self.editPerguntaEnquete = h;
             self.getEscolhaPerguntas(h);
-
         },
         editarEscolhaPergunta: function (h) {
-
             var self = this;
             self.editEscolhaPergunta = h;
-
         },                
         doneEditaEnquete: function (h) {
-
             $.ajax({
                 type: "POST",
                 url: enqURL + "modificar",
@@ -264,11 +237,8 @@ new Vue({
             });
         },
         doneEditaPergunta: function () {
-
             var self = this;
-
             self.editPerguntaEnquete.enquete = self.editEnquete;
-
             $.ajax({
                 type: "POST",
                 url: enqPerguntaURL + "modificar",
@@ -282,13 +252,10 @@ new Vue({
                 }
             });
         },
-        doneEditaEscolhaPergunta: function (h) {
-            
-            var self = this;
-            
+        doneEditaEscolhaPergunta: function (h) {            
+            var self = this;            
             self.editEscolhaPergunta.pergunta = self.editPerguntaEnquete;
-            self.editEscolhaPergunta.pergunta.enquete = self.editEnquete;
-            
+            self.editEscolhaPergunta.pergunta.enquete = self.editEnquete;            
             $.ajax({
                 type: "POST",
                 url: escolhaPerguntaURL + "modificar",
@@ -301,8 +268,7 @@ new Vue({
                     $('#editaEscolhaPergunta').modal('hide');
                 }
             });
-        },
-        
+        },        
         //Comandos Delete
         excluiEnquete: function (h) {
 
@@ -312,9 +278,7 @@ new Vue({
             
         },
         doneExcluiEnquete: function (h) {
-
             var self = this
-
             $.ajax({
                 type: "POST",
                 url: enqURL + "exclui",
@@ -324,44 +288,29 @@ new Vue({
                     xhr.setRequestHeader("Content-Type", "application/json");
                 },
                 success: function () {
-
                     $('#excluiEnquete').modal('hide');
-
                 }
             });
             self.fetchData();
-        },
-        
+        },        
         //Comandos Fetch
         fetchData: function () {
-
             var self = this;
             setTimeout(function () {
-
                 self.getEnquetes();
-
             }, 600);
-
         },
         fetchDataPergunta: function (h) {
-
             var self = this;
             setTimeout(function () {
-
                 self.getPerguntasEnquetes(h);
-
             }, 600);
-
         },
         fetchDataEscolhaPerguntas: function (h) {
-
             var self = this;
             setTimeout(function () {
-
                 self.getEscolhaPerguntas(h);
-
             }, 600);
-
         },
         
         //Comandos Reset Objects

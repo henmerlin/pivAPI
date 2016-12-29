@@ -46,7 +46,7 @@ public class PerguntaController extends AbstractController {
         
         if (l != null) {
             
-            this.result.use(Results.json()).from(l).serialize();
+            this.result.use(Results.json()).from(l).include("enquete").serialize();
             
         }
         

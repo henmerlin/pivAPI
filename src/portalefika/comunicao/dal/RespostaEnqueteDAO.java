@@ -19,51 +19,43 @@ import portalefika.comunicao.entidades.RespostaEnquete;
  */
 @Stateless
 public class RespostaEnqueteDAO extends AbstractDAO {
-    
+
     public void cadastrar(RespostaEnquete respostaEnquete) throws Exception {
-        
         try {
-            
             super.cadastrar(respostaEnquete);
-            
         } catch (Exception e) {
-            
             throw new Exception("Erro ao cadastrar resposta enquete.");
-            
         }
-        
     }
-    
+
     public void modificar(RespostaEnquete respostaEnquete) throws Exception {
-        
+
         try {
-                       
+
             super.modificar(respostaEnquete);
-            
+
         } catch (Exception e) {
-            
+
             throw new Exception("Erro ao modificar resposta enquete.");
-            
+
         }
-        
-    }    
-    
+
+    }
+
     public List<RespostaEnquete> listarRespostaEnquete(Enquete enquete) {
-        
+
         try {
-            
+
             Query query = this.entityManager.createQuery("FROM RespostaEnquete r WHERE r.enquete =:param1");
             query.setParameter("param1", enquete);
             return query.getResultList();
-            
+
         } catch (Exception e) {
-            
+
             return new ArrayList<RespostaEnquete>();
-            
+
         }
-        
+
     }
-    
-    
-    
+
 }

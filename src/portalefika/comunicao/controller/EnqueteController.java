@@ -38,6 +38,12 @@ public class EnqueteController extends AbstractController {
     public void create() {
 
     }
+    
+    @Path("/comunicacao/enquete/list")
+    public void list() {
+        
+                
+    }
 
     @Get
     @Path("/comunicacao/enquete/{enquete.id}")

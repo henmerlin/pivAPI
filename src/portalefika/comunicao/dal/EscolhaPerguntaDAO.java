@@ -19,18 +19,12 @@ import portalefika.comunicao.entidades.Pergunta;
 @Stateless
 public class EscolhaPerguntaDAO extends ComponentePortalDAO {
     
-    public void cadastrar(EscolhaPergunta escolhaPergunta) throws Exception {
-        
-        try {
-            
-            super.cadastrar(escolhaPergunta);
-            
-        } catch (Exception e) {
-            
-            throw new Exception("Erro ao cadastrar Escolha para a Pergunta");
-            
-        }
-        
+    public void cadastrar(EscolhaPergunta escolhaPergunta) throws Exception {        
+        try {            
+            super.cadastrar(escolhaPergunta);            
+        } catch (Exception e) {            
+            throw new Exception("Erro ao cadastrar Escolha para a Pergunta");            
+        }        
     }
     
     public void modificar(EscolhaPergunta escolhaPergunta) throws Exception {

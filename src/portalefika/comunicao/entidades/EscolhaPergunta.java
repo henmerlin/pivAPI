@@ -6,6 +6,7 @@
 package portalefika.comunicao.entidades;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
@@ -22,7 +23,7 @@ public class EscolhaPergunta extends ComponentePortal {
     }   
     
     @NotNull
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     private Pergunta pergunta;
 
     public Pergunta getPergunta() {

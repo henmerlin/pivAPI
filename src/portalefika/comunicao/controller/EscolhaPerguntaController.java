@@ -26,65 +26,54 @@ import portalefika.controller.AbstractController;
 @Controller
 @RequestScoped
 public class EscolhaPerguntaController extends AbstractController {
-    
+
     @Inject
     private EscolhaPerguntaDAO escolhaPerguntaDAO;
 
-    public EscolhaPerguntaController() {        
+    public EscolhaPerguntaController() {
     }
-    
-    public void create() {       
-        
+
+    public void create() {
+
     }
-    
+
     @Get
     @Path("/comunicacao/escolhapergunta/lista/{p.id}")
     public void visualizar(Pergunta p) {
-                                
         List<EscolhaPergunta> l = this.escolhaPerguntaDAO.listarEscolhasPerguntas(p);
-        
         if (l != null) {
-            
-            this.result.use(Results.json()).from(l).serialize();
-            
+            this.result.use(Results.json()).from(l).include("pergunta").serialize();
         }
-        
     }
-    
+
     @Post
     @Consumes("application/json")
     @Path("/comunicacao/escolhapergunta/cadastrar")
     public void cadastrar(EscolhaPergunta escolhaPergunta) {
-        
         try {
-            
             this.escolhaPerguntaDAO.cadastrar(escolhaPergunta);
             this.result.use(Results.json()).from(escolhaPergunta).serialize();
-            
         } catch (Exception e) {
-            
             this.result.use(Results.json()).from(e).serialize();
-                        
         }
-        
     }
-    
+
     @Post
     @Consumes("application/json")
     @Path("/comunicacao/escolhapergunta/modificar")
     public void modificar(EscolhaPergunta escolhaPergunta) {
-        
+
         try {
-            
+
             this.escolhaPerguntaDAO.modificar(escolhaPergunta);
             this.result.use(Results.json()).from(escolhaPergunta).serialize();
-            
+
         } catch (Exception e) {
-            
+
             this.result.use(Results.json()).from(e).serialize();
-            
+
         }
-        
+
     }
-    
+
 }

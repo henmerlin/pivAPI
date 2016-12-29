@@ -24,17 +24,15 @@ import org.hibernate.validator.constraints.NotEmpty;
 @Table(name = "PE_COMUNICACAO_PERGUNTA_ENQUETE")
 public class Pergunta extends ComponentePortal {
 
-    public Pergunta() {
-        
-        this.escolhaPerguntas = new ArrayList<>();
-        
+    public Pergunta() {        
+        this.escolhaPerguntas = new ArrayList<>();        
     }
     
-    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "pergunta", fetch = FetchType.EAGER, orphanRemoval = true)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "pergunta", fetch = FetchType.EAGER, orphanRemoval = true)
     private List<EscolhaPergunta> escolhaPerguntas;
     
     @NotNull
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     private Enquete enquete;
     
     @NotEmpty
