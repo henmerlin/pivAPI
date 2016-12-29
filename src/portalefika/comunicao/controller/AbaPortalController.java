@@ -32,7 +32,7 @@ public class AbaPortalController extends AbstractController {
         AbaPortal a1 = (AbaPortal) abaDao.buscarPorId(a);
 
         if (a1 != null) {
-            result.use(Results.json()).from(a1).include("subAbas").include("subAbas.conteudo").serialize();
+            includeSerializer(a1);
         }
     }
 

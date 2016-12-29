@@ -4,10 +4,14 @@ import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 
 import br.com.caelum.vraptor.Controller;
+import br.com.caelum.vraptor.Get;
+import br.com.caelum.vraptor.Path;
 import br.com.caelum.vraptor.Result;
+import br.com.caelum.vraptor.view.Results;
 import portalefika.controller.HomeController;
 import portalefika.autenticacao.dal.webservice.EfikaUsersProxy;
 import portalefika.autenticacao.dal.webservice.Usuario;
+import portalefika.comunicao.entidades.AbaPortal;
 
 @Controller
 @RequestScoped
@@ -44,7 +48,7 @@ public class UsuarioController {
             } else {
 
                 result.include("mensagemFalha", "Credênciais incorretas.");
-                result.redirectTo(this).create();
+                result.forwardTo(this).create();
             }
 
         } catch (Exception e) {
@@ -61,6 +65,12 @@ public class UsuarioController {
     public void logout() {
         session.setUsuario(new Usuario());
         result.forwardTo(UsuarioController.class).create();
+    }
+
+    @Get
+    @Path("/session/")
+    public void getSession(String login) {
+        result.use(Results.json()).from(session.getUsuario()).recursive().serialize();
     }
 
 }
