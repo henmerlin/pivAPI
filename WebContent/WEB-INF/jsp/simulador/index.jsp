@@ -16,6 +16,8 @@
     </div>
 
     <div id="piv" v-cloak>
+        <dados-user></dados-user>
+        <hr>
         <simulador-form></simulador-form>
     </div>
 
