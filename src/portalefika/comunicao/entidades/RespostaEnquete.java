@@ -7,6 +7,7 @@ package portalefika.comunicao.entidades;
 
 import java.io.Serializable;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
@@ -33,7 +34,7 @@ public class RespostaEnquete implements Serializable {
     private String resposta;
     
     @NotNull
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     private Pergunta pergunta;
     
     @NotEmpty
