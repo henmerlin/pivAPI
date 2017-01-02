@@ -1,0 +1,12 @@
+<?xml version='1.0' encoding='UTF-8' standalone='yes'?>
+<xmi:XMI xmlns:xmi='http://www.omg.org/spec/XMI/20131001' xmlns:uml='http://www.omg.org/spec/UML/20131001'>
+ <documentation exporter='Oracle JDeveloper' exporterVersion='12.2.1.2.0'/>
+ <uml:UseCase xmi:type='uml:UseCase' xmi:uuid='urn:uuid:b8103f06-e822-4b16-812b-5ededc13885a'
+   isAbstract='false'
+   isFinalSpecialization='false'
+   isLeaf='false'
+   name='UC001 – Efetuar Login'
+   visibility='public'>
+  <subject href='urn:uuid:817f3bad-42c2-411f-a2cb-4482167b97b7'/>
+ </uml:UseCase>
+</xmi:XMI>
