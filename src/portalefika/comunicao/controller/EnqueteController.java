@@ -29,7 +29,7 @@ import portalefika.controller.AbstractController;
 @Controller
 @RequestScoped
 public class EnqueteController extends AbstractController {
-    
+
     @Inject
     private SessionUsuarioEfika session;
 
@@ -43,12 +43,18 @@ public class EnqueteController extends AbstractController {
     public void create() {
 
     }
-    
+
     @Logado
     @Path("/comunicacao/enquete/list")
     public void list() {
-        
-                
+
+    }
+
+    @Path("/comunicacao/enquete/infoEnq/{enquete.id}")
+    public void infoEnq(Enquete enquete) {
+
+        System.out.println(enquete.getId());
+        this.result.include("enquete", enquete.getId());
     }
 
     @Get
@@ -86,7 +92,7 @@ public class EnqueteController extends AbstractController {
             this.result.use(Results.json()).from(l).serialize();
         }
     }
-    
+
     @Post
     @Consumes("application/json")
     @Path("/comunicacao/enquete/modificar")
