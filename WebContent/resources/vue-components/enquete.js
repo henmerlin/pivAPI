@@ -16,9 +16,6 @@ new Vue({
         enquetes: null,
         perguntasEnquetes: null,
         escolhaPerguntas: null,
-        escolhasPerguntasInfo: [],
-        escolhasInfo: [],
-        valores: [],
         editEnquete: {
             "enquete": {
                 "usuario": null,
@@ -212,32 +209,6 @@ new Vue({
                 self.escolhaPerguntas = data.list;
             });
         },
-        getPerguntasEnquetesInfo: function (h) {
-            var self = this;
-            $.get(enqPerguntaURL + "lista/" + h.id, function (data) {
-                self.perguntasEnquetes = data.list;
-                for (var i = 0; i < self.perguntasEnquetes.length; i++) {
-                    if (self.perguntasEnquetes[i].tipoPergunta === 'Múltipla Escolha') {
-                        self.getEscolhasPerguntasInfo(self.perguntasEnquetes[i]);
-                    }
-                }
-            });
-        },
-        getEscolhasPerguntasInfo: function (h) {
-            var self = this;
-            $.get(escolhaPerguntaURL + "lista/" + h.id, function (data) {
-                for (var i = 0; i < data.list.length; i++) {
-                    self.escolhasPerguntasInfo.push(data.list[i]);
-                }
-                self.contaEscolha();
-            });
-        },
-        buscaRespotas: function (h) {
-            var self = this;
-            $.get(respEnq + "listaTodos/" + h.id, function (data) {
-                self.respostas = data.list;
-            });
-        },
         //Comandos Modifica
         editarEnquete: function (h) {
             var self = this;
@@ -302,11 +273,8 @@ new Vue({
         },
         //Comandos Delete
         excluiEnquete: function (h) {
-
             var self = this;
-
             self.delEnquete = h;
-
         },
         doneExcluiEnquete: function (h) {
             var self = this
@@ -343,32 +311,6 @@ new Vue({
                 self.getEscolhaPerguntas(h);
             }, 600);
         },
-        fetchInfoEnq: function (h) {
-            var self = this;
-            setTimeout(function () {
-                self.getPerguntasEnquetesInfo(h);
-                self.buscaRespotas(h);
-            }, 600);
-        },
-
-        contaEscolha: function () {
-            var self = this;
-
-            self.escolhasInfo = self.escolhasPerguntasInfo.filter(function (item, index, inputarray) {
-                return inputarray.indexOf(item) == index;
-            });
-            var soma = 0;
-            for (var i = 0; i < self.escolhasInfo.length; i++) {
-                for (var a = 0; a < self.respostas.length; a++) {
-                    if (self.escolhasInfo[i].titulo === self.respostas[a].resposta) {
-                        soma++;
-                    }
-                }
-                self.valores.push({titulo: self.escolhasInfo[i].titulo, cont: soma, pergunta: self.escolhasInfo[i].pergunta.titulo});
-                soma = 0;
-            }
-        },
-
         //Comandos Reset Objects
         resetObjects: function () {
             var self = this;
@@ -416,10 +358,6 @@ new Vue({
                     }
                 }
             };
-            self.escolhasPerguntasInfo = [];
-            self.escolhasInfo = [];
-            self.valores = [];
-
         }
     }
 });

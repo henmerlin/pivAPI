@@ -62,18 +62,12 @@ public class EscolhaPerguntaController extends AbstractController {
     @Consumes("application/json")
     @Path("/comunicacao/escolhapergunta/modificar")
     public void modificar(EscolhaPergunta escolhaPergunta) {
-
         try {
-
             this.escolhaPerguntaDAO.modificar(escolhaPergunta);
             this.result.use(Results.json()).from(escolhaPergunta).serialize();
-
         } catch (Exception e) {
-
             this.result.use(Results.json()).from(e).serialize();
-
         }
-
     }
 
 }
