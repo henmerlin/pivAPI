@@ -12,9 +12,9 @@ import br.com.caelum.vraptor.Path;
 import br.com.caelum.vraptor.Post;
 import br.com.caelum.vraptor.view.Results;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import javax.enterprise.context.RequestScoped;
-import javax.faces.bean.ManagedProperty;
 import javax.inject.Inject;
 import portalefika.autenticacao.controller.SessionUsuarioEfika;
 import portalefika.comunicao.dal.EnqueteDAO;
@@ -55,8 +55,15 @@ public class RespostaEnqueteController extends AbstractController {
         }
     }
 
-    public void vevoto() {
-
+    @Get
+    @Path("/comunicacao/respostaEnquete/listaTodos/{enquete.id}")
+    public void vevoto(Enquete enquete) {        
+        try {            
+            List<RespostaEnquete> l = this.respostaEnqueteDAO.listarRespostaEnquete(enquete);            
+            this.result.use(Results.json()).from(l).include("pergunta").serialize();            
+        } catch (Exception e) {            
+            this.result.use(Results.json()).from(e).serialize();            
+        }
     }
 
     @Get

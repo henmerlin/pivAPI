@@ -64,6 +64,7 @@
                                 <td style="width: 20%;">
                                     <button type="button" class="btn btn-primary glyphicon glyphicon-edit btn-sm" data-toggle="modal" data-target="#modEnquete" @click="editarEnquete(enquete)" data-backdrop="static"></button>
                                     <button type="button" class="btn btn-danger glyphicon glyphicon-trash btn-sm" @click="excluiEnquete(enquete)" data-toggle="modal" data-target="#excluiEnquete"></button>
+                                    <a class="btn btn-default glyphicon glyphicon-stats btn-sm" href="#"role="button" data-toggle="modal" data-target="#infoEnq" data-backdrop="static" @click="fetchInfoEnq(enquete)"></a>
                                 </td>
 
                             </tr>
@@ -383,6 +384,43 @@
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
                         <button type="button" class="btn btn-primary" @click="doneEditaEscolhaPergunta(editEscolhaPergunta)">Modificar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="infoEnq" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close" @click="resetObjects()"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">Informações Enquete</h4>
+                    </div>
+                    <div class="modal-body">
+
+                        <div v-for="pergunta in perguntasEnquetes">                            
+                            <label>{{pergunta.titulo}}</label>
+                            <div style="margin-left: 20px;">
+                                <div v-if="pergunta.tipoPergunta === 'Múltipla Escolha' ">
+                                    <div v-for="escolha in valores">
+                                        <div v-if="escolha.pergunta === pergunta.titulo">                                        
+                                            {{escolha.titulo}}: {{escolha.cont}}
+                                        </div>
+                                    </div>                                
+                                </div>
+                                <div v-else>      
+                                    <div v-for="(resposta, index) in respostas">                   
+                                        {{index}}: {{resposta.resposta}}        
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal" @click="resetObjects()">Fechar</button>
                     </div>
                 </div>
             </div>

@@ -69,7 +69,7 @@
                                     <li class="dropdown-header">Adm</li>
                                     <li><a href="${linkTo[EditorController].create()}">Editor</a></li>
                                     <li><a href="${linkTo[EnqueteController].create()}">Gerenciar Enquete</a></li>
-                                    <li><a href="${linkTo[ConteudoController].create()}">Gerenciar Cwsieonteudo</a></li>
+                                    <li><a href="${linkTo[ConteudoController].create()}">Gerenciar Conteudo</a></li>
                                     <li><a href="${linkTo[ConteudoCategoriaController].create()}">Gerenciar Categoria</a></li>
                                     <li><a href="${linkTo[BannerController].create()}">Gerenciar Banner</a></li>
                                     <li role="separator" class="divider"></li>
