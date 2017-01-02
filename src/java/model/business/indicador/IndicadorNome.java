@@ -11,6 +11,6 @@ package model.business.indicador;
  */
 public enum IndicadorNome {
 
-    Aderencia, Fcr, Gps, Monitoria, Tma;
+    ADERENCIA, FCR, GPS, MONITORIA, TMA;
 
 }

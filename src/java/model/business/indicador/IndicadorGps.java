@@ -7,12 +7,12 @@ import model.entitiy.IndicadoresOperador;
 public class IndicadorGps extends Indicador implements RealizadoCalcInterface {
 
     public IndicadorGps() {
-        this.setNome(IndicadorNome.Gps);
+        this.setNome(IndicadorNome.GPS);
     }
 
     public IndicadorGps(Double peso) {
         super();
-        this.setNome(IndicadorNome.Gps);
+        this.setNome(IndicadorNome.GPS);
         this.setPeso(peso);
     }
 

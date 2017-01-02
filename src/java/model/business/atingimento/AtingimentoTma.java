@@ -20,9 +20,6 @@ public class AtingimentoTma implements AtingimentoInterface {
 
         MediaTma m = MediaTmaEquipeFactory.getMedia(op);
 
-        System.out.println("model.business.atingimento.tma.AtingimentoTma.calcularAtingimento()");
-        System.out.println(i.getRealizado());
-
         if (i.getRealizado() <= 120) {
             return 0d;
         } else if (i.getRealizado() <= m.valor - 60 && i.getRealizado() > 120) {

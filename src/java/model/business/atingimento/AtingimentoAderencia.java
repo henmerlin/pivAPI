@@ -5,7 +5,6 @@
  */
 package model.business.atingimento;
 
-import model.business.atingimento.AtingimentoInterface;
 import model.business.realizado.RealizadoCalcInterface;
 import model.entitiy.IndicadoresOperador;
 
@@ -29,6 +28,7 @@ public class AtingimentoAderencia implements AtingimentoInterface {
         } else if (i.getRealizado() <= 0.95d) {
             return 2d;
         }
+
         return 0d;
     }
 }

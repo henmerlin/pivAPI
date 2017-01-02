@@ -6,6 +6,7 @@
 package model.business;
 
 import java.util.List;
+import model.business.atingimento.AtingimentoPiv;
 import model.business.atingimento.AtingimentoPivFactory;
 import model.business.indicador.Indicador;
 
@@ -17,12 +18,14 @@ public class CalculoPivFacade {
     private List<Indicador> indicadores;
     private Double pontos;
     private Double pesos;
+    private Double target;
 
     public CalculoPivFacade(IndicadoresOperador op, List<Indicador> indicadores) {
         this.op = op;
         this.indicadores = indicadores;
         this.pontos = 0d;
         this.pesos = 0d;
+        this.target = 0d;
     }
 
     public Double calcular() {
@@ -34,17 +37,15 @@ public class CalculoPivFacade {
                 indicador.setAtingimento(a);
                 this.pontos += indicador.getPontos();
                 this.pesos += indicador.getPeso();
+                this.target = AtingimentoPiv.calcularTarget(pontos);
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
         });
 
         if (this.pesos > 1d) {
-            return null;
+            return 0d;
         }
-
-        System.out.println("Total Pontos: " + pontos);
-        System.out.println("Total Pesos: " + pesos);
 
         return pontos;
     }
