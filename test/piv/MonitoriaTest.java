@@ -8,7 +8,7 @@ package piv;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import model.business.atingimento.NotaAtingimento;
+import model.business.indicador.extra.NotaAtingimento;
 
 /**
  *

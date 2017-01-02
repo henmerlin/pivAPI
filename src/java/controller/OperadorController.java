@@ -12,9 +12,10 @@ import br.com.caelum.vraptor.view.Results;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import model.business.CalculoPivFacade;
-import model.business.indicador.IndicadoresFactory;
+import model.business.indicador.extra.IndicadoresFactory;
 import model.dal.IndicadoresOperadorDAO;
 import model.entitiy.IndicadoresOperador;
+import model.viewmodel.SimuladorAtendimento;
 
 @Controller
 @RequestScoped
@@ -46,6 +47,22 @@ public class OperadorController extends AbstractController {
             a = (IndicadoresOperador) dao.buscaPorLoginOperador(new IndicadoresOperador(loginOperador));
             CalculoPivFacade piv = new CalculoPivFacade(a, IndicadoresFactory.buscarIndicadores(a));
             piv.calcular();
+            result.use(Results.json()).from(piv).recursive().serialize();
+        } catch (Exception e) {
+            result.use(Results.json()).from(e).serialize();
+        }
+
+    }
+
+    @Get
+    @Path("/operador/simulador/change/{s}")
+    public void simuladorChange(SimuladorAtendimento s) {
+
+        try {
+            IndicadoresOperador a;
+            a = (IndicadoresOperador) dao.buscaPorLoginOperador(s.getOp());
+            CalculoPivFacade piv = new CalculoPivFacade(a, IndicadoresFactory.buscarIndicadores(a));
+            piv.calcularComRealizado();
             result.use(Results.json()).from(piv).recursive().serialize();
         } catch (Exception e) {
             result.use(Results.json()).from(e).serialize();

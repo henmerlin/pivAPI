@@ -1,12 +1,14 @@
 package model.business.indicador;
 
-import model.business.realizado.RealizadoCalcInterface;
+import model.business.indicador.inter.AtingimentoInterface;
+import model.business.indicador.inter.RealizadoCalcInterface;
+import model.business.indicador.extra.IndicadorNome;
 
 /**
  *
  * @author G0042204
  */
-public abstract class Indicador implements RealizadoCalcInterface {
+public abstract class Indicador implements RealizadoCalcInterface, AtingimentoInterface {
 
     private Double realizado;
 
@@ -63,5 +65,10 @@ public abstract class Indicador implements RealizadoCalcInterface {
 
     public void setNome(IndicadorNome nome) {
         this.nome = nome;
+    }
+
+    @Override
+    public void calcularRealizado(Double d) {
+        this.realizado = d;
     }
 }

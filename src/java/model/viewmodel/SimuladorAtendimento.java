@@ -1,22 +1,84 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package model.viewmodel;
 
-/**
- *
- * @author G0042204
- */
-public class SimuladorAtendimento extends SimuladorAbstract {
+import model.business.indicador.IndicadorAderencia;
+import model.business.indicador.IndicadorFcr;
+import model.business.indicador.IndicadorGps;
+import model.business.indicador.IndicadorMonitoria;
+import model.business.indicador.IndicadorTma;
+import model.entitiy.IndicadoresOperador;
+
+public class SimuladorAtendimento {
+
+    private IndicadoresOperador op;
+
+    private IndicadorFcr fcr;
+
+    private IndicadorAderencia adr;
+
+    private IndicadorMonitoria monitoria;
+
+    private IndicadorTma tma;
+
+    private IndicadorGps gps;
 
     public SimuladorAtendimento() {
     }
 
-    @Override
-    public Double calcularPiv() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public SimuladorAtendimento(IndicadoresOperador op) {
+        this.op = op;
+        this.fcr = new IndicadorFcr();
+        this.adr = new IndicadorAderencia();
+        this.monitoria = new IndicadorMonitoria();
+        this.tma = new IndicadorTma();
+        this.gps = new IndicadorGps();
+    }
+
+    public IndicadorFcr getFcr() {
+        return fcr;
+    }
+
+    public void setFcr(IndicadorFcr fcr) {
+        this.fcr = fcr;
+    }
+
+    public IndicadorAderencia getAdr() {
+        return adr;
+    }
+
+    public void setAdr(IndicadorAderencia adr) {
+        this.adr = adr;
+    }
+
+    public IndicadorMonitoria getMonitoria() {
+        return monitoria;
+    }
+
+    public void setMonitoria(IndicadorMonitoria monitoria) {
+        this.monitoria = monitoria;
+    }
+
+    public IndicadorTma getTma() {
+        return tma;
+    }
+
+    public void setTma(IndicadorTma tma) {
+        this.tma = tma;
+    }
+
+    public IndicadorGps getGps() {
+        return gps;
+    }
+
+    public void setGps(IndicadorGps gps) {
+        this.gps = gps;
+    }
+
+    public IndicadoresOperador getOp() {
+        return op;
+    }
+
+    public void setOp(IndicadoresOperador op) {
+        this.op = op;
     }
 
 }

@@ -5,8 +5,8 @@
  */
 package piv;
 
-import model.business.atingimento.AtingimentoPiv;
-import model.business.atingimento.NotaAtingimento;
+import model.business.indicador.extra.AtingimentoPiv;
+import model.business.indicador.extra.NotaAtingimento;
 
 /**
  *

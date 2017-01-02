@@ -3,7 +3,7 @@
  * To change this template file. choose Toolsd, Templates
  * and open the template in the editor.
  */
-package model.business.atingimento;
+package model.business.indicador.extra;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +15,7 @@ import java.util.List;
 public final class AtingimentoPiv {
 
     public static Double calcularTarget(Double atingimento) {
+
         for (NotaAtingimento n : carregaNotaAtingimentos()) {
             if (atingimento <= n.getNota()) {
                 return n.getAtingimento();

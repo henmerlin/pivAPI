@@ -1,21 +1,15 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package model.business;
 
 import java.util.List;
-import model.business.atingimento.AtingimentoPiv;
-import model.business.atingimento.AtingimentoPivFactory;
 import model.business.indicador.Indicador;
+import model.business.indicador.extra.AtingimentoPiv;
 
 import model.entitiy.IndicadoresOperador;
 
 public class CalculoPivFacade {
 
-    private IndicadoresOperador op;
-    private List<Indicador> indicadores;
+    private final IndicadoresOperador op;
+    private final List<Indicador> indicadores;
     private Double pontos;
     private Double pesos;
     private Double target;
@@ -28,26 +22,60 @@ public class CalculoPivFacade {
         this.target = 0d;
     }
 
-    public Double calcular() {
+    public void calcular() {
 
-        indicadores.forEach((Indicador indicador) -> {
+        for (Indicador indicador : indicadores) {
+
+            this.pesos += indicador.getPeso();
+
             try {
                 indicador.calcularRealizado(op);
-                Double a = AtingimentoPivFactory.getAtingimento(indicador).calcularAtingimento(indicador, op);
+            } catch (Exception e) {
+                indicador.setRealizado(0d);
+            }
+
+            try {
+                Double a = indicador.calcularAtingimento(indicador, op);
                 indicador.setAtingimento(a);
                 this.pontos += indicador.getPontos();
-                this.pesos += indicador.getPeso();
-                this.target = AtingimentoPiv.calcularTarget(pontos);
-            } catch (Exception ex) {
-                ex.printStackTrace();
+            } catch (Exception e) {
+                System.err.println(e.getMessage());
             }
-        });
-
-        if (this.pesos > 1d) {
-            return 0d;
         }
 
-        return pontos;
+        this.setTarget(AtingimentoPiv.calcularTarget(pontos));
     }
 
+    public void calcularComRealizado() {
+        for (Indicador indicador : indicadores) {
+
+            this.pesos += indicador.getPeso();
+
+            try {
+                Double a = indicador.calcularAtingimento(indicador, op);
+                indicador.setAtingimento(a);
+                this.pontos += indicador.getPontos();
+            } catch (Exception e) {
+                System.err.println(e.getMessage());
+            }
+        }
+
+        this.setTarget(AtingimentoPiv.calcularTarget(pontos));
+    }
+
+    public Double getPesos() {
+        return pesos;
+    }
+
+    public void setPesos(Double pesos) {
+        this.pesos = pesos;
+    }
+
+    public Double getTarget() {
+        return target;
+    }
+
+    public void setTarget(Double target) {
+        this.target = target;
+    }
 }

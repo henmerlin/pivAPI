@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package model.business.atingimento;
+package model.business.indicador.inter;
 
-import model.business.realizado.RealizadoCalcInterface;
+import model.business.indicador.inter.RealizadoCalcInterface;
 import model.entitiy.IndicadoresOperador;
 
 /**

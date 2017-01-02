@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package model.business.realizado;
+package model.business.indicador.inter;
 
 import model.entitiy.IndicadoresOperador;
 
@@ -14,6 +14,8 @@ import model.entitiy.IndicadoresOperador;
 public interface RealizadoCalcInterface {
 
     public void calcularRealizado(IndicadoresOperador op) throws Exception;
+
+    public void calcularRealizado(Double d);
 
     public Double getRealizado();
 
