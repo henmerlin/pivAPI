@@ -88,19 +88,6 @@ public class OperadorController extends AbstractController {
         }
     }
 
-//    @Post
-//    @Consumes("application/json")
-//    @Path("/operador/simulador/manual/")
-//    public void simuladorPorEquipe(EquipeViewModel equipe, SimuladorAtendimento s) {
-//
-//        try {
-//            CalculoPivFacade piv = new CalculoPivFacade(s.getOp(), IndicadoresFactory.buscarIndicadores(s.getOp()));
-//            piv.calcularComRealizado(s);
-//            result.use(Results.json()).from(piv).recursive().serialize();
-//        } catch (Exception e) {
-//            result.use(Results.json()).from(e).recursive().serialize();
-//        }
-//    }
     /**
      * Serializa Objeto com Padrão Definido
      *

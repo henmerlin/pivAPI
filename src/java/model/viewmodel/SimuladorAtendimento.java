@@ -12,8 +12,6 @@ import model.entitiy.IndicadoresOperador;
 
 public class SimuladorAtendimento {
 
-    private IndicadoresOperador op;
-
     private IndicadorFcr fcr;
 
     private IndicadorAderencia adr;
@@ -23,6 +21,8 @@ public class SimuladorAtendimento {
     private IndicadorTma tma;
 
     private IndicadorGps gps;
+
+    private IndicadoresOperador op;
 
     public SimuladorAtendimento() {
         this.fcr = new IndicadorFcr();

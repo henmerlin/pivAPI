@@ -23,7 +23,7 @@ public class DevTest {
     public static void main(String[] args) {
 
         IndicadoresOperador op = new IndicadoresOperador();
-        op.setEquipe("MULTISKILL_NOVOS");
+        op.setEquipe("MULTISKILL");
 
         SimuladorAtendimento s = new SimuladorAtendimento(op);
 
@@ -37,7 +37,7 @@ public class DevTest {
 
         try {
             c.calcularComRealizado(s);
-            c.toString();
+            System.out.println(c.getTarget());
         } catch (Exception e) {
             e.printStackTrace();
         }
