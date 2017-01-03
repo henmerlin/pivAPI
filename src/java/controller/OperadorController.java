@@ -5,13 +5,16 @@
  */
 package controller;
 
+import br.com.caelum.vraptor.Consumes;
 import br.com.caelum.vraptor.Controller;
 import br.com.caelum.vraptor.Get;
 import br.com.caelum.vraptor.Path;
+import br.com.caelum.vraptor.Post;
 import br.com.caelum.vraptor.view.Results;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import model.business.CalculoPivFacade;
+import model.business.exception.IndicadoresNaoEncontrados;
 import model.business.indicador.extra.IndicadoresFactory;
 import model.dal.IndicadoresOperadorDAO;
 import model.entitiy.IndicadoresOperador;
@@ -49,23 +52,22 @@ public class OperadorController extends AbstractController {
             piv.calcular();
             result.use(Results.json()).from(piv).recursive().serialize();
         } catch (Exception e) {
-            result.use(Results.json()).from(e).serialize();
+            result.use(Results.json()).from(new IndicadoresNaoEncontrados()).serialize();
         }
 
     }
 
-    @Get
-    @Path("/operador/simulador/change/{s}")
+    @Post
+    @Consumes("application/json")
+    @Path("/operador/simuladorChange/")
     public void simuladorChange(SimuladorAtendimento s) {
 
         try {
-            IndicadoresOperador a;
-            a = (IndicadoresOperador) dao.buscaPorLoginOperador(s.getOp());
-            CalculoPivFacade piv = new CalculoPivFacade(a, IndicadoresFactory.buscarIndicadores(a));
-            piv.calcularComRealizado();
+            CalculoPivFacade piv = new CalculoPivFacade(s.getOp(), IndicadoresFactory.buscarIndicadores(s.getOp()));
+            piv.calcularComRealizado(s);
             result.use(Results.json()).from(piv).recursive().serialize();
         } catch (Exception e) {
-            result.use(Results.json()).from(e).serialize();
+            result.use(Results.json()).from(e).recursive().serialize();
         }
 
     }

@@ -3,8 +3,10 @@ package model.business;
 import java.util.List;
 import model.business.indicador.Indicador;
 import model.business.indicador.extra.AtingimentoPiv;
+import model.business.indicador.extra.IndicadorNome;
 
 import model.entitiy.IndicadoresOperador;
+import model.viewmodel.SimuladorAtendimento;
 
 public class CalculoPivFacade {
 
@@ -46,8 +48,11 @@ public class CalculoPivFacade {
         this.setTarget(AtingimentoPiv.calcularTarget(pontos));
     }
 
-    public void calcularComRealizado() {
+    public void calcularComRealizado(SimuladorAtendimento s) {
+
         for (Indicador indicador : indicadores) {
+
+            indicador = adapter(indicador, s);
 
             this.pesos += indicador.getPeso();
 
@@ -56,11 +61,35 @@ public class CalculoPivFacade {
                 indicador.setAtingimento(a);
                 this.pontos += indicador.getPontos();
             } catch (Exception e) {
-                System.err.println(e.getMessage());
+                e.printStackTrace();
             }
         }
 
         this.setTarget(AtingimentoPiv.calcularTarget(pontos));
+    }
+
+    protected Indicador adapter(Indicador indicador, SimuladorAtendimento s) {
+
+        if (indicador.getNome() == IndicadorNome.ADERENCIA) {
+            indicador.setRealizado(s.getAdr().getRealizado());
+        }
+
+        if (indicador.getNome() == IndicadorNome.FCR) {
+            indicador.setRealizado(s.getFcr().getRealizado());
+        }
+
+        if (indicador.getNome() == IndicadorNome.GPS) {
+            indicador.setRealizado(s.getGps().getRealizado());
+        }
+
+        if (indicador.getNome() == IndicadorNome.MONITORIA) {
+            indicador.setRealizado(s.getMonitoria().getRealizado());
+        }
+        if (indicador.getNome() == IndicadorNome.TMA) {
+            indicador.setRealizado(s.getTma().getRealizado());
+        }
+
+        return indicador;
     }
 
     public Double getPesos() {

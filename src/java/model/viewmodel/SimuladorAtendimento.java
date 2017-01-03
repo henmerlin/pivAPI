@@ -1,5 +1,8 @@
 package model.viewmodel;
 
+import java.util.ArrayList;
+import java.util.List;
+import model.business.indicador.Indicador;
 import model.business.indicador.IndicadorAderencia;
 import model.business.indicador.IndicadorFcr;
 import model.business.indicador.IndicadorGps;
@@ -31,6 +34,19 @@ public class SimuladorAtendimento {
         this.monitoria = new IndicadorMonitoria();
         this.tma = new IndicadorTma();
         this.gps = new IndicadorGps();
+    }
+
+    public List<Indicador> getIndicadores() {
+
+        List<Indicador> lst = new ArrayList<Indicador>();
+
+        lst.add(fcr);
+        lst.add(adr);
+        lst.add(monitoria);
+        lst.add(gps);
+        lst.add(tma);
+
+        return lst;
     }
 
     public IndicadorFcr getFcr() {
