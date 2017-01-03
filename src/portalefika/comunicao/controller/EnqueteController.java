@@ -52,8 +52,6 @@ public class EnqueteController extends AbstractController {
 
     @Path("/comunicacao/enquete/infoEnq/{enquete.id}")
     public void infoEnq(Enquete enquete) {
-
-        System.out.println(enquete.getId());
         this.result.include("enquete", enquete.getId());
     }
 
@@ -87,7 +85,7 @@ public class EnqueteController extends AbstractController {
     @Path("/comunicacao/enquete/listar")
     public void listar() {
         List<Enquete> l = this.enqueteDAO.listarTodasEnquetes();
-
+        
         if (l != null) {
             this.result.use(Results.json()).from(l).serialize();
         }

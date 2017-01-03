@@ -37,6 +37,9 @@ public class Pergunta extends ComponentePortal {
     
     @NotEmpty
     private String tipoPergunta;
+    
+    @NotEmpty
+    private String tipoCampo;
 
     public Enquete getEnquete() {
         return enquete;
@@ -61,5 +64,13 @@ public class Pergunta extends ComponentePortal {
     public void setEscolhaPerguntas(List<EscolhaPergunta> escolhaPerguntas) {
         this.escolhaPerguntas = escolhaPerguntas;
     }
+
+    public String getTipoCampo() {
+        return tipoCampo;
+    }
+
+    public void setTipoCampo(String tipoCampo) {
+        this.tipoCampo = tipoCampo;
+    }    
     
 }
