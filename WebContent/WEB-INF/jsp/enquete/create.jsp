@@ -106,7 +106,7 @@
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
-                                <button type="button" class="btn btn-success" @click="adicionaEnquete(addEnquete)" data-dismiss="modal">Inserir</button>
+                                <button type="button" class="btn btn-success" @click="adicionaEnquete(addEnquete)" data-dismiss="modal">Cadastrar</button>
                             </div>
                         </div>
                     </div>

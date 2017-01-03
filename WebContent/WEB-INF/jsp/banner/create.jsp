@@ -20,7 +20,6 @@
         <div>
 
             <table class="table table-bordered">
-
                 <thead>
                     <tr>
                         <th>Titulo</th>
@@ -28,12 +27,11 @@
                         <th>Data Início</th>
                         <th>Data Fim</th>
                         <th>Data cricação</th>
-                        <th>Conteudo</th>                        
+                        <th>Conteúdo</th>                        
                         <th>Local</th>
                         <th>Imagem</th>
                         <th>Ações</th>
                     </tr>
-
                 </thead>
                 <tbody>
                     <tr v-for="banner in banners" :key="banner.id">
@@ -47,9 +45,7 @@
                         <td>{{dateFormat(banner.dataCriacao)}}</td>
                         <td>                            
                             <span v-if="banner.conteudo">
-
                                 {{banner.conteudo.titulo}}
-
                             </span>
                         </td>
                         <td>{{banner.local}}</td>
@@ -63,11 +59,8 @@
                     </tr>
                 </tbody>
             </table>
-
         </div>
-
         <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#addbanner" data-backdrop="static" @click="resetObjects()">Cadastrar Banner</button>
-
         <!-- Modal Cadastra Banner-->
         <div class="modal fade" id="addbanner" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
             <div class="modal-dialog" role="document">
@@ -138,7 +131,6 @@
                 </div>
             </div>
         </div>
-
         <!-- Modal Modifica Banner-->
         <div class="modal fade" id="modBanner" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
             <div class="modal-dialog" role="document">
@@ -174,7 +166,6 @@
                                 </option>
                             </select>
                         </div>
-
                         <div class="form-group">                            
                             <input id="linkconteudo" type="checkbox" v-model="checkedconteudo"/>
                             <label for="linkconteudo">Linkar Conteudo</label>
@@ -201,7 +192,6 @@
                                 <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
                             </button>
                         </div>
-
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
@@ -210,7 +200,6 @@
                 </div>
             </div>
         </div>
-
         <!-- Modal -->
         <div class="modal fade" id="delbanner" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
             <div class="modal-dialog" role="document">

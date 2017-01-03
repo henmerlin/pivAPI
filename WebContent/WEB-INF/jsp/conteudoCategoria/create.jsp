@@ -12,7 +12,7 @@
 <div class="container">
 
     <div class="page-header">
-        <h1>Conteudo categoria</h1>
+        <h1>Conteúdo categoria</h1>
     </div>
 
     <div id="conteduocategoria" v-cloak>

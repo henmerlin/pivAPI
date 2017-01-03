@@ -11,7 +11,7 @@
 <div class="container">
 
     <div class="page-header">
-        <h1>Conteudo</h1>
+        <h1>Conteúdo</h1>
     </div>
 
     <div id="conteudo" v-cloak>
@@ -23,7 +23,7 @@
                         <th>Titulo</th>
                         <th>Ativo</th>
                         <th>Data Criação</th>
-                        <th>Conteudo Categoria</th>
+                        <th>Categoria</th>
                         <th>Imagem</th>
                         <th>Ações</th>                        
                     </tr>                        
