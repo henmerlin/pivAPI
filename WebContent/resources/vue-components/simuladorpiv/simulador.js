@@ -1,10 +1,13 @@
 
 
 var pivURL = "http://localhost:8080/pivAPI/operador/simulador/";
-var pivURL2 = "http://localhost:8080/pivAPI/operador/simuladorChange/";
+var pivURL2 = "http://localhost:8080/pivAPI/operador/simulador/change/";
+var equipeURL = "http://localhost:8080/pivAPI/operador/simulador/equipes/";
+var pivManualURL = "http://localhost:8080/pivAPI/operador/simulador/manual/";
 var sessionURL = "/session/";
 var data =
         {
+            equipes: {},
             currentViewForm: 'dados-form',
             "fcr": {"nome": "FCR"},
             "adr": {"nome": "ADERENCIA"},
@@ -16,11 +19,11 @@ var data =
                 piv:
                         {
                             op: {
-                                "loginOperador": null,
-                                "avaya": null,
+                                "loginOperador": "",
+                                "avaya": "",
                                 "nome": "",
                                 "nomeSupervisor": "",
-                                "equipe": null,
+                                "equipe": "",
                                 "faltas": 0,
                                 "diasTrabalhados": 0,
                                 "totalIn": 0,
@@ -41,29 +44,33 @@ var data =
                 gps: 0,
                 monitoria: 0,
                 adr: 0,
-                piv: {op: {"loginOperador": null,
-                        "avaya": null,
-                        "nome": "",
-                        "nomeSupervisor": "",
-                        "equipe": "",
-                        "faltas": 0,
-                        "diasTrabalhados": 0,
-                        "totalIn": 0,
-                        "sched": 0,
-                        "chamadasAtendidas": 0,
-                        "tempoFalado": 0,
-                        "chamadasFCR": 0,
-                        "rechamadasFCR": 0
-                    }
-                    , "indicadores": [
-                        {"realizado": 0.95, "peso": 0.2, "atingimento": 2.0, "pontos": 0.4, "nome": "FCR"},
-                        {"realizado": 346.0, "peso": 0.3, "atingimento": 2.0, "pontos": 0.6, "nome": "TMA"}],
-                    "pontos": 1.0, "pesos": 0.5, "target": 0.0}
+                piv:
+                        {
+                            op: {
+                                "loginOperador": "",
+                                "avaya": "",
+                                "nome": "",
+                                "nomeSupervisor": "",
+                                "equipe": "",
+                                "faltas": 0,
+                                "diasTrabalhados": 0,
+                                "totalIn": 0,
+                                "sched": 0,
+                                "chamadasAtendidas": 0,
+                                "tempoFalado": 0,
+                                "chamadasFCR": 0,
+                                "rechamadasFCR": 0
+                            }
+                            ,
+                            "indicadores": [
+                                {"realizado": 0.95, "peso": 0.2, "atingimento": 2.0, "pontos": 0.4, "nome": "FCR"},
+                                {"realizado": 346.0, "peso": 0.3, "atingimento": 2.0, "pontos": 0.6, "nome": "TMA"}],
+                            "pontos": 1.0, "pesos": 0.5, "target": 0.0}
             }
         }
 
 
-var Form = {
+var SimuladorForm = {
     template: '#simulator',
     methods: {
         getTarget: function() {
@@ -108,13 +115,15 @@ var FormCelula = {
 }
 
 var DadosUsuario = {
-    template: '#usuario-form',
+    template: '#dados-form',
     data: function() {
         return data
     }
 }
 
-var vm = new Vue({
+
+
+new Vue({
     el: '#piv',
     data: data,
     created: function() {
@@ -122,7 +131,7 @@ var vm = new Vue({
         self.loadSession();
     },
     components: {
-        'simulador-form': Form,
+        'simulador-form': SimuladorForm,
         'celula-form': FormCelula,
         'dados-form': DadosUsuario
     },
@@ -150,28 +159,50 @@ var vm = new Vue({
                 }
             });
         },
+        getEquipes: function() {
+            var self = this;
+
+            $.ajax({
+                type: "GET",
+                dataType: "json",
+                url: equipeURL,
+                success: function(data) {
+                    self.equipes = data.list;
+                }
+            });
+        },
         loadIndicadores: function() {
             var self = this;
 
             $.get(pivURL + self.usuario.login, function(data) {
-                self.usuario.piv = data.calculoPivFacade;
-                self.vm.piv = data.calculoPivFacade;
-                // FCR
-                var _fcr = self.getIndicadorPorNome("FCR").realizado * 100;
-                if (_fcr) {
-                    self.vm.fcr = _fcr.toFixed(2);
-                }
 
-                // TMA
-                var _tma = moment("1900-01-01 00:00:00").add(self.getIndicadorPorNome("TMA").realizado, 'seconds').format("HH:mm:ss");
-                if (_tma) {
-                    self.vm.tma = _tma;
-                }
+                if (data.calculoPivFacade) {
+                    self.usuario.piv = data.calculoPivFacade;
+                    self.vm.piv = data.calculoPivFacade;
+                    // FCR
+                    var _fcr = self.getIndicadorPorNome("FCR").realizado * 100;
+                    if (_fcr) {
+                        self.vm.fcr = _fcr.toFixed(2);
+                    }
 
-                // ADERENCIA
-                var _adr = (self.getIndicadorPorNome("ADERENCIA").realizado * 100);
-                if (_adr) {
-                    self.vm.adr = _adr.toFixed(2);
+                    // TMA
+                    var _tma = moment("1900-01-01 00:00:00").add(self.getIndicadorPorNome("TMA").realizado, 'seconds').format("HH:mm:ss");
+                    if (_tma) {
+                        self.vm.tma = _tma;
+                    }
+
+                    // ADERENCIA
+                    var _adr = (self.getIndicadorPorNome("ADERENCIA").realizado * 100);
+                    if (_adr) {
+                        self.vm.adr = _adr.toFixed(2);
+                    }
+
+                } else {
+
+                    self.currentViewForm = 'celula-form';
+                    self.getEquipes();
+                    self.vm.tma = moment("1900-01-01 00:00:00").add(100, 'seconds').format("HH:mm:ss");
+
                 }
 
                 // Exibe componentes
