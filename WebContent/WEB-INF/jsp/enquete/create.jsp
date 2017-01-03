@@ -231,6 +231,7 @@
                     </div>
                     <div class="modal-body">
 
+                        <label>Tipo Pergunta</label>
                         <select class="form-control" v-model="addPerguntaEnquete.pergunta.tipoPergunta">
 
                             <option>Pergunta</option>
@@ -246,9 +247,7 @@
                         <br/>
 
                         <label>Ativo</label>
-                        <input type="checkbox" v-model="addPerguntaEnquete.pergunta.ativo"/>
-
-                        <br/>                       
+                        <input type="checkbox" v-model="addPerguntaEnquete.pergunta.ativo"/>                       
 
                     </div>
                     <div class="modal-footer">                        

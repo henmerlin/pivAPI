@@ -88,8 +88,7 @@ new Vue({
                 }
                 self.valores.push({titulo: trimmedArray[i].titulo, cont: soma, pergunta: trimmedArray[i].pergunta.titulo});
                 soma = 0;
-            }
-            console.log(JSON.stringify(self.valores));
+            }            
         }
     }
 });
