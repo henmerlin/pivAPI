@@ -1,9 +1,16 @@
 
 
 var pivURL = "http://localhost:8080/pivAPI/operador/simulador/";
+var pivURL2 = "http://localhost:8080/pivAPI/operador/simuladorChange/";
 var sessionURL = "/session/";
 var data =
         {
+            currentViewForm: 'dados-form',
+            "fcr": {"nome": "FCR"},
+            "adr": {"nome": "ADERENCIA"},
+            "monitoria": {"nome": "MONITORIA"},
+            "tma": {"nome": "TMA"},
+            "gps": {"nome": "GPS"},
             show: false,
             usuario: {
                 piv:
@@ -55,21 +62,59 @@ var data =
             }
         }
 
+
 var Form = {
     template: '#simulator',
+    methods: {
+        getTarget: function() {
+            var self = this;
+
+            var simulator =
+                    {"s": {op: self.vm.piv.op},
+                        "fcr": {nome: "FCR", "realizado": (self.vm.fcr / 100)},
+                        "adr": {nome: "ADERENCIA", "realizado": (self.vm.adr / 100)},
+                        "tma": {nome: "TMA", "realizado": moment.duration(self.vm.tma, "HH:mm:ss").asSeconds()},
+                        "monitoria": {nome: "MONITORIA", "realizado": (self.vm.monitoria / 100)},
+                        "gps": {nome: "GPS", "realizado": (self.vm.gps / 100)},
+                    };
+
+            $.ajax({
+                type: "POST",
+                data: JSON.stringify(simulator),
+                url: pivURL2,
+                dataType: "application/json",
+                beforeSend: function(xhr) {
+                    xhr.setRequestHeader("Content-Type", "application/json");
+                },
+                success: function(data) {
+                    console.log(data)
+                },
+                complete: function(jqXHR, textStatus) {
+                    console.log(jqXHR)
+                }
+            });
+        }
+    },
+    data: function() {
+        return data
+    }
+}
+
+var FormCelula = {
+    template: '#celula-form',
     data: function() {
         return data
     }
 }
 
 var DadosUsuario = {
-    template: '#dados-usuario',
+    template: '#usuario-form',
     data: function() {
         return data
     }
 }
 
-new Vue({
+var vm = new Vue({
     el: '#piv',
     data: data,
     created: function() {
@@ -78,7 +123,8 @@ new Vue({
     },
     components: {
         'simulador-form': Form,
-        'dados-user': DadosUsuario
+        'celula-form': FormCelula,
+        'dados-form': DadosUsuario
     },
     methods: {
         getIndicadorPorNome: function(nome) {
@@ -106,14 +152,14 @@ new Vue({
         },
         loadIndicadores: function() {
             var self = this;
+
             $.get(pivURL + self.usuario.login, function(data) {
                 self.usuario.piv = data.calculoPivFacade;
                 self.vm.piv = data.calculoPivFacade;
-
                 // FCR
                 var _fcr = self.getIndicadorPorNome("FCR").realizado * 100;
                 if (_fcr) {
-                    self.vm.fcr = _fcr;
+                    self.vm.fcr = _fcr.toFixed(2);
                 }
 
                 // TMA
