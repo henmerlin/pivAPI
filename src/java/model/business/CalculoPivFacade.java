@@ -70,23 +70,23 @@ public class CalculoPivFacade {
 
     protected Indicador adapter(Indicador indicador, SimuladorAtendimento s) {
 
-        if (indicador.getNome() == IndicadorNome.ADERENCIA) {
-            indicador.setRealizado(s.getAdr().getRealizado());
+        if (indicador.getNome().equals(IndicadorNome.ADERENCIA)) {
+            indicador.setRealizado(new Double(s.getAdr().getRealizado()));
         }
 
-        if (indicador.getNome() == IndicadorNome.FCR) {
-            indicador.setRealizado(s.getFcr().getRealizado());
+        if (indicador.getNome().equals(IndicadorNome.FCR)) {
+            indicador.setRealizado(new Double(s.getFcr().getRealizado()));
         }
 
-        if (indicador.getNome() == IndicadorNome.GPS) {
-            indicador.setRealizado(s.getGps().getRealizado());
+        if (indicador.getNome().equals(IndicadorNome.GPS)) {
+            indicador.setRealizado(new Double(s.getGps().getRealizado()));
         }
 
-        if (indicador.getNome() == IndicadorNome.MONITORIA) {
-            indicador.setRealizado(s.getMonitoria().getRealizado());
+        if (indicador.getNome().equals(IndicadorNome.MONITORIA)) {
+            indicador.setRealizado(new Double(s.getMonitoria().getRealizado()));
         }
-        if (indicador.getNome() == IndicadorNome.TMA) {
-            indicador.setRealizado(s.getTma().getRealizado());
+        if (indicador.getNome().equals(IndicadorNome.TMA)) {
+            indicador.setRealizado(new Double(s.getTma().getRealizado()));
         }
 
         return indicador;

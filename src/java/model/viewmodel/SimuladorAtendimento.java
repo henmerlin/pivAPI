@@ -25,6 +25,11 @@ public class SimuladorAtendimento {
     private IndicadorGps gps;
 
     public SimuladorAtendimento() {
+        this.fcr = new IndicadorFcr();
+        this.adr = new IndicadorAderencia();
+        this.monitoria = new IndicadorMonitoria();
+        this.tma = new IndicadorTma();
+        this.gps = new IndicadorGps();
     }
 
     public SimuladorAtendimento(IndicadoresOperador op) {

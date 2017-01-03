@@ -11,13 +11,17 @@ import br.com.caelum.vraptor.Get;
 import br.com.caelum.vraptor.Path;
 import br.com.caelum.vraptor.Post;
 import br.com.caelum.vraptor.view.Results;
+import java.util.ArrayList;
+import java.util.List;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import model.business.CalculoPivFacade;
+import model.business.equipe.Equipe;
 import model.business.exception.IndicadoresNaoEncontrados;
 import model.business.indicador.extra.IndicadoresFactory;
 import model.dal.IndicadoresOperadorDAO;
 import model.entitiy.IndicadoresOperador;
+import model.viewmodel.EquipeViewModel;
 import model.viewmodel.SimuladorAtendimento;
 
 @Controller
@@ -57,9 +61,22 @@ public class OperadorController extends AbstractController {
 
     }
 
+    @Get
+    @Path("/operador/simulador/equipes/")
+    public void equipes() {
+
+        List<EquipeViewModel> lst = new ArrayList<>();
+
+        lst.add(new EquipeViewModel(Equipe.MULTISKILL, Equipe.MULTISKILL.getNome()));
+        lst.add(new EquipeViewModel(Equipe.MULTISKILL_NOVOS, Equipe.MULTISKILL_NOVOS.getNome()));
+        lst.add(new EquipeViewModel(Equipe.ESPECIALIZADA, Equipe.ESPECIALIZADA.getNome()));
+
+        result.use(Results.json()).from(lst).serialize();
+    }
+
     @Post
     @Consumes("application/json")
-    @Path("/operador/simuladorChange/")
+    @Path("/operador/simulador/change/")
     public void simuladorChange(SimuladorAtendimento s) {
 
         try {
@@ -67,11 +84,23 @@ public class OperadorController extends AbstractController {
             piv.calcularComRealizado(s);
             result.use(Results.json()).from(piv).recursive().serialize();
         } catch (Exception e) {
-            result.use(Results.json()).from(e).recursive().serialize();
+            result.use(Results.json()).from(e).serialize();
         }
-
     }
 
+//    @Post
+//    @Consumes("application/json")
+//    @Path("/operador/simulador/manual/")
+//    public void simuladorPorEquipe(EquipeViewModel equipe, SimuladorAtendimento s) {
+//
+//        try {
+//            CalculoPivFacade piv = new CalculoPivFacade(s.getOp(), IndicadoresFactory.buscarIndicadores(s.getOp()));
+//            piv.calcularComRealizado(s);
+//            result.use(Results.json()).from(piv).recursive().serialize();
+//        } catch (Exception e) {
+//            result.use(Results.json()).from(e).recursive().serialize();
+//        }
+//    }
     /**
      * Serializa Objeto com Padrão Definido
      *

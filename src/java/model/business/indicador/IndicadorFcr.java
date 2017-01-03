@@ -30,8 +30,11 @@ public class IndicadorFcr extends Indicador {
     }
 
     @Override
-    public Double calcularAtingimento(RealizadoCalcInterface i, IndicadoresOperador op) {
+    public Double calcularAtingimento(RealizadoCalcInterface i, IndicadoresOperador op) throws Exception {
 
+        if (i == null) {
+            throw new Exception("Sem Realizado");
+        }
         if (i.getRealizado() <= 0.59d) {
             return 0d;
         } else if (i.getRealizado() <= 0.60d) {

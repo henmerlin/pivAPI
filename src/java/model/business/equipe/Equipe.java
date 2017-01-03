@@ -5,12 +5,26 @@
  */
 package model.business.equipe;
 
+import java.util.ArrayList;
+import java.util.List;
+import model.viewmodel.EquipeViewModel;
+
 /**
  *
  * @author G0042204
  */
 public enum Equipe {
 
-    MULTISKILL, MULTISKILL_NOVOS, ESPECIALIZADA;
+    MULTISKILL("MULTISKILL"), MULTISKILL_NOVOS("MULTISKILL NOVOS"), ESPECIALIZADA("ESPECIALIZADA");
+
+    public String nome;
+
+    private Equipe(String nome) {
+        this.nome = nome;
+    }
+
+    public String getNome() {
+        return nome;
+    }
 
 }

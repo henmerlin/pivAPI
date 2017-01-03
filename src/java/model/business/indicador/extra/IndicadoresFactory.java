@@ -13,12 +13,18 @@ import model.entitiy.IndicadoresOperador;
 
 public final class IndicadoresFactory {
 
+    /**
+     * Pesos do PIV
+     *
+     * @param op
+     * @return
+     */
     public static List<Indicador> buscarIndicadores(IndicadoresOperador op) {
 
         List<Indicador> inds = new ArrayList<>();
 
         if (op.getEquipe().equalsIgnoreCase("MULTISKILL")
-                || op.getEquipe().equalsIgnoreCase("MULTISKILL NOVOS")
+                || op.getEquipe().equalsIgnoreCase("MULTISKILL_NOVOS")
                 || op.getEquipe().equalsIgnoreCase("ESPECIALIZADA")) {
 
             inds.add(new IndicadorFcr(0.2d));

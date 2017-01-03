@@ -28,7 +28,11 @@ public class IndicadorTma extends Indicador {
     }
 
     @Override
-    public Double calcularAtingimento(RealizadoCalcInterface i, IndicadoresOperador op) {
+    public Double calcularAtingimento(RealizadoCalcInterface i, IndicadoresOperador op) throws Exception {
+
+        if (i == null) {
+            throw new Exception("Sem Realizado");
+        }
 
         MediaTma m = MediaTmaEquipeFactory.getMedia(op);
 

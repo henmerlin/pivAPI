@@ -14,6 +14,6 @@ import model.entitiy.IndicadoresOperador;
  */
 public interface AtingimentoInterface {
 
-    public Double calcularAtingimento(RealizadoCalcInterface i, IndicadoresOperador op);
+    public Double calcularAtingimento(RealizadoCalcInterface i, IndicadoresOperador op) throws Exception;
 
 }

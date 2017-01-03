@@ -25,7 +25,11 @@ public class IndicadorGps extends Indicador {
     }
 
     @Override
-    public Double calcularAtingimento(RealizadoCalcInterface i, IndicadoresOperador op) {
+    public Double calcularAtingimento(RealizadoCalcInterface i, IndicadoresOperador op) throws Exception {
+
+        if (i == null) {
+            throw new Exception("Sem Realizado");
+        }
 
         for (NotaAtingimento n : carregaNotaAtingimentos()) {
             if (i.getRealizado() * 100 <= n.getNota()) {
