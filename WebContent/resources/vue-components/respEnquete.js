@@ -79,6 +79,7 @@ new Vue({
                             titulo: self.perguntasEnquetes[i].titulo,
                             ativo: self.perguntasEnquetes[i].ativo,
                             tipoPergunta: self.perguntasEnquetes[i].tipoPergunta,
+                            tipoCampo: self.perguntasEnquetes[i].tipoCampo,
                             enquete: {h}
                         }
                     };

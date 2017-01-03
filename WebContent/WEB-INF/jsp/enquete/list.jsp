@@ -61,7 +61,6 @@
                     <div class="modal-body">
                         <h4>{{titulo}}</h4>
                         <div v-for="(enqR, index) in enqresp">
-                            <div v-if=""></div>
                             <label>{{enqR.pergunta.titulo}}</label>
                             <div v-if="enqR.pergunta.tipoPergunta === 'Múltipla Escolha' " style="margin-left: 20px;">                                
                                 <div v-for="escolha in escolhaPerguntas">
@@ -69,11 +68,15 @@
                                         <input type="radio" :name="index" v-bind:value="escolha.titulo" v-model="enqR.resposta"/>
                                         <label>{{escolha.titulo}}</label>
                                     </div>
-
                                 </div>                                
                             </div>
                             <div v-else style="margin-left: 20px;">
-                                <textarea class="form-control" rows="5" style="resize: none" v-model="enqR.resposta"></textarea>                              
+                                <div v-if="enqR.pergunta.tipoCampo === 'input' ">
+                                    <input type="text" class="form-control" v-model="enqR.resposta"/>
+                                </div>
+                                <div v-else-if="enqR.pergunta.tipoCampo === 'textarea' ">
+                                    <textarea class="form-control" rows="5" style="resize: none" v-model="enqR.resposta"></textarea>
+                                </div>
                             </div>
                         </div>                        
                     </div>

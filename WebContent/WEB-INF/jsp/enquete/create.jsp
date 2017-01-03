@@ -143,51 +143,36 @@
                                 <br/>
 
                                 <table class="table table-bordered small">
-
                                     <thead>
                                         <tr>
                                             <th>Pergunta</th>
                                             <th>Tipo Pergunta</th>
+                                            <th>Tipo Campo</th>
                                             <th>Ativo</th>
-                                            <th>Ação</th>
+                                            <th>Ação</th>                                            
                                         </tr>
                                     </thead>
-
                                     <tbody>
-
                                         <tr v-for="pergunta in perguntasEnquetes" :key="pergunta.id">
-
                                             <td>
-
                                                 <label>{{pergunta.titulo}}</label>
-
                                             </td>
-
                                             <td>
-
                                                 <label>{{pergunta.tipoPergunta}}</label>
-
                                             </td>
-
                                             <td>
-
+                                                <label>{{pergunta.tipoCampo}}</label>
+                                            </td>
+                                            <td>
                                                 <label v-if="pergunta.ativo == true" >Ativo</label>
                                                 <label v-if="pergunta.ativo == false" >Inativo</label>
-
                                             </td>
-
                                             <td>
-
                                                 <button type="button" class="btn btn-primary glyphicon glyphicon-edit glyphicon glyphicon-edit btn-sm" data-toggle="modal" data-target="#escolhaPergunta" @click="editarPerguntaEnquete(pergunta)" data-backdrop="static"></button>
-
                                             </td>
-
                                         </tr>
-
                                     </tbody>
-
                                 </table>
-
                                 <button class="btn btn-success btn-xs" data-toggle="modal" data-target="#criaPerguntaEnquete" data-backdrop="static">Adicionar Pergunta</button>
 
                             </div>
@@ -231,6 +216,7 @@
                     </div>
                     <div class="modal-body">
 
+                        <label>Tipo Pergunta</label>
                         <select class="form-control" v-model="addPerguntaEnquete.pergunta.tipoPergunta">
 
                             <option>Pergunta</option>
@@ -248,8 +234,26 @@
                         <label>Ativo</label>
                         <input type="checkbox" v-model="addPerguntaEnquete.pergunta.ativo"/>
 
-                        <br/>                       
+                        <br/>
 
+                        <label>Tipo Campo</label>
+                        <br/>
+                        <div v-if="addPerguntaEnquete.pergunta.tipoPergunta === 'Pergunta' ">
+                            <label class="radio-inline">
+                                <input type="radio" name="typeC" value="textarea" v-model="addPerguntaEnquete.pergunta.tipoCampo" checked> Text Area
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="typeC" value="input" v-model="addPerguntaEnquete.pergunta.tipoCampo"> Input Text
+                            </label>
+                        </div>
+                        <div v-else-if="addPerguntaEnquete.pergunta.tipoPergunta === 'Múltipla Escolha' ">
+                            <label class="radio-inline">
+                                <input type="radio" name="typeC" value="radio" v-model="addPerguntaEnquete.pergunta.tipoCampo" checked> Radio
+                            </label>
+                        </div>
+                        <div v-else>
+                            Selecione o Tipo Pergunta
+                        </div>
                     </div>
                     <div class="modal-footer">                        
                         <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>

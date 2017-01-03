@@ -52,6 +52,7 @@ new Vue({
                 "titulo": null,
                 "ativo": false,
                 "tipoPergunta": null,
+                "tipoCampo": null,
                 "enquete": {
                     "usuario": null,
                     "dataInicio": null,
@@ -68,6 +69,7 @@ new Vue({
                 "titulo": null,
                 "ativo": false,
                 "tipoPergunta": null,
+                "tipoCampo": null,
                 "enquete": {
                     "usuario": null,
                     "dataInicio": null,
@@ -88,6 +90,7 @@ new Vue({
                     "titulo": null,
                     "ativo": false,
                     "tipoPergunta": null,
+                    "tipoCampo": null,
                     "enquete": {
                         "usuario": null,
                         "dataInicio": null,
@@ -109,6 +112,7 @@ new Vue({
                     "titulo": null,
                     "ativo": false,
                     "tipoPergunta": null,
+                    "tipoCampo": null,
                     "enquete": {
                         "usuario": null,
                         "dataInicio": null,
@@ -147,10 +151,10 @@ new Vue({
                     xhrObj.setRequestHeader("Content-Type", "application/json");
                 },
                 success: function () {
-                    self.resetObjects()
+                    self.resetObjects();
+                    self.fetchData();
                 }
-            });
-            self.fetchData()
+            });            
         },
         adicionaPerguntaEnquete: function (h) {
             var self = this;
