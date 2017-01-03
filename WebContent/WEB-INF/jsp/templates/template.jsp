@@ -74,6 +74,7 @@
                                     <li role="separator" class="divider"></li>
                                     <li class="dropdown-header">Usr</li>
                                     <li><a href="${linkTo[EnqueteController].list()}">Responder Enquete</a></li>
+                                    <li><a href="${linkTo[ConteudoController].exibir()}">Conteudos </a></li>
                                     <li role="separator" class="divider"></li>
                                     <li><a href="#">One more separated link</a></li>
                                 </ul>

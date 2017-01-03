@@ -108,9 +108,11 @@ public class ConteudoController extends AbstractController {
         result.use(Results.json()).from(a).include("categoria").include("imagem").serialize();
     }
 
-    public void exibir() {
-
-    }
+    @Get
+    @Path("/comunicacao/conteudo/exibir/")
+    public void exibir(Conteudo a) {
+        
+    }   
 
     public void uploader() {
 
