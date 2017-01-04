@@ -223,7 +223,7 @@ new Vue({
 
                 var _piv = data.calculoPivFacade;
 
-                if (_piv) {
+                if (_piv && _piv.indicadores.length == 4 ) {
                     self.setIndicadores(_piv)
                 } else {
 

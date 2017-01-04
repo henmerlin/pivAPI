@@ -66,7 +66,7 @@
 
 <script type="text/html" id="simulator">
 
-    <div class="row">
+    <div class="row" v-show="vm.piv.op.equipe">
 
         <div class="col-xs-3">
             <div class="form-group">
