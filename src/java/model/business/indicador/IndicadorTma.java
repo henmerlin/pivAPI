@@ -33,22 +33,21 @@ public class IndicadorTma extends Indicador {
         if (i == null) {
             throw new Exception("Sem Realizado");
         }
-
         MediaTma m = MediaTmaEquipeFactory.getMedia(op);
 
-        if (i.getRealizado() <= 120) {
+        if (i.getRealizado() <= 120d) {
             return 0d;
-        } else if (i.getRealizado() <= m.valor - 60 && i.getRealizado() > 120) {
+        } else if (i.getRealizado() <= new Double(m.valor - 60d) && i.getRealizado() > new Double(120d)) {
             return 2d;
-        } else if (i.getRealizado() <= (m.valor - 30)) {
+        } else if (i.getRealizado() <= new Double(m.valor - 30d)) {
             return 1.5d;
-        } else if (i.getRealizado() <= m.valor) {
+        } else if (i.getRealizado() <= new Double(m.valor)) {
             return 1d;
-        } else if (i.getRealizado() <= m.valor + 30d) {
+        } else if (i.getRealizado() <= new Double(m.valor + 30d)) {
             return 0.7d;
-        } else if (i.getRealizado() <= m.valor + 60d) {
+        } else if (i.getRealizado() <= new Double(m.valor + 60d)) {
             return 0.3d;
-        } else if (i.getRealizado() > m.valor + 60d) {
+        } else if (i.getRealizado() > new Double(m.valor + 60d)) {
             return 0d;
         } else {
             return 0d;

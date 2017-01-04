@@ -44,7 +44,7 @@ public class IndicadorAderencia extends Indicador {
             return 2d;
         }
 
-        return 0d;
+        return 2d;
     }
 
 }
