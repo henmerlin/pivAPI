@@ -97,31 +97,32 @@ var SimuladorForm = {
     },
     template: '#simulator',
     methods: {
-        getTarget: function() {
-            var self = this;
-            var simulator =
-                    {"s": {
-                            "fcr": {realizado: (self.vm.fcr / 100)},
-                            "adr": {realizado: (self.vm.adr / 100)},
-                            "tma": {realizado: moment.duration(self.vm.tma, "HH:mm:ss").asSeconds()},
-                            "monitoria": {realizado: (self.vm.monitoria / 100)},
-                            "gps": {realizado: (self.vm.gps / 100)},
-                            op: self.vm.piv.op}
-                    };
+        getTarget:
+                _.debounce(function() {
+                    var self = this;
+                    var simulator =
+                            {"s": {
+                                    "fcr": {realizado: (self.vm.fcr / 100)},
+                                    "adr": {realizado: (self.vm.adr / 100)},
+                                    "tma": {realizado: moment.duration(self.vm.tma, "HH:mm:ss").asSeconds()},
+                                    "monitoria": {realizado: (self.vm.monitoria / 100)},
+                                    "gps": {realizado: (self.vm.gps / 100)},
+                                    op: self.vm.piv.op}
+                            };
 
-            $.ajax({
-                type: "POST",
-                data: JSON.stringify(simulator),
-                url: pivURL2,
-                dataType: "json",
-                beforeSend: function(xhr) {
-                    xhr.setRequestHeader("Content-Type", "application/json");
-                },
-                success: function(data) {
-                    self.vm.piv = data.calculoPivFacade;
-                }
-            });
-        }
+                    $.ajax({
+                        type: "POST",
+                        data: JSON.stringify(simulator),
+                        url: pivURL2,
+                        dataType: "json",
+                        beforeSend: function(xhr) {
+                            xhr.setRequestHeader("Content-Type", "application/json");
+                        },
+                        success: function(data) {
+                            self.vm.piv = data.calculoPivFacade;
+                        }
+                    });
+                }, 1000)
     },
     data: function() {
         return data
