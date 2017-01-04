@@ -9,26 +9,26 @@ package model.business.indicador.extra;
  *
  * @author G0042204
  */
-public class NotaAtingimento {
+public class ReguaAtingimento {
 
-    private Double nota;
+    private Double realizado;
 
     private Double atingimento;
 
-    public NotaAtingimento() {
+    public ReguaAtingimento() {
     }
 
-    public NotaAtingimento(Double nota, Double atingimento) {
-        this.nota = nota;
+    public ReguaAtingimento(Double realizado, Double atingimento) {
+        this.realizado = realizado;
         this.atingimento = atingimento;
     }
 
-    public Double getNota() {
-        return nota;
+    public Double getRealizado() {
+        return realizado;
     }
 
-    public void setNota(Double nota) {
-        this.nota = nota;
+    public void setRealizado(Double realizado) {
+        this.realizado = realizado;
     }
 
     public Double getAtingimento() {

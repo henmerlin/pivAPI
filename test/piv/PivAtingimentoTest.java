@@ -6,7 +6,7 @@
 package piv;
 
 import model.business.indicador.extra.AtingimentoPiv;
-import model.business.indicador.extra.NotaAtingimento;
+import model.business.indicador.extra.ReguaAtingimento;
 
 /**
  *
@@ -18,8 +18,8 @@ public class PivAtingimentoTest {
 
         AtingimentoPiv a = new AtingimentoPiv();
 
-        for (NotaAtingimento n : a.carregaNotaAtingimentos()) {
-            System.out.println("Target: " + n.getNota() + " Atingimento: " + n.getAtingimento().floatValue() * 100);
+        for (ReguaAtingimento n : a.carregaNotaAtingimentos()) {
+            System.out.println("Target: " + n.getRealizado() + " Atingimento: " + n.getAtingimento().floatValue() * 100);
         }
 
     }

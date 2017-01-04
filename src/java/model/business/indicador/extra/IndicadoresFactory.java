@@ -2,6 +2,7 @@ package model.business.indicador.extra;
 
 import java.util.ArrayList;
 import java.util.List;
+import model.business.equipe.Equipe;
 import model.business.indicador.Indicador;
 import model.business.indicador.IndicadorAderencia;
 import model.business.indicador.IndicadorFcr;
@@ -23,9 +24,9 @@ public final class IndicadoresFactory {
 
         List<Indicador> inds = new ArrayList<>();
 
-        if (op.getEquipe().equalsIgnoreCase("MULTISKILL")
-                || op.getEquipe().equalsIgnoreCase("MULTISKILL_NOVOS")
-                || op.getEquipe().equalsIgnoreCase("ESPECIALIZADA")) {
+        if (op.getEquipe().equalsIgnoreCase(Equipe.ESPECIALIZADA.toString())
+                || op.getEquipe().equalsIgnoreCase(Equipe.MULTISKILL.toString())
+                || op.getEquipe().equalsIgnoreCase(Equipe.MULTISKILL_NOVOS.toString())) {
 
             inds.add(new IndicadorFcr(0.2d));
             inds.add(new IndicadorTma(0.3d));

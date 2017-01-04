@@ -5,11 +5,7 @@
  */
 package piv;
 
-import model.business.CalculoPivFacade;
 import model.business.equipe.Equipe;
-import model.business.indicador.extra.IndicadoresFactory;
-import model.entitiy.IndicadoresOperador;
-import model.viewmodel.SimuladorAtendimento;
 
 /**
  *
@@ -22,25 +18,7 @@ public class DevTest {
      */
     public static void main(String[] args) {
 
-        IndicadoresOperador op = new IndicadoresOperador();
-        op.setEquipe("MULTISKILL");
-
-        SimuladorAtendimento s = new SimuladorAtendimento(op);
-
-        CalculoPivFacade c = new CalculoPivFacade(op, IndicadoresFactory.buscarIndicadores(op));
-
-        s.getFcr().setRealizado(0.86d);
-        s.getAdr().setRealizado(0.86d);
-        s.getGps().setRealizado(0.86d);
-        s.getMonitoria().setRealizado(0.86d);
-        s.getTma().setRealizado(300d);
-
-        try {
-            c.calcularComRealizado(s);
-            System.out.println(c.getTarget());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        System.out.println(Equipe.MULTISKILL_NOVOS);
 
     }
 

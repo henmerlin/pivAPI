@@ -1,8 +1,10 @@
 package model.business.indicador;
 
+import java.util.List;
 import model.business.indicador.inter.AtingimentoInterface;
 import model.business.indicador.inter.RealizadoCalcInterface;
 import model.business.indicador.extra.IndicadorNome;
+import model.business.indicador.extra.ReguaAtingimento;
 
 /**
  *
@@ -21,6 +23,8 @@ public abstract class Indicador implements RealizadoCalcInterface, AtingimentoIn
     private Double pontos;
 
     private IndicadorNome nome;
+
+    private List<ReguaAtingimento> regua;
 
     public Double getPontos() {
         this.pontos = this.atingimento * this.peso;
@@ -67,8 +71,17 @@ public abstract class Indicador implements RealizadoCalcInterface, AtingimentoIn
         this.nome = nome;
     }
 
+    public List<ReguaAtingimento> getRegua() {
+        return regua;
+    }
+
+    public void setRegua(List<ReguaAtingimento> regua) {
+        this.regua = regua;
+    }
+
     @Override
     public void calcularRealizado(Double d) {
         this.realizado = d;
     }
+
 }

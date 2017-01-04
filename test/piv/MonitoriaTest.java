@@ -8,7 +8,7 @@ package piv;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import model.business.indicador.extra.NotaAtingimento;
+import model.business.indicador.extra.ReguaAtingimento;
 
 /**
  *
@@ -24,15 +24,15 @@ public class MonitoriaTest {
         Double nota = new Double(84);
         Double monitoria = 0d;
 
-        List<NotaAtingimento> na = new ArrayList<NotaAtingimento>();
+        List<ReguaAtingimento> na = new ArrayList<ReguaAtingimento>();
 
-        na.add(new NotaAtingimento(nota, monitoria));
+        na.add(new ReguaAtingimento(nota, monitoria));
 
         nota += 1d;
         monitoria = novePerc;
 
         while (nota <= 100d) {
-            na.add(new NotaAtingimento(nota, monitoria));
+            na.add(new ReguaAtingimento(nota, monitoria));
 
             if (nota == 97d) {
                 nota += 1d;
@@ -47,8 +47,8 @@ public class MonitoriaTest {
             }
         }
 
-        for (NotaAtingimento n : na) {
-            System.out.println("Monitoria: " + n.getNota() + " Atingimento: " + n.getAtingimento().floatValue());
+        for (ReguaAtingimento n : na) {
+            System.out.println("Monitoria: " + n.getRealizado() + " Atingimento: " + n.getAtingimento().floatValue());
         }
 
     }

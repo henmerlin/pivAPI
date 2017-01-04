@@ -5,7 +5,6 @@
  */
 package model.business.indicador.extra;
 
-import model.business.indicador.extra.MediaTma;
 import model.entitiy.IndicadoresOperador;
 
 /**
@@ -26,4 +25,5 @@ public class MediaTmaEquipeFactory {
             return MediaTma.Multiskill;
         }
     }
+
 }

@@ -5,10 +5,6 @@
  */
 package model.business.equipe;
 
-import java.util.ArrayList;
-import java.util.List;
-import model.viewmodel.EquipeViewModel;
-
 /**
  *
  * @author G0042204

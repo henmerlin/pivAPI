@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import model.business.indicador.inter.RealizadoCalcInterface;
 import model.business.indicador.extra.IndicadorNome;
-import model.business.indicador.extra.NotaAtingimento;
+import model.business.indicador.extra.ReguaAtingimento;
 import model.entitiy.IndicadoresOperador;
 
 public class IndicadorGps extends Indicador {
@@ -31,15 +31,15 @@ public class IndicadorGps extends Indicador {
             throw new Exception("Sem Realizado");
         }
 
-        for (NotaAtingimento n : carregaNotaAtingimentos()) {
-            if (i.getRealizado() * 100 <= n.getNota()) {
+        for (ReguaAtingimento n : carregaNotaAtingimentos()) {
+            if (i.getRealizado() * 100 <= n.getRealizado()) {
                 return n.getAtingimento();
             }
         }
         return 0d;
     }
 
-    public List<NotaAtingimento> carregaNotaAtingimentos() {
+    public List<ReguaAtingimento> carregaNotaAtingimentos() {
 
         Double novePerc = 0.0909090909090909000d;
         Double cincoPerc = 0.0526315789473684000d;
@@ -47,15 +47,15 @@ public class IndicadorGps extends Indicador {
         Double nota = new Double(84);
         Double atingimento = 0d;
 
-        List<NotaAtingimento> na = new ArrayList<>();
+        List<ReguaAtingimento> na = new ArrayList<>();
 
-        na.add(new NotaAtingimento(nota, atingimento));
+        na.add(new ReguaAtingimento(nota, atingimento));
 
         nota += 1d;
         atingimento = novePerc;
 
         while (nota <= 100d) {
-            na.add(new NotaAtingimento(nota, atingimento));
+            na.add(new ReguaAtingimento(nota, atingimento));
 
             if (nota == 97d) {
                 nota += 1d;
