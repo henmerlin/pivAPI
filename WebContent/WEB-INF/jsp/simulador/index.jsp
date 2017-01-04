@@ -15,7 +15,7 @@
                 <div v-show="show">
                     <component v-bind:is="currentViewForm"></component>
                     <hr>
-                    <simulador-form></simulador-form>
+                    <simulador-form v-bind:target="vm.piv.target"></simulador-form>
                 </div>
                 <div v-show="!show">
                     <p> </p>
@@ -57,7 +57,7 @@
         <select class="form-control" v-model="vm.piv.op.equipe">
             <option value="" disabled>Selecione</option>
             <option v-for="eqp in equipes" v-bind:value="eqp.equipe">
-                {{ eqp.text }}
+                {{ eqp.nomeEquipe }}
             </option>
 
         </select>
@@ -72,7 +72,7 @@
             <div class="form-group">
                 <label for="fcr">FCR</label>
                 <div class="input-group">
-                    <input id="fcr" type="number" v-model="vm.fcr" min="0" max="100" class="form-control" placeholder="FCR" aria-describedby="fcr-addon1">
+                    <input id="fcr" type="number" v-model="vm.fcr" min="0" @change="getTarget()" max="100" class="form-control" placeholder="FCR" aria-describedby="fcr-addon1">
                     <span class="input-group-addon" id="fcr-addon1">%</span>
                 </div>
             </div>
@@ -82,7 +82,7 @@
             <div class="form-group">
                 <label for="adr">Aderência</label>
                 <div class="input-group">
-                    <input id="adr" v-model="vm.adr" type="number"  min="0" max="100" class="form-control" placeholder="Aderência" aria-describedby="adr-addon1">
+                    <input id="adr" v-model="vm.adr" type="number"  min="0" @change="getTarget()" max="100" class="form-control" placeholder="Aderência" aria-describedby="adr-addon1">
                     <span class="input-group-addon" id="adr-addon1">%</span>
                 </div>
             </div>
@@ -92,7 +92,7 @@
             <div class="form-group">
                 <label for="monitoria">Monitoria</label>
                 <div class="input-group">
-                    <input v-model="vm.monitoria"  id="monitoria" type="number" min="0" max="100" class="form-control" placeholder="Monitoria" aria-describedby="fcr-addon1">
+                    <input v-model="vm.monitoria"  id="monitoria" type="number" @change="getTarget()" min="0" max="100" class="form-control" placeholder="Monitoria" aria-describedby="fcr-addon1">
                     <span class="input-group-addon" id="monitoria-addon1"><span class="glyphicon glyphicon-headphones" aria-hidden="true"></span></span>
                 </div>
             </div>
@@ -102,7 +102,7 @@
             <div class="form-group">
                 <label for="tma">TMA</label>
                 <div class="input-group">
-                    <input v-model="vm.tma" id="tma" type="time" class="form-control" aria-describedby="tma-addon1">
+                    <input v-model="vm.tma" id="tma" type="time" class="form-control" @change="getTarget()" aria-describedby="tma-addon1">
                     <span class="input-group-addon" id="basic-tma"><span class="glyphicon glyphicon-dashboard" aria-hidden="true"></span></span>
                 </div>
             </div>
@@ -112,7 +112,7 @@
             <div class="form-group">
                 <label for="tma">GPS</label>
                 <div class="input-group">
-                    <input v-model="vm.gps" id="gps" type="number" min="0" max="100" class="form-control" placeholder="GPS" aria-describedby="tma-addon1">
+                    <input v-model="vm.gps" id="gps" type="number" min="0" max="100" @change="getTarget()" class="form-control" placeholder="GPS" aria-describedby="tma-addon1">
                     <span class="input-group-addon" id="basic-tma">%</span>
                 </div>
             </div>
@@ -124,13 +124,9 @@
                     <span>Target</span>
                 </div>
                 <div class="panel-body">
-                    <h2 class="text-center"><span v-text="vm.piv.target * 100"></span>%</h2>
+                    <h2 class="text-center"><span v-text="normalizedTarget"></span>%</h2>
                 </div>
             </div>
-        </div>
-
-        <div class="col-xs-3">
-            <button type="button" class="btn btn-primary" @click="getTarget">Calcular</button>
         </div>
     </div>
 
