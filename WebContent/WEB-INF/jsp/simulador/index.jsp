@@ -54,7 +54,7 @@
 <script type="text/html" id="celula-form">
     <div>
         <label>Selecione a Equipe</label>
-        <select class="form-control" v-model="vm.piv.op.equipe">
+        <select class="form-control" v-model="vm.piv.op.equipe" @change="getTarget()">
             <option value="" disabled>Selecione</option>
             <option v-for="eqp in equipes" v-bind:value="eqp.equipe">
                 {{ eqp.nomeEquipe }}

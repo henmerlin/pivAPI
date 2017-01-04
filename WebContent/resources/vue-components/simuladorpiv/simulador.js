@@ -133,6 +133,11 @@ var FormCelula = {
     template: '#celula-form',
     data: function() {
         return data
+    },
+    methods: {
+        getTarget : function(){
+           instance.notifier();
+        }
     }
 }
 
@@ -145,7 +150,7 @@ var DadosUsuario = {
 
 
 
-new Vue({
+var instance = new Vue({
     el: '#piv',
     data: data,
     created: function() {
@@ -158,6 +163,10 @@ new Vue({
         'dados-form': DadosUsuario
     },
     methods: {
+        notifier : function(){
+            var self = this;
+            self.$children[0].getTarget();
+        },
         getIndicadorPorNome: function(nome) {
             var self = this;
             var inds = self.usuario.piv.indicadores;
@@ -223,7 +232,7 @@ new Vue({
 
                 var _piv = data.calculoPivFacade;
 
-                if (_piv && _piv.indicadores.length == 4 ) {
+                if (_piv && _piv.indicadores.length == 5 ) {
                     self.setIndicadores(_piv)
                 } else {
 
