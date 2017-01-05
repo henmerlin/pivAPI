@@ -9,20 +9,20 @@
 </style>
 
 <div id="allBanners" style="margin-top: -20px;">
-    <div id="bannerGrande">        
+    <div id="bannerGrande" style="margin-left: 5%; margin-right: 5%;">        
         <ul id="lsgra">
-            <li v-for="gbanner in bannersGrandes">
+            <li v-for="gbanner in bannersGrandes" >
                 <a @click="conteudoimg(gbanner.conteudo)">
-                    <img :src="gbanner.imagem.base64" style="width: 100%;">
+                    <img :src="gbanner.imagem.base64" style="width: 100%; cursor: pointer;">
                 </a>                
             </li>            
         </ul>
     </div>
-    <div id="bannerPequeno" style="margin-left: 20%; margin-right: 20%;">
+    <div id="bannerPequeno" style="margin-left: 5%; margin-right: 5%;">
         <ul id="lspeq">
             <li v-for="pbanner in bannersPequenos">
                 <a @click="conteudoimg(pbanner.conteudo)">
-                    <img :src="pbanner.imagem.base64" style="width: 350px; height: 350px;"/>                    
+                    <img :src="pbanner.imagem.base64" style="width: 350px; height: 350px; cursor: pointer;"/>                    
                 </a>
             </li>
         </ul>

@@ -101,6 +101,7 @@ new Vue({
             var self = this;
             $.get(conteudoCategoriaURL + "listarAtivo", function (data) {
                 self.categorias = data.list;
+                self.categorias = _.orderBy(self.categorias, ['titulo'], ['asc']);
             });
 
         },

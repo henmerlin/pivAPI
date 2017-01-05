@@ -40,7 +40,7 @@ new Vue({
                 autoWidth: true,
                 loop: true,
                 enableDrag: false,
-                item: 2
+                item: 3
             });
         },
         lsgra: function () {

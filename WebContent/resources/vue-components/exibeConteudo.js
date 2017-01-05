@@ -23,6 +23,7 @@ new Vue({
             var self = this;
             $.get(conteudoURL + "lista", function (data) {
                 self.conteudos = data.list;
+                self.conteudos = _.orderBy(self.conteudos, ['dataCriacao'], ['asc']);
             });            
         }
     }

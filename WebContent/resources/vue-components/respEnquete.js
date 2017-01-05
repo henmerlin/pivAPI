@@ -62,6 +62,7 @@ new Vue({
             var self = this;
             $.get(respostaEnq + "listar", function (data) {
                 self.enquetes = data.list;
+                self.enquetes = _.orderBy(self.enquetes, ['dataFim'], ['desc']);
             });
         },
         getPerguntasEnquetes: function (h) {
