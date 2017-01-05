@@ -135,11 +135,19 @@ var FormCelula = {
         return data
     },
     methods: {
-        getTarget : function(){
-           instance.notifier();
+        getTarget: function() {
+            instance.notifier();
         }
     }
 }
+
+var FormIndisponivel = {
+    template: '<div>Funcionalidade indisponível no momento.</div>',
+    data: function() {
+        return data
+    }
+}
+
 
 var DadosUsuario = {
     template: '#dados-form',
@@ -160,10 +168,11 @@ var instance = new Vue({
     components: {
         'simulador-form': SimuladorForm,
         'celula-form': FormCelula,
-        'dados-form': DadosUsuario
+        'dados-form': DadosUsuario,
+        'indisponivel-form': FormIndisponivel
     },
     methods: {
-        notifier : function(){
+        notifier: function() {
             var self = this;
             self.$children[0].getTarget();
         },
@@ -192,19 +201,17 @@ var instance = new Vue({
         },
         getEquipes: function() {
             var self = this;
-
             $.ajax({
                 type: "GET",
                 dataType: "json",
                 url: equipeURL,
                 success: function(data) {
-                    self.equipes = data.list;
+                    self.equipes = _.orderBy(data.list, ['equipe'], ['asc']);
                 }
             });
         },
         setIndicadores: function(piv) {
             var self = this;
-
             self.usuario.piv = piv
             self.vm.piv = piv
             // FCR
@@ -227,23 +234,28 @@ var instance = new Vue({
         },
         loadIndicadores: function() {
             var self = this;
+            $.ajax({
+                type: "GET",
+                dataType: "json",
+                url: pivURL + self.usuario.login,
+                success: function(data) {
 
-            $.get(pivURL + self.usuario.login, function(data) {
+                    var _piv = data.calculoPivFacade;
+                    if (_piv) {
+                        self.setIndicadores(_piv)
+                    } else {
 
-                var _piv = data.calculoPivFacade;
-
-                if (_piv && _piv.indicadores.length == 5 ) {
-                    self.setIndicadores(_piv)
-                } else {
-
-                    self.currentViewForm = 'celula-form';
-                    self.getEquipes();
-                    self.vm.tma = moment("1900-01-01 00:00:00").add(100, 'seconds').format("HH:mm:ss");
-
+                        self.currentViewForm = 'celula-form';
+                        self.getEquipes();
+                        self.vm.tma = moment("1900-01-01 00:00:00").add(100, 'seconds').format("HH:mm:ss");
+                    }
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    self.currentViewForm = 'indisponivel-form';
+                },
+                complete: function(jqXHR, textStatus) {
+                    self.show = true;
                 }
-
-                // Exibe componentes
-                self.show = true;
             });
         }
     }

@@ -68,7 +68,7 @@
 
     <div class="row" v-show="vm.piv.op.equipe">
 
-        <div class="col-xs-3">
+        <div class="col-xs-4">
             <div class="form-group">
                 <label for="fcr">FCR</label>
                 <div class="input-group">
@@ -78,7 +78,7 @@
             </div>
         </div>
 
-        <div class="col-xs-3">
+        <div class="col-xs-4">
             <div class="form-group">
                 <label for="adr">Aderência</label>
                 <div class="input-group">
@@ -88,7 +88,7 @@
             </div>
         </div>
 
-        <div class="col-xs-3">
+        <div class="col-xs-4">
             <div class="form-group">
                 <label for="monitoria">Monitoria</label>
                 <div class="input-group">
@@ -98,7 +98,7 @@
             </div>
         </div>
 
-        <div class="col-xs-3">
+        <div class="col-xs-4">
             <div class="form-group">
                 <label for="tma">TMA</label>
                 <div class="input-group">
@@ -108,7 +108,19 @@
             </div>
         </div>
 
-        <div class="col-xs-3">
+        <div class="col-xs-4">
+            <div class="form-group">
+                <label for="tma">Target</label>
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <h2 class="text-center"><span v-text="normalizedTarget"></span>%</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-xs-4">
             <div class="form-group">
                 <label for="tma">GPS</label>
                 <div class="input-group">
@@ -118,16 +130,7 @@
             </div>
         </div>
 
-        <div class="col-xs-6">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <span>Target</span>
-                </div>
-                <div class="panel-body">
-                    <h2 class="text-center"><span v-text="normalizedTarget"></span>%</h2>
-                </div>
-            </div>
-        </div>
+
     </div>
 
 </script>
