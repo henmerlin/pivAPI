@@ -11,7 +11,6 @@ import br.com.caelum.vraptor.view.Results;
 import portalefika.controller.HomeController;
 import portalefika.autenticacao.dal.webservice.EfikaUsersProxy;
 import portalefika.autenticacao.dal.webservice.Usuario;
-import portalefika.comunicao.entidades.AbaPortal;
 
 @Controller
 @RequestScoped

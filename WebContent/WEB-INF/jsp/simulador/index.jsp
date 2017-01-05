@@ -7,125 +7,132 @@
 
     <div id="piv" v-cloak>
 
-        <script type="text/html" id="usuario-form">
-
+        <transition name="fade">
             <div>
-                <table class="table small table-bordered table-condensed">
-                    <tbody>
-                        <tr>
-                            <th class="row"><label for="nome">Nome:</label></th>
-                            <td><span id="nome" v-text="vm.piv.op.nome"></span></td>
-                        </tr>
-                        <tr>
-                            <th class="row"><label for="super">Supervisão:</label></th>
-                            <td><span id="super" v-text="vm.piv.op.nomeSupervisor"></span></td>
-                        </tr>
-                        <tr>
-                            <th class="row"><label for="equipe">Equipe:</label></th>
-                            <td><span id="equipe" v-text="vm.piv.op.equipe"></span></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
-        </script>
-
-
-        <script type="text/html" id="celula-form">
-
-
-        </script>
-
-
-
-        <script type="text/html" id="simulator">
-
-            <div class="row">
-                <div class="col-xs-3">
-                    <div class="form-group">
-                        <label for="fcr">FCR</label>
-                        <div class="input-group">
-                            <input id="fcr" type="number" v-model="vm.fcr" min="0" max="100" class="form-control" placeholder="FCR" aria-describedby="fcr-addon1">
-                            <span class="input-group-addon" id="fcr-addon1">%</span>
-                        </div>
-                    </div>
+                <div class="page-header">
+                    <h1>Simulador PIV</h1>
                 </div>
-
-                <div class="col-xs-3">
-                    <div class="form-group">
-                        <label for="adr">Aderência</label>
-                        <div class="input-group">
-                            <input id="adr" v-model="vm.adr" type="number"  min="0" max="100" class="form-control" placeholder="Aderência" aria-describedby="adr-addon1">
-                            <span class="input-group-addon" id="adr-addon1">%</span>
-                        </div>
-                    </div>
+                <div v-show="show">
+                    <component v-bind:is="currentViewForm"></component>
+                    <hr>
+                    <simulador-form v-bind:target="vm.piv.target"></simulador-form>
                 </div>
-
-                <div class="col-xs-3">
-                    <div class="form-group">
-                        <label for="monitoria">Monitoria</label>
-                        <div class="input-group">
-                            <input v-model="vm.monitoria"  id="monitoria" type="number" min="0" max="100" class="form-control" placeholder="Monitoria" aria-describedby="fcr-addon1">
-                            <span class="input-group-addon" id="monitoria-addon1"><span class="glyphicon glyphicon-headphones" aria-hidden="true"></span></span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-xs-3">
-                    <div class="form-group">
-                        <label for="tma">TMA</label>
-                        <div class="input-group">
-                            <input v-model="vm.tma" id="tma" type="time" class="form-control" placeholder="TMA" aria-describedby="tma-addon1">
-                            <span class="input-group-addon" id="basic-tma"><span class="glyphicon glyphicon-dashboard" aria-hidden="true"></span></span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-xs-3">
-                    <div class="form-group">
-                        <label for="tma">GPS</label>
-                        <div class="input-group">
-                            <input v-model="vm.gps" id="gps" type="number" min="0" max="100" class="form-control" placeholder="GPS" aria-describedby="tma-addon1">
-                            <span class="input-group-addon" id="basic-tma">%</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-xs-6">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <span>Target</span>
-                        </div>
-                        <div class="panel-body">
-                            <h2 class="text-center"><span v-text="vm.piv.target * 100"></span>%</h2>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-xs-3">
-                    <button type="button" class="btn btn-primary" @click="getTarget">Calcular</button>
+                <div v-show="!show">
+                    <p> </p>
+                    <img class="center-block" src="/resources/custom/gif/rolling.gif">
                 </div>
             </div>
-            </script>
+        </transition>
 
-            <transition name="fade">
-                <div>
-                    <div class="page-header">
-                        <h1>Simulador PIV</h1>
-                    </div>
-                    <div v-show="show">
-                        <component v-bind:is="currentViewForm"></component>
-                        <hr>
-                        <simulador-form></simulador-form>
-                    </div>
-                    <div v-show="!show">
-                        <p> </p>
-                        <img class="center-block" src="/resources/custom/gif/rolling.gif">
-                    </div>
-                </div>
-            </transition>
+    </div>
+</div>
 
-        </div>
+<script type="text/html" id="dados-form">
+
+    <div>
+        <table class="table small table-bordered table-condensed">
+            <tbody>
+                <tr>
+                    <th class="row"><label for="nome">Nome:</label></th>
+                    <td><span id="nome" v-text="vm.piv.op.nome"></span></td>
+                </tr>
+                <tr>
+                    <th class="row"><label for="super">Supervisão:</label></th>
+                    <td><span id="super" v-text="vm.piv.op.nomeSupervisor"></span></td>
+                </tr>
+                <tr>
+                    <th class="row"><label for="equipe">Equipe:</label></th>
+                    <td><span id="equipe" v-text="vm.piv.op.equipe"></span></td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 
-    <script src="${pageContext.request.contextPath}/resources/vue-components/simuladorpiv/simulador.js"></script>
+</script>
+
+
+<script type="text/html" id="celula-form">
+    <div>
+        <label>Selecione a Equipe</label>
+        <select class="form-control" v-model="vm.piv.op.equipe" @change="getTarget()">
+            <option value="" disabled>Selecione</option>
+            <option v-for="eqp in equipes" v-bind:value="eqp.equipe">
+                {{ eqp.nomeEquipe }}
+            </option>
+
+        </select>
+    </div>
+</script>
+
+<script type="text/html" id="simulator">
+
+    <div class="row" v-show="vm.piv.op.equipe">
+
+        <div class="col-xs-4">
+            <div class="form-group">
+                <label for="fcr">FCR</label>
+                <div class="input-group">
+                    <input id="fcr" type="number" v-model="vm.fcr" min="0" @change="getTarget()" max="100" class="form-control" placeholder="FCR" aria-describedby="fcr-addon1">
+                    <span class="input-group-addon" id="fcr-addon1">%</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xs-4">
+            <div class="form-group">
+                <label for="adr">Aderência</label>
+                <div class="input-group">
+                    <input id="adr" v-model="vm.adr" type="number"  min="0" @change="getTarget()" max="100" class="form-control" placeholder="Aderência" aria-describedby="adr-addon1">
+                    <span class="input-group-addon" id="adr-addon1">%</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xs-4">
+            <div class="form-group">
+                <label for="monitoria">Monitoria</label>
+                <div class="input-group">
+                    <input v-model="vm.monitoria"  id="monitoria" type="number" @change="getTarget()" min="0" max="100" class="form-control" placeholder="Monitoria" aria-describedby="fcr-addon1">
+                    <span class="input-group-addon" id="monitoria-addon1"><span class="glyphicon glyphicon-headphones" aria-hidden="true"></span></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xs-4">
+            <div class="form-group">
+                <label for="tma">TMA</label>
+                <div class="input-group">
+                    <input v-model="vm.tma" id="tma" type="time" class="form-control" @change="getTarget()" aria-describedby="tma-addon1">
+                    <span class="input-group-addon" id="basic-tma"><span class="glyphicon glyphicon-dashboard" aria-hidden="true"></span></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xs-4">
+            <div class="form-group">
+                <label for="tma">Target</label>
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <h2 class="text-center"><span v-text="normalizedTarget"></span>%</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-xs-4">
+            <div class="form-group">
+                <label for="tma">GPS</label>
+                <div class="input-group">
+                    <input v-model="vm.gps" id="gps" type="number" min="0" max="100" @change="getTarget()" class="form-control" placeholder="GPS" aria-describedby="tma-addon1">
+                    <span class="input-group-addon" id="basic-tma">%</span>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+</script>
+
+<script src="${pageContext.request.contextPath}/resources/vue-components/simuladorpiv/simulador.js"></script>

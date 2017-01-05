@@ -4,83 +4,80 @@
  * This file was auto-generated from WSDL
  * by the Apache Axis 1.4 Apr 22, 2006 (06:55:48 PDT) WSDL2Java emitter.
  */
-
 package portalefika.autenticacao.dal.webservice;
 
+import br.com.caelum.vraptor.serialization.SkipSerialization;
+
 @SuppressWarnings("serial")
-public class Usuario  implements java.io.Serializable {
+public class Usuario implements java.io.Serializable {
+
     private java.lang.String login;
 
     private java.lang.Integer nivel;
 
+    @SkipSerialization
     private java.lang.String senha;
 
     public Usuario() {
     }
 
     public Usuario(
-           java.lang.String login,
-           java.lang.Integer nivel,
-           java.lang.String senha) {
-           this.login = login;
-           this.nivel = nivel;
-           this.senha = senha;
+            java.lang.String login,
+            java.lang.Integer nivel,
+            java.lang.String senha) {
+        this.login = login;
+        this.nivel = nivel;
+        this.senha = senha;
     }
-
 
     /**
      * Gets the login value for this Usuario.
-     * 
+     *
      * @return login
      */
     public java.lang.String getLogin() {
         return login;
     }
 
-
     /**
      * Sets the login value for this Usuario.
-     * 
+     *
      * @param login
      */
     public void setLogin(java.lang.String login) {
         this.login = login;
     }
 
-
     /**
      * Gets the nivel value for this Usuario.
-     * 
+     *
      * @return nivel
      */
     public java.lang.Integer getNivel() {
         return nivel;
     }
 
-
     /**
      * Sets the nivel value for this Usuario.
-     * 
+     *
      * @param nivel
      */
     public void setNivel(java.lang.Integer nivel) {
         this.nivel = nivel;
     }
 
-
     /**
      * Gets the senha value for this Usuario.
-     * 
+     *
      * @return senha
      */
     public java.lang.String getSenha() {
         return senha;
     }
 
-
     /**
      * Sets the senha value for this Usuario.
-     * 
+     *
      * @param senha
      */
     public void setSenha(java.lang.String senha) {
@@ -88,32 +85,40 @@ public class Usuario  implements java.io.Serializable {
     }
 
     private java.lang.Object __equalsCalc = null;
+
     @SuppressWarnings("unused")
-	public synchronized boolean equals(java.lang.Object obj) {
-        if (!(obj instanceof Usuario)) return false;
+    public synchronized boolean equals(java.lang.Object obj) {
+        if (!(obj instanceof Usuario)) {
+            return false;
+        }
         Usuario other = (Usuario) obj;
-        if (obj == null) return false;
-        if (this == obj) return true;
+        if (obj == null) {
+            return false;
+        }
+        if (this == obj) {
+            return true;
+        }
         if (__equalsCalc != null) {
             return (__equalsCalc == obj);
         }
         __equalsCalc = obj;
         boolean _equals;
-        _equals = true && 
-            ((this.login==null && other.getLogin()==null) || 
-             (this.login!=null &&
-              this.login.equals(other.getLogin()))) &&
-            ((this.nivel==null && other.getNivel()==null) || 
-             (this.nivel!=null &&
-              this.nivel.equals(other.getNivel()))) &&
-            ((this.senha==null && other.getSenha()==null) || 
-             (this.senha!=null &&
-              this.senha.equals(other.getSenha())));
+        _equals = true
+                && ((this.login == null && other.getLogin() == null)
+                || (this.login != null
+                && this.login.equals(other.getLogin())))
+                && ((this.nivel == null && other.getNivel() == null)
+                || (this.nivel != null
+                && this.nivel.equals(other.getNivel())))
+                && ((this.senha == null && other.getSenha() == null)
+                || (this.senha != null
+                && this.senha.equals(other.getSenha())));
         __equalsCalc = null;
         return _equals;
     }
 
     private boolean __hashCodeCalc = false;
+
     public synchronized int hashCode() {
         if (__hashCodeCalc) {
             return 0;
@@ -134,8 +139,8 @@ public class Usuario  implements java.io.Serializable {
     }
 
     // Type metadata
-    private static org.apache.axis.description.TypeDesc typeDesc =
-        new org.apache.axis.description.TypeDesc(Usuario.class, true);
+    private static org.apache.axis.description.TypeDesc typeDesc
+            = new org.apache.axis.description.TypeDesc(Usuario.class, true);
 
     static {
         typeDesc.setXmlType(new javax.xml.namespace.QName("http://webservices/", "usuario"));
@@ -173,24 +178,22 @@ public class Usuario  implements java.io.Serializable {
      * Get Custom Serializer
      */
     public static org.apache.axis.encoding.Serializer getSerializer(
-           java.lang.String mechType, 
-           @SuppressWarnings("rawtypes") java.lang.Class _javaType,  
-           javax.xml.namespace.QName _xmlType) {
-        return 
-          new  org.apache.axis.encoding.ser.BeanSerializer(
-            _javaType, _xmlType, typeDesc);
+            java.lang.String mechType,
+            @SuppressWarnings("rawtypes") java.lang.Class _javaType,
+            javax.xml.namespace.QName _xmlType) {
+        return new org.apache.axis.encoding.ser.BeanSerializer(
+                _javaType, _xmlType, typeDesc);
     }
 
     /**
      * Get Custom Deserializer
      */
     public static org.apache.axis.encoding.Deserializer getDeserializer(
-           java.lang.String mechType, 
-           @SuppressWarnings("rawtypes") java.lang.Class _javaType,  
-           javax.xml.namespace.QName _xmlType) {
-        return 
-          new  org.apache.axis.encoding.ser.BeanDeserializer(
-            _javaType, _xmlType, typeDesc);
+            java.lang.String mechType,
+            @SuppressWarnings("rawtypes") java.lang.Class _javaType,
+            javax.xml.namespace.QName _xmlType) {
+        return new org.apache.axis.encoding.ser.BeanDeserializer(
+                _javaType, _xmlType, typeDesc);
     }
 
 }
