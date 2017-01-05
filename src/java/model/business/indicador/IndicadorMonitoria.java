@@ -19,14 +19,13 @@ public class IndicadorMonitoria extends Indicador {
     }
 
     public IndicadorMonitoria(Double peso) {
-        super();
         this.setNome(IndicadorNome.MONITORIA);
         this.setPeso(peso);
     }
 
     @Override
     public void calcularRealizado(IndicadoresOperador op) throws Exception {
-
+        this.setRealizado(0d);
     }
 
     @Override
@@ -41,7 +40,7 @@ public class IndicadorMonitoria extends Indicador {
                 return n.getAtingimento();
             }
         }
-        return 0d;
+        return 2d;
     }
 
     public List<ReguaAtingimento> carregaNotaAtingimentos() {

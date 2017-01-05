@@ -8,6 +8,7 @@ package model.business.regua;
 import java.util.ArrayList;
 import java.util.List;
 import model.business.equipe.Equipe;
+import model.business.indicador.Indicador;
 import model.business.indicador.extra.ReguaAtingimento;
 
 /**
@@ -18,12 +19,16 @@ public class ReguaFactory {
 
     private Equipe equipe;
 
-    public ReguaFactory(Equipe equipe) {
+    private Indicador ind;
+
+    public ReguaFactory(Equipe equipe, Indicador ind) {
         this.equipe = equipe;
+        this.ind = ind;
     }
 
     public List<ReguaAtingimento> getRegua() {
-        List<ReguaAtingimento> r = new ArrayList<ReguaAtingimento>();
+
+        List<ReguaAtingimento> r = new ArrayList<>();
 
         r.add(new ReguaAtingimento(0.47d, 0d));
         r.add(new ReguaAtingimento(0.48d, 0.3d));
@@ -56,6 +61,14 @@ public class ReguaFactory {
 
     public void setEquipe(Equipe equipe) {
         this.equipe = equipe;
+    }
+
+    public Indicador getInd() {
+        return ind;
+    }
+
+    public void setInd(Indicador ind) {
+        this.ind = ind;
     }
 
 }

@@ -52,7 +52,14 @@ public class OperadorController extends AbstractController {
         try {
             IndicadoresOperador a;
             a = (IndicadoresOperador) dao.buscaPorLoginOperador(new IndicadoresOperador(loginOperador));
-            CalculoPivFacade piv = new CalculoPivFacade(a, IndicadoresFactory.buscarIndicadores(a));
+
+            // Não encontrou indicadores
+            if (a == null) {
+                result.use(Results.json()).from(new IndicadoresNaoEncontrados()).serialize();
+                return;
+            }
+
+            CalculoPivFacade piv = new CalculoPivFacade(a, IndicadoresFactory.getIndicadores(a));
             piv.calcular();
             result.use(Results.json()).from(piv).recursive().serialize();
         } catch (Exception e) {
@@ -67,9 +74,9 @@ public class OperadorController extends AbstractController {
 
         List<EquipeViewModel> lst = new ArrayList<>();
 
-        lst.add(new EquipeViewModel(Equipe.MULTISKILL, Equipe.MULTISKILL.getNome()));
-        lst.add(new EquipeViewModel(Equipe.MULTISKILL_NOVOS, Equipe.MULTISKILL_NOVOS.getNome()));
-        lst.add(new EquipeViewModel(Equipe.ESPECIALIZADA, Equipe.ESPECIALIZADA.getNome()));
+        for (Equipe eqp : Equipe.values()) {
+            lst.add(new EquipeViewModel(eqp, eqp.getNome()));
+        }
 
         result.use(Results.json()).from(lst).serialize();
     }
@@ -80,7 +87,7 @@ public class OperadorController extends AbstractController {
     public void simuladorChange(SimuladorAtendimento s) {
 
         try {
-            CalculoPivFacade piv = new CalculoPivFacade(s.getOp(), IndicadoresFactory.buscarIndicadores(s.getOp()));
+            CalculoPivFacade piv = new CalculoPivFacade(s.getOp(), IndicadoresFactory.getIndicadores(s.getOp()));
             piv.calcularComRealizado(s);
             result.use(Results.json()).from(piv).recursive().serialize();
         } catch (Exception e) {

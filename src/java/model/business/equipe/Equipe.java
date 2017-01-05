@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package model.business.equipe;
 
 /**
@@ -11,12 +6,18 @@ package model.business.equipe;
  */
 public enum Equipe {
 
-    MULTISKILL("MULTISKILL"), MULTISKILL_NOVOS("MULTISKILL NOVOS"), ESPECIALIZADA("ESPECIALIZADA");
+    MULTISKILL("MULTISKILL", Site.CWB),
+    MULTISKILL_NOVOS("MULTISKILL NOVOS", Site.CWB),
+    ESPECIALIZADA("ESPECIALIZADA", Site.CWB),
+    CADASTRO("CADASTRO", Site.CWB);
 
     public String nome;
 
-    private Equipe(String nome) {
+    public Site site;
+
+    private Equipe(String nome, Site site) {
         this.nome = nome;
+        this.site = site;
     }
 
     public String getNome() {

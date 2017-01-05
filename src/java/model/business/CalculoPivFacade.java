@@ -41,7 +41,7 @@ public class CalculoPivFacade {
                 indicador.setAtingimento(a);
                 this.pontos += indicador.getPontos();
             } catch (Exception e) {
-                System.err.println(e.getMessage());
+                e.printStackTrace();
             }
         }
 

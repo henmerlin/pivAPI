@@ -14,14 +14,13 @@ public class IndicadorGps extends Indicador {
     }
 
     public IndicadorGps(Double peso) {
-        super();
         this.setNome(IndicadorNome.GPS);
         this.setPeso(peso);
     }
 
     @Override
     public void calcularRealizado(IndicadoresOperador op) throws Exception {
-        throw new Exception("Não implementado.");
+        this.setRealizado(0d);
     }
 
     @Override
