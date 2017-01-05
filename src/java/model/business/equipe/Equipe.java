@@ -24,4 +24,8 @@ public enum Equipe {
         return nome;
     }
 
+    public Site getSite() {
+        return site;
+    }
+
 }

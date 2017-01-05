@@ -5,10 +5,10 @@
  */
 package model.business.regua;
 
-import java.util.ArrayList;
 import java.util.List;
 import model.business.equipe.Equipe;
 import model.business.indicador.Indicador;
+import model.business.indicador.IndicadorFcr;
 import model.business.indicador.extra.ReguaAtingimento;
 
 /**
@@ -21,38 +21,20 @@ public class ReguaFactory {
 
     private Indicador ind;
 
+    private ReguaMaker factory;
+
     public ReguaFactory(Equipe equipe, Indicador ind) {
         this.equipe = equipe;
         this.ind = ind;
+
+        if (ind instanceof IndicadorFcr) {
+            factory = new ReguaIndicadorFcrFactory(ind, equipe);
+        }
+
     }
 
     public List<ReguaAtingimento> getRegua() {
-
-        List<ReguaAtingimento> r = new ArrayList<>();
-
-        r.add(new ReguaAtingimento(0.47d, 0d));
-        r.add(new ReguaAtingimento(0.48d, 0.3d));
-        r.add(new ReguaAtingimento(0.49d, 0.35d));
-        r.add(new ReguaAtingimento(0.5d, 0.4d));
-        r.add(new ReguaAtingimento(0.51d, 0.45d));
-        r.add(new ReguaAtingimento(0.52d, 0.5d));
-        r.add(new ReguaAtingimento(0.53d, 0.55d));
-        r.add(new ReguaAtingimento(0.54d, 0.6d));
-        r.add(new ReguaAtingimento(0.55d, 0.65d));
-        r.add(new ReguaAtingimento(0.56d, 0.7d));
-        r.add(new ReguaAtingimento(0.57d, 0.75d));
-        r.add(new ReguaAtingimento(0.58d, 0.8d));
-        r.add(new ReguaAtingimento(0.59d, 0.85d));
-        r.add(new ReguaAtingimento(0.6d, 1d));
-        r.add(new ReguaAtingimento(0.61d, 1.05d));
-        r.add(new ReguaAtingimento(0.62d, 1.1d));
-        r.add(new ReguaAtingimento(0.63d, 1.2d));
-        r.add(new ReguaAtingimento(0.64d, 1.25d));
-        r.add(new ReguaAtingimento(0.65d, 1.3d));
-        r.add(new ReguaAtingimento(0.66d, 1.5d));
-        r.add(new ReguaAtingimento(0.67d, 2d));
-
-        return r;
+        return factory.getRegua();
     }
 
     public Equipe getEquipe() {
@@ -69,6 +51,14 @@ public class ReguaFactory {
 
     public void setInd(Indicador ind) {
         this.ind = ind;
+    }
+
+    public ReguaMaker getFactory() {
+        return factory;
+    }
+
+    public void setFactory(ReguaMaker factory) {
+        this.factory = factory;
     }
 
 }

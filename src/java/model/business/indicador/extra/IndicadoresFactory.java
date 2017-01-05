@@ -23,10 +23,9 @@ public final class IndicadoresFactory {
 
         List<Indicador> inds = new ArrayList<>();
 
-        inds.add(new IndicadorFcr(0.2d));
-        inds.add(new IndicadorTma(0.3d));
-        inds.add(new IndicadorGps(0.1d));
-        inds.add(new IndicadorMonitoria(0.15d));
+        inds.add(new IndicadorFcr(0.3d));
+        inds.add(new IndicadorTma(0.25d));
+        inds.add(new IndicadorMonitoria(0.20d));
         inds.add(new IndicadorAderencia(0.25d));
 
         return inds;
