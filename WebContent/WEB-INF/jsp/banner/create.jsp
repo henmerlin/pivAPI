@@ -152,11 +152,11 @@
                         </div>
                         <div class="form-group">
                             <label>Data Início</label>
-                            <input id="moddatainicio" type="date" class="datainiciofrm form-control" placeholder="Data início" v-model="modbanner.dataInicio" @load="minimundate(modbanner.dataInicio)">
+                            <input id="moddatainicio" type="date" class="frm form-control" placeholder="Data início" v-model="modbanner.dataInicio" @load="minimundate(modbanner.dataInicio)">
                         </div>
                         <div class="form-group">
                             <label>Data Fim</label>
-                            <input id="moddatafim" type="date" class="datainiciofrm form-control" placeholder="Data Fim" v-model="modbanner.dataFim">
+                            <input id="moddatafim" type="date" class="frm form-control" placeholder="Data Fim" v-model="modbanner.dataFim">
                         </div>
                         <div class="form-group">
                             <label>Local Banner</label>
@@ -194,7 +194,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal" @click="fetchbanner()">Fechar</button>
                         <button type="button" class="btn btn-primary" @click="modibanner()">Modificar</button>
                     </div>
                 </div>

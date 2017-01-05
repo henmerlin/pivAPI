@@ -177,7 +177,7 @@
 
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                                <button type="button" class="btn btn-default" data-dismiss="modal" @click="fetchData()">Fechar</button>
                                 <button type="button" class="btn btn-primary" data-dismiss="modal" @click="doneEditaEnquete(editEnquete)">Alterar</button>
                             </div>
                         </div>
@@ -240,7 +240,7 @@
                         <br/>
                         <div v-if="addPerguntaEnquete.pergunta.tipoPergunta === 'Pergunta' ">
                             <label class="radio-inline">
-                                <input type="radio" name="typeC" value="textarea" v-model="addPerguntaEnquete.pergunta.tipoCampo" checked> Text Area
+                                <input type="radio" name="typeC" value="textarea" v-model="addPerguntaEnquete.pergunta.tipoCampo"> Text Area
                             </label>
                             <label class="radio-inline">
                                 <input type="radio" name="typeC" value="input" v-model="addPerguntaEnquete.pergunta.tipoCampo"> Input Text
@@ -248,7 +248,7 @@
                         </div>
                         <div v-else-if="addPerguntaEnquete.pergunta.tipoPergunta === 'Múltipla Escolha' ">
                             <label class="radio-inline">
-                                <input type="radio" name="typeC" value="radio" v-model="addPerguntaEnquete.pergunta.tipoCampo" checked> Radio
+                                <input type="radio" name="typeC" value="radio" v-model="addPerguntaEnquete.pergunta.tipoCampo"> Radio
                             </label>
                         </div>
                         <div v-else>
@@ -332,7 +332,7 @@
 
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal" @click="fetchDataPergunta(editEnquete)">Fechar</button>
                         <button type="button" class="btn btn-primary" @click="doneEditaPergunta(editPerguntaEnquete)" >Modificar</button>
                     </div>
                 </div>

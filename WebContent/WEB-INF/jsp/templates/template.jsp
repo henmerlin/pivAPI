@@ -71,6 +71,7 @@
                                     <li><a href="${linkTo[ConteudoController].create()}">Gerenciar Conteúdo</a></li>
                                     <li><a href="${linkTo[ConteudoCategoriaController].create()}">Gerenciar Categoria</a></li>
                                     <li><a href="${linkTo[BannerController].create()}">Gerenciar Banner</a></li>
+                                    <li><a href="${linkTo[NotificacaoController].create()}">Gerenciar Notificações</a></li>
                                     <li role="separator" class="divider"></li>
                                     <li class="dropdown-header">Usr</li>
                                     <li><a href="${linkTo[EnqueteController].list()}">Responder Enquete</a></li>
@@ -128,7 +129,7 @@
         <div>
             <decorator:body/>
         </div>
-        <!-- /container -->
-
+        <!-- /container -->        
+        <script src="${pageContext.request.contextPath}/resources/vue-components/notificationTemplate.js"></script>        
     </body>
 </html>

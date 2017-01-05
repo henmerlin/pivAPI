@@ -44,7 +44,8 @@
         <br />
 
         <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#criaConteudo">Cadastrar categoria</button>
-
+        <a class="btn btn-primary btn-sm" href="${linkTo[ConteudoController].create()}" role="button">Ir Para Conteúdo</a>
+        
         <!-- Modal Cria Conteudo-->
         <div class="modal fade" id="criaConteudo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
             <div class="modal-dialog" role="document">
@@ -115,7 +116,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal" @click="fetchConteudo()">Fechar</button>
                         <button type="button" class="btn btn-primary" @click="modificaConteudo()">Modificar</button>
                     </div>
                 </div>
