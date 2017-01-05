@@ -68,7 +68,7 @@
 
     <div class="row" v-show="vm.piv.op.equipe">
 
-        <div class="col-xs-4">
+        <div class="col-xs-3">
             <div class="form-group">
                 <label for="fcr">FCR</label>
                 <div class="input-group">
@@ -78,7 +78,7 @@
             </div>
         </div>
 
-        <div class="col-xs-4">
+        <div class="col-xs-3">
             <div class="form-group">
                 <label for="adr">Aderência</label>
                 <div class="input-group">
@@ -88,7 +88,7 @@
             </div>
         </div>
 
-        <div class="col-xs-4">
+        <div class="col-xs-3">
             <div class="form-group">
                 <label for="monitoria">Monitoria</label>
                 <div class="input-group">
@@ -98,7 +98,7 @@
             </div>
         </div>
 
-        <div class="col-xs-4">
+        <div class="col-xs-3">
             <div class="form-group">
                 <label for="tma">TMA</label>
                 <div class="input-group">
@@ -107,6 +107,8 @@
                 </div>
             </div>
         </div>
+
+        <div class="col-xs-4"></div>
 
         <div class="col-xs-4">
             <div class="form-group">
@@ -119,16 +121,7 @@
             </div>
         </div>
 
-
-        <div class="col-xs-4">
-            <div class="form-group">
-                <label for="tma">GPS</label>
-                <div class="input-group">
-                    <input v-model="vm.gps" id="gps" type="number" min="0" max="100" @change="getTarget()" class="form-control" placeholder="GPS" aria-describedby="tma-addon1">
-                    <span class="input-group-addon" id="basic-tma">%</span>
-                </div>
-            </div>
-        </div>
+        <div class="col-xs-4"></div>
 
 
     </div>

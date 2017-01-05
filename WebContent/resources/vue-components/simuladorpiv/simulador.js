@@ -10,56 +10,15 @@ var data =
         {
             equipes: {},
             currentViewForm: 'dados-form',
-            "fcr": {"nome": "FCR"},
-            "adr": {"nome": "ADERENCIA"},
-            "monitoria": {"nome": "MONITORIA"},
-            "tma": {"nome": "TMA"},
-            "gps": {"nome": "GPS"},
             show: false,
-            usuario: {
-                piv: {op: {"loginOperador": "",
-                        "avaya": "",
-                        "nome": "",
-                        "nomeSupervisor": "",
-                        "equipe": "",
-                        "faltas": 0,
-                        "diasTrabalhados": 0,
-                        "totalIn": 0,
-                        "sched": 0,
-                        "chamadasAtendidas": 0,
-                        "tempoFalado": 0,
-                        "chamadasFCR": 0,
-                        "rechamadasFCR": 0
-                    },
-                    "indicadores": [
-                        {"realizado": 0.95, "peso": 0.2, "atingimento": 2.0, "pontos": 0.4, "nome": "FCR"},
-                        {"realizado": 346.0, "peso": 0.3, "atingimento": 2.0, "pontos": 0.6, "nome": "TMA"}],
-                    "pontos": 0, "pesos": 0.0, "target": 0.}},
             vm: {
                 fcr: 0,
                 tma: 0,
-                gps: 0,
                 monitoria: 0,
                 adr: 0,
                 piv: {
-                    op: {
-                        "loginOperador": "",
-                        "avaya": "",
-                        "nome": "",
-                        "nomeSupervisor": "",
-                        "equipe": "",
-                        "faltas": 0,
-                        "diasTrabalhados": 0,
-                        "totalIn": 0,
-                        "sched": 0,
-                        "chamadasAtendidas": 0,
-                        "tempoFalado": 0,
-                        "chamadasFCR": 0,
-                        "rechamadasFCR": 0
-                    },
-                    "indicadores": [
-                        {"realizado": 0.95, "peso": 0.2, "atingimento": 2.0, "pontos": 0.4, "nome": "FCR"},
-                        {"realizado": 346.0, "peso": 0.3, "atingimento": 2.0, "pontos": 0.6, "nome": "TMA"}],
+                    op: {},
+                    "indicadores": {},
                     "pontos": 0.0,
                     "pesos": 0.0,
                     "target": 0}
@@ -106,7 +65,6 @@ var SimuladorForm = {
                                     "adr": {realizado: (self.vm.adr / 100)},
                                     "tma": {realizado: moment.duration(self.vm.tma, "HH:mm:ss").asSeconds()},
                                     "monitoria": {realizado: (self.vm.monitoria / 100)},
-                                    "gps": {realizado: (self.vm.gps / 100)},
                                     op: self.vm.piv.op}
                             };
 
@@ -155,8 +113,6 @@ var DadosUsuario = {
         return data
     }
 }
-
-
 
 var instance = new Vue({
     el: '#piv',
