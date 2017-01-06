@@ -8,7 +8,10 @@ package model.business.regua;
 import java.util.List;
 import model.business.equipe.Equipe;
 import model.business.indicador.Indicador;
+import model.business.indicador.IndicadorAderencia;
 import model.business.indicador.IndicadorFcr;
+import model.business.indicador.IndicadorMonitoria;
+import model.business.indicador.IndicadorTma;
 import model.business.indicador.extra.ReguaAtingimento;
 
 /**
@@ -29,12 +32,27 @@ public class ReguaFactory {
 
         if (ind instanceof IndicadorFcr) {
             factory = new ReguaIndicadorFcrFactory(ind, equipe);
+        } else if (ind instanceof IndicadorAderencia) {
+            factory = new ReguaIndicadorAderenciaFactory(ind, equipe);
+        } else if (ind instanceof IndicadorMonitoria) {
+            factory = new ReguaIndicadorAderenciaFactory(ind, equipe);
+        } else if (ind instanceof IndicadorTma) {
+            factory = new ReguaIndicadorTmaFactory(ind, equipe);
         }
 
     }
 
     public List<ReguaAtingimento> getRegua() {
         return factory.getRegua();
+    }
+
+    public Double getMeta() {
+        for (ReguaAtingimento r : factory.getRegua()) {
+            if (r.getAtingimento().equals(1d)) {
+                return r.getRealizado();
+            }
+        }
+        return 0d;
     }
 
     public Equipe getEquipe() {

@@ -1,13 +1,7 @@
-package model.business.indicador.extra;
+package model.business.indicador;
 
 import java.util.ArrayList;
 import java.util.List;
-import model.business.indicador.Indicador;
-import model.business.indicador.IndicadorAderencia;
-import model.business.indicador.IndicadorFcr;
-import model.business.indicador.IndicadorGps;
-import model.business.indicador.IndicadorMonitoria;
-import model.business.indicador.IndicadorTma;
 
 import model.entitiy.IndicadoresOperador;
 

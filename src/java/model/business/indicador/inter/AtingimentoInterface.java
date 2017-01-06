@@ -5,7 +5,6 @@
  */
 package model.business.indicador.inter;
 
-import model.business.indicador.inter.RealizadoCalcInterface;
 import model.entitiy.IndicadoresOperador;
 
 /**

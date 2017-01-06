@@ -1,9 +1,11 @@
 package model.business;
 
 import java.util.List;
+import model.business.equipe.Equipe;
 import model.business.indicador.Indicador;
 import model.business.indicador.extra.AtingimentoPiv;
 import model.business.indicador.extra.IndicadorNome;
+import model.business.regua.ReguaFactory;
 
 import model.entitiy.IndicadoresOperador;
 import model.viewmodel.SimuladorAtendimento;
@@ -37,11 +39,13 @@ public class CalculoPivFacade {
             }
 
             try {
+                ReguaFactory factory = new ReguaFactory(Equipe.buscarPorNome(op.getEquipe()), indicador);
+                indicador.setRegua(factory.getRegua());
                 Double a = indicador.calcularAtingimento(indicador, op);
                 indicador.setAtingimento(a);
                 this.pontos += indicador.getPontos();
             } catch (Exception e) {
-                e.printStackTrace();
+
             }
         }
 
@@ -57,6 +61,10 @@ public class CalculoPivFacade {
             this.pesos += indicador.getPeso();
 
             try {
+
+                ReguaFactory factory = new ReguaFactory(Equipe.buscarPorNome(op.getEquipe()), indicador);
+                indicador.setRegua(factory.getRegua());
+
                 Double a = indicador.calcularAtingimento(indicador, op);
                 indicador.setAtingimento(a);
                 this.pontos += indicador.getPontos();

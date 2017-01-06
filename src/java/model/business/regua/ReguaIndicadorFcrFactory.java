@@ -20,8 +20,7 @@ public class ReguaIndicadorFcrFactory extends ReguaIndicadorAbstractFactory impl
         ReguaMaker {
 
     public ReguaIndicadorFcrFactory(Indicador ind, Equipe eqp) {
-        this.ind = ind;
-        this.eqp = eqp;
+        super(ind, eqp);
     }
 
     /**
@@ -29,6 +28,7 @@ public class ReguaIndicadorFcrFactory extends ReguaIndicadorAbstractFactory impl
      *
      * @return
      */
+    @Override
     public List<ReguaAtingimento> getRegua() {
 
         if (eqp.getSite().equals(Site.SP)) {

@@ -18,6 +18,11 @@ public abstract class ReguaIndicadorAbstractFactory {
 
     protected Equipe eqp;
 
+    public ReguaIndicadorAbstractFactory(Indicador ind, Equipe eqp) {
+        this.ind = ind;
+        this.eqp = eqp;
+    }
+
     public Indicador getInd() {
         return ind;
     }

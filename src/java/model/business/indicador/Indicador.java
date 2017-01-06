@@ -5,6 +5,7 @@ import model.business.indicador.inter.AtingimentoInterface;
 import model.business.indicador.inter.RealizadoCalcInterface;
 import model.business.indicador.extra.IndicadorNome;
 import model.business.indicador.extra.ReguaAtingimento;
+import model.entitiy.IndicadoresOperador;
 
 /**
  *
@@ -82,6 +83,17 @@ public abstract class Indicador implements RealizadoCalcInterface, AtingimentoIn
     @Override
     public void calcularRealizado(Double d) {
         this.realizado = d;
+    }
+
+    @Override
+    public Double calcularAtingimento(RealizadoCalcInterface i, IndicadoresOperador op) throws Exception {
+
+        for (ReguaAtingimento n : getRegua()) {
+            if (i.getRealizado() <= n.getRealizado()) {
+                return n.getAtingimento();
+            }
+        }
+        return 2d;
     }
 
 }

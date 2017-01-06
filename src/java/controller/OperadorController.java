@@ -18,7 +18,7 @@ import javax.inject.Inject;
 import model.business.CalculoPivFacade;
 import model.business.equipe.Equipe;
 import model.business.exception.IndicadoresNaoEncontrados;
-import model.business.indicador.extra.IndicadoresFactory;
+import model.business.indicador.IndicadoresFactory;
 import model.dal.IndicadoresOperadorDAO;
 import model.entitiy.IndicadoresOperador;
 import model.viewmodel.EquipeViewModel;
@@ -75,7 +75,9 @@ public class OperadorController extends AbstractController {
         List<EquipeViewModel> lst = new ArrayList<>();
 
         for (Equipe eqp : Equipe.values()) {
-            lst.add(new EquipeViewModel(eqp, eqp.getNome()));
+            if (eqp.getAtivo()) {
+                lst.add(new EquipeViewModel(eqp, eqp.getNome()));
+            }
         }
 
         result.use(Results.json()).from(lst).serialize();
