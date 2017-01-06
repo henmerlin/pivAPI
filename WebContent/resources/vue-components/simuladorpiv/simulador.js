@@ -17,7 +17,7 @@ var data =
                 monitoria: 0,
                 adr: 0,
                 piv: {
-                    op: {},
+                    op: {equipe: ""},
                     "indicadores": {},
                     "pontos": 0.0,
                     "pesos": 0.0,
