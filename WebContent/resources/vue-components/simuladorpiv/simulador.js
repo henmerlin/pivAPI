@@ -76,6 +76,9 @@ var SimuladorForm = {
                         beforeSend: function(xhr) {
                             xhr.setRequestHeader("Content-Type", "application/json");
                         },
+                        error: function(jqXHR, textStatus, errorThrown) {
+                            self.currentViewForm = 'indisponivel-form';
+                        },
                         success: function(data) {
                             self.vm.piv = data.calculoPivFacade;
                         }
