@@ -1,2 +1,0 @@
-package portalefika.mis.entidades;
-
