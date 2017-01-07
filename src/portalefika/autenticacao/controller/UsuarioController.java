@@ -8,9 +8,9 @@ import br.com.caelum.vraptor.Get;
 import br.com.caelum.vraptor.Path;
 import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.view.Results;
-import portalefika.controller.HomeController;
 import portalefika.autenticacao.dal.webservice.EfikaUsersProxy;
 import portalefika.autenticacao.dal.webservice.Usuario;
+import portalefika.simuladorpiv.controller.SimuladorController;
 
 @Controller
 @RequestScoped
@@ -42,7 +42,7 @@ public class UsuarioController {
 
                 u = ws.consultarUsuario(u.getLogin());
                 session.setUsuario(u);
-                result.redirectTo(HomeController.class).index();
+                result.redirectTo(SimuladorController.class).index();
 
             } else {
 

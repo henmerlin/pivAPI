@@ -19,7 +19,7 @@
                 </div>
                 <div v-show="!show">
                     <p> </p>
-                    <img class="center-block" src="/resources/custom/gif/rolling.gif">
+                    <img class="center-block" src="/simuladorpiv/resources/custom/gif/rolling.gif">
                 </div>
             </div>
         </transition>

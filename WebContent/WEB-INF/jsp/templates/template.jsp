@@ -13,7 +13,6 @@
         <link href="${pageContext.request.contextPath}/resources/bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet" />
         <link href="${pageContext.request.contextPath}/resources/bootstrap-3.3.7-dist/css/bootstrap-theme.min.css" rel="stylesheet" />
         <link href="${pageContext.request.contextPath}/resources/custom/custom.css" rel="stylesheet" />
-        <link href="${pageContext.request.contextPath}/resources/custom/lightslider.min.css" rel="stylesheet" />
 
         <!-- import JavaScript -->
         <script src="${pageContext.request.contextPath}/resources/jquery-3.1.1/jquery-3.1.1.min.js"></script>
@@ -22,7 +21,6 @@
         <script src="${pageContext.request.contextPath}/resources/lodash/lodash.js"></script>
         <script src="${pageContext.request.contextPath}/resources/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
         <script src="${pageContext.request.contextPath}/resources/custom/custom.js"></script>
-        <script src="${pageContext.request.contextPath}/resources/custom/lightslider.min.js"></script>
 
         <style>
 
@@ -61,65 +59,10 @@
                     <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav">
-                            <li><a href="${linkTo[HomeController].index()}">Home <span class="sr-only">(current)</span></a></li>
-                            <li><a href="${linkTo[SimuladorController].index()}">Simulador PIV</a></li>
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Funcionalidades <span class="caret"></span></a>
-                                <ul class="dropdown-menu">
-                                    <li class="dropdown-header">Adm</li>
-                                    <li><a href="${linkTo[EditorController].create()}">Editor</a></li>
-                                    <li><a href="${linkTo[EnqueteController].create()}">Gerenciar Enquete</a></li>
-                                    <li><a href="${linkTo[ConteudoController].create()}">Gerenciar Conteúdo</a></li>
-                                    <li><a href="${linkTo[ConteudoCategoriaController].create()}">Gerenciar Categoria</a></li>
-                                    <li><a href="${linkTo[BannerController].create()}">Gerenciar Banner</a></li>
-                                    <li><a href="${linkTo[NotificacaoController].create()}">Gerenciar Notificações</a></li>
-                                    <li role="separator" class="divider"></li>
-                                    <li class="dropdown-header">Usr</li>
-                                    <li><a href="${linkTo[EnqueteController].list()}">Responder Enquete</a></li>
-                                    <li><a href="${linkTo[ConteudoController].exibir()}">Conteúdos </a></li>
-                                    <li role="separator" class="divider"></li>
-                                    <li><a href="#">One more separated link</a></li>
-                                </ul>
-                            </li>
+                            <li><a href="${linkTo[SimuladorController].index()}">Simulador PIV<span class="sr-only">(current)</span></a></li>
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-user"></span>Perfil <span class="caret"></span></a>
-                                <ul class="dropdown-menu">
-
-                                    <li>
-                                        <div class="navbar-login">
-                                            <div class="row">
-                                                <div class="col-lg-4">
-                                                    <p class="text-center">
-                                                        <span class="glyphicon glyphicon-user icon-size"></span>
-                                                    </p>
-                                                </div>
-                                                <div class="col-lg-7">
-                                                    <p class="text-left"><strong>Nome</strong></p>
-                                                    <p class="text-left small">nome.sobrenome@telefonica.com</p>
-                                                    <p class="text-left">
-                                                        <a href="#" class="btn btn-primary btn-block btn-sm">Meu Perfil</a>
-                                                    </p>
-                                                </div>
-                                                <div class="col-lg-1"></div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="divider"></li>
-                                    <li>
-                                        <div class="navbar-login navbar-login-session">
-                                            <div class="row">
-                                                <div class="col-lg-12">
-                                                    <p>
-                                                        <a href="${linkTo[UsuarioController].logout()}" class="btn btn-danger btn-block">Sair</a>
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </li>
+                            <li><a href="${linkTo[UsuarioController].logout()}">Sair</a></li>
                         </ul>
                     </div><!-- /.navbar-collapse -->
                 </div><!-- /.container-fluid -->
@@ -130,7 +73,6 @@
         <div>
             <decorator:body/>
         </div>
-        <!-- /container -->        
-        <script src="${pageContext.request.contextPath}/resources/vue-components/notificationTemplate.js"></script>        
+        <!-- /container -->
     </body>
 </html>

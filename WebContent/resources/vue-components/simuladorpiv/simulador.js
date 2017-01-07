@@ -1,10 +1,10 @@
 
 
-var pivURL = "http://localhost:8080/pivAPI/operador/simulador/";
-var pivURL2 = "http://localhost:8080/pivAPI/operador/simulador/change/";
-var equipeURL = "http://localhost:8080/pivAPI/operador/simulador/equipes/";
-var pivManualURL = "http://localhost:8080/pivAPI/operador/simulador/manual/";
-var sessionURL = "/session/";
+var pivURL = "http://10.40.195.81:8080/pivAPI/operador/simulador/";
+var pivURL2 = "http://10.40.195.81:8080/pivAPI/operador/simulador/change/";
+var equipeURL = "http://10.40.195.81:8080/pivAPI/operador/simulador/equipes/";
+var pivManualURL = "http://10.40.195.81:8080/pivAPI/operador/simulador/manual/";
+var sessionURL = "/simuladorpiv/session/";
 
 var data =
         {

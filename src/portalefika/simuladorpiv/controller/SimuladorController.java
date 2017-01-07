@@ -13,7 +13,7 @@ import portalefika.controller.AbstractController;
 @Controller
 public class SimuladorController extends AbstractController {
 
-    @Path("/simuladorPiv/")
+    @Path("/")
     @Logado
     public void index() {
 
