@@ -55,7 +55,7 @@ public enum Equipe {
     public static Equipe buscarPorNome(String nome) {
 
         for (Equipe eqp : Equipe.values()) {
-            if (eqp.getNome().equalsIgnoreCase(nome)) {
+            if (eqp.toString().equalsIgnoreCase(nome)) {
                 return eqp;
             }
         }
