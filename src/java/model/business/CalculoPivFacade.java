@@ -1,5 +1,6 @@
 package model.business;
 
+import java.util.ArrayList;
 import java.util.List;
 import model.business.equipe.Equipe;
 import model.business.indicador.Indicador;
@@ -8,12 +9,14 @@ import model.business.indicador.extra.IndicadorNome;
 import model.business.regua.ReguaFactory;
 
 import model.entitiy.IndicadoresOperador;
+import model.viewmodel.MensagemPiv;
 import model.viewmodel.SimuladorAtendimento;
 
 public class CalculoPivFacade {
 
     private final IndicadoresOperador op;
     private final List<Indicador> indicadores;
+    private List<MensagemPiv> mensagens;
     private Double pontos;
     private Double pesos;
     private Double target;
@@ -24,6 +27,7 @@ public class CalculoPivFacade {
         this.pontos = 0d;
         this.pesos = 0d;
         this.target = 0d;
+        this.mensagens = new ArrayList<>();
     }
 
     public void calcular() {
@@ -49,7 +53,39 @@ public class CalculoPivFacade {
             }
         }
 
+        /**
+         * Validação de Faltas
+         */
+        Double desconto = getDescontoAbatimentoAbs(this.op.getFaltas());
+
+        if (desconto > 0) {
+            this.pontos -= desconto;
+
+            Double frm = desconto * 100;
+
+            this.mensagens.add(new MensagemPiv("Descontado " + frm.toString() + "% do atingimento devido ao número de faltas: " + this.op.getFaltas() + "."));
+        }
+
         this.setTarget(AtingimentoPiv.calcularTarget(pontos));
+    }
+
+    public Double getDescontoAbatimentoAbs(Integer faltas) {
+
+        if (faltas > 0) {
+            if (faltas != null) {
+                switch (faltas) {
+                    case 1:
+                        return 0.3d;
+                    case 2:
+                        return 0.6d;
+                    case 3:
+                        return 2d;
+                    default:
+                        return 0d;
+                }
+            }
+        }
+        return 0d;
     }
 
     public void calcularComRealizado(SimuladorAtendimento s) {
