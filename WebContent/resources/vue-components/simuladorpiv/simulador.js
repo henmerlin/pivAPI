@@ -1,5 +1,7 @@
 
 
+/* global _, moment */
+
 var pivURL = "http://10.40.195.81:8080/pivAPI/operador/simulador/";
 var pivURL2 = "http://10.40.195.81:8080/pivAPI/operador/simulador/change/";
 var equipeURL = "http://10.40.195.81:8080/pivAPI/operador/simulador/equipes/";
@@ -26,17 +28,6 @@ var data =
         }
 
 
-var Alert = {
-    props: {
-        target: {
-            type: String,
-            default: function() {
-                return "Erro!"
-            }
-        }
-    },
-    template: '#alert'
-}
 
 var SimuladorForm = {
     props: {
@@ -112,6 +103,11 @@ var FormIndisponivel = {
 
 var DadosUsuario = {
     template: '#dados-form',
+    methods: {
+        loadIndicadores: function() {
+            instance.loadIndicadores();
+        }
+    },
     data: function() {
         return data
     }

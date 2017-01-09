@@ -46,6 +46,9 @@
                 </tr>
             </tbody>
         </table>
+
+        <button type="button" class="btn btn-default btn-xs" @click="loadIndicadores()"><span class="glyphicon glyphicon-refresh" aria-hidden="true"></span> Carregar Indicadores</button>
+
     </div>
 
 </script>
