@@ -2,10 +2,10 @@
 
 /* global _, moment */
 
-var pivURL = "http://10.40.195.81:8080/pivAPI/operador/simulador/";
-var pivURL2 = "http://10.40.195.81:8080/pivAPI/operador/simulador/change/";
-var equipeURL = "http://10.40.195.81:8080/pivAPI/operador/simulador/equipes/";
-var pivManualURL = "http://10.40.195.81:8080/pivAPI/operador/simulador/manual/";
+var pivURL = "http://localhost:8080/pivAPI/operador/simulador/";
+var pivURL2 = "http://localhost:8080/pivAPI/operador/simulador/change/";
+var equipeURL = "http://localhost:8080/pivAPI/operador/simulador/equipes/";
+var pivManualURL = "http://localhost:8080/pivAPI/operador/simulador/manual/";
 var sessionURL = "/simuladorpiv/session/";
 
 var data =
@@ -27,7 +27,17 @@ var data =
             }
         }
 
-
+var MensagemPiv = {
+    template: '<div class="alert alert-warning" role="alert">{{texto}}</div>',
+    props: {
+        texto: {
+            type: String,
+            default: function() {
+                return ""
+            }
+        }
+    }
+}
 
 var SimuladorForm = {
     props: {
@@ -67,7 +77,7 @@ var SimuladorForm = {
                         beforeSend: function(xhr) {
                             xhr.setRequestHeader("Content-Type", "application/json");
                         },
-                        error: function(jqXHR, textStatus, errorThrown) {
+                        error: function() {
                             self.currentViewForm = 'indisponivel-form';
                         },
                         success: function(data) {
@@ -107,6 +117,9 @@ var DadosUsuario = {
         loadIndicadores: function() {
             instance.loadIndicadores();
         }
+    },
+    components: {
+        'mensagem-piv': MensagemPiv
     },
     data: function() {
         return data
