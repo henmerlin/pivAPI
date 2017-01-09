@@ -46,6 +46,9 @@
                 </tr>
             </tbody>
         </table>
+        <hr>
+
+        <mensagem-piv v-for="msg in vm.piv.mensagens" v-bind:texto="msg.texto"></mensagem-piv>
 
         <button type="button" class="btn btn-default btn-xs" @click="loadIndicadores()"><span class="glyphicon glyphicon-refresh" aria-hidden="true"></span> Carregar Indicadores</button>
 
@@ -71,7 +74,9 @@
 
     <div class="row" v-show="vm.piv.op.equipe">
 
-        <div class="col-xs-3">
+        <div class="col-xs-1"></div>
+
+        <div class="col-xs-2">
             <div class="form-group">
                 <label for="fcr">FCR</label>
                 <div class="input-group">
@@ -81,7 +86,7 @@
             </div>
         </div>
 
-        <div class="col-xs-3">
+        <div class="col-xs-2">
             <div class="form-group">
                 <label for="adr">Aderência</label>
                 <div class="input-group">
@@ -91,7 +96,7 @@
             </div>
         </div>
 
-        <div class="col-xs-3">
+        <div class="col-xs-2">
             <div class="form-group">
                 <label for="monitoria">Monitoria</label>
                 <div class="input-group">
@@ -101,7 +106,7 @@
             </div>
         </div>
 
-        <div class="col-xs-3">
+        <div class="col-xs-2">
             <div class="form-group">
                 <label for="tma">TMA</label>
                 <div class="input-group">
@@ -110,6 +115,19 @@
                 </div>
             </div>
         </div>
+
+
+        <div class="col-xs-2">
+            <div class="form-group">
+                <label for="tma">Faltas</label>
+                <div class="input-group">
+                    <input v-model="vm.faltas" id="faltas" type="number" class="form-control" @change="getTarget()" aria-describedby="tma-addon1">
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-alert" aria-hidden="true"></span></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xs-1"></div>
 
         <div class="col-xs-4"></div>
 
