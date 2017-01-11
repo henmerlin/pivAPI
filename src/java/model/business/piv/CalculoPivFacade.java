@@ -1,4 +1,4 @@
-package model.business;
+package model.business.piv;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,12 +14,14 @@ import model.viewmodel.SimuladorAtendimento;
 
 public class CalculoPivFacade {
 
-    private final IndicadoresOperador op;
-    private final List<Indicador> indicadores;
+    private IndicadoresOperador op;
+    private List<Indicador> indicadores;
     private List<MensagemPiv> mensagens;
     private Double pontos;
     private Double pesos;
     private Double target;
+
+    private CalcPivStrategyInt calc;
 
     public CalculoPivFacade(IndicadoresOperador op, List<Indicador> indicadores) {
         this.op = op;
@@ -28,6 +30,20 @@ public class CalculoPivFacade {
         this.pesos = 0d;
         this.target = 0d;
         this.mensagens = new ArrayList<>();
+    }
+
+    public CalculoPivFacade(IndicadoresOperador op, List<Indicador> indicadores, CalcPivStrategyInt calc) {
+        this.op = op;
+        this.indicadores = indicadores;
+        this.pontos = 0d;
+        this.pesos = 0d;
+        this.target = 0d;
+        this.mensagens = new ArrayList<>();
+        this.calc = calc;
+    }
+
+    public void calc() {
+        this.calc.calcular(this);
     }
 
     /**
@@ -58,7 +74,7 @@ public class CalculoPivFacade {
 
                 this.pontos += indicador.getPontos();
             } catch (Exception e) {
-
+                System.out.println(e.getCause());
             }
         }
 
@@ -90,12 +106,16 @@ public class CalculoPivFacade {
 
                 this.pontos += indicador.getPontos();
             } catch (Exception e) {
-                e.printStackTrace();
+                System.out.println(e.getCause());
             }
         }
 
         // Faltas
-        abateAbsAtingimentoPiv(s.getFaltas());
+        try {
+            abateAbsAtingimentoPiv(s.getFaltas());
+        } catch (Exception e) {
+
+        }
 
         this.setTarget(AtingimentoPiv.calcularTarget(pontos));
     }
@@ -103,32 +123,36 @@ public class CalculoPivFacade {
     public Double getDescontoAbatimentoAbs(Integer faltas) {
 
         if (faltas > 0) {
-            if (faltas != null) {
-                switch (faltas) {
-                    case 1:
-                        return 0.3d;
-                    case 2:
-                        return 0.6d;
-                    case 3:
-                        return 2d;
-                    default:
-                        return 2d;
-                }
+
+            switch (faltas) {
+                case 1:
+                    return 0.3d;
+                case 2:
+                    return 0.6d;
+                case 3:
+                    return 2d;
+                default:
+                    return 2d;
             }
         }
         return 0d;
     }
 
-    protected void abateAbsAtingimentoPiv(Integer faltas) {
-        /**
-         * Validação de Faltas
-         */
-        Double desconto = getDescontoAbatimentoAbs(faltas);
+    /**
+     * Validação de Faltas
+     *
+     * @param faltas
+     */
+    public void abateAbsAtingimentoPiv(Integer faltas) {
 
-        if (desconto > 0) {
-            this.pontos -= desconto;
-            Double frm = desconto * 100;
-            this.mensagens.add(new MensagemPiv("Desconto de " + frm.toString() + "% aplicado ao atingimento devido ao número de faltas: " + faltas + "."));
+        if (faltas != null) {
+            Double desconto = getDescontoAbatimentoAbs(faltas);
+
+            if (desconto > 0) {
+                this.pontos -= desconto;
+                Double frm = desconto * 100;
+                this.mensagens.add(new MensagemPiv("Desconto de " + frm.toString() + "% aplicado ao atingimento devido ao número de faltas: " + faltas + "."));
+            }
         }
     }
 
@@ -171,4 +195,37 @@ public class CalculoPivFacade {
     public void setTarget(Double target) {
         this.target = target;
     }
+
+    public CalcPivStrategyInt getCalc() {
+        return calc;
+    }
+
+    public void setCalc(CalcPivStrategyInt calc) {
+        this.calc = calc;
+    }
+
+    public IndicadoresOperador getOp() {
+        return op;
+    }
+
+    public void setOp(IndicadoresOperador op) {
+        this.op = op;
+    }
+
+    public List<Indicador> getIndicadores() {
+        return indicadores;
+    }
+
+    public void setIndicadores(List<Indicador> indicadores) {
+        this.indicadores = indicadores;
+    }
+
+    public Double getPontos() {
+        return pontos;
+    }
+
+    public void setPontos(Double pontos) {
+        this.pontos = pontos;
+    }
+
 }

@@ -14,40 +14,40 @@ public class IndicadoresOperador implements Serializable {
     @Column(name = "MATRICULA_ANTIGA")
     private String loginOperador;
 
-    @Column(name = "AVAYA")
+    @Column(name = "AVAYA", nullable = true)
     private String avaya;
 
-    @Column(name = "COLABORADOR")
+    @Column(name = "COLABORADOR", nullable = true)
     private String nome;
 
-    @Column(name = "SUPERVISOR")
+    @Column(name = "SUPERVISOR", nullable = true)
     private String nomeSupervisor;
 
     @Column(name = "EQUIPE")
     private String equipe;
 
-    @Column(name = "FALTAS")
+    @Column(name = "FALTAS", nullable = true)
     private Integer faltas;
 
-    @Column(name = "DIAS_TRABALHADOS")
+    @Column(name = "DIAS_TRABALHADOS", nullable = true)
     private Integer diasTrabalhados;
 
-    @Column(name = "TOTAL_IN")
+    @Column(name = "TOTAL_IN", nullable = true)
     private Double totalIn;
 
-    @Column(name = "SCHED")
+    @Column(name = "SCHED", nullable = true)
     private Double sched;
 
-    @Column(name = "CA_")
+    @Column(name = "CA_", nullable = true)
     private Integer chamadasAtendidas;
 
-    @Column(name = "TEMPO_FALADO")
+    @Column(name = "TEMPO_FALADO", nullable = true)
     private Double tempoFalado;
 
-    @Column(name = "FCR_CHAMADAS")
+    @Column(name = "FCR_CHAMADAS", nullable = true)
     private Integer chamadasFCR;
 
-    @Column(name = "FCR_RECHAMADAS")
+    @Column(name = "FCR_RECHAMADAS", nullable = true)
     private Integer rechamadasFCR;
 
     public IndicadoresOperador() {

@@ -21,7 +21,7 @@ import java.util.Set;
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.event.Observes;
 import javax.inject.Inject;
-import model.business.CalculoPivFacade;
+import model.business.piv.CalculoPivFacade;
 import model.business.equipe.Equipe;
 import model.business.exception.IndicadoresNaoEncontrados;
 import model.business.indicador.IndicadoresFactory;
@@ -78,13 +78,13 @@ public class OperadorController extends AbstractController {
             if (a == null) {
                 result.use(Results.json()).from(new IndicadoresNaoEncontrados()).serialize();
                 return;
+            } else {
+                CalculoPivFacade piv = new CalculoPivFacade(a, IndicadoresFactory.getIndicadores(a));
+                piv.calcular();
+                result.use(Results.json()).from(piv).recursive().serialize();
             }
-
-            CalculoPivFacade piv = new CalculoPivFacade(a, IndicadoresFactory.getIndicadores(a));
-            piv.calcular();
-            result.use(Results.json()).from(piv).recursive().serialize();
         } catch (Exception e) {
-            result.use(Results.json()).from(new IndicadoresNaoEncontrados()).serialize();
+            result.use(Results.json()).from(e).serialize();
         }
 
     }
@@ -114,7 +114,7 @@ public class OperadorController extends AbstractController {
             piv.calcularComRealizado(s);
             result.use(Results.json()).from(piv).recursive().serialize();
         } catch (Exception e) {
-            result.use(Results.json()).from(e).serialize();
+            result.use(Results.json()).from(e).recursive().serialize();
         }
     }
 

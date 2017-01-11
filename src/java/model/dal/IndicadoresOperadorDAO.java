@@ -21,8 +21,10 @@ public class IndicadoresOperadorDAO extends AbstractDAO {
             query.setParameter("param1", i.getLoginOperador());
             return (IndicadoresOperador) query.getSingleResult();
         } catch (Exception e) {
+            System.out.println(e.getCause());
             return null;
         }
+
     }
 
 }

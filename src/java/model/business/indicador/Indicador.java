@@ -40,6 +40,7 @@ public abstract class Indicador implements RealizadoCalcInterface, AtingimentoIn
         this.atingimento = atingimento;
     }
 
+    @Override
     public Double getRealizado() {
         return realizado;
     }
@@ -88,12 +89,27 @@ public abstract class Indicador implements RealizadoCalcInterface, AtingimentoIn
     @Override
     public Double calcularAtingimento(RealizadoCalcInterface i, IndicadoresOperador op) throws Exception {
 
+        if (getRegua() == null) {
+            throw new Exception("Indicador sem Regua implementada.");
+        }
+
         for (ReguaAtingimento n : getRegua()) {
             if (i.getRealizado() <= n.getRealizado()) {
                 return n.getAtingimento();
             }
         }
         return 2d;
+    }
+
+    @Override
+    public Double obterMeta() throws Exception {
+        for (ReguaAtingimento n : getRegua()) {
+            if (n.getAtingimento() == 1d) {
+                this.meta = n.getRealizado();
+                return n.getRealizado();
+            }
+        }
+        return 0d;
     }
 
 }

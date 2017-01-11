@@ -24,6 +24,8 @@ public class SimuladorAtendimento {
 
     private IndicadoresOperador op;
 
+    private Integer faltas;
+
     public SimuladorAtendimento() {
         this.fcr = new IndicadorFcr();
         this.adr = new IndicadorAderencia();
@@ -43,7 +45,7 @@ public class SimuladorAtendimento {
 
     public List<Indicador> getIndicadores() {
 
-        List<Indicador> lst = new ArrayList<Indicador>();
+        List<Indicador> lst = new ArrayList<>();
 
         lst.add(fcr);
         lst.add(adr);
@@ -52,6 +54,14 @@ public class SimuladorAtendimento {
         lst.add(tma);
 
         return lst;
+    }
+
+    public Integer getFaltas() {
+        return faltas;
+    }
+
+    public void setFaltas(Integer faltas) {
+        this.faltas = faltas;
     }
 
     public IndicadorFcr getFcr() {

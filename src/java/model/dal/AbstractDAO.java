@@ -12,7 +12,7 @@ import javax.persistence.PersistenceContext;
 @Stateless
 public class AbstractDAO {
 
-    @PersistenceContext(unitName = "pivUP")
+    @PersistenceContext
     protected EntityManager entityManager;
 
     public void cadastrar(Object object) {

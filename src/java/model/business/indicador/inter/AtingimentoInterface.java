@@ -15,4 +15,6 @@ public interface AtingimentoInterface {
 
     public Double calcularAtingimento(RealizadoCalcInterface i, IndicadoresOperador op) throws Exception;
 
+    public Double obterMeta() throws Exception;
+
 }
