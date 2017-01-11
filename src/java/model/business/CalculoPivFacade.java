@@ -30,6 +30,9 @@ public class CalculoPivFacade {
         this.mensagens = new ArrayList<>();
     }
 
+    /**
+     * CASO DE USO - SIMULAR PIV
+     */
     public void calcular() {
 
         for (Indicador indicador : indicadores) {
@@ -43,28 +46,56 @@ public class CalculoPivFacade {
             }
 
             try {
+
+                // Regua Atingimento
                 ReguaFactory factory = new ReguaFactory(Equipe.buscarPorNome(op.getEquipe()), indicador);
                 indicador.setRegua(factory.getRegua());
+                // Atingimento
                 Double a = indicador.calcularAtingimento(indicador, op);
                 indicador.setAtingimento(a);
+                // Meta
+                indicador.obterMeta();
+
                 this.pontos += indicador.getPontos();
             } catch (Exception e) {
 
             }
         }
 
-        /**
-         * Validação de Faltas
-         */
-        Double desconto = getDescontoAbatimentoAbs(this.op.getFaltas());
+        // Faltas
+        abateAbsAtingimentoPiv(this.op.getFaltas());
 
-        if (desconto > 0) {
-            this.pontos -= desconto;
+        this.setTarget(AtingimentoPiv.calcularTarget(pontos));
+    }
 
-            Double frm = desconto * 100;
+    public void calcularComRealizado(SimuladorAtendimento s) {
 
-            this.mensagens.add(new MensagemPiv("Descontado " + frm.toString() + "% do atingimento devido ao número de faltas: " + this.op.getFaltas() + "."));
+        for (Indicador indicador : indicadores) {
+
+            indicador = adapter(indicador, s);
+
+            this.pesos += indicador.getPeso();
+
+            try {
+
+                // Regua Atingimento
+                ReguaFactory factory = new ReguaFactory(Equipe.buscarPorNome(op.getEquipe()), indicador);
+                indicador.setRegua(factory.getRegua());
+
+                // Atingimento
+                Double a = indicador.calcularAtingimento(indicador, op);
+                indicador.setAtingimento(a);
+                // Meta
+                indicador.obterMeta();
+
+                this.pontos += indicador.getPontos();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
+
+        // Faltas
+        abateAbsAtingimentoPiv(s.getFaltas());
 
         this.setTarget(AtingimentoPiv.calcularTarget(pontos));
     }
@@ -81,56 +112,45 @@ public class CalculoPivFacade {
                     case 3:
                         return 2d;
                     default:
-                        return 0d;
+                        return 2d;
                 }
             }
         }
         return 0d;
     }
 
-    public void calcularComRealizado(SimuladorAtendimento s) {
+    protected void abateAbsAtingimentoPiv(Integer faltas) {
+        /**
+         * Validação de Faltas
+         */
+        Double desconto = getDescontoAbatimentoAbs(faltas);
 
-        for (Indicador indicador : indicadores) {
-
-            indicador = adapter(indicador, s);
-
-            this.pesos += indicador.getPeso();
-
-            try {
-
-                ReguaFactory factory = new ReguaFactory(Equipe.buscarPorNome(op.getEquipe()), indicador);
-                indicador.setRegua(factory.getRegua());
-
-                Double a = indicador.calcularAtingimento(indicador, op);
-                indicador.setAtingimento(a);
-                this.pontos += indicador.getPontos();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+        if (desconto > 0) {
+            this.pontos -= desconto;
+            Double frm = desconto * 100;
+            this.mensagens.add(new MensagemPiv("Desconto de " + frm.toString() + "% aplicado ao atingimento devido ao número de faltas: " + faltas + "."));
         }
-
-        this.setTarget(AtingimentoPiv.calcularTarget(pontos));
     }
 
     protected Indicador adapter(Indicador indicador, SimuladorAtendimento s) {
 
         if (indicador.getNome().equals(IndicadorNome.ADERENCIA)) {
-            indicador.setRealizado(new Double(s.getAdr().getRealizado()));
+            indicador.setRealizado(s.getAdr().getRealizado());
         }
 
         if (indicador.getNome().equals(IndicadorNome.FCR)) {
-            indicador.setRealizado(new Double(s.getFcr().getRealizado()));
+            indicador.setRealizado(s.getFcr().getRealizado());
         }
 
         if (indicador.getNome().equals(IndicadorNome.GPS)) {
-            indicador.setRealizado(new Double(s.getGps().getRealizado()));
+            indicador.setRealizado(s.getGps().getRealizado());
         }
 
         if (indicador.getNome().equals(IndicadorNome.MONITORIA)) {
-            indicador.setRealizado(new Double(s.getMonitoria().getRealizado()));
+            indicador.setRealizado(s.getMonitoria().getRealizado());
         }
         if (indicador.getNome().equals(IndicadorNome.TMA)) {
-            indicador.setRealizado(new Double(s.getTma().getRealizado()));
+            indicador.setRealizado(s.getTma().getRealizado());
         }
 
         return indicador;
