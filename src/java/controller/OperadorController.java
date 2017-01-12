@@ -77,7 +77,6 @@ public class OperadorController extends AbstractController {
             // Não encontrou indicadores
             if (a == null) {
                 result.use(Results.json()).from(new IndicadoresNaoEncontrados()).serialize();
-                return;
             } else {
                 CalculoPivFacade piv = new CalculoPivFacade(a, IndicadoresFactory.getIndicadores(a));
                 piv.calcular();
