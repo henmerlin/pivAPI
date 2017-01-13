@@ -66,20 +66,24 @@ public class CalculoPivFacade {
                 // Regua Atingimento
                 ReguaFactory factory = new ReguaFactory(Equipe.buscarPorNome(op.getEquipe()), indicador);
                 indicador.setRegua(factory.getRegua());
+                // Meta
+                indicador.obterMeta();
                 // Atingimento
                 Double a = indicador.calcularAtingimento(indicador, op);
                 indicador.setAtingimento(a);
-                // Meta
-                indicador.obterMeta();
 
                 this.pontos += indicador.getPontos();
             } catch (Exception e) {
-                System.out.println(e.getCause());
+                //System.out.println(e.getMessage());
             }
         }
 
         // Faltas
-        abateAbsAtingimentoPiv(this.op.getFaltas());
+        try {
+            abateAbsAtingimentoPiv(this.op.getFaltas());
+        } catch (Exception e) {
+            // System.out.println(e.getMessage());
+        }
 
         this.setTarget(AtingimentoPiv.calcularTarget(pontos));
     }
@@ -97,16 +101,15 @@ public class CalculoPivFacade {
                 // Regua Atingimento
                 ReguaFactory factory = new ReguaFactory(Equipe.buscarPorNome(op.getEquipe()), indicador);
                 indicador.setRegua(factory.getRegua());
-
+                // Meta
+                indicador.obterMeta();
                 // Atingimento
                 Double a = indicador.calcularAtingimento(indicador, op);
                 indicador.setAtingimento(a);
-                // Meta
-                indicador.obterMeta();
 
                 this.pontos += indicador.getPontos();
             } catch (Exception e) {
-                System.out.println(e.getCause());
+                // System.out.println(e.getMessage());
             }
         }
 
@@ -114,7 +117,7 @@ public class CalculoPivFacade {
         try {
             abateAbsAtingimentoPiv(s.getFaltas());
         } catch (Exception e) {
-
+            // System.out.println(e.getMessage());
         }
 
         this.setTarget(AtingimentoPiv.calcularTarget(pontos));
@@ -151,7 +154,7 @@ public class CalculoPivFacade {
             if (desconto > 0) {
                 this.pontos -= desconto;
                 Double frm = desconto * 100;
-                this.mensagens.add(new MensagemPiv("Desconto de " + frm.toString() + "% aplicado ao atingimento devido ao número de faltas: " + faltas + "."));
+                this.mensagens.add(new MensagemPiv("Desconto de " + frm.intValue() + "% aplicado ao atingimento devido ao número de faltas: " + faltas + "."));
             }
         }
     }

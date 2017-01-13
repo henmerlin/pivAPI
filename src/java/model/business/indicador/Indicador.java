@@ -89,7 +89,7 @@ public abstract class Indicador implements RealizadoCalcInterface, AtingimentoIn
     @Override
     public Double calcularAtingimento(RealizadoCalcInterface i, IndicadoresOperador op) throws Exception {
 
-        if (getRegua() == null) {
+        if (this.getRegua() == null) {
             throw new Exception("Indicador sem Regua implementada.");
         }
 
