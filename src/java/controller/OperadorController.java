@@ -60,35 +60,32 @@ public class OperadorController extends AbstractController {
     public void visualiza(IndicadoresOperador i) {
         IndicadoresOperador a;
         a = (IndicadoresOperador) dao.buscaPorLoginOperador(i);
-
         if (a != null) {
             includeSerializer(a);
         }
     }
 
-    @Get
     @Path("/operador/simulador/{loginOperador}")
     public void simulador(String loginOperador) {
 
-        try {
-            IndicadoresOperador a;
-            a = (IndicadoresOperador) dao.buscaPorLoginOperador(new IndicadoresOperador(loginOperador));
-
-            // Não encontrou indicadores
-            if (a == null) {
-                result.use(Results.json()).from(new IndicadoresNaoEncontrados()).serialize();
-            } else {
+        IndicadoresOperador a;
+        a = (IndicadoresOperador) dao.buscaPorLoginOperador(new IndicadoresOperador(loginOperador));
+        // Não encontrou indicadores
+        if (a == null) {
+            result.use(Results.json()).from(new IndicadoresNaoEncontrados()).serialize();
+        } else {
+            try {
                 CalculoPivFacade piv = new CalculoPivFacade(a, IndicadoresFactory.getIndicadores(a));
                 piv.calcular();
                 result.use(Results.json()).from(piv).recursive().serialize();
+            } catch (Exception e) {
+                e.printStackTrace();
+                result.use(Results.json()).from(new IndicadoresNaoEncontrados()).serialize();
             }
-        } catch (Exception e) {
-            result.use(Results.json()).from(e).serialize();
-        }
 
+        }
     }
 
-    @Get
     @Path("/operador/simulador/equipes/")
     public void equipes() {
 

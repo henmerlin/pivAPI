@@ -32,7 +32,7 @@ public class ReguaIndicadorTmaFactory extends ReguaIndicadorAbstractFactory impl
         r.add(new ReguaAtingimento(eqp.getTma(), 1d));
         r.add(new ReguaAtingimento(eqp.getTma() + 30d, 0.7d));
         r.add(new ReguaAtingimento(eqp.getTma() + 60d, 0.3d));
-        r.add(new ReguaAtingimento(eqp.getTma() + 999999d, 0d));
+        r.add(new ReguaAtingimento(9999d, 0d));
 
         return r;
     }

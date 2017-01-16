@@ -49,7 +49,7 @@ public class CalculoPivFacade {
     /**
      * CASO DE USO - SIMULAR PIV
      */
-    public void calcular() {
+    public void calcular() throws Exception {
 
         for (Indicador indicador : indicadores) {
 
@@ -71,21 +71,19 @@ public class CalculoPivFacade {
                 // Atingimento
                 Double a = indicador.calcularAtingimento(indicador, op);
                 indicador.setAtingimento(a);
-
                 this.pontos += indicador.getPontos();
             } catch (Exception e) {
-                //System.out.println(e.getMessage());
+                throw e;
             }
         }
 
         // Faltas
         try {
             abateAbsAtingimentoPiv(this.op.getFaltas());
+            this.setTarget(AtingimentoPiv.calcularTarget(pontos));
         } catch (Exception e) {
-            // System.out.println(e.getMessage());
+            throw e;
         }
-
-        this.setTarget(AtingimentoPiv.calcularTarget(pontos));
     }
 
     public void calcularComRealizado(SimuladorAtendimento s) {
@@ -154,7 +152,7 @@ public class CalculoPivFacade {
             if (desconto > 0) {
                 this.pontos -= desconto;
                 Double frm = desconto * 100;
-                this.mensagens.add(new MensagemPiv("Desconto de " + frm.intValue() + "% aplicado ao atingimento devido ao número de faltas: " + faltas + "."));
+                this.mensagens.add(new MensagemPiv("Desconto de " + frm.intValue() + " pontos aplicado ao atingimento devido ao número de faltas: " + faltas + "."));
             }
         }
     }
