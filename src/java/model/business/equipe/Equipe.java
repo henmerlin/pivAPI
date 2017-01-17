@@ -66,8 +66,6 @@ public enum Equipe {
             }
         }
         return null;
-
-        System.out.println("model.business.equipe.Equipe.buscarPorNome()");
     }
 
 }
