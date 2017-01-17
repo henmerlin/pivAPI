@@ -52,14 +52,22 @@ public enum Equipe {
         return tma;
     }
 
+    /**
+     * De-para para Inumerados
+     *
+     * @param nome
+     * @return
+     */
     public static Equipe buscarPorNome(String nome) {
 
         for (Equipe eqp : Equipe.values()) {
-            if (eqp.toString().equalsIgnoreCase(nome)) {
+            if (eqp.getNome().equalsIgnoreCase(nome)) {
                 return eqp;
             }
         }
         return null;
+
+        System.out.println("model.business.equipe.Equipe.buscarPorNome()");
     }
 
 }
