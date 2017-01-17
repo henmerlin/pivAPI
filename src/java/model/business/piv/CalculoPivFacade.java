@@ -1,6 +1,7 @@
 package model.business.piv;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import model.business.equipe.Equipe;
 import model.business.indicador.Indicador;
@@ -48,6 +49,8 @@ public class CalculoPivFacade {
 
     /**
      * CASO DE USO - SIMULAR PIV
+     *
+     * @throws java.lang.Exception
      */
     public void calcular() throws Exception {
 
@@ -77,12 +80,32 @@ public class CalculoPivFacade {
             }
         }
 
-        // Faltas
         try {
+            // Faltas
             abateAbsAtingimentoPiv(this.op.getFaltas());
+            verificarPivColchao();
             this.setTarget(AtingimentoPiv.calcularTarget(pontos));
         } catch (Exception e) {
             throw e;
+        }
+    }
+
+    /**
+     * Caso PIV Colchão #5 - Issue
+     */
+    public void verificarPivColchao() {
+
+        Calendar agora = Calendar.getInstance();
+        Calendar adm = this.op.getDataAdmissao();
+
+        if (adm == null) {
+            return;
+        }
+
+        Long dias = ((((agora.getTimeInMillis() - adm.getTimeInMillis()) / 1000) / 60) / 60) / 24;
+
+        if (this.op != null && this.target < 0.25 && dias < 60) {
+            this.mensagens.add(new MensagemPiv("Colaborador elegível ao PIV Colchão."));
         }
     }
 
@@ -111,8 +134,8 @@ public class CalculoPivFacade {
             }
         }
 
-        // Faltas
         try {
+            // Faltas
             abateAbsAtingimentoPiv(s.getFaltas());
         } catch (Exception e) {
             // System.out.println(e.getMessage());
@@ -121,7 +144,7 @@ public class CalculoPivFacade {
         this.setTarget(AtingimentoPiv.calcularTarget(pontos));
     }
 
-    public Double getDescontoAbatimentoAbs(Integer faltas) {
+    protected Double getDescontoAbatimentoAbs(Integer faltas) {
 
         if (faltas > 0) {
 

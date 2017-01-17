@@ -1,53 +1,59 @@
 package model.entitiy;
 
 import java.io.Serializable;
+import java.util.Calendar;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
 
 @Entity
-@Table(name = "MIS_PAINEL_ATENDIMENTO")
+@Table(name = "MIS_PAINEL_ATENDIMENTO_CWB_SP")
 public class IndicadoresOperador implements Serializable {
 
     @Id
     @Column(name = "MATRICULA_ANTIGA")
     private String loginOperador;
 
-    @Column(name = "AVAYA", nullable = true)
+    @Column(name = "AVAYA")
     private String avaya;
 
-    @Column(name = "COLABORADOR", nullable = true)
+    @Column(name = "DATA_ADMISSAO")
+    @Temporal(javax.persistence.TemporalType.DATE)
+    private Calendar dataAdmissao;
+
+    @Column(name = "COLABORADOR")
     private String nome;
 
-    @Column(name = "SUPERVISOR", nullable = true)
+    @Column(name = "SUPERVISOR")
     private String nomeSupervisor;
 
     @Column(name = "EQUIPE")
     private String equipe;
 
-    @Column(name = "FALTAS", nullable = true)
+    @Column(name = "FALTAS")
     private Integer faltas;
 
-    @Column(name = "DIAS_TRABALHADOS", nullable = true)
+    @Column(name = "DIAS_TRABALHADOS")
     private Integer diasTrabalhados;
 
-    @Column(name = "TOTAL_IN", nullable = true)
+    @Column(name = "TOTAL_IN")
     private Double totalIn;
 
-    @Column(name = "SCHED", nullable = true)
+    @Column(name = "SCHED")
     private Double sched;
 
-    @Column(name = "CA_", nullable = true)
+    @Column(name = "CA_")
     private Integer chamadasAtendidas;
 
-    @Column(name = "TEMPO_FALADO", nullable = true)
+    @Column(name = "TEMPO_FALADO")
     private Double tempoFalado;
 
-    @Column(name = "FCR_CHAMADAS", nullable = true)
+    @Column(name = "FCR_CHAMADAS")
     private Integer chamadasFCR;
 
-    @Column(name = "FCR_RECHAMADAS", nullable = true)
+    @Column(name = "FCR_RECHAMADAS")
     private Integer rechamadasFCR;
 
     public IndicadoresOperador() {
@@ -55,6 +61,14 @@ public class IndicadoresOperador implements Serializable {
 
     public IndicadoresOperador(String loginOperador) {
         this.loginOperador = loginOperador;
+    }
+
+    public Calendar getDataAdmissao() {
+        return dataAdmissao;
+    }
+
+    public void setDataAdmissao(Calendar dataAdmissao) {
+        this.dataAdmissao = dataAdmissao;
     }
 
     public void setLoginOperador(String loginOperador) {
