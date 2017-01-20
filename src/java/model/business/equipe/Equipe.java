@@ -9,17 +9,17 @@ public enum Equipe {
     /* CWB */
     CHECKLIST("CHECKLIST", Site.CWB, false, 340d),
     MULTISKILL("MULTISKILL", Site.CWB, true, 360d),
-    MULTISKILL_NOVOS("MULTISKILL NOVOS", Site.CWB, true, 360d),
+    MULTISKILL_NOVOS("MULTISKILL NOVOS", Site.CWB, false, 360d),
     ESPECIALIZADA("ESPECIALIZADA", Site.CWB, true, 498d),
     CADASTRO("CADASTRO", Site.CWB, true, 510d),
     TRIAGEM("TRIAGEM", Site.CWB, false, 1d),
     /* SP */
-    CERTIFICACAO_COBRE("CERTIFICAÇÃO COBRE", Site.SP, false, 300d),
-    CERTIFICACAO_FIBRA("CERTIFICAÇÃO FIBRA", Site.SP, false, 470d),
+    CERTIFICACAO_COBRE("CERTIFICACAO MASSIVA", Site.SP, false, 300d),
+    CERTIFICACAO_FIBRA("CERTIFICACAO FIBRA", Site.SP, false, 470d),
     TRIAGEM_SP("TRIAGEM - SÃO PAULO", Site.SP, false, 1d),
     SUPORTE_N1("SUPORTE - N1", Site.SP, false, 710d),
     SUPORTE_N2("SUPORTE - N2", Site.SP, false, 710d),
-    SUPORTE_COBRE("SUPORTE - COBRE", Site.SP, false, 290d);
+    SUPORTE_COBRE("SUPORTE COBRE", Site.SP, true, 290d);
 
     private final String nome;
 

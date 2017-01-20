@@ -24,8 +24,10 @@ public class IndicadorFcr extends Indicador {
         if (op.getChamadasFCR() == null || op.getRechamadasFCR() == null) {
             throw new Exception("Indicadores não preenchidos.");
         }
-        Double percent = 1 - ((op.getChamadasFCR() / op.getRechamadasFCR()) / 100d);
+
+        Double percent = 1 - (op.getRechamadasFCR() / new Double(op.getChamadasFCR()));
         this.setRealizado(percent);
+        this.setDataAtualizacao(op.getDataFcr());
     }
 
 }

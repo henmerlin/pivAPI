@@ -21,6 +21,7 @@ public class IndicadorAderencia extends Indicador {
             throw new Exception("Indicadores não preenchidos.");
 
         }
+        this.setDataAtualizacao(op.getDataAdr());
         this.setRealizado(op.getTotalIn() / op.getSched());
     }
 }

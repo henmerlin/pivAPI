@@ -33,6 +33,8 @@ public class CORSInterceptor {
         String origin = request.getHeader("origin") != null ? request.getHeader("origin") : "*";
 
         response.addHeader("Access-Control-Allow-Origin", origin);
+        response.addHeader("Access-Control-Allow-Credentials", "true");
+        response.addHeader("Access-Control-Expose-Headers", "Content-Type, Location");
     }
 
 }

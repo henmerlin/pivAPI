@@ -1,5 +1,6 @@
 package model.business.indicador;
 
+import java.util.Calendar;
 import java.util.List;
 import model.business.indicador.inter.AtingimentoInterface;
 import model.business.indicador.inter.RealizadoCalcInterface;
@@ -24,6 +25,8 @@ public abstract class Indicador implements RealizadoCalcInterface, AtingimentoIn
     private Double pontos;
 
     private IndicadorNome nome;
+
+    private Calendar dataAtualizacao;
 
     private List<ReguaAtingimento> regua;
 
@@ -110,6 +113,14 @@ public abstract class Indicador implements RealizadoCalcInterface, AtingimentoIn
             }
         }
         return 0d;
+    }
+
+    public Calendar getDataAtualizacao() {
+        return dataAtualizacao;
+    }
+
+    public void setDataAtualizacao(Calendar dataAtualizacao) {
+        this.dataAtualizacao = dataAtualizacao;
     }
 
 }

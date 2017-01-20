@@ -32,7 +32,6 @@ public final class AtingimentoPiv {
         List<ReguaAtingimento> na = new ArrayList<>();
 
         na.add(new ReguaAtingimento(nota, atingimento));
-
         na.add(new ReguaAtingimento(0.8d, 0.075d));
         na.add(new ReguaAtingimento(0.81d, 0.078d));
         na.add(new ReguaAtingimento(0.82d, 0.08d));

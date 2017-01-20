@@ -22,6 +22,7 @@ public class IndicadorTma extends Indicador {
         }
         Double segundos = (op.getTempoFalado() / op.getChamadasAtendidas()) * 86400;
         this.setRealizado(new Double(segundos.intValue()));
+        this.setDataAtualizacao(op.getDataTma());
     }
 
 }

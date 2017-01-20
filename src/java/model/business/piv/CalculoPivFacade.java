@@ -7,6 +7,7 @@ import model.business.equipe.Equipe;
 import model.business.indicador.Indicador;
 import model.business.indicador.extra.AtingimentoPiv;
 import model.business.indicador.extra.IndicadorNome;
+import model.business.indicador.extra.ReguaAtingimento;
 import model.business.regua.ReguaFactory;
 
 import model.entitiy.IndicadoresOperador;
@@ -21,6 +22,7 @@ public class CalculoPivFacade {
     private Double pontos;
     private Double pesos;
     private Double target;
+    private final List<ReguaAtingimento> targets = AtingimentoPiv.carregaNotaAtingimentos();
 
     private CalcPivStrategyInt calc;
 

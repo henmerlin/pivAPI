@@ -23,6 +23,22 @@ public class IndicadoresOperador implements Serializable {
     @Temporal(javax.persistence.TemporalType.DATE)
     private Calendar dataAdmissao;
 
+    @Column(name = "DATA_TMA")
+    @Temporal(javax.persistence.TemporalType.DATE)
+    private Calendar dataTma;
+
+    @Column(name = "DATA_FCR")
+    @Temporal(javax.persistence.TemporalType.DATE)
+    private Calendar dataFcr;
+
+    @Column(name = "DATA_ABS")
+    @Temporal(javax.persistence.TemporalType.DATE)
+    private Calendar dataAbs;
+
+    @Column(name = "DATA_ADERENCIA")
+    @Temporal(javax.persistence.TemporalType.DATE)
+    private Calendar dataAdr;
+
     @Column(name = "COLABORADOR")
     private String nome;
 
@@ -174,4 +190,37 @@ public class IndicadoresOperador implements Serializable {
     public Integer getRechamadasFCR() {
         return rechamadasFCR;
     }
+
+    public Calendar getDataTma() {
+        return dataTma;
+    }
+
+    public void setDataTma(Calendar dataTma) {
+        this.dataTma = dataTma;
+    }
+
+    public Calendar getDataFcr() {
+        return dataFcr;
+    }
+
+    public void setDataFcr(Calendar dataFcr) {
+        this.dataFcr = dataFcr;
+    }
+
+    public Calendar getDataAbs() {
+        return dataAbs;
+    }
+
+    public void setDataAbs(Calendar dataAbs) {
+        this.dataAbs = dataAbs;
+    }
+
+    public Calendar getDataAdr() {
+        return dataAdr;
+    }
+
+    public void setDataAdr(Calendar dataAdr) {
+        this.dataAdr = dataAdr;
+    }
+
 }
