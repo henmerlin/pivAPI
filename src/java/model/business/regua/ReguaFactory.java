@@ -35,7 +35,7 @@ public class ReguaFactory {
         } else if (ind instanceof IndicadorAderencia) {
             factory = new ReguaIndicadorAderenciaFactory(ind, equipe);
         } else if (ind instanceof IndicadorMonitoria) {
-            factory = new ReguaIndicadorAderenciaFactory(ind, equipe);
+            factory = new ReguaIndicadorMonitoriaFactory(ind, equipe);
         } else if (ind instanceof IndicadorTma) {
             factory = new ReguaIndicadorTmaFactory(ind, equipe);
         }
