@@ -31,9 +31,7 @@ public class ReguaIndicadorFcrFactory extends ReguaIndicadorAbstractFactory impl
     @Override
     public List<ReguaAtingimento> getRegua() {
 
-        if (eqp.getSite().equals(Site.SP)) {
-            return this.getReguaSaoPaulo();
-        } else if (eqp.equals(Equipe.CADASTRO)) {
+        if (eqp.equals(Equipe.CADASTRO)) {
             return this.getReguaCadastro();
         } else if (eqp.equals(Equipe.MULTISKILL)
                 || eqp.equals(Equipe.MULTISKILL_NOVOS)
@@ -41,7 +39,7 @@ public class ReguaIndicadorFcrFactory extends ReguaIndicadorAbstractFactory impl
             return this.getReguaMultiskill();
         }
 
-        return null;
+        return this.getReguaSaoPaulo();
     }
 
     private List<ReguaAtingimento> getReguaMultiskill() {

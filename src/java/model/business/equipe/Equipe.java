@@ -19,7 +19,7 @@ public enum Equipe {
     TRIAGEM_SP("TRIAGEM - SÃO PAULO", Site.SP, false, 1d),
     SUPORTE_IPTV("SUPORTE IPTV", Site.SP, true, 710d),
     SUPORTE_COBRE("SUPORTE COBRE", Site.SP, true, 290d),
-    SUPORTE_FIBRA("SUPORTE FIBRA", Site.SP, false, 710d);
+    SUPORTE_FIBRA("SUPORTE FIBRA", Site.SP, true, 710d);
 
     private final String nome;
 
