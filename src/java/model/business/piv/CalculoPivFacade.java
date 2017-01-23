@@ -85,7 +85,7 @@ public class CalculoPivFacade {
         try {
             // Faltas
             abateAbsAtingimentoPiv(this.op.getFaltas());
-            verificarPivColchao();
+            //verificarPivColchao();
             this.setTarget(AtingimentoPiv.calcularTarget(pontos));
         } catch (Exception e) {
             throw e;
