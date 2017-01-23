@@ -14,24 +14,31 @@ import java.util.List;
  */
 public final class AtingimentoPiv {
 
-    public static Double calcularTarget(Double atingimento) {
+    public static Double calcularTarget(Double realizado) {
 
-        for (ReguaAtingimento n : carregaNotaAtingimentos()) {
-            if (atingimento <= n.getRealizado()) {
+        List<ReguaAtingimento> na = carregaNotaAtingimentos();
+
+        if (realizado <= na.get(1).getRealizado()) {
+            return 0d;
+        }
+
+        for (ReguaAtingimento n : na) {
+            if (realizado <= n.getRealizado()) {
                 return n.getAtingimento();
             }
         }
+
         return 0d;
     }
 
     public static List<ReguaAtingimento> carregaNotaAtingimentos() {
 
-        Double nota = 0d;
+        Double realizado = 0d;
         Double atingimento = 0d;
 
         List<ReguaAtingimento> na = new ArrayList<>();
 
-        na.add(new ReguaAtingimento(nota, atingimento));
+        na.add(new ReguaAtingimento(realizado, atingimento));
         na.add(new ReguaAtingimento(0.8d, 0.075d));
         na.add(new ReguaAtingimento(0.81d, 0.078d));
         na.add(new ReguaAtingimento(0.82d, 0.08d));
