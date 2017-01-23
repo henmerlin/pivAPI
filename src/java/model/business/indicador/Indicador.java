@@ -107,7 +107,7 @@ public abstract class Indicador implements RealizadoCalcInterface, AtingimentoIn
     @Override
     public Double obterMeta() throws Exception {
         for (ReguaAtingimento n : getRegua()) {
-            if (n.getAtingimento() == 1d) {
+            if (n.getAtingimento().equals(1d)) {
                 this.meta = n.getRealizado();
                 return n.getRealizado();
             }
