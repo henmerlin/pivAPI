@@ -17,9 +17,9 @@ public enum Equipe {
     CERTIFICACAO_COBRE("CERTIFICACAO MASSIVA", Site.SP, false, 300d),
     CERTIFICACAO_FIBRA("CERTIFICACAO FIBRA", Site.SP, false, 470d),
     TRIAGEM_SP("TRIAGEM - SÃO PAULO", Site.SP, false, 1d),
-    SUPORTE_N1("SUPORTE - N1", Site.SP, false, 710d),
-    SUPORTE_N2("SUPORTE - N2", Site.SP, false, 710d),
-    SUPORTE_COBRE("SUPORTE COBRE", Site.SP, true, 290d);
+    SUPORTE_IPTV("SUPORTE IPTV", Site.SP, true, 710d),
+    SUPORTE_COBRE("SUPORTE COBRE", Site.SP, true, 290d),
+    SUPORTE_FIBRA("SUPORTE FIBRA", Site.SP, false, 710d);
 
     private final String nome;
 
