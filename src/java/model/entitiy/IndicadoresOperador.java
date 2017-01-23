@@ -222,5 +222,4 @@ public class IndicadoresOperador implements Serializable {
     public void setDataAdr(Calendar dataAdr) {
         this.dataAdr = dataAdr;
     }
-
 }
