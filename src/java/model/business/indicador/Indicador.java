@@ -1,5 +1,7 @@
 package model.business.indicador;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Calendar;
 import java.util.List;
 import model.business.indicador.inter.AtingimentoInterface;
@@ -31,7 +33,8 @@ public abstract class Indicador implements RealizadoCalcInterface, AtingimentoIn
     private List<ReguaAtingimento> regua;
 
     public Double getPontos() {
-        this.pontos = this.atingimento * this.peso;
+        BigDecimal atn = new BigDecimal(this.atingimento);
+        this.pontos = atn.multiply(new BigDecimal(this.peso)).setScale(2, RoundingMode.HALF_EVEN).doubleValue();
         return this.pontos;
     }
 

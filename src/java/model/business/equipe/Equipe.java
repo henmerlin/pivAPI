@@ -8,10 +8,10 @@ public enum Equipe {
 
     /* CWB */
     CHECKLIST("CHECKLIST", Site.CWB, false, 340d),
+    CADASTRO("CADASTRO", Site.CWB, true, 510d),
+    ESPECIALIZADA("ESPECIALIZADA", Site.CWB, true, 498d),
     MULTISKILL("MULTISKILL", Site.CWB, true, 360d),
     MULTISKILL_NOVOS("MULTISKILL NOVOS", Site.CWB, false, 360d),
-    ESPECIALIZADA("ESPECIALIZADA", Site.CWB, true, 498d),
-    CADASTRO("CADASTRO", Site.CWB, true, 510d),
     TRIAGEM("TRIAGEM", Site.CWB, false, 1d),
     /* SP */
     CERTIFICACAO_COBRE("CERTIFICACAO MASSIVA", Site.SP, false, 300d),

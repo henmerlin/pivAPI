@@ -1,5 +1,7 @@
 package model.business.piv;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -86,10 +88,16 @@ public class CalculoPivFacade {
             // Faltas
             abateAbsAtingimentoPiv(this.op.getFaltas());
             //verificarPivColchao();
+            this.arredondamentoPontos();
             this.setTarget(AtingimentoPiv.calcularTarget(pontos));
         } catch (Exception e) {
             throw e;
         }
+    }
+
+    public void arredondamentoPontos() {
+        BigDecimal atn = new BigDecimal(this.pontos);
+        this.pontos = atn.multiply(new BigDecimal(1)).setScale(2, RoundingMode.HALF_EVEN).doubleValue();
     }
 
     /**
@@ -139,6 +147,7 @@ public class CalculoPivFacade {
         try {
             // Faltas
             abateAbsAtingimentoPiv(s.getFaltas());
+            this.arredondamentoPontos();
         } catch (Exception e) {
             // System.out.println(e.getMessage());
         }
